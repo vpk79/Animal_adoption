@@ -11,9 +11,18 @@ main {
 }
 
 
-.header-background {
+.header-wrapper {
     background-image: url('../images/header.png');
     background-position: center;
     height: 720px;
     width: 1920px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.3) ;
+    
 }
