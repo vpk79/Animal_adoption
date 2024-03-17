@@ -22,7 +22,16 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 1920px;
+    padding: 0 300px 0 300px;
     height: 100px;
     background: rgba(255, 255, 255, 0.3) ;
     
+}
+
+.header-logo {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
