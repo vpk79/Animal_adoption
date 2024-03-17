@@ -1,0 +1,19 @@
+@import url('https: //fonts.google.com/specimen/Poppins');
+@import url('./reset.css');
+@import url('./typography.css');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    
+}
+
+
+.header-background {
+    background-image: url('../images/header.png');
+    background-position: center;
+    height: 720px;
+    width: 1920px;
+}
