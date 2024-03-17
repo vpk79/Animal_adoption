@@ -57,3 +57,30 @@ main {
     margin-right: 30px;
 }
 
+.site-title {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 600px;
+    font-size: 26px;
+    font-family: serif;
+}
+
+.site-title h1 {
+    font-weight: 100;
+    font-style: italic;
+}
+
+.site-title h1:nth-child(3) {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 86px;
+}
+
+
+
+
+
