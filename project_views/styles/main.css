@@ -10,28 +10,40 @@ main {
     
 }
 
-
 .header-wrapper {
     background-image: url('../images/header.png');
     background-position: center;
     height: 720px;
+    max-width: 1920px;
+    position: relative;
+    z-index: -20;
+}
+
+.header-wrapper::after {
+    content: '';
     width: 1920px;
+    height: 720px;
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 .header-wrapper a {
     text-decoration: none;
     color: white;
+    z-index: 1;
 }
 
 .header-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    width: 1920px;
-    padding: 0 300px 0 300px;
+    width: auto;
     height: 80px;
     background: rgba(41, 40, 40, 0.3) ;
-    
+    z-index: 1;
 }
 
 .header-logo {
@@ -39,22 +51,27 @@ main {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin-right: 500px;
+    z-index: 1;
 }
 
 .header-logo .logo {
     width: 80px;
     height: 80px;
     margin-right: 30px;
+    z-index: 1;
 }
 
 .nav ul {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    z-index: 1;
 }
 
 .nav ul li {
     margin-right: 30px;
+    list-style: none;
 }
 
 .site-title {
@@ -67,20 +84,30 @@ main {
     margin-left: 600px;
     font-size: 26px;
     font-family: serif;
+    z-index: 1;
 }
 
 .site-title h1 {
     font-weight: 100;
     font-style: italic;
+    letter-spacing: 10px;
+    line-height: 130px;
+    z-index: 1;
 }
+
+.site-title h1:nth-child(2){
+    align-self: flex-end;
+    margin-right: 200px;
+    z-index: 1;
+}
+
 
 .site-title h1:nth-child(3) {
     font-style: normal;
     font-weight: bold;
-    font-size: 86px;
+    font-size: 106px;
+    z-index: 1;
 }
-
-
 
 
 
