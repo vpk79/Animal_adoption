@@ -2,6 +2,8 @@
 @import url('./reset.css');
 @import url('./typography.css');
 @import url('./carousel.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+@import url('./selection-cards.css');
 
 body {
     font-family: 'Poppins', sans-serif;

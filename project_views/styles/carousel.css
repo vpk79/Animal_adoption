@@ -12,6 +12,7 @@
     left: 0;
     right: 0;
     padding-bottom: 50px;
+    z-index: -1;
 }
 
 .overlay-image {
@@ -23,7 +24,9 @@
     background-position: center;
     background-size: cover;
     opacity: 0.7;
-    
-    
+    z-index: -1;
+}
 
+#myCarousel {
+    border-bottom: purple 10px solid;
 }
