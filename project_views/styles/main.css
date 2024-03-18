@@ -9,16 +9,16 @@ body {
 
 main {}
 
-.header-wrapper {
+/* .header-wrapper {
     background-image: url('../images/header.png');
     background-position: center;
     height: 720px;
     max-width: 1920px;
     position: relative;
     z-index: -20;
-}
+} */
 
-.header-wrapper::after {
+/* .header-wrapper::after {
     content: '';
     width: 1920px;
     height: 720px;
@@ -27,13 +27,9 @@ main {}
     top: 0;
     left: 0;
     z-index: -1;
-}
+} */
 
-.header-wrapper a {
-    text-decoration: none;
-    color: white;
-    z-index: 1;
-}
+
 
 .header-container {
     display: flex;
@@ -41,7 +37,14 @@ main {}
     align-items: center;
     width: auto;
     height: 80px;
-    background: rgba(41, 40, 40, 0.3);
+    /* background: rgba(41, 40, 40, 1); */
+    z-index: 1;
+    
+}
+
+.header-container a {
+    text-decoration: none;
+    color: white;
     z-index: 1;
 }
 
