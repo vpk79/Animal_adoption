@@ -150,3 +150,7 @@ main {}
         left: -7px;
         z-index: -1;
 }
+
+main {
+    background-image: url(../images/);
+}

@@ -1,9 +1,10 @@
 .selection-cards-container {
-    height: 300px;
-    background-color: gray;
+    height: 160px;
+    background-color: white;
     margin-top: -90px;
     z-index: 1;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    
 }
 .selection-cards {
     display: flex;
