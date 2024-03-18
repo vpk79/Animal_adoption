@@ -3,7 +3,7 @@
     background: #000;
     color: white;
     position: relative;
-    
+    z-index: -1;
 }
 
 .container {
@@ -30,3 +30,4 @@
 #myCarousel {
     border-bottom: purple 10px solid;
 }
+
