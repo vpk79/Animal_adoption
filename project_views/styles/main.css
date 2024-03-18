@@ -6,9 +6,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-main {
-    
-}
+main {}
 
 .header-wrapper {
     background-image: url('../images/header.png');
@@ -42,7 +40,7 @@ main {
     align-items: center;
     width: auto;
     height: 80px;
-    background: rgba(41, 40, 40, 0.3) ;
+    background: rgba(41, 40, 40, 0.3);
     z-index: 1;
 }
 
@@ -95,7 +93,7 @@ main {
     z-index: 1;
 }
 
-.site-title h1:nth-child(2){
+.site-title h1:nth-child(2) {
     align-self: flex-end;
     margin-right: 200px;
     z-index: 1;
@@ -107,7 +105,40 @@ main {
     font-weight: bold;
     font-size: 106px;
     z-index: 1;
+    
 }
 
+.site-title h1 {
+    position: relative;
+    color: gold;
+}
 
+.title-first-row::after {
+    content: 'FIND YOUR';
+    color: purple;
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: -6px;
+    z-index: -1;
+}
 
+.title-second-row::after {
+    content: 'BEST FRIEND';
+    color: purple;
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: -6px;
+    z-index: -1;
+}
+
+.title-third-row::after {
+    content: 'TODAY!';
+        color: purple;
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: -7px;
+        z-index: -1;
+}
