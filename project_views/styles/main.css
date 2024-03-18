@@ -78,6 +78,15 @@ main {}
 .nav ul li {
     margin-right: 30px;
     list-style: none;
+    /* border: 1px solid black; */
+    padding: 5px 10px 5px 10px;
+}
+
+.nav ul li:hover {
+    outline: 1px solid orange;
+    border-bottom: 1px solid orange;
+    cursor: pointer;
+    
 }
 
 .site-title {
@@ -157,8 +166,8 @@ main {}
     position: relative;
     justify-content: center;
     align-items: center;
-
-
+    margin-top: -50px;
+    z-index: 1;
 }
 
 .section-two-background {
