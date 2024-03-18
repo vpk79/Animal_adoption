@@ -1,8 +1,10 @@
 .carousel-item{
-    height: 32rem;
+    height: 720px;
     background: #777;
     color: white;
     position: relative;
+    background-position: center;
+    background-size: cover;
 }
 
 .container {
@@ -11,7 +13,4 @@
     left: 0;
     right: 0;
     padding-bottom: 50px;
-
-
-
 }
