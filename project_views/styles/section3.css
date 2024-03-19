@@ -1,7 +1,7 @@
 .section-three {
     width: 100%;
     height: 300px;
-
+    margin-top: 40px;
 }
 
 .section-three .cards-wrapper {
@@ -82,4 +82,13 @@
     border-radius: 15px;
     object-fit: cover;
     z-index: 1;
+}
+
+.section-three .extra-card{
+    background-color: purple;
+}
+
+.section-three .extra-card a {
+    text-decoration: none;
+    font-size: 130px;
 }
