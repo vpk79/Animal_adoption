@@ -31,14 +31,20 @@
     border-bottom: purple 10px solid;
 }
 
-#myCarousel2 {
+
+
+
+/* #myCarousel2 {
     width: 620px;
     height: 320px;
-}
+} */
 
 #myCarousel2 .image-wrapper {
     max-width: 100%;
-    height: 17em;
+    height: 65vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 #myCarousel2 img {
