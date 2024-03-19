@@ -13,9 +13,9 @@
     margin: 0 .5em;
     /* width: calc(100%/4); */
     width: 200px;
-    height: 200px;
-    border: none;
-    border-radius: 0;
+    height: 250px;
+    
+    border-radius: 15px;
     box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
     z-index: 1;
 }
@@ -86,9 +86,32 @@
 
 .section-three .extra-card{
     background-color: purple;
+    border-radius: 15px;
 }
 
 .section-three .extra-card a {
     text-decoration: none;
-    font-size: 130px;
+    font-size: 80px;
+    color: white
+}
+
+.section-three .extra-card p {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.8;
+    font-weight: bold;
+}
+
+.section-three .extra-card .image-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.section-three .gallery-link:hover {
+    cursor: pointer;
+    outline: 1px solid white;
 }
