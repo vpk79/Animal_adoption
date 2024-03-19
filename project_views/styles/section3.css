@@ -1,6 +1,9 @@
 .section-three {
-    width: 100%;
+    max-width: 1000px;
     height: 300px;
+    
+    display: flex;
+    margin: 0 auto;
     margin-top: 40px;
 }
 
@@ -11,8 +14,8 @@
 
 .section-three .card {
     margin: 0 .5em;
-    /* width: calc(100%/4); */
-    width: 200px;
+    width: calc(100%/5);
+    /* width: 200px; */
     height: 250px;
     
     border-radius: 15px;
@@ -20,7 +23,7 @@
     z-index: 1;
 }
 
-.section-three .card:hover {
+.section-three .card:not(:last-child):hover {
     outline: 3px purple solid;
     border-radius: 15px;
 }
@@ -31,12 +34,12 @@
     align-items: center;
 }
 
-.section-three .card-body a {
+/* .section-three .card-body a {
     font-size: 20px;
     background-color: rgb(163, 2, 163);
     padding-left: 20px;
     padding-right: 20px;
-}
+} */
 
 .section-three .image-wrapper {
     /* height: 22vw; */
@@ -88,8 +91,11 @@
     background-color: purple;
     border-radius: 15px;
 }
+.section-three .extra-card:hover{
+    outline: 5px rgb(172, 219, 2) solid;
+}
 
-.section-three .extra-card a {
+.section-three .extra-card .image-wrapper a {
     text-decoration: none;
     font-size: 80px;
     color: white
@@ -97,21 +103,31 @@
 
 .section-three .extra-card p {
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
     line-height: 1.8;
     font-weight: bold;
+    margin-bottom: -20px;
 }
 
 .section-three .extra-card .image-wrapper{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 10px;
 }
 
+.section-three .gallery-link {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 20px 5px 20px;
+   background-color: rgb(163, 2, 163);
+   
+}
+
 .section-three .gallery-link:hover {
-    cursor: pointer;
-    outline: 1px solid white;
+    border: 1px solid white;
 }
