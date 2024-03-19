@@ -129,5 +129,7 @@
 }
 
 .section-three .gallery-link:hover {
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    background-color: aqua;
+    color: purple;
 }
