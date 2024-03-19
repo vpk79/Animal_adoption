@@ -137,3 +137,8 @@
     border-radius: 15px;
     object-fit: cover;
 }
+
+#myCarousel2 .card-body .btn:hover {
+    background-color: aqua;
+    color: purple;
+}
