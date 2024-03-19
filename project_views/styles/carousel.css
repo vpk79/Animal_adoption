@@ -34,6 +34,7 @@
 
 #myCarousel2 .carousel-inner {
     padding: 1em;
+    
 }
 
 #myCarousel2 .carousel-control-prev,
@@ -63,6 +64,7 @@
 #myCarousel2 {
     width: 1200px;
     height: 200px;
+    display: block;
 }
 
 #myCarousel2 .card {
