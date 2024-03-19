@@ -11,28 +11,6 @@ body {
 
 main {}
 
-/* .header-wrapper {
-    background-image: url('../images/header.png');
-    background-position: center;
-    height: 720px;
-    max-width: 1920px;
-    position: relative;
-    z-index: -20;
-} */
-
-/* .header-wrapper::after {
-    content: '';
-    width: 1920px;
-    height: 720px;
-    background: rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-} */
-
-
-
 .header-container {
     display: flex;
     justify-content: space-evenly;
@@ -40,7 +18,6 @@ main {}
     width: auto;
     height: 80px;
     padding-top: 30px;
-    /* background: rgba(41, 40, 40, 1); */
     z-index: 1;
 
 }
@@ -52,7 +29,6 @@ main {}
 }
 
 .header-logo {
-    /* border: 1px solid black; */
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -166,7 +142,7 @@ main {}
     position: relative;
     justify-content: center;
     align-items: center;
-    margin-top: -50px;
+    margin-top: -70px;
     z-index: 1;
 }
 
