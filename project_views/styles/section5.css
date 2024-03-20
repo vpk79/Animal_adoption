@@ -36,3 +36,9 @@
     padding: 30px;
     text-align: center;
 }
+
+.section-five-title {
+    color: purple;
+    /* text-shadow: 8px 3px rgba(22, 22, 26, 0.3); */
+    font-weight: 800;
+}
