@@ -1,17 +1,27 @@
-
-
-
 .header-container {
-   
     display: flex;
+
     justify-content: space-evenly;
     align-items: center;
     width: auto;
     height: 80px;
     padding-top: 30px;
-    z-index: 100;
+    z-index: 100000000;
+    position: fixed;
+    top: 0;
+    left: 130px;
+    transition: 0.6s;
+    
+
 }
 
+header.sticky {
+    /* padding: 5px 100px; */
+    background-color: #000;
+    opacity: 0.6;
+    /* overflow: hidden; */
+    z-index: 1000000;
+}
 
 
 .header-container a {

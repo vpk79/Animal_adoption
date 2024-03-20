@@ -13,7 +13,9 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-main {}
+main {
+    max-width: 1920px;
+}
 
 
 
@@ -27,3 +29,7 @@ main {}
 }
 
 
+.header-scrolled {
+    background: rgba(0, 0, 0, 0.7);
+    transition: all 0.5s;
+}
