@@ -24,8 +24,10 @@
 }
 
 .section-three .card:not(:last-child):hover {
-    outline: 3px purple solid;
+    /* outline: 3px purple solid; */
     border-radius: 15px;
+    scale: 1.1;
+    transition: 0.8s;
 }
 
 .section-three .card-body {
@@ -90,6 +92,7 @@
 .section-three .extra-card{
     background-color: purple;
     border-radius: 15px;
+   
 }
 .section-three .extra-card:hover{
     outline: 5px rgb(172, 219, 2) solid;
@@ -132,4 +135,5 @@
     /* border: 1px solid white; */
     background-color: aqua;
     color: purple;
+
 }

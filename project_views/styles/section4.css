@@ -72,10 +72,12 @@
     font-weight: 500;
     background-color: purple;
     padding: 15px 20px 15px 20px;
-    border-radius: 3px;
+    /* border-radius: 3px; */
 }
 
 .adoption-article-read-more a:hover{
     background-color: aqua;
     color: purple;
+    border-top-left-radius: 205%;
+    transition: 2s;
 }
