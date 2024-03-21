@@ -10,15 +10,39 @@
     display: flex;
     justify-content: center;
     padding: 50px;
-    gap: 30px;
+    gap: 40px;
 
 }
 
 .footer-links {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .footer-links h3 {
-    
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-weight: 550;
+    color: #888;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+footer .contact-us {
+    display: flex;
+    flex-direction: column;
+}
+
+footer .contact-us .contacts{
+    display: flex
+    gap: 5px
 }
