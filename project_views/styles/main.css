@@ -11,6 +11,7 @@
 @import url('./section5.css');
 @import url('./section6.css');
 @import url('./section7.css');
+@import url('./footer.css');
 
 
 body {
@@ -67,4 +68,15 @@ main {
     font-size: 16px;
     margin-top: 40px;
     
+}
+
+.section-logo .sign-up,
+.section-logo .sign-in  {
+    text-decoration: none;
+    color: white;
+    padding: 5px 20px 5px 20px;
+    background-color: purple;
+    text-transform: uppercase;
+    border-radius: 50px;
+    font-size: 12px;
 }
