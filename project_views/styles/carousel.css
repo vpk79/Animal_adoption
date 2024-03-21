@@ -300,13 +300,15 @@
     /* background-color: red; */
     font-size: 18px;
     margin-right: 10px;
+    border: none;
 
     /* padding: 0; */
 }
 
 #myCarousel3 .card-body .btn-wrapper .btn-delete {
-    background-color: red;
+    background-color: rgb(95, 95, 95);
     font-size: 18px;
+    border: none;
 }
 
 #myCarousel3 .card-body .card-text {
