@@ -312,3 +312,10 @@
 #myCarousel3 .card-body .card-text {
     margin-top: 15px;
 }
+
+#myCarousel3 .rate-stars {
+    display: flex;
+    justify-content: center;
+    color: rgb(231, 197, 3);
+    z-index: 1;
+}

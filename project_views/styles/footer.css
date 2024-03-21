@@ -90,3 +90,29 @@ footer .usefull-links a:last-child {
     width: 100%;
     margin-top: 20px;
 }
+
+
+.footer-copyright {
+    display: flex;
+    height: auto;
+    justify-content: space-between;
+    padding-left: 350px;
+    padding-right: 350px;
+    gap: 50px;
+    background-color: rgb(56, 56, 56);
+    color: #888;
+    align-items: center;
+    /* align-content: center; */
+    padding-top: 30px;
+}
+
+footer .media-links {
+    display: flex;
+    gap: 15px;
+}
+footer .media-links a{
+    text-decoration: none;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 40px;
+}

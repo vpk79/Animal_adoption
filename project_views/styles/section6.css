@@ -2,11 +2,13 @@
     display: flex;
     position: relative;
     height: 1050px;
+    /* justify-content: space-between; */
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
-    padding-top: 500px;
+    padding-top: 460px;
     padding-bottom: 200px;
+    border-bottom: 10px purple solid;
     /* opacity: 0.1; */
   
     /* border: 1px solid black; */
@@ -44,6 +46,21 @@
     z-index: 1;
 }
 
-.section-six {
-    border-bottom: 10px purple solid;
+
+.section-six .rate-us-btn {
+    margin-top: 220px;
+    z-index: 1;
+}
+
+.section-six .rate-us-btn a {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(170, 1, 170);
+    padding: 10px 20px 10px 20px;
+    font-size: 20px;
+}
+
+.section-six .rate-us-btn a:hover {
+    background-color: aqua;
+    color: purple;
 }

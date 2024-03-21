@@ -34,10 +34,7 @@ main {
 }
 
 
-.header-scrolled {
-    background: rgba(0, 0, 0, 0.7);
-    transition: all 0.5s;
-}
+
 
 .section-logo {
     max-width: 100%;
@@ -46,7 +43,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    /* gap: 30px; */
 }
 
 .section-logo .logo {
@@ -61,6 +58,8 @@ main {
     background-color: rgb(37, 37, 37);
     margin-top: 7px;
     padding: 2px 20px 5px 20px;
+    margin-right: 30px;
+    margin-left: 10px;
     /* border-radius: 50px; */
 }
 
@@ -68,7 +67,13 @@ main {
     color: white;
     font-size: 16px;
     margin-top: 40px;
+    font-weight: 600;
     
+}
+
+.section-logo .sign-in {
+    margin-left: 30px;
+    margin-right: 10px;
 }
 
 .section-logo .sign-up,

@@ -28,6 +28,11 @@
     text-align: center;
 }
 
+.header-scrolled {
+    background: rgba(0, 0, 0, 0.7);
+    transition: all 0.5s;
+}
+
 .sticky {
     /* padding: 5px 100px; */
     background-color: #000;
