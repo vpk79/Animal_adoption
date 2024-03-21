@@ -42,7 +42,20 @@ footer .contact-us {
     flex-direction: column;
 }
 
-footer .contact-us .contacts{
-    display: flex
-    gap: 5px
+footer .contact-us .contacts>span{
+    margin-top: 5px;
+}
+
+footer .contact-us .contacts {
+    display: flex;
+    gap: 15px;
+    
+}
+
+footer .contact-us .contacts p {
+    color: #888;
+    line-height: 2;
+}
+footer .contact-us .contacts span {
+    color: white;
 }
