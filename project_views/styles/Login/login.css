@@ -33,12 +33,22 @@ body {
     position: absolute;
     top: -150%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
     width: 380px;
     padding: 20px 30px;
     background: #fff;
-    box-shadow: 2px 5px 5px rgba(0,0,0,0.15);
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+    transition: top 0ms ease-in-out 200ms,
+        opacity 200ms ease-in-out 200ms,
+        top 0ms ease-in-out 200ms, ;
+}
+
+.popup.active {
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .popup .close-btn {
@@ -62,7 +72,7 @@ body {
     font-size: 25px;
 }
 
-.popup .form .form-element{
+.popup .form .form-element {
     margin: 15px 0px;
 }
 
@@ -82,7 +92,7 @@ body {
     border-radius: 5px;
 }
 
-.popup .form .form-element input[type="checkbox"]{
+.popup .form .form-element input[type="checkbox"] {
     margin-right: 5px;
 }
 
