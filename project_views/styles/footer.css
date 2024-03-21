@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-bottom: 50px;
 }
 
 .footer-container {
@@ -58,4 +59,34 @@ footer .contact-us .contacts p {
 }
 footer .contact-us .contacts span {
     color: white;
+}
+
+footer .usefull-links {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    /* gap: 10px; */
+    flex-wrap: wrap;
+    
+}
+
+footer .usefull-links a {
+    text-decoration: none;
+    color: #888;
+}
+
+footer .usefull-links a:hover {
+    text-decoration: underline;
+}
+
+footer .usefull-links a:not(:last-child):after{
+    content: '|';
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #888;
+}
+
+footer .usefull-links a:last-child {
+    width: 100%;
+    margin-top: 20px;
 }
