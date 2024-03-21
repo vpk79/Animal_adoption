@@ -32,12 +32,39 @@ main {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    transform: scale(0);
+    transition: height 0.2s ease;
     
+}
+
+.wrapper.active {
+    height: 520px;
 }
 
 .wrapper .form-box {
     width: 100%;
     padding: 40px;
+}
+
+.wrapper.active .form-box.login {
+   transition: none;
+   transform: translateX(-400px);
+}
+
+.wrapper .form-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper .form-box.register{
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
 }
 
 .wrapper .icon-close {
@@ -165,3 +192,4 @@ main {
 .form-box .login-register p a {
     text-decoration: underline;
 }
+
