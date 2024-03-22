@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { HeaderCardsComponent } from './header-cards/header-cards.component';
 import { HomeComponent } from './home.component';
 import { AvailablePetsComponent } from './available-pets/available-pets.component';
+import { LastViewedPetsComponent } from './last-viewed-pets/last-viewed-pets.component';
 
 
 
@@ -12,7 +13,8 @@ import { AvailablePetsComponent } from './available-pets/available-pets.componen
     HeaderComponent,
     HeaderCardsComponent,
     HomeComponent,
-    AvailablePetsComponent
+    AvailablePetsComponent,
+    LastViewedPetsComponent
   ],
   imports: [
     CommonModule
