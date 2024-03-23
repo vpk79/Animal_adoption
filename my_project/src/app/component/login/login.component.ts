@@ -1,33 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  email: string = '';
-  password: string = '';
-  constructor(private auth : AuthService) { }
-  ngOnInit(): void { }
+  constructor(private auth: AuthService) { }
 
-    login(){
-      if(this.email == ''){
-        alert('Please enter email');
-        return;
-      }
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
+  router = inject(Router);
 
-      if (this.password == '') {
-        alert('Please enter password');
-        return;
-      }
+  form = this.fb.nonNullable.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+  })
 
-      this.auth.login(this.email, this.password);
-      this.email = '';
-      this.password = '';
-      
-    }
-  
+  onSubmit():void {
+    console.log('login');
+    
+  }
 }
