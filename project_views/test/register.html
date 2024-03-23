@@ -41,7 +41,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+        import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         // Your web app's Firebase configuration
@@ -56,10 +56,12 @@
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        
 
         const db = getDatabase();
         console.log(db);
         const auth = getAuth(app);
+        console.log(auth);
 
         let EmailInp = document.getElementById('emailInp');
         let PassInp = document.getElementById('passwordInp');
@@ -67,23 +69,58 @@
         let LnameInp = document.getElementById('lnameInp');
         let MainForm = document.getElementById('MainForm');
 
-        let RegisterUser = evt => {
+
+        let RegisterUser = (evt) => {
             evt.preventDefault();
 
             createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-            .then((credentials)=>{
-                  set(ref(db, 'UsersAuthList/' + credentials.user.uid), {
-                    firstname: FnameInp.value,
-                    lastname: LnameInp.value
+                .then((credentials) => {
+                    writeUserData(credentials.user.uid, FnameInp.value, EmailInp.value )
+                    console.log("User created successfully:", credentials.user);
+                    // return set(ref(db, "UsersAuthList/" + credentials.user.uid), {
+                    //     firstname: FnameInp.value,
+                    //     lastname: LnameInp.value,
+                    // });
                 })
-                console.log(credentials);
-            })
-            .catch((error) => {
-                alert(alert.message);
-                console.log(error.code);
-                console.log(error.message);
-            })
-        }
+                .then(() => {
+                    console.log("User data saved to database successfully");
+                    // Optionally, display a success message or redirect the user
+                })
+                .catch((error) => {
+                    console.error("Error creating user or saving data:", error.message);
+                    // Handle errors appropriately, e.g., display an error message to the user
+                });
+
+                function writeUserData(userId, name, email) {
+                const db = getDatabase();
+                set(ref(db, 'users/' + userId), {
+                    username: name,
+                    email: email
+                });
+            }
+        };
+
+        
+
+        // let RegisterUser = evt => {
+        //     evt.preventDefault();
+
+        //     createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+        //     .then((credentials)=>{
+
+        //           set(ref(db, 'UsersAuthList/' + credentials.user.uid), {
+        //             firstname: FnameInp.value,
+        //             lastname: LnameInp.value
+        //         })
+        //         console.log(credentials);
+        //         console.log(credentials.user.uid);
+        //     })
+        //     .catch((error) => {
+        //         alert(alert.message);
+        //         console.log(error.code);
+        //         console.log(error.message);
+        //     })
+        // }
 
         MainForm.addEventListener('submit', RegisterUser);
 
