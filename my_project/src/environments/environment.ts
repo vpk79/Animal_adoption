@@ -1,6 +1,21 @@
-export const environment = {
 
-    firebase : {
+interface FirebaseConfig {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+    storageBucket: string;
+    messagingSenderId: string;
+    appId: string;
+}
+
+interface Environment {
+    production: boolean;
+    firebase: FirebaseConfig;
+}
+
+export const environment: Environment = {
+    production: false,
+    firebase: {
         apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
         authDomain: "animaladoption-95397.firebaseapp.com",
         projectId: "animaladoption-95397",
