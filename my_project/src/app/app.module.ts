@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     AppRoutingModule,
     NgbModule,
     HomeModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    FormsModule
 
   ],
   providers: [
