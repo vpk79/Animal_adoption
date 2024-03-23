@@ -30,7 +30,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary" style="float:right;">Create New User</button>
-        <a href="./login.html"><button type="submit" style="float:right;" class="btn btn-primary me-2">Sign
+        <a href="./login.html"><button type="button" style="float:right;" class="btn btn-primary me-2">Sign
                 In</button></a>
     </form>
 
@@ -58,6 +58,7 @@
         const app = initializeApp(firebaseConfig);
 
         const db = getDatabase();
+        console.log(db);
         const auth = getAuth(app);
 
         let EmailInp = document.getElementById('emailInp');
@@ -71,7 +72,7 @@
 
             createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
             .then((credentials)=>{
-                  set(ref(db, 'UserAuthList/' + credentials.user.uid), {
+                  set(ref(db, 'UsersAuthList/' + credentials.user.uid), {
                     firstname: FnameInp.value,
                     lastname: LnameInp.value
                 })

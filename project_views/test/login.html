@@ -22,7 +22,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary" style="float:right;">Log In</button>
-        <a href="./register.html"><button type="submit" style="float:right;" class="btn btn-primary me-2">Sign
+        <a href="./register.html"><button type="button" style="float:right;" class="btn btn-primary me-2">Sign
                 Up</button></a>
     </form>
 
@@ -61,14 +61,14 @@
 
             signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
                 .then((credentials) => {
-                  get(child(dbref, 'UserAuthList/' + credentials.user.uid)).then((snapshot) => {
+                  get(child(dbref, 'UsersAuthList/' + credentials.user.uid)).then((snapshot) => {
                     if(snapshot.exists){
-                        localStorage.setItem('user-info', JSON.stringify({
+                        localStorage.setItem("user-info", JSON.stringify({
                             firstname: snapshot.val().firstname,
                             lastname: snapshot.val().lastname
                         }))
 
-                        localStorage.setItem('user-creds', JSON.stringify(credentials.user));
+                        localStorage.setItem("user-creds", JSON.stringify(credentials.user));
                         window.location.href='home.html'
                     }
                   })
