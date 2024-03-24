@@ -9,7 +9,7 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { GalleryModule } from './src/gallery/gallery.module';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -25,7 +25,7 @@ import { RouterOutlet } from '@angular/router';
     HomeModule,
     FormsModule,
     GalleryModule,
-    RouterOutlet
+    RouterModule
   ],
   providers: [
     provideClientHydration()
