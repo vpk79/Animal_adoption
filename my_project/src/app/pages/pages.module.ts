@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
+import { GalleryModule } from './gallery/gallery.module';
 
 
 
@@ -12,7 +13,7 @@ import { HomeModule } from './home/home.module';
     PagesComponent
   ],
   imports: [
-    CommonModule, HomeModule
+    CommonModule, HomeModule, GalleryModule
   ],
   exports: [
     PagesComponent
