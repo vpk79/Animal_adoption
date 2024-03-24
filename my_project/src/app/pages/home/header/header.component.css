@@ -17,9 +17,9 @@
     z-index: 100000000;
     position: fixed;
     top: 0;
-    left: 100px;
+    left: 0;
     transition: 0.6s;
-    padding: 0 300px 0 200px;
+    padding: 0 200px 0 200px;
     
 }
 
@@ -27,7 +27,7 @@
     display: flex;
     max-width: 1920px;
     
-    margin-left: 400px;
+    margin-left: 500px;
     text-align: center;
 }
 
