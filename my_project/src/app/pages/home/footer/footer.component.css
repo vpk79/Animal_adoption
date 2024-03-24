@@ -1,0 +1,120 @@
+.footer-container-wrapper {
+    background-color: rgb(75, 74, 74);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.footer-container {
+    margin: 0 200px 0 200px;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    gap: 40px;
+
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links h3 {
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-weight: 550;
+    color: #888;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.contact-us {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-us .contacts>span {
+    margin-top: 5px;
+}
+
+.contact-us .contacts {
+    display: flex;
+    gap: 15px;
+
+}
+
+.contact-us .contacts p {
+    color: #888;
+    line-height: 2;
+}
+
+.contact-us .contacts span {
+    color: white;
+}
+
+.usefull-links {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    /* gap: 10px; */
+    flex-wrap: wrap;
+
+}
+
+.usefull-links a {
+    text-decoration: none;
+    color: #888;
+}
+
+.usefull-links a:hover {
+    text-decoration: underline;
+}
+
+.usefull-links a:not(:last-child):after {
+    content: '|';
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #888;
+}
+
+.usefull-links a:last-child {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.footer-copyright {
+    display: flex;
+    height: auto;
+    justify-content: space-between;
+    padding-left: 350px;
+    padding-right: 350px;
+    gap: 50px;
+    background-color: rgb(56, 56, 56);
+    color: #888;
+    align-items: center;
+    /* align-content: center; */
+    padding-top: 30px;
+}
+
+.media-links {
+    display: flex;
+    gap: 15px;
+}
+
+.media-links a {
+    text-decoration: none;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 40px;
+}

@@ -8,6 +8,9 @@ import { LastViewedPetsComponent } from './last-viewed-pets/last-viewed-pets.com
 import { AdoptionArticlesComponent } from './adoption-articles/adoption-articles.component';
 import { UsefullAdoptionLinksComponent } from './usefull-adoption-links/usefull-adoption-links.component';
 import { CommentarySectionComponent } from './commentary-section/commentary-section.component';
+import { DonationSectionComponent } from './donation-section/donation-section.component';
+import { OverFooterLineComponent } from './over-footer-line/over-footer-line.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -20,7 +23,10 @@ import { CommentarySectionComponent } from './commentary-section/commentary-sect
     LastViewedPetsComponent,
     AdoptionArticlesComponent,
     UsefullAdoptionLinksComponent,
-    CommentarySectionComponent
+    CommentarySectionComponent,
+    DonationSectionComponent,
+    OverFooterLineComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule
