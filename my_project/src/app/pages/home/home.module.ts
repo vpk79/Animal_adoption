@@ -11,6 +11,7 @@ import { CommentarySectionComponent } from './commentary-section/commentary-sect
 import { DonationSectionComponent } from './donation-section/donation-section.component';
 import { OverFooterLineComponent } from './over-footer-line/over-footer-line.component';
 import { FooterComponent } from './footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -29,7 +30,7 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule, RouterModule
   ],
   exports: [HomeComponent]
 

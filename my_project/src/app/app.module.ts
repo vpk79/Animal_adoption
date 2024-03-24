@@ -14,7 +14,7 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    // PagesModule
+    PagesModule
   ],
   providers: [
     provideClientHydration()
