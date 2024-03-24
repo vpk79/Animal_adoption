@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { HomeModule } from './src/home/home.module';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [CommonModule, RouterOutlet, RouterLink]
+  // imports: [CommonModule, RouterOutlet, RouterLink, HomeModule]
 })
 export class AppComponent {
   title = 'my_project';

@@ -1,31 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  email: string = '';
-  password: string = '';
   constructor(private auth: AuthService) { }
-  ngOnInit(): void { }
 
-  register() {
-    if (this.email == '') {
-      alert('Please enter email');
-      return;
-    }
 
-    if (this.password == '') {
-      alert('Please enter password');
-      return;
-    }
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
+  router = inject(Router);
 
-    this.auth.register(this.email, this.password);
-    this.email = '';
-    this.password = '';
+  form = this.fb.nonNullable.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+  })
+
+  onSubmit(): void {
+    console.log('login');
+
   }
+
+
 }
