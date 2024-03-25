@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 
 
+
 @NgModule({
   declarations: [
     GalleryComponent
@@ -14,4 +15,8 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [GalleryComponent]
 })
-export class GalleryModule { }
+export class GalleryModule {
+
+   
+
+ }
