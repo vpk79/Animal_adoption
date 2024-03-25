@@ -12,11 +12,26 @@ export class GalleryComponent implements OnInit{
   constructor(private service: ServiceService){ }
 
   ngOnInit(): void {
+
     this.service.getItems().subscribe({
-      next:(data) => {
-        console.log(data);
+      next: (data) => {
+        console.log(data); // Тук ще видите върнатите данни
+      },
+      error: (error) => {
+        console.error(error); // Ако има грешка при извличането на данните
       }
-    })
+    });
+    
+    // this.service.getItems().subscribe({
+    //   next:(data) => {
+    //     console.log(data);
+    //   }
+    // })
+    // console.log(this.service.getItems())
+    {
+      
+      
+    }
 
   }
 

@@ -15,7 +15,7 @@ export class ServiceService {
 
     // Пример за получаване на данни от базата данни
     getItems() {
-      return this.db.list('items').valueChanges();
+      return this.db.list('animals').valueChanges();
     }
 
   uploadFile(event: any) {
