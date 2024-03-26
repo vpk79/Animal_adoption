@@ -10,6 +10,7 @@ import { AngularFireModule } from '@angular/fire/compat'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { HomeModule } from './pages/home/home.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -31,11 +32,10 @@ const firebaseConfig = {
     NgbModule,
     PagesModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
-
+    AngularFireDatabaseModule,
   ],
   providers: [
-    provideClientHydration()
+    // provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })

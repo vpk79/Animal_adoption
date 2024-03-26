@@ -12,6 +12,7 @@ import { DonationSectionComponent } from './donation-section/donation-section.co
 import { OverFooterLineComponent } from './over-footer-line/over-footer-line.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { HeaderCarouselComponent } from './header-carousel/header-carousel.component';
 
 
 
@@ -27,12 +28,16 @@ import { RouterModule } from '@angular/router';
     CommentarySectionComponent,
     DonationSectionComponent,
     OverFooterLineComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderCarouselComponent
   ],
   imports: [
     CommonModule, RouterModule
   ],
-  exports: [HomeComponent, HeaderComponent, FooterComponent]
+  exports: [HomeComponent,
+     HeaderComponent,
+     FooterComponent,
+      DonationSectionComponent, AvailablePetsComponent, HeaderCardsComponent, HeaderCarouselComponent]
 
 })
 export class HomeModule { }

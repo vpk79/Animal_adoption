@@ -1,3 +1,5 @@
+/* @import url('../node_modules/bootstrap/dist/css/bootstrap.css'); */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
 @import url('./styles/reset.css');
 @import url('./styles/typography.css');
 @import url('https://fonts.google.com/specimen/Poppins');
@@ -6,3 +8,5 @@
 main {
     max-width: 1920px;
 }
+
+

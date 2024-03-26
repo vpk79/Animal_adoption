@@ -16,8 +16,12 @@ import { HomeModule } from '../home/home.module';
   ],
   exports: [GalleryComponent]
 })
+
+
+
 export class GalleryModule {
 
-   
+  
+}
 
- }
+ 

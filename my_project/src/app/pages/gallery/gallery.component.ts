@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 
 
@@ -7,20 +7,34 @@ import { ServiceService } from '../../services/service.service';
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
 })
+
+
+
+
+
+
 export class GalleryComponent implements OnInit{
 
+  
   constructor(private service: ServiceService){ }
 
-  ngOnInit(): void {
+//    carouselElement = querySelector('.carousel');
+// restartCarousel(): void {
+//   this.carouselElement?.querySelector('.carousel-item:first-child')?.classList.remove('active');
+//   this.carouselElement?.
+// }
 
-    this.service.getItems().subscribe({
-      next: (data) => {
-        console.log(data); // Тук ще видите върнатите данни
-      },
-      error: (error) => {
-        console.error(error); // Ако има грешка при извличането на данните
-      }
-    });
+
+  ngOnInit(): void {
+    
+    // this.service.getItems().subscribe({
+    //   next: (data) => {
+    //     console.log(data); // Тук ще видите върнатите данни
+    //   },
+    //   error: (error) => {
+    //     console.error(error); // Ако има грешка при извличането на данните
+    //   }
+    // });
     
     // this.service.getItems().subscribe({
     //   next:(data) => {
@@ -28,10 +42,7 @@ export class GalleryComponent implements OnInit{
     //   }
     // })
     // console.log(this.service.getItems())
-    {
-      
-      
-    }
+    
 
   }
 
