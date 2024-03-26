@@ -16,29 +16,38 @@ header .header-container {
 
 .gallery-bgnd {
     width: 1920px;
-    height: 585px;
+    height: 400px;
     position: relative;
 }
 
 .gallery-bgnd img {
     display: block;
-    
+    border-top: 80px black solid;
      width: 100%;
-    height: 585px;
+    height: 400px;
     object-fit: cover; 
     border-bottom: 10px purple solid;
-    opacity: 0.6;
+    opacity: 0.5;
 
 }
 
-/* .gallery-bgnd::after{
+.gallery-bgnd::after{
     content: '';
     width: 1920px;
-    height: 585px;
+    height: 400px;
     position: absolute;
     top: 0;
     left: 0;
     background-color: black;
     opacity: 0.2;
     z-index: 10;
-} */
+}
+
+.gallery-pet-search {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}

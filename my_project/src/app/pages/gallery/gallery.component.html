@@ -6,7 +6,43 @@
     <img src="../../../assets/gallery-bgnd.jpg" alt="">
 </div>
 
-<div class="search-field">
+<div class="gallery-pet-search">
+    <form>
+        <div>
+            <label for="animalGender">Gender</label>
+            <select name="animalGender" id="animalGender">
+                <option value="any" selected></option>
+                <option value="Male"></option>
+                <option value="Female"></option>
+            </select>
+        </div>
+        <div>
+            <label for="animalSize">Size</label>
+            <select name="animalSize" id="animalSize">
+                <option value="any" selected></option>
+                <option value="Small"></option>
+                <option value="Medium"></option>
+                <option value="Large"></option>
+            </select>
+
+        </div>
+        <div>
+            <label for="animalAge">Color</label>
+            <select name="animalAge" id="animalAge">
+                <option value="any" selected></option>
+                <option value="Under 6 months" selected></option>
+                <option value="6 months - 3 years" selected></option>
+                <option value="Over 3 years" selected></option>
+            </select>
+
+        </div>
+
+        <div>
+            <button class="search-btn" type="submit">Search</button>
+        </div>
+    </form>
+
+
 
 </div>
 <!-- <app-header-carousel></app-header-carousel> -->
