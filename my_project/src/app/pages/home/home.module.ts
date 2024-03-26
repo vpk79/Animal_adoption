@@ -32,7 +32,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule, RouterModule
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent, HeaderComponent, FooterComponent]
 
 })
 export class HomeModule { }
