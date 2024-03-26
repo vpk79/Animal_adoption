@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 
 
@@ -8,25 +8,18 @@ import { ServiceService } from '../../services/service.service';
   styleUrl: './gallery.component.css'
 })
 
-
-
-
-
-
-export class GalleryComponent implements OnInit{
+export class GalleryComponent implements OnInit, AfterViewInit{
 
   
   constructor(private service: ServiceService){ }
 
-//    carouselElement = querySelector('.carousel');
-// restartCarousel(): void {
-//   this.carouselElement?.querySelector('.carousel-item:first-child')?.classList.remove('active');
-//   this.carouselElement?.
-// }
-
+  ngAfterViewInit() {
+  
+    // ...
+  }
 
   ngOnInit(): void {
-    
+
     // this.service.getItems().subscribe({
     //   next: (data) => {
     //     console.log(data); // Тук ще видите върнатите данни
@@ -42,7 +35,6 @@ export class GalleryComponent implements OnInit{
     //   }
     // })
     // console.log(this.service.getItems())
-    
 
   }
 
