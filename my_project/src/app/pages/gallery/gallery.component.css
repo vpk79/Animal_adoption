@@ -1,0 +1,30 @@
+header .header-container {
+    background-color: black;
+    height: 300px;
+}
+
+.gallery-header {
+    width: 1920px;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+}
+
+.gallery-bgnd {
+    position: relative;
+}
+
+.gallery-bgnd::after{
+    content: '';
+    width: 1920px;
+    height: 585px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 10;
+}

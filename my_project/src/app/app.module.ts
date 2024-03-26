@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { HomeModule } from './pages/home/home.module';
+import { GalleryModule } from './pages/gallery/gallery.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -33,6 +34,7 @@ const firebaseConfig = {
     PagesModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    
   ],
   providers: [
     // provideClientHydration()
