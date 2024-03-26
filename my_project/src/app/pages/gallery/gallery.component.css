@@ -11,13 +11,27 @@ header .header-container {
     left: 0;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 100;
+    
 }
 
 .gallery-bgnd {
+    width: 1920px;
+    height: 585px;
     position: relative;
 }
 
-.gallery-bgnd::after{
+.gallery-bgnd img {
+    display: block;
+    
+     width: 100%;
+    height: 585px;
+    object-fit: cover; 
+    border-bottom: 10px purple solid;
+    opacity: 0.6;
+
+}
+
+/* .gallery-bgnd::after{
     content: '';
     width: 1920px;
     height: 585px;
@@ -27,4 +41,4 @@ header .header-container {
     background-color: black;
     opacity: 0.2;
     z-index: 10;
-}
+} */
