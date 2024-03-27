@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
 import { ActivatedRoute } from '@angular/router';
+import { Animals } from '../../../types/animals';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class GalleryComponent implements OnInit, AfterViewInit {
 
   choosedAnimal: string = '';
-  animalsData: string[] = [];
+  animalsData: Animals[] = [];
 
   constructor(private service: Service, private route: ActivatedRoute) { }
 

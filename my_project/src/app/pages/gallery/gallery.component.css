@@ -124,9 +124,10 @@ header .header-container {
 
 
 .gallery-cards {
-    max-width: 1000px;
-    height: 300px;
+    max-width: 1200px;
+    height: 650px;
 
+    overflow: auto;
     display: flex;
     margin: 0 auto;
     margin-top: 40px;
@@ -137,11 +138,13 @@ header .header-container {
 .gallery-cards-wrapper {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    /* border: 1px solid black; */
 }
 
 .gallery-cards .card {
     margin: 0 .5em;
-    width: calc(100%/5);
+    width: calc(100%/6);
     /* width: 200px; */
     height: 250px;
 
@@ -170,13 +173,13 @@ header .header-container {
     padding-right: 20px;
 } */
 
-.gallery-cards.image-wrapper {
+.gallery-cards .image-wrapper {
     /* height: 22vw; */
     display: flex;
     position: relative;
     padding: 10px;
     width: 100%;
-    height: 200px;
+    height: 150px;
     margin: 0 auto;
 }
 
@@ -259,9 +262,14 @@ header .header-container {
 
 }
 
-.gallery-cards .gallery-link:hover {
+.section-three .gallery-link:hover {
     /* border: 1px solid white; */
     background-color: aqua;
     color: purple;
 
+}
+
+.gallery-cards .card-price {
+    text-align: center;
+    font-weight: 900;
 }
