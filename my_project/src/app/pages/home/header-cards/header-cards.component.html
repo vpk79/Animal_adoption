@@ -1,13 +1,13 @@
 <div class="selection-cards-container">
     <ul class="selection-cards">
         <li class="selection-card">
-            <a routerLink="/gallery" data-bs-toggle="tooltip" title="Search dogs">
+            <a routerLink="/gallery" [queryParams]="{animalChoice: dogs}" data-bs-toggle="tooltip" title="Looking for dogs?">
                 <i class="fa-solid fa-dog"></i>
                 <p>Dogs</p>
             </a>
         </li>
         <li class="selection-card">
-            <a href="#">
+            <a routerLink="/gallery" [queryParams]="{animalChoice: cats}" data-bs-toggle="tooltip" title="Looking for cats?">
                 <i class="fa-solid fa-cat"></i>
                 <p>Cats</p>
             </a>

@@ -1,5 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -7,15 +9,21 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+  dogs: string = "dogs";
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Access window object safely here
       window.addEventListener("scroll", () => {
         const header = document.querySelector("header");
         header?.classList.toggle("sticky", window.scrollY > 0);
       });
     }
   }
+
+
+
+
 }

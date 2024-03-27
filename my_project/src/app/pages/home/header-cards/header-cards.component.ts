@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './header-cards.component.css'
 })
 export class HeaderCardsComponent {
-
+  dogs: string = "dogs";
+  cats: string = "cats";
 }

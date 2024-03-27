@@ -3,7 +3,8 @@
 </div>
 
 <div class="gallery-bgnd">
-    <img src="../../../assets/gallery-bgnd.jpg" alt="">
+    <img *ngIf="choosedAnimal == 'dogs'" src="../../../assets/gallery-dogs-bgnd.jpg" alt="dogs">
+    <img *ngIf="choosedAnimal =='cats'" src="../../../assets/gallery-cats-bgnd.jpg" alt="cats">
 </div>
 
 <div class="gallery-pet-search">
@@ -42,9 +43,7 @@
         </div>
     </form>
 </div>
-<!-- <app-header-carousel></app-header-carousel> -->
-<!-- <app-header-cards></app-header-cards> -->
-<!-- <app-available-pets></app-available-pets> -->
+
 <app-donation-section></app-donation-section>
 <app-footer></app-footer>
 

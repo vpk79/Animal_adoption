@@ -6,7 +6,7 @@ import { finalize } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceService {
+export class Service {
   private dbPath = "/newItem";
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
     addItem(item: any) {
