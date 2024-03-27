@@ -3,8 +3,8 @@
 </div>
 
 <div class="gallery-bgnd">
-    <img *ngIf="choosedAnimal == 'dogs'" src="../../../assets/gallery-dogs-bgnd.jpg" alt="dogs">
-    <img *ngIf="choosedAnimal =='cats'" src="../../../assets/gallery-cats-bgnd.jpg" alt="cats">
+    <img class="dogs-bgnd" *ngIf="choosedAnimal == 'dogs'" src="../../../assets/gallery-dogs-bgnd.jpg" alt="dogs">
+    <img class="cats-bgnd" *ngIf="choosedAnimal =='cats'" src="../../../assets/gallery-cats-bgnd.jpg" alt="cats">
 </div>
 
 <div class="gallery-pet-search">
@@ -42,6 +42,25 @@
             <button class="search-btn" type="submit">Search</button>
         </div>
     </form>
+</div>
+
+<div class="gallery-cards">
+    <div class="gallery-cards-wrapper">
+        <div *ngFor="let animal of animalsData" class="card">
+            <div class="image-wrapper">
+                <img src="../../../assets/cat1.png" alt="...">
+                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a> -->
+            </div>
+        </div>
+    </div>
 </div>
 
 <app-donation-section></app-donation-section>

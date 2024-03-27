@@ -109,3 +109,159 @@ header .header-container {
     background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(86, 17, 120, 1) 35%, rgba(0, 212, 255, 1) 100%);
     outline: 1px black solid;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.gallery-cards {
+    max-width: 1000px;
+    height: 300px;
+
+    display: flex;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+
+
+.gallery-cards-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.gallery-cards .card {
+    margin: 0 .5em;
+    width: calc(100%/5);
+    /* width: 200px; */
+    height: 250px;
+
+    border-radius: 15px;
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    z-index: 1;
+}
+
+.gallery-cards .card:not(:last-child):hover {
+    /* outline: 3px purple solid; */
+    border-radius: 15px;
+    scale: 1.1;
+    transition: 0.8s;
+}
+
+.gallery-cards .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .section-three .card-body a {
+    font-size: 20px;
+    background-color: rgb(163, 2, 163);
+    padding-left: 20px;
+    padding-right: 20px;
+} */
+
+.gallery-cards.image-wrapper {
+    /* height: 22vw; */
+    display: flex;
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.gallery-cards .image-wrapper .like-btn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(255, 254, 254);
+    border-radius: 50%;
+    text-decoration: none;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.gallery-cards .image-wrapper .like-btn:hover {
+    background-color: rgb(220, 223, 223);
+}
+
+/* @media screen and (max-width: 576px) {
+    .section-three .card:not(:first-child) {
+        display: none;
+    }
+} */
+
+.gallery-cards .image-wrapper img {
+    width: 100%;
+    max-height: 100%;
+    border: 1px solid rgb(209, 201, 201);
+    border-radius: 15px;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.gallery-cards .extra-card {
+    background-color: purple;
+    border-radius: 15px;
+
+}
+
+/* .section-three .extra-card:hover{
+    outline: 5px rgb(172, 219, 2) solid;
+} */
+
+.gallery-cards .extra-card .image-wrapper a {
+    text-decoration: none;
+    font-size: 80px;
+    color: white
+}
+
+.gallery-cards .extra-card p {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.8;
+    font-weight: bold;
+    margin-bottom: -20px;
+}
+
+.gallery-cards .extra-card .image-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+}
+
+.gallery-cards .gallery-link {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 20px 5px 20px;
+    background-color: rgb(163, 2, 163);
+
+}
+
+.gallery-cards .gallery-link:hover {
+    /* border: 1px solid white; */
+    background-color: aqua;
+    color: purple;
+
+}

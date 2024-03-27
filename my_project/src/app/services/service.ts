@@ -9,13 +9,13 @@ import { finalize } from 'rxjs';
 export class Service {
   private dbPath = "/newItem";
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
-    addItem(item: any) {
-      this.db.list('items').push(item);
+    addItem(url: string, item: any) {
+      this.db.list(url).push(item);
     }
 
     // Пример за получаване на данни от базата данни
-    getItems() {
-      return this.db.list('animals').valueChanges();
+    getItems(url: string) {
+      return this.db.list(url).valueChanges();
     }
 
   uploadFile(event: any) {

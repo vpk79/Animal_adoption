@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class GalleryComponent implements OnInit, AfterViewInit {
 
   choosedAnimal: string = '';
+  animalsData: string[] = [];
 
   constructor(private service: Service, private route: ActivatedRoute) { }
 
@@ -22,9 +23,18 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.service.getItems().subscribe({
-      next: (data) => {
-        console.log(data); // Тук ще видите върнатите данни
+    // Loading gallery by user choice
+    this.route.queryParams.subscribe(params => {
+      this.choosedAnimal = params['animalChoice'];
+      console.log(this.choosedAnimal); // Тук може да използвате стойността на променливата
+    });
+
+    // Loading data from database by url + user choice
+
+    this.service.getItems('animals/' + this.choosedAnimal).subscribe({
+      next: (data: any) => {
+        this.animalsData = data;
+        console.log(this.animalsData); // Тук ще видите върнатите данни
       },
       error: (error) => {
         console.error(error); // Ако има грешка при извличането на данните
@@ -32,10 +42,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     });
 
 
-    this.route.queryParams.subscribe(params => {
-      this.choosedAnimal = params['animalChoice'];
-      console.log(this.choosedAnimal); // Тук може да използвате стойността на променливата
-    });
+    
   }
 
   // onSubmit() {
