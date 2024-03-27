@@ -1,22 +1,40 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs';
+import { finalize, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Service {
   private dbPath = "/newItem";
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
-    addItem(url: string, item: any) {
-      this.db.list(url).push(item);
-    }
 
-    // Пример за получаване на данни от базата данни
-    getItems(url: string) {
-      return this.db.list(url).valueChanges();
-    }
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
+
+
+  // Запис на данни в базата
+
+  addItem(url: string, item: string) {
+    this.db.list(url).push(item);
+  }
+
+  updateItem(url: string, item: string, likes: string) {
+    this.db.object(`${url}/${item}`).update({ Liked: likes });
+  }
+
+
+
+  // Четене на данни от базата
+
+  getItemsAsArray(url: string) {
+    return this.db.list(url).valueChanges();
+  }
+
+  getItemsAsObject(url: string) {
+    return this.db.object(url).valueChanges();
+  }
+
+
 
   uploadFile(event: any) {
     const file = event.target.files[0];

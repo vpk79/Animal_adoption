@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Animals } from '../../../types/animals';
 
 
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -14,6 +15,8 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   choosedAnimal: string = '';
   animalsData: Animals[] = [];
+  animalData = {};
+  
 
   constructor(private service: Service, private route: ActivatedRoute) { }
 
@@ -32,7 +35,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
     // Loading data from database by url + user choice
 
-    this.service.getItems('animals/' + this.choosedAnimal).subscribe({
+    this.service.getItemsAsArray('animals/' + this.choosedAnimal).subscribe({
       next: (data: any) => {
         this.animalsData = data;
         console.log(this.animalsData); // Тук ще видите върнатите данни
@@ -41,9 +44,22 @@ export class GalleryComponent implements OnInit, AfterViewInit {
         console.error(error); // Ако има грешка при извличането на данните
       }
     });
+  }
 
 
-    
+  // Load animal data
+  getAnimalData(name:string): void {
+   
+    this.service.getItemsAsObject('animals/' + this.choosedAnimal + "/" + name).subscribe({
+      next: (data: any) => {
+        this.animalData = data;
+        console.log(this.animalData); // Тук ще видите върнатите данни
+      },
+      error: (error) => {
+        console.error(error); // Ако има грешка при извличането на данните
+      }
+    });
+
   }
 
   // onSubmit() {

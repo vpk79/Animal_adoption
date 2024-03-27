@@ -74,18 +74,17 @@
 
 .nav ul li {
     /* border: 1px solid black; */
-
+    
     list-style: none;
     padding: 7px 10px 7px 10px;
 }
 
 .nav ul li:hover {
-    /* outline: 1px solid orange; */
-    /* border-radius: 5px; */
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
-    cursor: pointer;
+    scale: 1.2;
     opacity: 0.5;
 }
+
+
 
 .header-container a {
     text-decoration: none;
@@ -93,3 +92,4 @@
     z-index: 1;
     font-weight: 600;
 }
+

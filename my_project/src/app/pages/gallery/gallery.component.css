@@ -153,11 +153,12 @@ header .header-container {
     z-index: 1;
 }
 
-.gallery-cards .card:not(:last-child):hover {
+.gallery-cards .card:hover {
     /* outline: 3px purple solid; */
     border-radius: 15px;
     scale: 1.1;
     transition: 0.8s;
+    cursor: pointer;
 }
 
 .gallery-cards .card-body {
@@ -201,7 +202,8 @@ header .header-container {
 }
 
 .gallery-cards .image-wrapper .like-btn:hover {
-    background-color: rgb(220, 223, 223);
+    background-color: rgb(190, 192, 192);
+    
 }
 
 /* @media screen and (max-width: 576px) {
