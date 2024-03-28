@@ -1,7 +1,26 @@
-.close-btn{
-    display: flex;
+.login-form-wrapper {
     position: absolute;
-    top: 64%;
+    width: 500px;
+    height: auto;
+    /* display: flex;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    flex-direction: column; */
+    top: 50%;
     left: 50%;
+    /* transform: translate(-50%, -50%); */
     z-index: 200;
+    /* border: 1px solid black; */
+}
+
+.close-btn {
+    position: relative;
+    margin-top: -600px;
+    margin-left: -75px;
+    padding: 10px 60px;
+    /* display: flex; */
+    /* position: absolute; */
+    /* top: 86%;
+    left: 50%; */
+    z-index: 2000;
 }

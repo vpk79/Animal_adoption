@@ -28,10 +28,8 @@ export class HeaderComponent implements OnInit {
   isLoginFormVisible: boolean = false;
 
   toggleLoginForm() {
-    console.log('works');
     
     this.isLoginFormVisible = !this.isLoginFormVisible;
-    console.log(this.isLoginFormVisible);
   }
 }
 

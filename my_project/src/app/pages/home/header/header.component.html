@@ -21,9 +21,13 @@
     </nav>
 </header>
 
-<div *ngIf="isLoginFormVisible">
-<app-login></app-login>
+
+<div *ngIf="isLoginFormVisible" class="login-form-wrapper">
+    <app-login></app-login>
+    <button type="button" class="btn btn-secondary close-btn" (click)="toggleLoginForm()" data-bs-dismiss="modal">Close</button>
 </div>
+
+
 
 
 

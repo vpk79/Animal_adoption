@@ -7,9 +7,9 @@
 
 .signup-form,
 .login-form {
-    position: absolute;
-    top: 45%;
-    left: 50%;
+    /* position: absolute; */
+    /* top: 45%;
+    left: 50%; */
     transform: translate(-50%, -50%);
     background: #fff;
     border-radius: 10px;
@@ -20,7 +20,9 @@
 
 .form {
     width: 500px;
+
     padding: 20px 50px;
+    padding-bottom: 100px;
 }
 
 .form .close {
