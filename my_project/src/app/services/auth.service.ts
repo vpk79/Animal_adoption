@@ -14,6 +14,7 @@ export class AuthService {
       alert('Login Successful');
       localStorage.setItem('token', 'true');
       this.router.navigate(['/home']);
+      
     }, err => {
       alert(err.message);
       this.router.navigate(['/home']);

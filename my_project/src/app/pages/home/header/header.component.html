@@ -14,16 +14,23 @@
             <li><a href="#">CATS</a></li>
             <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">GALLERY</a></li>
             <li><a href="#">CONTACT</a></li>
-            <li (click)="openLogin()"><a>LOGIN</a></li>
-            <li (click)="openRegister()"><a>REGISTER</a></li>
+            <li (click)="toggleLoginForm()"><a>LOGIN</a></li>
+            <!-- <li (click)="openRegister()"><a>REGISTER</a></li> -->
             <li><a href="#">LOGOUT</a></li>
         </ul>
     </nav>
 </header>
 
-<div class="modal" tabindex="-1" id="loginModal" style="display: none;" #loginModal>
+<div *ngIf="isLoginFormVisible">
+<app-login></app-login>
+</div>
 
-    <app-login></app-login>
+
+
+
+<!-- <div class="modal" tabindex="-1" id="loginModal" style="display: none;" #loginModal>
+
+    
     <div class="close-btn">
         <button type="button" class="btn btn-secondary" (click)="closeLogin()"  data-bs-dismiss="modal">Close</button>
     </div>
@@ -31,4 +38,4 @@
 </div>
 <div class="modal" tabindex="-1" id="registerModal" style="display: none;" #registerModal>
     <app-register></app-register>
-</div>
+</div> -->

@@ -33,5 +33,19 @@ export class LoginComponent implements OnInit {
     const emailValue = this.form.get('email')?.value;
     const passwordValue = this.form.get('password')?.value;
     this.auth.login(emailValue, passwordValue);
+    console.log('asdsadsadsd');
+    
+    this.closeLogin();
+  }
+
+  closeLogin(){
+    const getForm = document.getElementById('login-form');
+    console.log('12232321');
+    console.log(getForm);
+    
+    if(getForm != null){
+      getForm.style.display = 'none';
+    }
   }
 }
+

@@ -18,7 +18,7 @@
     </div>
 </div> -->
 
-<div class="login-form" #loginform>
+<div class="login-form" id="login-form" #loginform>
     <div class="form">
         <div class="text">
             <h1>Login</h1>
@@ -28,6 +28,6 @@
             <input type="password" placeholder="Password" formControlName="password">
             <input type="submit" value="Login">
         </form>
-        
+        <button type="button" class="btn btn-secondary" (click)="closeLogin()" data-bs-dismiss="modal">Close</button>
     </div>
 </div>

@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('loginModal') loginModal!: ElementRef;
-  @ViewChild('registerModal') registerModal!: ElementRef;
+  // @ViewChild('loginModal') loginModal!: ElementRef;
+  // @ViewChild('registerModal') registerModal!: ElementRef;
+  @ViewChild('loginform') loginForm!: ElementRef;
   dogs: string = "dogs";
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
@@ -24,42 +25,54 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  isLoginFormVisible: boolean = false;
 
-  openLogin() {
-    if (this.loginModal != null) {
-      this.loginModal.nativeElement.style.display = 'block';
-      this.loginModal.nativeElement.classList.add('active');
-    }
-
-    if (this.registerModal != null) {
-      this.registerModal.nativeElement.style.display = 'none';
-      this.registerModal.nativeElement.classList.remove('active');
-    }
+  toggleLoginForm() {
+    console.log('works');
+    
+    this.isLoginFormVisible = !this.isLoginFormVisible;
+    console.log(this.isLoginFormVisible);
   }
+}
+
+  // openLogin() {
+  //   console.log(this.loginForm);
+    
+  //   this.loginForm.nativeElement.style.display = 'block';
+    // if (this.loginModal != null) {
+    //   this.loginModal.nativeElement.style.display = 'block';
+    //   this.loginModal.nativeElement.classList.add('active');
+    // }
+
+    // if (this.registerModal != null) {
+    //   this.registerModal.nativeElement.style.display = 'none';
+    //   this.registerModal.nativeElement.classList.remove('active');
+    // }
+  // }
 
 
-  closeLogin() {
-    if (this.loginModal != null) {
-      this.loginModal.nativeElement.style.display = 'none';
-      this.loginModal.nativeElement.classList.remove('active')
+  // closeLogin() {
+  //   if (this.loginModal != null) {
+  //     this.loginModal.nativeElement.style.display = 'none';
+  //     this.loginModal.nativeElement.classList.remove('active')
 
-    }
+  //   }
 
-  }
+  // }
 
-  openRegister() {
+  // openRegister() {
 
-    if (this.registerModal != null) {
-      this.registerModal.nativeElement.style.display = 'block';
-      this.registerModal.nativeElement.classList.add('active');
-    }
+  //   if (this.registerModal != null) {
+  //     this.registerModal.nativeElement.style.display = 'block';
+  //     this.registerModal.nativeElement.classList.add('active');
+  //   }
 
-    if (this.loginModal != null) {
-      this.loginModal.nativeElement.style.display = 'none';
-      this.loginModal.nativeElement.classList.remove('active')
-    }
+  //   if (this.loginModal != null) {
+  //     this.loginModal.nativeElement.style.display = 'none';
+  //     this.loginModal.nativeElement.classList.remove('active')
+  //   }
 
-  }
+  // }
 
   // closeRegister() {
   //   const registerDiv = document.getElementById('registerModal');
@@ -69,4 +82,4 @@ export class HeaderComponent implements OnInit {
 
   // }
 
-}
+// }
