@@ -23,9 +23,9 @@
         <div class="text">
             <h1>Login</h1>
         </div>
-        <form>
-            <input type="email" placeholder="Email ID">
-            <input type="password" placeholder="Password">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="email" placeholder="Email ID" formControlName="email">
+            <input type="password" placeholder="Password" formControlName="password">
             <input type="submit" value="Login">
         </form>
         

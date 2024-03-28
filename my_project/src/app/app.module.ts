@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { HomeModule } from './pages/home/home.module';
 import { GalleryModule } from './pages/gallery/gallery.module';
 import { UserModule } from './pages/user/user.module';
+import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -34,12 +35,13 @@ const firebaseConfig = {
     NgbModule,
     PagesModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
    
     
   ],
   providers: [
-    // provideClientHydration()
+    { provide: HttpClient, useClass: HttpClient, useValue: { withCredentials: true } }
   ],
   bootstrap: [AppComponent]
 })

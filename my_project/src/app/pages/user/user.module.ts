@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    LoginComponent,
+   LoginComponent,
     RegisterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule, ReactiveFormsModule
   ],
   exports: [
     UserComponent,
