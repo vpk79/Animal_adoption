@@ -7,4 +7,21 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+
+  openLogin(){
+    const loginDiv = document.getElementById('loginModal');
+    if(loginDiv != null ){
+      loginDiv.style.display = 'block';
+    }
+   
+  }
+
+  closeLogin() {
+    const loginDiv = document.getElementById('loginModal');
+    if (loginDiv != null) {
+      loginDiv.style.display = 'none';
+    }
+
+  }
+
 }
