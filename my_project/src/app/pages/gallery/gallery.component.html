@@ -49,7 +49,7 @@
         <div *ngFor="let animal of animalsData" class="card" (click)="getAnimalData(animal.Name)">
             <div class="image-wrapper">
                 <img src="../../../assets/{{choosedAnimal}}/{{animal.Name}}.jpeg" alt="...">
-                <div class="like-btn-wrappper" (click)="updateLikes(animal.Name)">
+                <div class="like-btn-wrappper" (click)="updateLikes($event, animal.Name, animal.Liked)">
                     <a  class="like-btn">
                         <i [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
                 </div>

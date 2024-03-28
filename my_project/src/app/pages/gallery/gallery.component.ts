@@ -18,10 +18,12 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   animalsData: Animals[] = [];
   animalData = {};
   likes: string = '';
-  
+  oldValue: number = 1;
 
 
   constructor(private service: Service, private route: ActivatedRoute) { }
+
+
 
   ngAfterViewInit() {
 
@@ -29,7 +31,12 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
+
+    if (this.oldValue == 1) {
+      this.oldValue = 0
+    } else {
+      this.oldValue = 1;
+    }
 
     // Loading gallery by user choice
     this.route.queryParams.subscribe(params => {
@@ -53,12 +60,12 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
 
   // Load animal data
-  getAnimalData(name: string): void {
+  getAnimalData(name: string): any {
 
-    this.service.getItemsAsObject('animals/' + this.choosedAnimal + "/" + name).subscribe({
+    this.service.getItemsAsObject('/animals/' + this.choosedAnimal + "/" + name).subscribe({
       next: (data: any) => {
         this.animalData = data;
-        console.log(this.animalData); // Тук ще видите върнатите данни
+        // console.log(this.animalData); // Тук ще видите върнатите данни
       },
       error: (error) => {
         console.error(error); // Ако има грешка при извличането на данните
@@ -66,25 +73,33 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateLikes(name: string): void {
-    this.getLikes(name).subscribe({
-      next: (data: any) => {
-        data = Number(data);
-        let newValue: string;
-        if (data != 0) {
-          newValue = "0";
-        } else {
-          newValue = "1";
-        }
-        this.service.updateItemLikes('animals', this.choosedAnimal, name, newValue);
-        return;
-      },
-      error: (error) => {
-        console.error('Error:', error);
-      }
-    });
+  updateLikes(event: Event, name: string, liked: string): void {
+    event.stopImmediatePropagation();
+    
+    if(liked == "0") {
+      this.service.updateItemLikes('animals', this.choosedAnimal, name, "1");
+    } else {
+      this.service.updateItemLikes('animals', this.choosedAnimal, name, "0");
+    }
+
+    // this.getLikes(name).subscribe({
+    //   next: (data: any) => {
+    //     data = Number(data);
+    //     let newValue: string;
+    //     if (data != 0) {
+    //       newValue = "0";
+    //     } else {
+    //       newValue = "1";
+    //     }
+    //     this.service.updateItemLikes('animals', this.choosedAnimal, name, newValue);
+    //     return;
+    //   },
+    //   error: (error) => {
+    //     console.error('Error:', error);
+    //   }
+    // });
   }
-  
+
   getLikes(name: string): Observable<any> {
     return this.service.getItemLikes('animals', this.choosedAnimal, name)
   }
