@@ -1,0 +1,37 @@
+.signup-form
+.login-form {
+    position:absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
+    visibility: hidden;
+    transition: .5;
+}
+
+.form{
+    width: 500px;
+    padding: 20px 50px;
+}
+
+.form .close{
+    text-align: right;
+    cursor: pointer;
+}
+
+.form .text h1 {
+    text-align: center;
+    margin: 30px 0px;
+}
+
+.form form{
+    display: block;
+    margin: auto;
+}
+
+.form .row {
+    display: flex;
+    justify-content: space-between;
+}
