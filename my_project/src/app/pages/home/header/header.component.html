@@ -14,12 +14,15 @@
             <li><a href="#">CATS</a></li>
             <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">GALLERY</a></li>
             <li><a href="#">CONTACT</a></li>
-            <li><a routerLink="/login">LOGIN</a></li>
+            <li (click)="openLogin()"><a >LOGIN</a></li>
             <li><a routerLink="/register">REGISTER</a></li>
             <li><a href="#">LOGOUT</a></li>
         </ul>
     </nav>
 </header>
 
-<!-----Header carousel--->
+<div class="modal" tabindex="-1" id="loginModal">
+    <app-login></app-login>
+</div>
+
 

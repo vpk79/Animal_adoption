@@ -34,8 +34,8 @@ const firebaseConfig = {
     NgbModule,
     PagesModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    UserModule
+    AngularFireDatabaseModule
+   
     
   ],
   providers: [

@@ -24,6 +24,22 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  openLogin() {
+    const loginDiv = document.getElementById('loginModal');
+    if (loginDiv != null) {
+      loginDiv.style.display = 'block';
+    }
+
+  }
+
+  closeLogin() {
+    const loginDiv = document.getElementById('loginModal');
+    if (loginDiv != null) {
+      loginDiv.style.display = 'none';
+    }
+
+  }
+
 
 
 }

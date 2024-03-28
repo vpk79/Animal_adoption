@@ -13,6 +13,8 @@ import { OverFooterLineComponent } from './over-footer-line/over-footer-line.com
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { HeaderCarouselComponent } from './header-carousel/header-carousel.component';
+import { UserModule } from '../user/user.module';
+import { LoginComponent } from '../user/login/login.component';
 
 
 
@@ -32,7 +34,7 @@ import { HeaderCarouselComponent } from './header-carousel/header-carousel.compo
     HeaderCarouselComponent
   ],
   imports: [
-    CommonModule, RouterModule
+    CommonModule, RouterModule, UserModule
   ],
   exports: [HomeComponent,
      HeaderComponent,
