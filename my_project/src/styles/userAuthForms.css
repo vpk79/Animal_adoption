@@ -1,0 +1,84 @@
+/* #loginModal {
+    display: flex;
+
+    z-index: 100000;
+} */
+
+
+.signup-form,
+.login-form {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
+
+}
+
+.form {
+    width: 500px;
+    padding: 20px 50px;
+}
+
+.form .close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    text-align: right;
+   
+}
+
+.form .text h1 {
+    text-align: center;
+    margin: 30px 0px;
+}
+
+.form form {
+    display: block;
+    margin: auto;
+}
+
+.form .row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.form .row input {
+    width: 46%;
+    margin-bottom: 0;
+}
+
+.form .row input:first-child {
+    margin-right: 10px;
+}
+
+.form .row input:last-child {
+    margin-left: 10px;
+}
+
+.form form input {
+    width: 100%;
+    display: block;
+    border: 1px solid #000;
+    border-radius: 50px;
+    padding: 20px 16px;
+    margin: 20px auto;
+    outline: none;
+}
+
+.signup-form.active,
+.login-form.active {
+    top: 50%;
+    transition: 0.5s;
+    visibility: hidden;
+}
+
+.constainer.active {
+    filter: blur(20px);
+    transition: 0.5s;
+    pointer-events: none;
+}

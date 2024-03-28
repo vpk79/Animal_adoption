@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -6,22 +6,21 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  @ViewChild('loginform') loginform!: ElementRef;
 
+  // closeLogin() {
+  //   if (this.loginform != null && this.loginform.nativeElement != null) {
+  //     this.loginform.nativeElement.style.display = 'none';
+  //   }
+    
+    
+  //   // const loginDiv = document.getElementById('login-form');
+  //   // console.log(loginDiv);
 
-  openLogin(){
-    const loginDiv = document.getElementById('loginModal');
-    if(loginDiv != null ){
-      loginDiv.style.display = 'block';
-    }
-   
-  }
-
-  closeLogin() {
-    const loginDiv = document.getElementById('loginModal');
-    if (loginDiv != null) {
-      loginDiv.style.display = 'none';
-    }
-
-  }
-
+  //   // if (loginDiv != null) {
+  //   //   loginDiv.style.display = 'none';
+  //   //   console.log('wdddddd');
+      
+  //   // }
+  // }
 }

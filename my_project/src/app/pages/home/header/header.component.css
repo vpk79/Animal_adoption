@@ -1,0 +1,7 @@
+.close-btn{
+    display: flex;
+    position: absolute;
+    top: 64%;
+    left: 50%;
+    z-index: 200;
+}

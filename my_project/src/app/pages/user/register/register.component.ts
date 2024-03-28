@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
+  closeRegister() {
+    const loginDiv = document.getElementById('signup-form');
+    if (loginDiv != null) {
+      loginDiv.style.display = 'none';
+    }
+
+  }
+
 }
