@@ -102,6 +102,10 @@
     /* outline: 3px purple solid;
     border-radius: 15px; */
     background-color: rgb(237, 233, 247);
+    border-radius: 15px;
+    scale: 1.1;
+    transition: 0.8s;
+    /* cursor: pointer; */
 
 }
 
@@ -145,7 +149,7 @@
 }
 
 #myCarousel2 .image-wrapper .like-btn:hover {
-    background-color: rgb(220, 223, 223);
+    background-color: rgb(162, 163, 163);
 }
 
 @media screen and (max-width: 576px) {
@@ -165,4 +169,8 @@
 #myCarousel2 .card-body .btn:hover {
     background-color: aqua;
     color: purple;
+}
+
+.like-btn-wrappper:hover {
+    cursor: pointer;
 }

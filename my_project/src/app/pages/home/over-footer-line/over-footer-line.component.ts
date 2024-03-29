@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Service } from '../../../services/service';
 
 @Component({
   selector: 'app-over-footer-line',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './over-footer-line.component.css'
 })
 export class OverFooterLineComponent {
+  constructor(public service: Service){
 
+  }
 }

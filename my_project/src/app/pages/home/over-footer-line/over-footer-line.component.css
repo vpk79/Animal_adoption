@@ -47,4 +47,12 @@
     text-transform: uppercase;
     border-radius: 50px;
     font-size: 12px;
+   
+}
+
+.section-logo .sign-up:hover,
+.section-logo .sign-in:hover {
+    cursor: pointer;
+    background-color: aqua;
+    color: black;
 }

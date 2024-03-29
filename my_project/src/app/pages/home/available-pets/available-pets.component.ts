@@ -1,54 +1,76 @@
 import { Service } from './../../../services/service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Animals } from '../../../../types/animals';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-available-pets',
   templateUrl: './available-pets.component.html',
   styleUrl: './available-pets.component.css'
 })
-export class AvailablePetsComponent implements OnInit{
+export class AvailablePetsComponent implements OnInit, AfterViewInit {
 
-  constructor(private service: Service){ }
+  constructor(private service: Service, private cdr: ChangeDetectorRef) { }
 
   animalsData: Animals[] = [];
   animalsDataArray: any[][] = [];
-  
+  animalData: Animals[] = [];
+
+  ngAfterViewInit() {
+
+  }
 
   ngOnInit(): void {
 
     this.service.getAnimalsDataByStatus('Available').subscribe({   // Could be 'Reserved' or 'Available'
-      next: (data:any) => {
-      //  this.animalsData = data;
+      next: (data: any) => {
+        //  this.animalsData = data;
         for (let i = 0; i < data.length; i += 4) {
           this.animalsDataArray.push(data.slice(i, i + 4));
         }
-       console.log(this.animalsDataArray);
+        //  console.log(this.animalsDataArray);
       }
     });
-
-
-
-    
-    
-
-    // this.service.getItemsAsArray('/animals/').subscribe({
-    //   next: (data: any) => {
-        
-    //     data.forEach((x: { [key: string]: any }) => {
-    //       Object.values(x).forEach((value: any) => {
-    //         if (value && value.Status == 'Reserved') {
-    //           this.animalsData.push(value);
-    //           console.log(this.animalsData);
-    //         }
-    //       });
-    //     });
-      
-    //   },
-    //   error: (error) => {
-    //     console.error(error);
-    //   }
-    // });
   }
 
+  updateLikes(event: Event, name: string, liked: string, type: string): void {
+    // event.stopImmediatePropagation();
+    if (type == "Dog") {
+      type = 'dogs'
+    } else {
+      type = 'cats';
+    }
+
+    if (liked == "0") {
+      this.service.updateItemLikes('animals', type, name, "1");
+    } else {
+      this.service.updateItemLikes('animals', type, name, "0");
+    }
+  }
+
+
+  // Load animal data
+  getAnimalData(name: string, type: string): void {
+
+    if (type == "Dog") {
+      type = 'dogs'
+    } else {
+      type = 'cats';
+    }
+
+    this.service.getItemsAsObject('/animals/' + type + "/" + name).subscribe({
+      next: (data: any) => {
+        this.animalData = data;
+        // console.log(this.animalData); 
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  toggleLike(event: MouseEvent, animalCard: any): void {
+    this.updateLikes(event, animalCard.Name, animalCard.Liked, animalCard.Type)
+    animalCard.Liked = (animalCard.Liked === '1') ? '0' : '1';
+  }
 }

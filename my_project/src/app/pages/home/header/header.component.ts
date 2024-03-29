@@ -1,3 +1,4 @@
+import { Service } from './../../../services/service';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('loginform') loginForm!: ElementRef;
   dogs: string = "dogs";
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, public service: Service) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -23,22 +24,26 @@ export class HeaderComponent implements OnInit {
         header?.classList.toggle("sticky", window.scrollY > 0);
       });
     }
+
+    
   }
 
-  isLoginFormVisible: boolean = false;
+ 
 
-  toggleLoginForm() {
-    this.isLoginFormVisible = !this.isLoginFormVisible;
-    this.isRegisterFormVisible = false;
-  }
+  // isLoginFormVisible: boolean = false;
 
-  isRegisterFormVisible: boolean = false;
+  // toggleLoginForm() {
+  //   this.isLoginFormVisible = !this.isLoginFormVisible;
+  //   this.isRegisterFormVisible = false;
+  // }
 
-  toggleRegisterForm() {
-    this.isRegisterFormVisible = !this.isRegisterFormVisible;
-    this.isLoginFormVisible = false;
-  }
+  // isRegisterFormVisible: boolean = false;
 
+  // toggleRegisterForm() {
+  //   this.isRegisterFormVisible = !this.isRegisterFormVisible;
+  //   this.isLoginFormVisible = false;
+  // }
+        
 }
 
   // openLogin() {

@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderCarouselComponent } from './header-carousel/header-carousel.component';
 import { UserModule } from '../user/user.module';
 import { LoginComponent } from '../user/login/login.component';
+import { Service } from '../../services/service';
 
 
 

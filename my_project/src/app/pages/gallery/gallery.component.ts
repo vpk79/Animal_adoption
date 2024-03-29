@@ -21,7 +21,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   oldValue: number = 1;
 
 
-  constructor(private service: Service, private route: ActivatedRoute) { }
+  constructor(public service: Service, private route: ActivatedRoute) { }
 
 
 
@@ -41,7 +41,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     //  Taking user animal choice from previous page
     this.route.queryParams.subscribe(params => {
       this.choosedAnimal = params['animalChoice'];
-      console.log(this.choosedAnimal); 
+      // console.log(this.choosedAnimal); 
     });
 
 
@@ -50,7 +50,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
       next: (data: any) => {
         this.animalsData = data;
-        console.log(this.animalsData); 
+        // console.log(this.animalsData); 
       },
       error: (error) => {
         console.error(error); 
@@ -86,7 +86,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getLikes(name: string): Observable<any> {
-    return this.service.getItemLikes('animals', this.choosedAnimal, name)
-  }
+  // getLikes(name: string): Observable<any> {
+  //   return this.service.getItemLikes('animals', this.choosedAnimal, name)
+  // }
 }

@@ -1,9 +1,11 @@
+@import url(../../../styles/userAuthForms.css);
+
 header .header-container {
     background-color: black;
     height: 300px;
 }
 
-.gallery-header {
+/* .gallery-header {
     width: 1920px;
     height: 80px;
     position: fixed;
@@ -12,7 +14,7 @@ header .header-container {
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 100;
 
-}
+} */
 
 .gallery-bgnd {
     width: 1920px;
@@ -267,3 +269,10 @@ header .header-container {
     text-align: center;
     font-weight: 900;
 }
+
+/* .signup-form,
+.login-form {
+    position: fixed;
+    top: 500px;
+    left: 50%;
+} */

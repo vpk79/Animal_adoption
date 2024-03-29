@@ -1,9 +1,9 @@
 <header class="header-container">
     <div class="header-logo">
-        <a href="/home">
+        <a routerLink="/home">
             <img class="logo" src="../assets/logo.png" alt="">
         </a>
-        <h1><a href="/home">HappyTails</a></h1>
+        <h1><a routerLink="/home">HappyTails</a></h1>
     </div>
 
     <nav class="nav">
@@ -14,23 +14,23 @@
             <li><a href="#">CATS</a></li>
             <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">GALLERY</a></li>
             <li><a href="#">CONTACT</a></li>
-            <li (click)="toggleLoginForm()"><a>LOGIN</a></li>
-            <li (click)="toggleRegisterForm()"><a>REGISTER</a></li>
+            <li (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
+            <li (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
             <li><a href="#">LOGOUT</a></li>
         </ul>
     </nav>
 </header>
 
 
-<div *ngIf="isLoginFormVisible" class="login-form-wrapper">
+<div *ngIf="service.isLoginFormVisible" class="login-form-wrapper">
     <app-login></app-login>
-    <button type="button" class="btn btn-secondary login-close-btn" (click)="toggleLoginForm()" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary login-close-btn" (click)="service.toggleLoginForm()" data-bs-dismiss="modal">Close</button>
 </div>
 
 
-<div *ngIf="isRegisterFormVisible" class="register-form-wrapper">
+<div *ngIf="service.isRegisterFormVisible" class="register-form-wrapper">
     <app-register></app-register>
-    <button type="button" class="btn btn-secondary register-close-btn" (click)="toggleRegisterForm()" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary register-close-btn" (click)="service.toggleRegisterForm()" data-bs-dismiss="modal">Close</button>
 </div>
 
 

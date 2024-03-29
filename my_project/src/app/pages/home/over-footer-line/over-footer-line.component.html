@@ -5,7 +5,18 @@
 
     <h1>HappyTails</h1>
     <p>"Your best friend, awaiting for you!"</p>
-    <a href="#" class="sign-in">Sign In</a>
-    <a href="#" class="sign-up">Sign Up</a>
+    <a (click)="service.toggleLoginForm()" class="sign-in">Sign In</a>
+    <a (click)="service.toggleRegisterForm()" class="sign-up">Sign Up</a>
 
 </div>
+
+<!-- <div *ngIf="service.isLoginFormVisible" class="login-form-wrapper">
+    <app-login></app-login>
+    
+</div>
+
+
+<div *ngIf="service.isRegisterFormVisible" class="register-form-wrapper">
+    <app-register></app-register>
+   
+</div> -->

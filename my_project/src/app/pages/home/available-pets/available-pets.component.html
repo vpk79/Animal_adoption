@@ -9,10 +9,13 @@
         <div class="carousel-inner">
             <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index" [class.active]="i === 0">
                 <div class="cards-wrapper">
-                    <div class="card" *ngFor="let animalCard of animalsArray">
+                    <div class="card" *ngFor="let animalCard of animalsArray" (click)="getAnimalData(animalCard.Name, animalCard.Type)">
                         <div class="image-wrapper">
                             <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'" alt="...">
-                            <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            <div class="like-btn-wrappper">
+                                <a class="like-btn" (click)="toggleLike($event, animalCard)">
+                                    <i [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ animalCard.Name }}</h5>

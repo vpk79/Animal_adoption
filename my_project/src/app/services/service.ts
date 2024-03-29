@@ -24,9 +24,9 @@ export class Service {
     return this.db.object(`/${url}/${item}/${itemName}/Liked`).valueChanges();
   }
 
-  updateItemLikes(url: string, item: string, itemName: string, likes: string) {
+  updateItemLikes(url: string, item: string, itemName: string, likes: string){
     this.db.object(`/${url}/${item}/${itemName}`).update({ Liked: likes });
-    return;
+    // return;
   }
 
 
@@ -107,6 +107,21 @@ export class Service {
   //     }
   //   });
   // }
+
+  isLoginFormVisible: boolean = false;
+
+  toggleLoginForm() {
+    this.isLoginFormVisible = !this.isLoginFormVisible;
+    this.isRegisterFormVisible = false;
+  }
+
+  isRegisterFormVisible: boolean = false;
+
+  toggleRegisterForm() {
+    this.isRegisterFormVisible = !this.isRegisterFormVisible;
+    this.isLoginFormVisible = false;
+  }
+
 
 
 
