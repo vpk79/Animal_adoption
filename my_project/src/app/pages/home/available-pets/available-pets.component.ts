@@ -9,9 +9,7 @@ import { Animals } from '../../../../types/animals';
 })
 export class AvailablePetsComponent implements OnInit{
 
-  constructor(private service: Service){
-
-  }
+  constructor(private service: Service){ }
 
   animalsData: { [key: string]: any }[] = [];
   

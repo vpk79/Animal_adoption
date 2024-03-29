@@ -9,7 +9,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="cards-wrapper">
-                    <div class="card">
+                    <div class="card" *ngFor="let animal of animalsData">
                         <div class="image-wrapper">
                             <img src="../../../../assets/dog1.png" alt="...">
                             <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
@@ -22,7 +22,7 @@
                             <a href="#" class="btn btn-primary">Details</a>
                         </div>
                     </div>
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="image-wrapper">
                             <img src="../../../../assets/cat1.png" alt="...">
                             <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
@@ -64,7 +64,7 @@
                                 content.</p>
                             <a href="#" class="btn btn-primary">Details</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="carousel-item">
