@@ -28,9 +28,17 @@ export class HeaderComponent implements OnInit {
   isLoginFormVisible: boolean = false;
 
   toggleLoginForm() {
-    
     this.isLoginFormVisible = !this.isLoginFormVisible;
+    this.isRegisterFormVisible = false;
   }
+
+  isRegisterFormVisible: boolean = false;
+
+  toggleRegisterForm() {
+    this.isRegisterFormVisible = !this.isRegisterFormVisible;
+    this.isLoginFormVisible = false;
+  }
+
 }
 
   // openLogin() {

@@ -15,7 +15,7 @@
             <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">GALLERY</a></li>
             <li><a href="#">CONTACT</a></li>
             <li (click)="toggleLoginForm()"><a>LOGIN</a></li>
-            <!-- <li (click)="openRegister()"><a>REGISTER</a></li> -->
+            <li (click)="toggleRegisterForm()"><a>REGISTER</a></li>
             <li><a href="#">LOGOUT</a></li>
         </ul>
     </nav>
@@ -24,11 +24,14 @@
 
 <div *ngIf="isLoginFormVisible" class="login-form-wrapper">
     <app-login></app-login>
-    <button type="button" class="btn btn-secondary close-btn" (click)="toggleLoginForm()" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary login-close-btn" (click)="toggleLoginForm()" data-bs-dismiss="modal">Close</button>
 </div>
 
 
-
+<div *ngIf="isRegisterFormVisible" class="register-form-wrapper">
+    <app-register></app-register>
+    <button type="button" class="btn btn-secondary register-close-btn" (click)="toggleRegisterForm()" data-bs-dismiss="modal">Close</button>
+</div>
 
 
 
