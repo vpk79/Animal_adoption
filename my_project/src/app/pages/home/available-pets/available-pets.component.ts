@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Animals } from '../../../../types/animals';
 
 @Component({
   selector: 'app-available-pets',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './available-pets.component.css'
 })
 export class AvailablePetsComponent {
+  animalsData: Animals[] = [];
 
 }
