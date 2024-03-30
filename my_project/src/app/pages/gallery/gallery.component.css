@@ -51,6 +51,8 @@ header .header-container {
     display: flex;
     justify-content: center;
     align-items: center;
+   
+    
     /* background-color: aqua; */
 
 }
@@ -63,6 +65,7 @@ header .header-container {
     align-items: center;
     gap: 50px;
     background-color: rgb(226, 228, 228);
+    border-radius: 4px;
 
 }
 

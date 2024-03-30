@@ -8,19 +8,19 @@
 </div>
 
 <div class="gallery-pet-search">
-    <form class="gallery-search-form">
+    <form class="gallery-search-form" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div>
             <label for="animalGender">Gender</label>
-            <select name="animalGender" id="animalGender">
-                <option value="any" selected>Any</option>
+            <select name="animalGender" id="animalGender" formControlName="animalGender">
+                <option value selected="any" >Any</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
         </div>
         <div>
             <label for="animalSize">Size</label>
-            <select name="animalSize" id="animalSize">
-                <option value="any" selected>Any</option>
+            <select name="animalSize" id="animalSize" formControlName="animalSize">
+                <option value selected="any" >Any</option>
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
@@ -29,8 +29,8 @@
         </div>
         <div>
             <label for="animalAge">Color</label>
-            <select name="animalAge" id="animalAge">
-                <option value="any" selected>Any</option>
+            <select name="animalAge" id="animalAge" formControlName="animalAge">
+                <option value selected="any" >Any</option>
                 <option value="Under 6 months">Under 6 months</option>
                 <option value="6 months - 3 years">6 months - 3 years</option>
                 <option value="Over 3 years">Over 3 years</option>

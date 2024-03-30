@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GalleryComponent } from './gallery.component';
 import { RouterModule } from '@angular/router';
 import { HomeModule } from '../home/home.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,7 @@ import { HomeModule } from '../home/home.module';
     GalleryComponent
   ],
   imports: [
-    CommonModule, RouterModule, HomeModule
+    CommonModule, RouterModule, HomeModule, ReactiveFormsModule
   ],
   exports: [GalleryComponent]
 })

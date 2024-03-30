@@ -3,6 +3,7 @@ import { Service } from '../../services/service';
 import { ActivatedRoute } from '@angular/router';
 import { Animals } from '../../../types/animals';
 import { Observable, tap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -21,9 +22,9 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   oldValue: number = 1;
 
 
-  constructor(public service: Service, private route: ActivatedRoute) { }
+  constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder,) { }
 
-
+  form: FormGroup = new FormGroup({});
 
   ngAfterViewInit() {
 
@@ -32,18 +33,23 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    if (this.oldValue == 1) {
-      this.oldValue = 0
-    } else {
-      this.oldValue = 1;
-    }
+    this.form = this.fb.nonNullable.group({
+      animalGender: ['', Validators.required],
+      animalSize: ['', Validators.required],
+      animalAge: ['', Validators.required]
+    });
+
+    // if (this.oldValue == 1) {
+    //   this.oldValue = 0
+    // } else {
+    //   this.oldValue = 1;
+    // }
 
     //  Taking user animal choice from previous page
     this.route.queryParams.subscribe(params => {
       this.choosedAnimal = params['animalChoice'];
       // console.log(this.choosedAnimal); 
     });
-
 
     // Loading gallery data from database by url + user choice
 
@@ -56,6 +62,16 @@ export class GalleryComponent implements OnInit, AfterViewInit {
         console.error(error); 
       }
     });
+  }
+
+
+  onSubmit(): void {
+
+    const animalGenderValue = this.form.get('animalGender')?.value;
+    const animalSizeValue = this.form.get('animalSize')?.value;
+    const animalAgeValue = this.form.get('animalAge')?.value;
+    console.log(animalGenderValue, animalSizeValue, animalAgeValue);
+    this.service.getAnimalsDataByKeyAndValue()
   }
 
 

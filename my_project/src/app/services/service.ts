@@ -85,28 +85,21 @@ export class Service {
     );
   }
 
-  // getAnimalsDataByStatus(status: string): any {
-  //   this.getItemsAsArray('/animals/').subscribe({
-  //     next: (data: any) => {
-
-  //       const animalsData: { [key: string]: any }[] = [];
-
-  //       data.forEach((x: { [key: string]: any }) => {
-  //         Object.values(x).forEach((value: any) => {
-  //           if (value && value.Status == status) {
-  //             animalsData.push(value);
-  //             return animalsData;
-  //             // console.log(this.animalsData);
-  //           }
-  //         });
-  //       });
-
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
+  getAnimalsDataByKeyAndValue(key: string, animalValue : string, type : string): Observable<any[]> {
+    return this.getItemsAsArray('/animals/' + type).pipe(
+      map((data: any[]) => {
+        const animalsData: { [key: string]: any }[] = [];
+        data.forEach((x: { [key: string]: any }) => {
+          Object.values(x).forEach((value: any) => {
+            if (value && value[key] == animalValue) {
+              animalsData.push(value);
+            }
+          });
+        });
+        return animalsData;
+      })
+    );
+  }
 
   isLoginFormVisible: boolean = false;
 
