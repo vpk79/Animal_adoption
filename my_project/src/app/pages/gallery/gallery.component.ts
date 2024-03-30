@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -20,7 +21,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   animalData = {};
   likes: string = '';
   oldValue: number = 1;
-  searchData: string[] = [];
+ 
 
 
   constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder) { }
@@ -57,8 +58,6 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
       next: (data: any) => {
         this.animalsData = data;
-       
-        // console.log(this.animalsData); 
       },
       error: (error) => {
         console.error(error); 
@@ -73,18 +72,16 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     const animalSizeValue = this.form.get('animalSize')?.value;
     const animalAgeValue = this.form.get('animalAge')?.value;
     // console.log(animalGenderValue, animalSizeValue, animalAgeValue);
-    this.service.getAnimalsDataByKeyAndValue('Sex', animalGenderValue, this.choosedAnimal).subscribe({
-      next: (data2: any) => {
-        // this.searchData = data;
-        // console.log(this.searchData); 
-        this.animalsData = data2;
-        console.log(this.animalsData);
-        
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+    console.log(animalGenderValue == false);
+    
+    // this.service.getAnimalsDataByKeyAndValue('Sex', animalGenderValue, this.choosedAnimal).subscribe({
+    //   next: (data: any) => {
+    //     this.animalsData = data;
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //   }
+    // });
    
     
   }
