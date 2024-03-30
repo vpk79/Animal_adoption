@@ -16,6 +16,8 @@ header .header-container {
 
 } */
 
+
+
 .gallery-bgnd {
     width: 1920px;
     height: 400px;
@@ -51,11 +53,43 @@ header .header-container {
     display: flex;
     justify-content: center;
     align-items: center;
-   
-    
+
+
     /* background-color: aqua; */
 
 }
+
+.section-bgnd {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1390px;
+    background-image: url(../../../assets/paws.jpg);
+    background-size: contain;
+
+
+    opacity: 0.1;
+    z-index: -100;
+}
+
+.gallery-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+
+
+}
+
+
+.gallery-title h2 {
+    font-size: 48px;
+    color: purple;
+    margin-bottom: 20px;
+}
+
 
 .gallery-search-form {
     width: 900px;
@@ -116,8 +150,24 @@ header .header-container {
 }
 
 
+.gallery .not-found {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
+}
 
+.not-found h2 {
+    font-size: 42px;
+    color: purple;
+    text-align: center;
+    margin-left: 60px;
+}
+
+.not-found .sad-face {
+    font-size: 42px;
+}
 
 
 .gallery-cards {
@@ -135,7 +185,7 @@ header .header-container {
 .gallery-cards-wrapper {
     display: flex;
     justify-content: center;
-    
+
     flex-wrap: wrap;
     /* border: 1px solid black; */
 }
@@ -201,7 +251,7 @@ header .header-container {
 
 .gallery-cards .image-wrapper .like-btn:hover {
     background-color: rgb(190, 192, 192);
-    
+
 }
 
 /* @media screen and (max-width: 576px) {

@@ -16,8 +16,12 @@
     border-radius: 10px;
     box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
     z-index: 1000;
+    /* filter: blur(radius);
+    transition: 0.5s;
+    pointer-events: none; */
 
 }
+
 
 .form {
     width: 500px;

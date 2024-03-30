@@ -4,14 +4,16 @@ import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
 @NgModule({
   declarations: [
     UserComponent,
-   LoginComponent,
-    RegisterComponent
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule, ReactiveFormsModule
@@ -19,6 +21,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   exports: [
     UserComponent,
     LoginComponent,
-    RegisterComponent]
+    RegisterComponent,
+    ProfileComponent]
 })
 export class UserModule { }

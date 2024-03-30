@@ -1,73 +1,90 @@
-<div class="gallery-header">
-    <app-header></app-header>
-</div>
+<section class="gallery-section">
+    <div class="gallery-header">
+        <app-header></app-header>
+    </div>
 
-<div class="gallery-bgnd">
-    <img class="dogs-bgnd" *ngIf="choosedAnimal == 'dogs'" src="../../../assets/gallery-dogs-bgnd.jpg" alt="dogs">
-    <img class="cats-bgnd" *ngIf="choosedAnimal =='cats'" src="../../../assets/gallery-cats-bgnd.jpg" alt="cats">
-</div>
+    <div class="gallery-bgnd">
+        <img class="dogs-bgnd" *ngIf="choosedAnimal == 'dogs'" src="../../../assets/gallery-dogs-bgnd.jpg" alt="dogs">
+        <img class="cats-bgnd" *ngIf="choosedAnimal =='cats'" src="../../../assets/gallery-cats-bgnd.jpg" alt="cats">
+    </div>
 
-<div class="gallery-pet-search">
-    <form class="gallery-search-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="animalGender">Gender</label>
-            <select name="animalGender" id="animalGender" formControlName="animalGender">
-                <option value selected="any" >Any</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-        </div>
-        <div>
-            <label for="animalSize">Size</label>
-            <select name="animalSize" id="animalSize" formControlName="animalSize">
-                <option value selected="any" >Any</option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-            </select>
-
-        </div>
-        <div>
-            <label for="animalAge">Age</label>
-            <select name="animalAge" id="animalAge" formControlName="animalAge">
-                <option value selected="any" >Any</option>
-                <option value="Under 6 months">Under 6 months</option>
-                <option value="6 months - 3 years">6 months - 3 years</option>
-                <option value="Over 3 years">Over 3 years</option>
-            </select>
-
-        </div>
-
-        <div>
-            <button class="search-btn" type="submit">Search</button>
-        </div>
-    </form>
-</div>
-
-<div class="gallery-cards">
-    <div class="gallery-cards-wrapper">
-        <div *ngFor="let animal of animalsData" class="card" (click)="getAnimalData(animal.Name)">
-            <div class="image-wrapper">
-                <img src="../../../assets/{{choosedAnimal}}/{{animal.Name}}.jpeg" alt="...">
-                <div class="like-btn-wrappper" (click)="updateLikes($event, animal.Name, animal.Liked)">
-                    <a  class="like-btn">
-                        <i [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
-                </div>
+    <div class="section-bgnd"></div>
+    <div class="gallery-title">
+        <h2>HERE is our {{choosedAnimal}}<span>
+                <i [class]="choosedAnimal === 'dogs' ? 'fa-solid fa-dog' : 'fa-solid fa-cat'"></i>
+            </span> gallery!</h2>
+        <h5>Our {{choosedAnimal == 'dogs' ? 'pupies':'kitties'}} are eager to meet you!</h5>
+    </div>
+    <div class="gallery-pet-search">
+        <form class="gallery-search-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="animalGender">Gender</label>
+                <select name="animalGender" id="animalGender" formControlName="animalGender">
+                    <option value selected="any">All</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">{{animal.Name}}</h5>
-                <!-- <p class="card-text">Some quick example text to build on the card title and make
+            <div>
+                <label for="animalSize">Size</label>
+                <select name="animalSize" id="animalSize" formControlName="animalSize">
+                    <option value selected="any">All</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                </select>
+
+            </div>
+            <div>
+                <label for="animalAge">Age</label>
+                <select name="animalAge" id="animalAge" formControlName="animalAge">
+                    <option value selected="any">All</option>
+                    <option value="1year">1 year</option>
+                    <option value="2year">2 years</option>
+                    <option value="3year">3 years</option>
+                    <option value="4year">4 years</option>
+                </select>
+
+            </div>
+
+            <div>
+                <button class="search-btn" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="gallery-cards">
+        <div class="gallery-cards-wrapper">
+
+
+            <div *ngFor="let animal of animalsData" class="card" (click)="getAnimalData(animal.Name)">
+                <div class="image-wrapper">
+                    <img src="../../../assets/{{choosedAnimal}}/{{animal.Name}}.jpeg" alt="...">
+                    <div class="like-btn-wrappper" (click)="updateLikes($event, animal.Name, animal.Liked)">
+                        <a class="like-btn">
+                            <i
+                                [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{animal.Name}}</h5>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make
                                     up
                                     the bulk of the card's
                                     content.</p>
                                 <a href="#" class="btn btn-primary">Details</a> -->
+                </div>
+                <div class="card-price">
+                    <p>Fee: <span>{{animal.Price}}</span></p>
+                </div>
             </div>
-            <div class="card-price">
-                <p>Fee: <span>{{animal.Price}}</span></p>
+            <div class="not-found" *ngIf="animalsData.length === 0">
+                <h2><i class="fa-regular fa-face-frown"></i> Sorry, no-available animals by these criteria!</h2>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <app-donation-section></app-donation-section>
 <app-footer></app-footer>
