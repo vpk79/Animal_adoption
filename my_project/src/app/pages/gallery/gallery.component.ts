@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
 import { ActivatedRoute } from '@angular/router';
 import { Animals } from '../../../types/animals';
@@ -20,9 +20,10 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   animalData = {};
   likes: string = '';
   oldValue: number = 1;
+  searchData: string[] = [];
 
 
-  constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder,) { }
+  constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   form: FormGroup = new FormGroup({});
 
@@ -56,6 +57,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
       next: (data: any) => {
         this.animalsData = data;
+       
         // console.log(this.animalsData); 
       },
       error: (error) => {
@@ -70,8 +72,21 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     const animalGenderValue = this.form.get('animalGender')?.value;
     const animalSizeValue = this.form.get('animalSize')?.value;
     const animalAgeValue = this.form.get('animalAge')?.value;
-    console.log(animalGenderValue, animalSizeValue, animalAgeValue);
-    this.service.getAnimalsDataByKeyAndValue()
+    // console.log(animalGenderValue, animalSizeValue, animalAgeValue);
+    this.service.getAnimalsDataByKeyAndValue('Sex', animalGenderValue, this.choosedAnimal).subscribe({
+      next: (data2: any) => {
+        // this.searchData = data;
+        // console.log(this.searchData); 
+        this.animalsData = data2;
+        console.log(this.animalsData);
+        
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+   
+    
   }
 
 

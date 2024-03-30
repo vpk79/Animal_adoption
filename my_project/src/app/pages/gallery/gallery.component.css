@@ -135,14 +135,15 @@ header .header-container {
 .gallery-cards-wrapper {
     display: flex;
     justify-content: center;
+    
     flex-wrap: wrap;
     /* border: 1px solid black; */
 }
 
 .gallery-cards .card {
     margin: 0 .5em;
-    width: calc(100%/6);
-    /* width: 200px; */
+    /* width: calc(100%/6); */
+    width: 200px;
     height: 250px;
 
     border-radius: 15px;

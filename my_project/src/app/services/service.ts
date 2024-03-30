@@ -24,7 +24,7 @@ export class Service {
     return this.db.object(`/${url}/${item}/${itemName}/Liked`).valueChanges();
   }
 
-  updateItemLikes(url: string, item: string, itemName: string, likes: string){
+  updateItemLikes(url: string, item: string, itemName: string, likes: string) {
     this.db.object(`/${url}/${item}/${itemName}`).update({ Liked: likes });
     // return;
   }
@@ -85,16 +85,14 @@ export class Service {
     );
   }
 
-  getAnimalsDataByKeyAndValue(key: string, animalValue : string, type : string): Observable<any[]> {
-    return this.getItemsAsArray('/animals/' + type).pipe(
+  getAnimalsDataByKeyAndValue(animalKey: any, animalValue: string, animalType: string): Observable<any[]> {
+    return this.getItemsAsArray('/animals/' + animalType + '/').pipe(
       map((data: any[]) => {
         const animalsData: { [key: string]: any }[] = [];
         data.forEach((x: { [key: string]: any }) => {
-          Object.values(x).forEach((value: any) => {
-            if (value && value[key] == animalValue) {
-              animalsData.push(value);
-            }
-          });
+          if (x[animalKey] == animalValue) {
+            animalsData.push(x);
+          }
         });
         return animalsData;
       })
