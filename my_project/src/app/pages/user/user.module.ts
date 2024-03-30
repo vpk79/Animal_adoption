@@ -4,7 +4,9 @@ import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProfileComponent } from './profile/profile.component';
+
+
+
 
 
 
@@ -13,7 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
     UserComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+   
   ],
   imports: [
     CommonModule, ReactiveFormsModule
@@ -22,6 +24,6 @@ import { ProfileComponent } from './profile/profile.component';
     UserComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent]
+   ]
 })
 export class UserModule { }

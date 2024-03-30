@@ -14,6 +14,7 @@ import { HomeModule } from './pages/home/home.module';
 import { GalleryModule } from './pages/gallery/gallery.module';
 import { UserModule } from './pages/user/user.module';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { UserProfilModule } from './pages/user-profil/user-profil.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -36,7 +37,8 @@ const firebaseConfig = {
     PagesModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    HttpClientModule
+    HttpClientModule,
+    UserProfilModule
    
     
   ],

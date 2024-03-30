@@ -4,7 +4,9 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
 import { PagesComponent } from './pages/pages.component';
 import { LoginComponent } from './pages/user/login/login.component';
 import { RegisterComponent } from './pages/user/register/register.component';
-import { ProfileComponent } from './pages/user/profile/profile.component';
+import { UserProfilModule } from './pages/user-profil/user-profil.module';
+import { UserProfilComponent } from './pages/user-profil/user-profil.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,7 +14,7 @@ const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: UserProfilComponent },
   // { path: 'dasboard', component: DashboardComponent },
   
 ];
