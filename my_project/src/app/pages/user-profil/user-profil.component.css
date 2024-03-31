@@ -99,3 +99,16 @@
 #uploadImg {
     display: none;
 }
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.user-form label {
+    margin-right: 10px;
+    font-size: 18px;
+    border: 1px black solid;
+    padding: 5px 20px;
+}
