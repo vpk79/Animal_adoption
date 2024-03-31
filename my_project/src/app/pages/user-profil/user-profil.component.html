@@ -12,10 +12,11 @@
        
         <div class="user-picture-wrapper">
             <div class="user-picture-holder">
-                <img src="../../../assets/user_profile.jpg" alt="">
+                <img [src]="imageUrl" alt="">
             </div>
             <div class="user-image-upload">
-                <input type="file" (change)="upload($event)">
+                <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
+                <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg">
             </div>
         </div>
         <div class="user-details">

@@ -52,19 +52,27 @@ export class Service {
 
 
 
-  uploadFile(event: any, dirPath: string) {
+  uploadFile(event: any, dirPath: string, fileName: string) {
     const file = event.target.files[0];
-    const filePath = 'main/' + dirPath + file.name;
+    const newImgName = fileName;
+    const filePath = 'main/' + dirPath + fileName;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe(downloadURL => {
-          console.log('File available at', downloadURL);
-        });
-      })
-    ).subscribe();
+    return new Observable<string>(observer => {
+      task.snapshotChanges().subscribe(snapshot => {
+        if (snapshot?.state === 'success') {
+          snapshot.ref.getDownloadURL().then(downloadURL => {
+            observer.next(downloadURL);
+            observer.complete();
+          });
+        }
+      }, error => {
+        observer.error(error);
+      });
+    });
+
+  
   }
 
 
