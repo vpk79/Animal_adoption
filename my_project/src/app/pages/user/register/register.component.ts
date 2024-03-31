@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { Service } from '../../../services/service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent {
     private auth: AuthService,
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    public service: Service
   ) { }
 
   form: FormGroup = new FormGroup({});

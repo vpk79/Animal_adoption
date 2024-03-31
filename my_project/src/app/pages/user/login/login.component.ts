@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { Service } from '../../../services/service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    public service: Service
   ) { }
 
   form: FormGroup = new FormGroup({});
@@ -29,19 +30,20 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('login');
+    // console.log('login');
     const emailValue = this.form.get('email')?.value;
     const passwordValue = this.form.get('password')?.value;
     this.auth.login(emailValue, passwordValue);
-    this.closeLogin();
+    this.service.toggleLoginForm;
+    // this.closeLogin();
   }
 
-  closeLogin(){
-    const getForm = document.getElementById('login-form');
+  // closeLogin(){
+  //   const getForm = document.getElementById('login-form');
     
-    if(getForm != null){
-      getForm.style.display = 'none';
-    }
-  }
+  //   if(getForm != null){
+  //     getForm.style.display = 'none';
+  //   }
+  // }
 }
 
