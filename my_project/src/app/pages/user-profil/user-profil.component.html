@@ -9,7 +9,6 @@
 
 <section class="user-profile-section">
     <div class="user-profile-section-wrapper">
-        <!-- <div class="user-profil-bgnd"><img src='../../../assets/user-profil-bgnd.jpg' alt=""></div> -->
         <div class="user-profile-container">
             <div class="user-picture-wrapper">
                 <div class="user-picture-holder">
@@ -44,16 +43,46 @@
 
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
+<!-- <section class="liked-animals">
+    <div id="myCarousel2" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index"
+                [class.active]="i === 0">
+                <div class="cards-wrapper">
+                    <div class="card" *ngFor="let animalCard of animalsArray"
+                        (click)="getAnimalData(animalCard.Name, animalCard.Type)">
+                        <div class="image-wrapper">
+                            <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
+                                alt="...">
+                            <div class="like-btn-wrappper">
+                                <a class="like-btn" (click)="toggleLike($event, animalCard)">
+                                    <i
+                                        [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ animalCard.Name }}</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up
+                                the bulk of the card's
+                                content.</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+    
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section> -->
 
 
 <app-donation-section></app-donation-section>
