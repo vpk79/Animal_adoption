@@ -2,18 +2,39 @@
     <app-header></app-header>
 </div>
 
+<div class="user-welcome">
+    <h2>Hi, user</h2>
+    <h2>Welcome, to your profil page</h2>
+</div>
 
 <section class="user-profile-section">
-    <div class="user-welcome">
-        <h2>Hi, user</h2>
-        <h2>Welcome, to your profil page</h2>
+    <div class="user-profile-section-wrapper">
+       
+        <div class="user-picture-wrapper">
+            <div class="user-picture-holder">
+                <img src="../../../assets/user_profile.jpg" alt="">
+            </div>
+            <div class="user-image-upload">
+                <input type="file" (change)="upload($event)">
+            </div>
+        </div>
+        <div class="user-details">
+            <form>
+                <div>
+                    <label for="username">Name</label>
+                    <input type="text" name="username" id="username" placeholder="Username">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                </div>
+                <div>
+                    <label for="number">Phone</label>
+                    <input type="number" name="number" id="number" placeholder="Phone">
+                </div>
+            </form>
+        </div>
     </div>
-
-
-
-
-
-
 </section>
 
 

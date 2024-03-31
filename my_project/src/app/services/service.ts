@@ -52,13 +52,12 @@ export class Service {
 
 
 
-  uploadFile(event: any) {
+  uploadFile(event: any, dirPath: string) {
     const file = event.target.files[0];
-    const filePath = 'main/dogs' + file.name;
+    const filePath = 'main/' + dirPath + file.name;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
-    // Опционален обработчик за прогрес или успешно качване
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(downloadURL => {
