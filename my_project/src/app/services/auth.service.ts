@@ -10,6 +10,9 @@ export class AuthService {
 
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
+
+  // Login function
+
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then((userCredential) => {
       // Вземете данните за текущия потребител
@@ -38,15 +41,33 @@ export class AuthService {
     });
   }
 
+  // Register function
+
   register(email: string, password: string) {
-    this.fireauth.createUserWithEmailAndPassword(email, password).then(() => {
+    this.fireauth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+      // Вземете данните за новорегистрирания потребител
+      const user = userCredential.user;
+
+      // Проверка дали текущия потребител съществува
+      if (user) {
+        // Получаване на токена за текущия потребител
+        user.getIdToken().then(token => {
+          console.log('User Token:', token);
+          // Тук може да използвате токена по ваше усмотрение
+        }).catch(err => {
+          console.error('Error getting user token:', err);
+        });
+      }
+
       alert('Registration Successful');
       this.router.navigate(['/home']);
-    }, err => {
+    }).catch(err => {
       alert(err.message);
       this.router.navigate(['/home']);
-    })
+    });
   }
+
+  // Logout function
 
   logout() {
     this.fireauth.signOut().then(() => {
