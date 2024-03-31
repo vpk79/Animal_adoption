@@ -10,10 +10,10 @@ import { Service } from '../../services/service';
 
 
 export class UserProfilComponent {
- 
+  toggle: boolean = true; 
+  isVisible = false;
+
   imageUrl: string = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fprofile_pic?alt=media&token=1cc19d05-685a-4d03-9d9e-5aa6f2aa22d6';
-
-
 
   constructor(public service: Service, public imageValidateService: ImageValidateService){}
 
@@ -41,6 +41,11 @@ export class UserProfilComponent {
       .catch(error => {
         console.error('Error validating image:', error);
       });
+  }
+
+  isDisabled(): boolean {
+    this.isVisible = true;
+    return this.toggle = false; 
   }
   
 }

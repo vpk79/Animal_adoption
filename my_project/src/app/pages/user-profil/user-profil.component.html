@@ -9,32 +9,39 @@
 
 <section class="user-profile-section">
     <div class="user-profile-section-wrapper">
-       
-        <div class="user-picture-wrapper">
-            <div class="user-picture-holder">
-                <img [src]="imageUrl" alt="">
+        <!-- <div class="user-profil-bgnd"><img src='../../../assets/user-profil-bgnd.jpg' alt=""></div> -->
+        <div class="user-profile-container">
+            <div class="user-picture-wrapper">
+                <div class="user-picture-holder">
+                    <img [src]="imageUrl" alt="">
+                </div>
+                <div class="user-image-upload">
+                    <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
+                    <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg">
+                </div>
             </div>
-            <div class="user-image-upload">
-                <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
-                <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg">
+            <div class="user-details">
+                <div class="edit-profil">
+                    <h2>Edit your profile  <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span></h2>
+                </div>
+                <form class="user-form">
+                    <div class="form-labels">
+                        <label for="username">Name:</label>
+                        <label for="email">Email:</label>
+                        <label for="number">Phone:</label>
+                    </div>
+                    <div class="form-fields">
+                        <input type="text" name="username" id="username" placeholder="Username" [disabled]="toggle">
+                        <input type="email" name="email" id="email" placeholder="Email" [disabled]="toggle">
+                        <input type="number" name="number" id="number" placeholder="Phone" [disabled]="toggle">
+                    </div>
+                    <div class="save-btn">
+                        <button *ngIf="isVisible" type="submit" [disabled]="toggle" >Save</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="user-details">
-            <form class="user-form">
-                <div>
-                    <label for="username">Name</label>
-                    <input type="text" name="username" id="username" placeholder="Username">
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Email">
-                </div>
-                <div>
-                    <label for="number">Phone</label>
-                    <input type="number" name="number" id="number" placeholder="Phone">
-                </div>
-            </form>
-        </div>
+
     </div>
 </section>
 

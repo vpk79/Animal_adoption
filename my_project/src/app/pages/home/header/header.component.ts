@@ -27,70 +27,7 @@ export class HeaderComponent implements OnInit {
 
     
   }
-
- 
-
-  // isLoginFormVisible: boolean = false;
-
-  // toggleLoginForm() {
-  //   this.isLoginFormVisible = !this.isLoginFormVisible;
-  //   this.isRegisterFormVisible = false;
-  // }
-
-  // isRegisterFormVisible: boolean = false;
-
-  // toggleRegisterForm() {
-  //   this.isRegisterFormVisible = !this.isRegisterFormVisible;
-  //   this.isLoginFormVisible = false;
-  // }
         
 }
 
-  // openLogin() {
-  //   console.log(this.loginForm);
-    
-  //   this.loginForm.nativeElement.style.display = 'block';
-    // if (this.loginModal != null) {
-    //   this.loginModal.nativeElement.style.display = 'block';
-    //   this.loginModal.nativeElement.classList.add('active');
-    // }
-
-    // if (this.registerModal != null) {
-    //   this.registerModal.nativeElement.style.display = 'none';
-    //   this.registerModal.nativeElement.classList.remove('active');
-    // }
-  // }
-
-
-  // closeLogin() {
-  //   if (this.loginModal != null) {
-  //     this.loginModal.nativeElement.style.display = 'none';
-  //     this.loginModal.nativeElement.classList.remove('active')
-
-  //   }
-
-  // }
-
-  // openRegister() {
-
-  //   if (this.registerModal != null) {
-  //     this.registerModal.nativeElement.style.display = 'block';
-  //     this.registerModal.nativeElement.classList.add('active');
-  //   }
-
-  //   if (this.loginModal != null) {
-  //     this.loginModal.nativeElement.style.display = 'none';
-  //     this.loginModal.nativeElement.classList.remove('active')
-  //   }
-
-  // }
-
-  // closeRegister() {
-  //   const registerDiv = document.getElementById('registerModal');
-  //   if (registerDiv != null) {
-  //     registerDiv.style.display = 'none';
-  //   }
-
-  // }
-
-// }
+  
