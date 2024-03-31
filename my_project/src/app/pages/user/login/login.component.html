@@ -21,12 +21,13 @@
 <div class="login-form" id="login-form" #loginform>
     <div class="form">
         <div class="text">
-            <h1>Login</h1>
+            <img src="../../../../assets/login.png" alt="">
+            <!-- <h1>Login</h1> -->
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="email" placeholder="Email ID" formControlName="email">
-            <input type="password" placeholder="Password" formControlName="password">
-            <input type="submit" value="Login">
+            <input type="email" placeholder="Email ID" formControlName="email" required>
+            <input type="password" placeholder="Password" formControlName="password" required>
+            <input type="submit" value="Login" id="login"> 
         </form>
         <button type="button" class="btn btn-secondary" (click)="this.service.toggleLoginForm()" data-bs-dismiss="modal">Close</button>
     </div>

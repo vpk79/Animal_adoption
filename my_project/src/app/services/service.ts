@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, finalize, map } from 'rxjs';
+import { UserProfil } from '../../types/users';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class Service {
 
   // Запис на данни в базата
 
-  addItem(url: string, item: string) {
+  addItem(url: string, item: string | UserProfil) {
     this.db.list(url).push(item);
     return;
   }
@@ -26,7 +27,7 @@ export class Service {
 
   updateItemLikes(url: string, item: string, itemName: string, likes: string) {
     this.db.object(`/${url}/${item}/${itemName}`).update({ Liked: likes });
-    // return;
+   
   }
 
 
@@ -34,9 +35,7 @@ export class Service {
 
 
 
-  // addItem() {
-  //   this.db.object('/animals/dogs/Bambi').update({ Liked: "10" });
-  // }
+  
 
 
 
@@ -54,9 +53,7 @@ export class Service {
 
   uploadFile(event: any, dirPath: string, fileName: string) {
     const file = event.target.files[0];
-    const newImgName = fileName;
     const filePath = 'main/' + dirPath + fileName;
-    const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
     return new Observable<string>(observer => {

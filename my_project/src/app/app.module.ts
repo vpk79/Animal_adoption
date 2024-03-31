@@ -15,6 +15,7 @@ import { GalleryModule } from './pages/gallery/gallery.module';
 import { UserModule } from './pages/user/user.module';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { UserProfilModule } from './pages/user-profil/user-profil.module';
+import { Service } from './services/service';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -43,7 +44,8 @@ const firebaseConfig = {
     
   ],
   providers: [
-    { provide: HttpClient, useClass: HttpClient, useValue: { withCredentials: true } }
+    { provide: HttpClient, useClass: HttpClient, useValue: { withCredentials: true }},
+    Service
   ],
   bootstrap: [AppComponent]
 })

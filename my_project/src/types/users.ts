@@ -1,12 +1,13 @@
 export interface UserProfil {
     ID: string,
     firstName: string,
-    lastName: string | undefined,
+    lastName: string | null,
     email: string,
-    phone: number | undefined,
-    age: number | undefined,
-    balance: number,
-    donation: number,
-    liked_animals: [],
-    adopted_animals: [],
+    phone: number | null,
+    age: number | null,
+    sex: string,
+    balance: number | null,
+    donation: number | null, 
+    liked_animals: string[] | null, 
+    adopted_animals: string[] | null
 }

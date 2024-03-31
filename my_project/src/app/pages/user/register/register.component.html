@@ -3,19 +3,38 @@
     <div class="form">
         <!-- <div class="close">&times;</div> -->
         <div class="text">
-            <h1>Register</h1>
+            <img src="../../../../assets/register..png" alt="">
+            <!-- <h1>Register</h1> -->
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <input type="text" placeholder="Username" formControlName="username">
-                <!-- <input type="text" placeholder="Last Name"> -->
+            <div class="first-row">
+                <input type="text" placeholder="Firstname" formControlName="username" required>
+                <input type="text" placeholder="Last Name" required>
+            </div>
+            <div class="second-row">
+                <input type="email" placeholder="Email ID" formControlName="email" required>
+                <select name="gander" id="gender" placeholder="gender" required>
+                    <option value="gender" selected>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">female</option>
+                </select>
+            </div>
+            <div class="third-row">
+                <input type="password" placeholder="Password" formControlName="password" required>
+                <input type="password" placeholder="Confirm Password" required> 
+            </div>
+            <div>
+                <input type="checkbox" name="adultcheck" required>
+                <label for="adultcheck">I am over 13 years old.</label>
+            </div>
+            <div>
+                <input type="checkbox" name="license" required>
+                <label for="license">I agree with the <a href="#">license policy</a>.</label>
             </div>
 
-            <input type="email" placeholder="Email ID" formControlName="email">
-            <input type="password" placeholder="Password" formControlName="password">
-            <!-- <input type="password" placeholder="Confirm Password"> -->
-            <input type="submit" value="Register">
+            <input type="submit" value="Register" id="register">
         </form>
-        <button type="button" class="btn btn-secondary" (click)="this.service.toggleRegisterForm()" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="this.service.toggleRegisterForm()"
+            data-bs-dismiss="modal">Close</button>
     </div>
 </div>
