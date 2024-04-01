@@ -25,16 +25,20 @@
 
 .error-wrapper {
     display: flex;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
     position: relative;
 }
 
 .error-wrapper .error-msg {
+    color: red;
     position: absolute;
     top: 45px;
     left: 10px;
     font-size: 14px;
     font-weight: bold;
+    font-style: italic;
 }
 
 .form {
@@ -147,8 +151,9 @@
     padding: 5px;
 }
 
-.signup-form form select {
+.signup-form #gender {
     width: 100%;
+    height: 42px;
 }
 
 .signup-form form label {
@@ -194,6 +199,7 @@
 
 .signup-form .remark {
     font-weight: 600;
+    font-style: italic;
 }
 
 .signup-form .remark span {
@@ -222,6 +228,13 @@
     outline: 3px solid rgb(182, 182, 182);
 
 }
+
+.signup-form .checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+
 
 
 

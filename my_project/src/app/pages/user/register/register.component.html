@@ -9,58 +9,103 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-wrapper">
                 <div class="first-row">
-                    <input type="text" placeholder="Firstname*" formControlName="username">
-                    <input type="text" placeholder="Last Name*" formControlName="lastname">
+                    <div class="error-wrapper">
+                        <input type="text" placeholder="Firstname*" formControlName="firstname">
+
+                        <div class="error-msg" *ngIf="form.get('firstname')?.touched">
+                            <div *ngIf="form.get('firstname')?.errors?.['invalidName']" >
+                                *Letters Only!
+                            </div>
+                            <div *ngIf="form.get('firstname')?.errors?.['minlength']">
+                                *3-20 characters!
+                            </div>
+                            <div *ngIf="form.get('firstname')?.errors?.['maxlength']">
+                                *3-20 characters!
+                            </div>
+                            <div *ngIf="form.get('firstname')?.errors?.['required']" >
+                                *First name is required!
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="error-wrapper">
+                        <input type="text" placeholder="Last Name*" formControlName="lastname">
+
+                        <div class="error-msg" *ngIf="form.get('lastname')?.touched">
+                            <div *ngIf="form.get('lastname')?.errors?.['invalidName']" >
+                                *Letters Only!
+                            </div>
+                            <div *ngIf="form.get('lastname')?.errors?.['minlength']" >
+                                *3-20 characters!
+                            </div>
+                            <div *ngIf="form.get('lastname')?.errors?.['maxlength']" >
+                                *3-20 characters!
+                            </div>
+                            <div *ngIf="form.get('lastname')?.errors?.['required']" >
+                                *Last name is required!
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    
                 </div>
                 <div class="second-row">
                     <div class="error-wrapper">
                         <input type="email" placeholder="Email ID*" formControlName="email"
                             [style.border-color]="form.get('email')?.invalid && form.get('email')?.touched ? 'red' : 'initial'">
                         <div *ngIf="form.get('email')?.touched" class="error-msg">
-                            <div *ngIf="form.get('email')?.errors?.['email']" style="color:red">
+                            <div *ngIf="form.get('email')?.errors?.['email']" >
                                 *Email is INVALID!
                             </div>
-                            <div *ngIf="form.get('email')?.errors?.['required']" style="color:red">
+                            <div *ngIf="form.get('email')?.errors?.['required']" >
                                 *Email is required!
                             </div>
                         </div>
                     </div>
-                
+                <div class="error-wrapper">
                     <select name="gander" id="gender" placeholder="gender" formControlName="gender">
-                        <option value="gender" selected>Gender</option>
+                        <option value="gender" selected>Gender*</option>
                         <option value="male">Male</option>
                         <option value="female">female</option>
                     </select>
+                    <div *ngIf="form.get('gender')?.value === 'gender' && form.get('gender')?.touched" class="error-msg">
+                        *Please select a gender!
+                    </div>
+                </div>
+                    
                 </div>
                 <div class="third-row">
                     <div class="error-wrapper">
                         <input type="password" placeholder="Password*" formControlName="password">
                         <div class="error-msg" *ngIf="form.get('password')?.touched">
-                            <div *ngIf="form.get('password')?.errors?.['minlength']" style="color:red">
+                            <div *ngIf="form.get('password')?.errors?.['minlength']" >
                                 *6-20 characters!
                             </div>
-                            <div *ngIf="form.get('password')?.errors?.['maxlength']" style="color:red">
+                            <div *ngIf="form.get('password')?.errors?.['maxlength']" >
                                 *6-20 characters!
                             </div>
-                            <div *ngIf="form.get('password')?.errors?.['required']" style="color:red">
+                            <div *ngIf="form.get('password')?.errors?.['required']" >
                                 *Password is required!
                             </div>
-
                         </div>
-
                     </div>
-                    <div>
-                        <input type="password" placeholder="Confirm Password*" formControlName="confirmpass">
+                    <div  class="error-wrapper">
+                        <input type="password" placeholder="Confirm Password*" formControlName="rePassword">
+                        <div class="error-msg" *ngIf="form.get('rePassword')?.touched">
+                            <div *ngIf="form.get('password')?.value !== form.get('rePassword')?.value || form.get('rePassword')?.errors?.['required']" style="color:red">
+                                *Password did not much!
+                            </div>
+                        </div>
                     </div>  
-                    
                 </div>
             </div>
             <div class="adultcheck">
-                <input type="checkbox" name="adultcheck" >
+                <input type="checkbox" name="adultcheck" class="checkbox">
                 <label for="adultcheck">*I am over 13 years old.</label>
             </div>
             <div class="license">
-                <input type="checkbox" name="license" >
+                <input type="checkbox" name="license" class="checkbox">
                 <label for="license">*I agree with the <a href="#">License policy</a>.</label>
             </div>
             <p class="remark">*All fields marked with <span>*</span> are required!</p>

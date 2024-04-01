@@ -25,7 +25,7 @@
             <!-- <h1>Login</h1> -->
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="email" placeholder="Email ID" formControlName="email" [appEmailValidator]="['hello', 'directive']">
+            <input type="email" placeholder="Email ID" formControlName="email" [appEmailValidator]="['bg', 'com']">
             <input type="password" placeholder="Password" formControlName="password" >
             <input type="submit" value="Login" id="login"> 
         </form>
