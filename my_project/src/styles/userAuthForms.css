@@ -23,6 +23,19 @@
 
 }
 
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.error-wrapper .error-msg {
+    position: absolute;
+    top: 45px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
 .form {
     width: 576px;
@@ -110,7 +123,18 @@
 .signup-form form {
     display: flex;
     flex-direction: column;
-    gap: 20px
+    gap: 20px;
+    flex: auto;
+}
+
+.signup-form form .form-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+   margin-top: -30px;
+   margin-bottom: 20px;
 }
 
 .signup-form form div {
@@ -177,7 +201,7 @@
 }
 
 .signup-form .adultcheck label,
-.signup-form .license label{
+.signup-form .license label {
     font-weight: 600;
 }
 

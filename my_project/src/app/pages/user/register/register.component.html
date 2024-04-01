@@ -7,24 +7,51 @@
             <!-- <h1>Register</h1> -->
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="first-row">
-                <input type="text" placeholder="Firstname*" formControlName="username" >
-                <input type="text" placeholder="Last Name*"  formControlName="lastname" >
-            </div>
-            <div class="second-row">
-                <input type="email"
-                 placeholder="Email ID*"
-                 formControlName="email"
-                 [style.border-color]="form.get('email')?.invalid && form.get('email')?.touched ? 'red' : 'initial'">
-                <select name="gander" id="gender" placeholder="gender" formControlName="gender" >
-                    <option value="gender" selected>Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">female</option>
-                </select>
-            </div>
-            <div class="third-row">
-                <input type="password" placeholder="Password*" formControlName="password" >
-                <input type="password" placeholder="Confirm Password*" formControlName="confirmpass" > 
+            <div class="form-wrapper">
+                <div class="first-row">
+                    <input type="text" placeholder="Firstname*" formControlName="username">
+                    <input type="text" placeholder="Last Name*" formControlName="lastname">
+                </div>
+                <div class="second-row">
+                    <div class="error-wrapper">
+                        <input type="email" placeholder="Email ID*" formControlName="email"
+                            [style.border-color]="form.get('email')?.invalid && form.get('email')?.touched ? 'red' : 'initial'">
+                        <div *ngIf="form.get('email')?.touched" class="error-msg">
+                            <div *ngIf="form.get('email')?.errors?.['email']" style="color:red">
+                                *Email is INVALID!
+                            </div>
+                            <div *ngIf="form.get('email')?.errors?.['required']" style="color:red">
+                                *Email is required!
+                            </div>
+                        </div>
+                    </div>
+                
+                    <select name="gander" id="gender" placeholder="gender" formControlName="gender">
+                        <option value="gender" selected>Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">female</option>
+                    </select>
+                </div>
+                <div class="third-row">
+                    <div class="error-wrapper">
+                        <input type="password" placeholder="Password*" formControlName="password">
+                        <div class="error-msg" *ngIf="form.get('password')?.touched">
+                            <div *ngIf="form.get('password')?.errors?.['minLength']" style="color:red">
+                                *Password should be 6-20 characters!
+                            </div>
+                            <div *ngIf="form.get('password')?.errors?.['maxLength']" style="color:red">
+                                *Password should be 6-20 characters!
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Confirm Password*" formControlName="confirmpass">
+                    </div>  
+                    
+                </div>
             </div>
             <div class="adultcheck">
                 <input type="checkbox" name="adultcheck" >
