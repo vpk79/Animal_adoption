@@ -36,13 +36,15 @@
                     <div class="error-wrapper">
                         <input type="password" placeholder="Password*" formControlName="password">
                         <div class="error-msg" *ngIf="form.get('password')?.touched">
-                            <div *ngIf="form.get('password')?.errors?.['minLength']" style="color:red">
-                                *Password should be 6-20 characters!
+                            <div *ngIf="form.get('password')?.errors?.['minlength']" style="color:red">
+                                *6-20 characters!
                             </div>
-                            <div *ngIf="form.get('password')?.errors?.['maxLength']" style="color:red">
-                                *Password should be 6-20 characters!
+                            <div *ngIf="form.get('password')?.errors?.['maxlength']" style="color:red">
+                                *6-20 characters!
                             </div>
-
+                            <div *ngIf="form.get('password')?.errors?.['required']" style="color:red">
+                                *Password is required!
+                            </div>
 
                         </div>
 

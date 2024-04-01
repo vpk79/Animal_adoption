@@ -4,6 +4,7 @@ import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DirectivesModule } from '../../directives/directives.module';
 
 
 
@@ -15,15 +16,16 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     UserComponent,
     LoginComponent,
     RegisterComponent,
-   
+
   ],
   imports: [
-    CommonModule, ReactiveFormsModule
-  ],
+    CommonModule,
+    ReactiveFormsModule,
+    DirectivesModule],
   exports: [
     UserComponent,
     LoginComponent,
     RegisterComponent,
-   ]
+  ]
 })
 export class UserModule { }

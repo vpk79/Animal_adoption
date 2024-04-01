@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -11,6 +11,8 @@ import { Service } from '../../../services/service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+
 
   constructor(
     private auth: AuthService,
@@ -38,6 +40,15 @@ export class RegisterComponent {
 
 
 onSubmit(): void {
+  if(!this.form){
+    return;
+  }
+
+  if(this.form.invalid){
+    console.log('form is invalid');
+    return;
+  }
+
   const emailValue = this.form.get('email')?.value;
   const passwordValue = this.form.get('password')?.value;
   const username = this.form.get('username')?.value;
