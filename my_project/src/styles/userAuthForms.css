@@ -56,10 +56,11 @@
     margin-top: 20px;
 }
 
-.login-form .signup{
+.login-form .signup {
     display: block;
     text-align: center;
     font-size: 16px;
+    font-weight: 600;
 
 }
 
@@ -70,6 +71,7 @@
     /* text-decoration: underline; */
     color: blue;
 }
+
 .form form {
     display: block;
     margin: auto;
@@ -121,9 +123,10 @@
     padding: 5px;
 }
 
-.signup-form form select{
+.signup-form form select {
     width: 100%;
 }
+
 .signup-form form label {
     font-size: 16px;
 }
@@ -131,31 +134,33 @@
 .login-form .btn,
 .signup-form .btn {
     width: 100%;
-   display: block;
-   text-align: center;
-   margin-top: 30px;
-   color: black;
-   background-color: #efefef;
-   /* padding: 10px 0; */
-   font-size: 18px;
-   font-weight: 600;
-   margin-bottom: -20px;
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: black;
+    background-color: #efefef;
+    /* padding: 10px 0; */
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: -20px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
 }
 
 .signup-form .btn:hover,
 .login-form .btn:hover {
-background-color: #aaaaaa;
+    background-color: #aaaaaa;
 }
-   
+
 .signup-form .btn:active,
 .login-form .btn:active {
-outline: 3px solid rgb(182, 182, 182);
+    outline: 3px solid rgb(182, 182, 182);
 }
-        
+
 .signup-form .loginin {
     display: block;
     text-align: center;
     font-size: 16px;
+    font-weight: 600;
 }
 
 .signup-form a {
@@ -163,21 +168,35 @@ outline: 3px solid rgb(182, 182, 182);
     cursor: pointer;
 }
 
+.signup-form .remark {
+    font-weight: 600;
+}
+
+.signup-form .remark span {
+    font-size: 24px;
+}
+
+.signup-form .adultcheck label,
+.signup-form .license label{
+    font-weight: 600;
+}
+
 
 .signup-form #register {
     font-weight: 600;
     border-radius: 5px;
     border: 1px solid rgb(109, 108, 108);
-    margin-top: 20px;
+    margin-top: -20px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
 }
 
 .signup-form #register:hover {
-  background-color: #aaaaaa;
+    background-color: #aaaaaa;
 }
 
 .signup-form #register:active {
     outline: 3px solid rgb(182, 182, 182);
-    
+
 }
 
 
@@ -189,6 +208,7 @@ outline: 3px solid rgb(182, 182, 182);
     border-radius: 5px;
     border: 1px solid rgb(109, 108, 108);
     margin-top: 50px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
 }
 
 .login-form #login:hover {
@@ -226,6 +246,3 @@ outline: 3px solid rgb(182, 182, 182);
     z-index: 200;
     /* border: 1px solid black; */
 }
-
-
-

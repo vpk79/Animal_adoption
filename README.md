@@ -1,2 +1,5 @@
 # Animal_adoption
-SoftUni Angular final exam project
+
+!!! THE PROJECT IS UNDER CONSTRUCITON !!!
+
+SoftUni Angular final exam project - NOT READY YET :(

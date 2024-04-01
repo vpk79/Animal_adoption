@@ -25,8 +25,8 @@
             <!-- <h1>Login</h1> -->
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="email" placeholder="Email ID" formControlName="email" required>
-            <input type="password" placeholder="Password" formControlName="password" required>
+            <input type="email" placeholder="Email ID" formControlName="email" >
+            <input type="password" placeholder="Password" formControlName="password" >
             <input type="submit" value="Login" id="login"> 
         </form>
         <button type="button" class="btn btn-secondary" (click)="this.service.toggleLoginForm()" data-bs-dismiss="modal">Close</button>
