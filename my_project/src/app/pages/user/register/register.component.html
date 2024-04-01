@@ -29,7 +29,7 @@
             </div>
             <div>
                 <input type="checkbox" name="license" required>
-                <label for="license">I agree with the <a href="#">license policy</a>.</label>
+                <label for="license">I agree with the <a href="#">License policy</a>.</label>
             </div>
 
             <input type="submit" value="Register" id="register">
@@ -37,4 +37,5 @@
         <button type="button" class="btn btn-secondary" (click)="this.service.toggleRegisterForm()"
             data-bs-dismiss="modal">Close</button>
     </div>
+    <p class="loginin">Have an Account? <span><a (click)="service.toggleLoginForm()">Login Here</a></span></p>
 </div>

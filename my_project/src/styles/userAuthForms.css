@@ -56,7 +56,20 @@
     margin-top: 20px;
 }
 
+.login-form .signup{
+    display: block;
+    text-align: center;
+    font-size: 16px;
 
+}
+
+
+
+.login-form .signup a {
+    cursor: pointer;
+    /* text-decoration: underline; */
+    color: blue;
+}
 .form form {
     display: block;
     margin: auto;
@@ -126,6 +139,7 @@
    /* padding: 10px 0; */
    font-size: 18px;
    font-weight: 600;
+   margin-bottom: -20px;
 }
 
 .signup-form .btn:hover,
@@ -138,13 +152,23 @@ background-color: #aaaaaa;
 outline: 3px solid rgb(182, 182, 182);
 }
         
-   
+.signup-form .loginin {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+}
+
+.signup-form a {
+    color: blue;
+    cursor: pointer;
+}
 
 
 .signup-form #register {
     font-weight: 600;
     border-radius: 5px;
     border: 1px solid rgb(109, 108, 108);
+    margin-top: 20px;
 }
 
 .signup-form #register:hover {
@@ -155,6 +179,8 @@ outline: 3px solid rgb(182, 182, 182);
     outline: 3px solid rgb(182, 182, 182);
     
 }
+
+
 
 .login-form #login {
     font-size: 18px;
