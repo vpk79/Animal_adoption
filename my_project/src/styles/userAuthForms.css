@@ -52,6 +52,10 @@
     /* object-fit: cover; */
 }
 
+.login-form .text {
+    margin-top: 20px;
+}
+
 
 .form form {
     display: block;

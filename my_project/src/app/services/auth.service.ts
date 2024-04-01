@@ -105,4 +105,20 @@ export class AuthService {
       alert(err.message);
     })
   }
+
+  async deleteAccount() {
+    const user = await this.fireauth.currentUser;
+    if (user) {
+      try {
+        await user.delete();
+        console.log('User account deleted successfully.');
+        // Изтрийте други асоциирани данни или извършете други действия след успешно изтриване на акаунта
+      } catch (error) {
+        console.error('Error deleting user account:', error);
+      }
+    } else {
+      console.error('No user currently signed in.');
+    }
+  }
 }
+
