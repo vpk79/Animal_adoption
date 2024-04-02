@@ -144,6 +144,7 @@
 
 .user-form {
     display: flex;
+    justify-content: center;
     /* flex-direction: column; */
     gap: 30px;
     flex-wrap: wrap;
@@ -174,6 +175,11 @@
     align-items: center;
     gap: 25px;
 
+}
+
+.form-fields div {
+    display: flex;
+    gap: 30px;
 }
 
 .form-fields input {

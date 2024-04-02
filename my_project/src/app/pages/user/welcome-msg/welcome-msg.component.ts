@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Service } from '../../../services/service';
 
 @Component({
   selector: 'app-welcome-msg',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './welcome-msg.component.css'
 })
 export class WelcomeMsgComponent {
-
+  constructor(public service: Service){}
 }

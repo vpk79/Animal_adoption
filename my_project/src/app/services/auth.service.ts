@@ -34,14 +34,24 @@ export class AuthService {
         .then((userCredential) => {
           const user = userCredential.user;
           if (user) {
-            console.log('User ID:', user.uid);
-            console.log('Email:', user.email);
-
+            const userID = user.uid;
+            const userEmail = user.email;
+          
             user.getIdToken().then(token => {
-              console.log('User Token:', token);
+              const userToken = token;
+              const logged = true;
+              // console.log('User Token:', token);
+
+              localStorage.setItem('userInfo', JSON.stringify({userID, userEmail, userToken, logged }));
+            
             }).catch(err => {
               console.error('Error getting user token:', err);
             });
+
+            // console.log('User ID:', user.uid);
+            // console.log('Email:', user.email);
+         
+
 
             resolve({ success: true }); // Връщаме успешно влизане в системата
           }

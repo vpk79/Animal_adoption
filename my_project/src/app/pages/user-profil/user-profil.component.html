@@ -24,15 +24,24 @@
                     <h2>Edit your profile  <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span></h2>
                 </div>
                 <form class="user-form">
-                    <div class="form-labels">
+                    <!-- <div class="form-labels">
                         <label for="username">Name:</label>
                         <label for="email">Email:</label>
                         <label for="number">Phone:</label>
-                    </div>
+                    </div> -->
                     <div class="form-fields">
-                        <input type="text" name="username" id="username" placeholder="Username" [disabled]="toggle">
-                        <input type="email" name="email" id="email" placeholder="Email" [disabled]="toggle">
-                        <input type="number" name="number" id="number" placeholder="Phone" [disabled]="toggle">
+                        <div>
+                            <input type="text" name="firstname" id="firstname" placeholder="Firstname" [disabled]="toggle">
+                            <input type="text" name="lastname" id="lastname" placeholder="Lastname" [disabled]="toggle">
+                        </div>
+                        <div>
+                            <input type="text" name="country" id="country" placeholder="Country" [disabled]="toggle">
+                            <input type="text" name="city" id="username" placeholder="City" [disabled]="toggle">
+                        </div>
+                        <div>
+                            <input type="email" name="email" id="email" placeholder="Email" [disabled]="toggle">
+                            <input type="number" name="phone" id="phone" placeholder="Phone" [disabled]="toggle">
+                        </div>  
                     </div>
                     <div class="save-btn">
                         <button *ngIf="isVisible" type="submit" [disabled]="toggle" >Save</button>

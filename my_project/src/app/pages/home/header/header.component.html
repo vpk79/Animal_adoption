@@ -9,6 +9,7 @@
     <nav class="nav">
         <ul>
             <li><a href="/home">HOME</a></li>
+            <li (click)="service.toggleWelcomeMsg()"><a>WELCOME</a></li>
             <li><a href="#">ABOUT</a></li>
             <li><a href="#">DOGS</a></li>
             <li><a href="#">CATS</a></li>
@@ -25,8 +26,10 @@
 
 <div *ngIf="service.isLoginFormVisible" class="login-form-wrapper">
     <app-login></app-login>
+    <app-welcome-msg></app-welcome-msg>
     <!-- <button type="button" class="btn btn-secondary login-close-btn" (click)="service.toggleLoginForm()" data-bs-dismiss="modal">Close</button> -->
 </div>
+
 
 
 <div *ngIf="service.isRegisterFormVisible" class="register-form-wrapper">

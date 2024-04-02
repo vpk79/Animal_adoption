@@ -118,6 +118,17 @@ export class Service {
   }
 
 
+  isWelcomeMsg: boolean = false;
+
+  toggleWelcomeMsg() {
+    this.isWelcomeMsg = !this.isWelcomeMsg;
+  }
+
+  isLoggedIn: boolean = false;
+
+  toggleLoggedIn() {
+    this.isLoggedIn = !this.isLoggedIn;
+  }
 
 
 }

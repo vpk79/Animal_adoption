@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(emailValue, passwordValue)
       .then((result: any) => {
         if (result.success) {
+          
           console.log('Login successful');
           this.service.toggleLoginForm();
 

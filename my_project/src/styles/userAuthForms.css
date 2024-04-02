@@ -1,8 +1,17 @@
-/* #loginModal {
-    display: flex;
 
-    z-index: 100000;
-} */
+.login-form-wrapper,
+.register-form-wrapper {
+    position: absolute;
+    width: 500px;
+    height: auto;
+
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    z-index: 200;
+    /* border: 1px solid black; */
+}
+
 
 
 .signup-form,
@@ -336,15 +345,16 @@
 }
 
 
-.login-form-wrapper,
-.register-form-wrapper {
-    position: absolute;
-    width: 500px;
+.welcome-back-container {
+    width: 576px;
     height: auto;
-
-    top: 50%;
-    left: 50%;
-    /* transform: translate(-50%, -50%); */
-    z-index: 200;
-    /* border: 1px solid black; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    /* background: #fff; */
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .2);
+    z-index: 100000;
+    background-color: rgb(224, 213, 213);
 }

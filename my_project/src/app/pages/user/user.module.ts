@@ -28,6 +28,7 @@ import { WelcomeMsgComponent } from './welcome-msg/welcome-msg.component';
     UserComponent,
     LoginComponent,
     RegisterComponent,
+    WelcomeMsgComponent
   ]
 })
 export class UserModule { }
