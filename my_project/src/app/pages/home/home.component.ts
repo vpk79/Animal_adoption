@@ -8,16 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
-  //   let userInfo;
-
-  //   const userInfoString = localStorage.getItem('userInfo');
-
-  //   if (userInfoString !== null) {
-  //     userInfo = JSON.parse(userInfoString);
-  //   }
-
-  //   console.log(userInfo);
-
+ 
   
   }
 }

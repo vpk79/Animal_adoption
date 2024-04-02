@@ -126,9 +126,9 @@ export class Service {
 
   isLoggedIn: boolean = false;
 
-  toggleLoggedIn() {
-    this.isLoggedIn = !this.isLoggedIn;
-  }
+  // toggleLoggedIn() {
+  //   this.isLoggedIn = !this.isLoggedIn;
+  // }
 
 
 }
