@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    public service: Service
+    public service: Service,
+    public authService: AuthService
   ) { }
 
   form: FormGroup = this.fb.group({});
@@ -51,7 +52,8 @@ export class LoginComponent implements OnInit {
     this.auth.login(emailValue, passwordValue)
       .then((result: any) => {
         if (result.success) {
-          
+
+          this.service.isLoggedIn = true;
           console.log('Login successful');
           this.service.toggleLoginForm();
 

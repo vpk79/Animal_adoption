@@ -1,6 +1,4 @@
-import { CarouselStateServiceService } from './../../../services/carousel-state-service.service';
-import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { AfterViewInit, Component, ElementRef,  OnInit,  ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-header-carousel',
@@ -19,21 +17,21 @@ export class HeaderCarouselComponent implements  OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
    
-    this.reloadCarousel();
+    // this.reloadCarousel();
     // console.log(this.carousel);
   }
   
 
 
-  reloadCarousel(): void {
-    if (this.carousel) {
-      this.carousel.nativeElement.dataset['bsRide'] = 'false';
-      this.carousel.nativeElement.dataset['bsRide'] = 'carousel';
+  // reloadCarousel(): void {
+  //   if (this.carousel) {
+  //     this.carousel.nativeElement.dataset['bsRide'] = 'false';
+  //     this.carousel.nativeElement.dataset['bsRide'] = 'carousel';
       
      
-      console.log('Carousel reloaded.');
-    } else {
-      console.error('Carousel element not found.');
-    }
-  }
+  //     console.log('Carousel reloaded.');
+  //   } else {
+  //     console.error('Carousel element not found.');
+  //   }
+  // }
 }

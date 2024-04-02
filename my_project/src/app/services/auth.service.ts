@@ -5,6 +5,7 @@ import { UserProfil } from '../../types/users';
 import { Service } from './service';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +20,9 @@ export class AuthService {
     'email': 'default',
     'phone': null,
     'age': null,
-    'sex': 'default',
+    'country': null,
+    'city': null,
+    'gender': 'default',
     'balance': null,
     'donation': null,
     'liked_animals': [],
@@ -40,7 +43,6 @@ export class AuthService {
             user.getIdToken().then(token => {
               const userToken = token;
               const logged = true;
-              // console.log('User Token:', token);
 
               localStorage.setItem('userInfo', JSON.stringify({userID, userEmail, userToken, logged }));
             
@@ -48,17 +50,12 @@ export class AuthService {
               console.error('Error getting user token:', err);
             });
 
-            // console.log('User ID:', user.uid);
-            // console.log('Email:', user.email);
-         
-
-
-            resolve({ success: true }); // Връщаме успешно влизане в системата
+            resolve({ success: true }); 
           }
         })
         .catch(err => {
          
-          reject({ success: false, code: err.code }); // Връщаме номера на грешката
+          reject({ success: false, code: err.code }); 
         });
     });
   }
@@ -68,10 +65,10 @@ export class AuthService {
 
   register(email: string, password: string, username: string) {
     this.fireauth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
-      // Вземете данните за новорегистрирания потребител
+      
       const user = userCredential.user;
 
-      // Проверка дали текущия потребител съществува
+      
       if (user) {
         this.newUser.ID = user.uid;
         this.newUser.firstName = username;
@@ -80,14 +77,14 @@ export class AuthService {
 
         this.service.addItem('/users/', this.newUser);
 
-
         console.log('User ID:', user.uid);
         console.log('Email:', user.email);
-        // Получаване на токена за текущия потребител
+       
+
         // user.getIdToken().then(token => {
 
         //   console.log('User Token:', token);
-        //   // Тук може да използвате токена по ваше усмотрение
+        //   
         // }).catch(err => {
         //   console.error('Error getting user token:', err);
         // });
@@ -105,7 +102,8 @@ export class AuthService {
 
   logout() {
     this.fireauth.signOut().then(() => {
-      localStorage.removeItem('token');
+      localStorage.removeItem('userInfo');
+      this.service.isLoggedIn = false;
       this.router.navigate(['/home']);
     }, err => {
       alert(err.message);

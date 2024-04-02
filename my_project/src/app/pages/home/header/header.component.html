@@ -17,7 +17,7 @@
             <li *ngIf="!this.service.isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
             <li *ngIf="!this.service.isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
             <li *ngIf="this.service.isLoggedIn"><a routerLink="/profile">User Profile</a></li>
-            <li *ngIf="this.service.isLoggedIn"><a href="#">LOGOUT</a></li>
+            <li *ngIf="this.service.isLoggedIn"><a (click)="authService.logout()">LOGOUT</a></li>
         </ul>
     </nav>
 </header>

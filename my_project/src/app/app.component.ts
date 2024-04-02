@@ -11,17 +11,21 @@ import { Service } from './services/service';
 export class AppComponent implements OnInit {
   title = 'my_project';
   constructor(public localStorageService: LocalStorageService,
-     @Inject(PLATFORM_ID) private platformId: Object,
-     public service: Service) { }
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public service: Service) { }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)){
+    if (isPlatformBrowser(this.platformId)) {
       const userInfo = this.localStorageService.getItem('userInfo');
-      console.log(userInfo.logged);
-      this.service.isLoggedIn = true;
-      console.log(this.service.isLoggedIn);
+      if(userInfo == null) {
+        this.service.isLoggedIn = false;
+      } else {
+        this.service.isLoggedIn = true;
+      }
       
+      console.log(userInfo.logged);
+      console.log(this.service.isLoggedIn);
     }
-    }
+  }
 
 }
