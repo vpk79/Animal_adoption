@@ -11,6 +11,8 @@ import { Service } from '../../../services/service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  submitted = false;
+  loginError = false;
 
   constructor(
     private auth: AuthService,
@@ -20,22 +22,65 @@ export class LoginComponent implements OnInit {
     public service: Service
   ) { }
 
-  form: FormGroup = new FormGroup({});
+  form: FormGroup = this.fb.group({});
 
   ngOnInit(): void {
     this.form = this.fb.nonNullable.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
+      password: ['', [Validators.required]],
     });
   }
 
   onSubmit(): void {
-    // console.log('login');
+
+    this.submitted = true
+
+    if (!this.form) {
+      return;
+    }
+
+    if (this.form.invalid) {
+      this.markFormGroupTouched(this.form);
+      console.log('form is invalid');
+      return;
+    }
+   
     const emailValue = this.form.get('email')?.value;
     const passwordValue = this.form.get('password')?.value;
-    this.auth.login(emailValue, passwordValue);
-    this.service.toggleLoginForm;
-    // this.closeLogin();
+
+    this.auth.login(emailValue, passwordValue)
+      .then((result: any) => {
+        if (result.success) {
+          console.log('Login successful');
+          this.service.toggleLoginForm();
+
+        } else {
+          console.error('Login error:', result.status);
+            this.loginError = true;
+            setTimeout(() => {
+              this.loginError = false;
+            }, 3000);
+        }
+      })
+      .catch(err => {
+        // console.error('My login error:', err);
+        if(err){
+          this.loginError = true;
+          setTimeout(() => {
+            this.loginError = false;
+          }, 3000);
+        }
+      });
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 
   // closeLogin(){

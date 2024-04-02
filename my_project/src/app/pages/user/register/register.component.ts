@@ -12,7 +12,7 @@ import { Service } from '../../../services/service';
 })
 export class RegisterComponent {
 
-
+  submitted = false;
 
   constructor(
     private auth: AuthService,
@@ -20,7 +20,13 @@ export class RegisterComponent {
     private http: HttpClient,
     private router: Router,
     public service: Service
-  ) { }
+  ) { 
+    this.form.valueChanges.subscribe(() => {
+      if (this.submitted) {
+        this.submitted = false;
+      }
+    });
+  }
 
   form: FormGroup = this.fb.group({});
 
@@ -32,6 +38,8 @@ export class RegisterComponent {
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.nameValidator]],
       email: ['', [Validators.required, this.emailValidator]],
       gender: ['gender', [Validators.required]],
+      adultcheck: [false, Validators.requiredTrue],
+      license: [false, Validators.requiredTrue],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       rePassword: ['', [Validators.required]]
     });
@@ -50,11 +58,14 @@ export class RegisterComponent {
 
 
   onSubmit(): void {
+    this.submitted = true
+
     if (!this.form) {
       return;
     }
 
     if (this.form.invalid) {
+      this.markFormGroupTouched(this.form);
       console.log('form is invalid');
       return;
     }
@@ -68,9 +79,18 @@ export class RegisterComponent {
   }
 
 
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
 
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
 
-
+ 
+  
 
   emailValidator(control: FormControl): { [key: string]: any } | null {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

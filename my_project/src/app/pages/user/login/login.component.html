@@ -1,35 +1,37 @@
 
-<!-- Modal -->
-<!-- <div class="modal" tabindex="-1" id="loginModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" (click)="closeLogin()" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="closeLogin()"  data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div> -->
+
 
 <div class="login-form" id="login-form" #loginform>
+    <div class="close-btn-wrapper">
+        <a class="close-btn" (click)="this.service.toggleLoginForm()">X</a>
+    </div>
     <div class="form">
         <div class="text">
             <img src="../../../../assets/login.png" alt="">
             <!-- <h1>Login</h1> -->
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="email" placeholder="Email ID" formControlName="email" [appEmailValidator]="['bg', 'com']">
-            <input type="password" placeholder="Password" formControlName="password" >
+            <div class="error-wrapper">
+               
+                <input type="email" placeholder="*Email ID" formControlName="email">
+                <div class="error-msg" *ngIf="form.get('email')?.touched && submitted && form.get('email')?.errors?.['required']">
+                    *Email is required!
+                </div>
+                <div class="error-msg" *ngIf="form.get('email')?.touched && submitted && form.get('email')?.errors?.['pattern']">
+                    *Email is not valid!
+                </div>
+            </div>
+            {{form.get('email')?.errors?.['email']}}
+            <div class="error-wrapper">
+                <input type="password" placeholder="*Password" formControlName="password">
+                <div class="error-msg" *ngIf="form.get('password')?.touched && submitted && form.get('password')?.errors?.['required']">
+                    *Password is required!
+                </div>
+            </div>
+                <label class="loginErr" *ngIf="submitted && loginError" for="" >Wrong password or user name!</label>
             <input type="submit" value="Login" id="login"> 
         </form>
-        <button type="button" class="btn btn-secondary" (click)="this.service.toggleLoginForm()" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-secondary" (click)="this.service.toggleLoginForm()" data-bs-dismiss="modal">Close</button> -->
     </div>
     <p class="signup">Don't have an account? <span><a (click)="service.toggleRegisterForm()">Sign up</a></span></p>
 </div>

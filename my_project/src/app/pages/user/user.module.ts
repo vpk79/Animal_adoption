@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DirectivesModule } from '../../directives/directives.module';
+import { WelcomeMsgComponent } from './welcome-msg/welcome-msg.component';
 
 
 
@@ -16,6 +17,7 @@ import { DirectivesModule } from '../../directives/directives.module';
     UserComponent,
     LoginComponent,
     RegisterComponent,
+    WelcomeMsgComponent,
 
   ],
   imports: [

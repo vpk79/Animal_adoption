@@ -1,7 +1,8 @@
 <div class="signup-form">
-
+    <div class="close-btn-wrapper">
+        <a class="close-btn" (click)="this.service.toggleRegisterForm()">X</a>
+    </div>
     <div class="form">
-        <!-- <div class="close">&times;</div> -->
         <div class="text">
             <img src="../../../../assets/register..png" alt="">
             <!-- <h1>Register</h1> -->
@@ -46,9 +47,6 @@
                             </div>
                         </div>
                     </div>
-
-                   
-                    
                 </div>
                 <div class="second-row">
                     <div class="error-wrapper">
@@ -100,19 +98,34 @@
                     </div>  
                 </div>
             </div>
-            <div class="adultcheck">
-                <input type="checkbox" name="adultcheck" class="checkbox">
-                <label for="adultcheck">*I am over 13 years old.</label>
+            <div class="error-wrapper">
+                <div class="adultcheck">
+                    <input type="checkbox" name="adultcheck" class="checkbox" formControlName="adultcheck">
+                    <label for="adultcheck">*I am over 18 years old.</label>
+                </div>
+                <div *ngIf="submitted && form.get('adultcheck')?.errors?.['required']">
+                    <div class="error-msg2">
+                        *You must confirm that you are over 18 years old.
+                    </div>
+                </div>
             </div>
-            <div class="license">
-                <input type="checkbox" name="license" class="checkbox">
-                <label for="license">*I agree with the <a href="#">License policy</a>.</label>
+            <div class="error-wrapper">
+                <div class="license" >
+                    <input type="checkbox" name="license" class="checkbox" formControlName="license">
+                    <label for="license">*I agree with the <a href="#">License policy</a>.</label>
+                </div>
+                <div *ngIf="submitted && form.get('license')?.errors?.['required']">
+                    <div class="error-msg2" >
+                        *You must agree to the license policy.
+                    </div>
+                </div>
             </div>
+           
             <p class="remark">*All fields marked with <span>*</span> are required!</p>
             <input type="submit" value="Register" id="register">
         </form>
-        <button type="button" class="btn btn-secondary" (click)="this.service.toggleRegisterForm()"
-            data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-secondary" (click)="this.service.toggleRegisterForm()"
+            data-bs-dismiss="modal">Close</button> -->
     </div>
     <p class="loginin">Have an Account? <span><a (click)="service.toggleLoginForm()">Login Here</a></span></p>
 </div>

@@ -28,35 +28,31 @@ export class AuthService {
 
   // Login function
 
-  login(email: string, password: string) {
-    this.fireauth.signInWithEmailAndPassword(email, password).then((userCredential) => {
-      // Вземете данните за текущия потребител
-      const user = userCredential.user;
+  login(email: string, password: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.fireauth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          if (user) {
+            console.log('User ID:', user.uid);
+            console.log('Email:', user.email);
 
-      // Проверка дали текущия потребител съществува
-      if (user) {
-        console.log('User ID:', user.uid);
-        console.log('Email:', user.email);
+            user.getIdToken().then(token => {
+              console.log('User Token:', token);
+            }).catch(err => {
+              console.error('Error getting user token:', err);
+            });
 
-        user.getIdToken().then(token => {
-          console.log('User Token:', token);
-          // Тук може да използвате токена по ваше усмотрение
-        }).catch(err => {
-          console.error('Error getting user token:', err);
+            resolve({ success: true }); // Връщаме успешно влизане в системата
+          }
+        })
+        .catch(err => {
+         
+          reject({ success: false, code: err.code }); // Връщаме номера на грешката
         });
-
-
-        // Други полета, които може да има в обекта User
-      }
-
-      alert('Login Successful');
-      // localStorage.setItem('token', 'true');
-      this.router.navigate(['/home']);
-    }).catch(err => {
-      alert(err.message);
-      this.router.navigate(['/home']);
     });
   }
+
 
   // Register function
 
