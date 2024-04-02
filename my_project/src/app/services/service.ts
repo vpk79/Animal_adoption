@@ -1,8 +1,9 @@
+import { UserProfil } from './../../types/users';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, finalize, map } from 'rxjs';
-import { UserProfil } from '../../types/users';
+import { Observable, Subscription, finalize, map } from 'rxjs';
+
 
 
 @Injectable({
@@ -14,12 +15,14 @@ export class Service {
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
 
-  // Запис на данни в базата
+  // Add items in database
 
   addItem(url: string, item: string | UserProfil) {
     this.db.list(url).push(item);
     return;
   }
+
+  // Check likes in animal database
 
   getItemLikes(url: string, item: string, itemName: string) {
     return this.db.object(`/${url}/${item}/${itemName}/Liked`).valueChanges();
@@ -27,7 +30,7 @@ export class Service {
 
   updateItemLikes(url: string, item: string, itemName: string, likes: string) {
     this.db.object(`/${url}/${item}/${itemName}`).update({ Liked: likes });
-   
+
   }
 
 
@@ -35,11 +38,11 @@ export class Service {
 
 
 
-  
 
 
 
-  // Четене на данни от базата
+
+  // Get data from database - have 2 ways
 
   getItemsAsArray(url: string) {
     return this.db.list(url).valueChanges();
@@ -50,6 +53,7 @@ export class Service {
   }
 
 
+  // Upload user photo in data server
 
   uploadFile(event: any, dirPath: string, fileName: string) {
     const file = event.target.files[0];
@@ -68,9 +72,36 @@ export class Service {
         observer.error(error);
       });
     });
-
-  
   }
+
+
+
+
+  // getUserDataByID(id: string): any {
+  //   this.getItemsAsArray('/users/')
+
+
+
+  userDataSubscription: Subscription | undefined;
+  id: string = 'JANUEzfn8agRbZ9JciBWXGpsMk22';
+
+  getUserData(id: string) {
+    this.getItemsAsArray('/users/').subscribe({
+      next: (data) => {
+        data.forEach((x: any) => {
+          if (x.ID == id) {
+            console.log(x);
+          }
+        })
+      },
+      error: (error) => {
+        // Обработка на грешката
+      }
+    });
+  }
+
+
+
 
 
   getAnimalsDataByStatus(status: string): Observable<any[]> {
@@ -89,6 +120,8 @@ export class Service {
     );
   }
 
+
+
   getAnimalsDataByKeyAndValue(animalKey: any, animalValue: string, animalType: string): Observable<any[]> {
     return this.getItemsAsArray('/animals/' + animalType + '/').pipe(
       map((data: any[]) => {
@@ -102,6 +135,9 @@ export class Service {
       })
     );
   }
+
+
+  // Toggle Login and Registre forms
 
   isLoginFormVisible: boolean = false;
 
@@ -118,17 +154,18 @@ export class Service {
   }
 
 
+
   isWelcomeMsg: boolean = false;
 
   toggleWelcomeMsg() {
     this.isWelcomeMsg = !this.isWelcomeMsg;
   }
 
-  isLoggedIn: boolean = false;
 
-  // toggleLoggedIn() {
-  //   this.isLoggedIn = !this.isLoggedIn;
-  // }
+
+  // Logged In check
+
+  isLoggedIn: boolean = false;
 
 
 }

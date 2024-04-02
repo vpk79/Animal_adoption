@@ -9,7 +9,8 @@ export interface UserProfil {
     age: number | null,
     gender: string,
     balance: number | null,
-    donation: number | null, 
+    donation: number | null,
+    comentary: [] | null, 
     liked_animals: string[] | null, 
     adopted_animals: string[] | null
 }

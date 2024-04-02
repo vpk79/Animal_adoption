@@ -14,17 +14,18 @@ export class AuthService {
   constructor(private fireauth: AngularFireAuth, private router: Router, public service: Service) { }
 
   newUser: UserProfil = {
-    'ID': '000',
-    'firstName': 'default',
-    'lastName': null,
-    'email': 'default',
+    'ID': '',
+    'firstName': '',
+    'lastName': '',
+    'email': '',
     'phone': null,
     'age': null,
     'country': null,
     'city': null,
-    'gender': 'default',
+    'gender': '',
     'balance': null,
     'donation': null,
+    'comentary': [],
     'liked_animals': [],
     'adopted_animals': []
   };
@@ -43,6 +44,8 @@ export class AuthService {
             user.getIdToken().then(token => {
               const userToken = token;
               const logged = true;
+
+
 
               localStorage.setItem('userInfo', JSON.stringify({userID, userEmail, userToken, logged }));
             
@@ -63,7 +66,7 @@ export class AuthService {
 
   // Register function
 
-  register(email: string, password: string, username: string) {
+  register(email: string, password: string, firstname: string, lastname: string, gender: string) {
     this.fireauth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
       
       const user = userCredential.user;
@@ -71,9 +74,21 @@ export class AuthService {
       
       if (user) {
         this.newUser.ID = user.uid;
-        this.newUser.firstName = username;
+        this.newUser.firstName = firstname;
         this.newUser.email = user.email!;
         this.newUser.balance = 5000;
+        this.newUser.lastName = lastname;
+        this.newUser.gender = gender;
+
+        this.newUser.phone = null;
+        this.newUser.age = null;
+        this.newUser.country = null;
+        this.newUser.city = null;
+        this.newUser.donation = 0;
+        this.newUser.comentary = [];
+        this.newUser.liked_animals = [];
+        this.newUser.adopted_animals = [];
+
 
         this.service.addItem('/users/', this.newUser);
 
@@ -124,5 +139,10 @@ export class AuthService {
       console.error('No user currently signed in.');
     }
   }
+
+
+
+
+
 }
 

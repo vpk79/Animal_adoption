@@ -72,10 +72,13 @@ export class RegisterComponent {
 
     const emailValue = this.form.get('email')?.value;
     const passwordValue = this.form.get('password')?.value;
-    const username = this.form.get('username')?.value;
+    const firstname = this.form.get('firstname')?.value;
+    const lastname = this.form.get('lastname')?.value;
+    const gender = this.form.get('gender')?.value;
+   
     // console.log('register');
     console.log(emailValue, passwordValue);
-    this.auth.register(emailValue, passwordValue, username)
+    this.auth.register(emailValue, passwordValue, firstname, lastname, gender)
   }
 
 

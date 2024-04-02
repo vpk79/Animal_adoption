@@ -86,12 +86,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // closeLogin(){
-  //   const getForm = document.getElementById('login-form');
-    
-  //   if(getForm != null){
-  //     getForm.style.display = 'none';
-  //   }
-  // }
+ 
+ 
 }
 
