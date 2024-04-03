@@ -11,6 +11,9 @@ import { Service } from './service';
 })
 export class AuthService {
 
+  errorMessage: string = ' Please, fill all required fields!';
+  errorStatus: boolean = false;
+
   constructor(private fireauth: AngularFireAuth, private router: Router, public service: Service) { }
 
   newUser: UserProfil = {
@@ -44,8 +47,6 @@ export class AuthService {
             user.getIdToken().then(token => {
               const userToken = token;
               const logged = true;
-
-
 
               localStorage.setItem('userInfo', JSON.stringify({userID, userEmail, userToken, logged }));
             
@@ -104,23 +105,34 @@ export class AuthService {
         //   console.error('Error getting user token:', err);
         // });
       }
+      this.errorMessage = ' Registration Successful! Welcome to us!';
+      this.login(email, password).then((result: any) => {
+        if (result.success) {
+          this.service.isLoggedIn = true;
+          console.log('Login successful');
+          setTimeout(() => {
+          }, 1500);
+        } else {
+          console.error('Login error:', result.status);
+        }
+      })
+      setTimeout(() => {
+        this.service.toggleRegisterForm();
+        this.router.navigate(['/home']);
 
-      alert('Registration Successful');
-      this.router.navigate(['/home']);
+      }, 1500);
+      
     }).catch(err => {
       
-      alert(err.message);
-      
-      if(err.message.includes('already in use')){
-        console.log(true);
-        
-      } else {
-        console.log(false);
-        
-      }
-      console.log('message', err.message);
-      
-      // this.router.navigate(['/home']);
+      this.errorStatus = true;
+      this.errorMessage = ' Registration FAILED! '
+      if (err.message.includes('already in use')) {
+        this.errorMessage += 'This email is aready in use!'
+      } 
+      setTimeout(() => {
+        this.errorStatus = false;
+        this.errorMessage =' Please, fill all required fields!';
+      }, 4000);
     });
   }
 

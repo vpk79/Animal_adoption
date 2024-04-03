@@ -14,7 +14,7 @@
                         <input type="text" placeholder="Firstname*" formControlName="firstname">
 
                         <div class="error-msg" *ngIf="form.get('firstname')?.touched">
-                            <div *ngIf="form.get('firstname')?.errors?.['invalidName']" >
+                            <div *ngIf="form.get('firstname')?.errors?.['invalidName']">
                                 *Letters Only!
                             </div>
                             <div *ngIf="form.get('firstname')?.errors?.['minlength']">
@@ -23,26 +23,26 @@
                             <div *ngIf="form.get('firstname')?.errors?.['maxlength']">
                                 *3-20 characters!
                             </div>
-                            <div *ngIf="form.get('firstname')?.errors?.['required']" >
+                            <div *ngIf="form.get('firstname')?.errors?.['required']">
                                 *First name is required!
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="error-wrapper">
                         <input type="text" placeholder="Last Name*" formControlName="lastname">
 
                         <div class="error-msg" *ngIf="form.get('lastname')?.touched">
-                            <div *ngIf="form.get('lastname')?.errors?.['invalidName']" >
+                            <div *ngIf="form.get('lastname')?.errors?.['invalidName']">
                                 *Letters Only!
                             </div>
-                            <div *ngIf="form.get('lastname')?.errors?.['minlength']" >
+                            <div *ngIf="form.get('lastname')?.errors?.['minlength']">
                                 *3-20 characters!
                             </div>
-                            <div *ngIf="form.get('lastname')?.errors?.['maxlength']" >
+                            <div *ngIf="form.get('lastname')?.errors?.['maxlength']">
                                 *3-20 characters!
                             </div>
-                            <div *ngIf="form.get('lastname')?.errors?.['required']" >
+                            <div *ngIf="form.get('lastname')?.errors?.['required']">
                                 *Last name is required!
                             </div>
                         </div>
@@ -53,49 +53,51 @@
                         <input type="email" placeholder="Email ID*" formControlName="email"
                             [style.border-color]="form.get('email')?.invalid && form.get('email')?.touched ? 'red' : 'initial'">
                         <div *ngIf="form.get('email')?.touched" class="error-msg">
-                            <div *ngIf="form.get('email')?.errors?.['email']" >
+                            <div *ngIf="form.get('email')?.errors?.['email']">
                                 *Email is INVALID!
                             </div>
-                            <div *ngIf="form.get('email')?.errors?.['required']" >
+                            <div *ngIf="form.get('email')?.errors?.['required']">
                                 *Email is required!
                             </div>
                         </div>
                     </div>
-                <div class="error-wrapper">
-                    <select name="gender" id="gender" placeholder="gender" formControlName="gender">
-                        <option value="gender" selected>Gender*</option>
-                        <option value="male">Male</option>
-                        <option value="female">female</option>
-                    </select>
-                    <div *ngIf="form.get('gender')?.value === 'gender' && form.get('gender')?.touched" class="error-msg">
-                        *Please select a gender!
+                    <div class="error-wrapper">
+                        <select name="gender" id="gender" placeholder="gender" formControlName="gender">
+                            <option value="gender" selected>Gender*</option>
+                            <option value="male">Male</option>
+                            <option value="female">female</option>
+                        </select>
+                        <div *ngIf="form.get('gender')?.value === 'gender' && form.get('gender')?.touched"
+                            class="error-msg">
+                            *Please select a gender!
+                        </div>
                     </div>
-                </div>
-                    
+
                 </div>
                 <div class="third-row">
                     <div class="error-wrapper">
                         <input type="password" placeholder="Password*" formControlName="password">
                         <div class="error-msg" *ngIf="form.get('password')?.touched">
-                            <div *ngIf="form.get('password')?.errors?.['minlength']" >
+                            <div *ngIf="form.get('password')?.errors?.['minlength']">
                                 *6-20 characters!
                             </div>
-                            <div *ngIf="form.get('password')?.errors?.['maxlength']" >
+                            <div *ngIf="form.get('password')?.errors?.['maxlength']">
                                 *6-20 characters!
                             </div>
-                            <div *ngIf="form.get('password')?.errors?.['required']" >
+                            <div *ngIf="form.get('password')?.errors?.['required']">
                                 *Password is required!
                             </div>
                         </div>
                     </div>
-                    <div  class="error-wrapper">
+                    <div class="error-wrapper">
                         <input type="password" placeholder="Confirm Password*" formControlName="rePassword">
                         <div class="error-msg" *ngIf="form.get('rePassword')?.touched">
-                            <div *ngIf="form.get('password')?.value !== form.get('rePassword')?.value || form.get('rePassword')?.errors?.['required']" style="color:red">
+                            <div *ngIf="form.get('password')?.value !== form.get('rePassword')?.value || form.get('rePassword')?.errors?.['required']"
+                                style="color:red">
                                 *Password did not much!
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div class="error-wrapper">
@@ -110,21 +112,22 @@
                 </div>
             </div>
             <div class="error-wrapper">
-                <div class="license" >
+                <div class="license">
                     <input type="checkbox" name="license" class="checkbox" formControlName="license">
                     <label for="license">*I agree with the <a href="#">License policy</a>.</label>
                 </div>
                 <div *ngIf="submitted && form.get('license')?.errors?.['required']">
-                    <div class="error-msg2" >
+                    <div class="error-msg2">
                         *You must agree to the license policy.
                     </div>
                 </div>
             </div>
-           
+
             <p class="remark">*All fields marked with <span>*</span> are required!</p>
             <input type="submit" value="Register" id="register">
         </form>
-                <p class="reg-success"><i class="fa-solid fa-circle-check"></i>Registration Successful! Welcome to us!</p> 
+        <p *ngIf="submitted && auth.errorStatus" class="reg-alert"><i class="fa-solid fa-circle-check"></i>{{auth.errorMessage}}</p>
+        <p *ngIf="submitted && !auth.errorStatus" class="reg-alert"><i class="fa-solid fa-circle-check"></i>{{auth.errorMessage}}</p>
     </div>
-    <p class="loginin" >Have an Account? <span><a (click)="service.toggleLoginForm()">Login Here</a></span></p>
+    <p class="loginin">Have an Account? <span><a (click)="service.toggleLoginForm()">Login Here</a></span></p>
 </div>

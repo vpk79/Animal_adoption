@@ -1,1 +1,11 @@
 @import url('../../../../styles/userAuthForms.css');
+
+.reg-alert {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: red;
+    margin-top: 20px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}

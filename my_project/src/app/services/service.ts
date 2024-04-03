@@ -35,18 +35,23 @@ export class Service {
 
 
 
-// update user info
+  // update user info
 
-  updateUser(url: string, id:string, object: any) {
+  updateUser(url: string, id: string, object: any) {
     // const updateObject: any = {};
     // updateObject[property] = value;
-    console.log(url, id, object);
-    
+    // console.log(url, id, object);
+
     this.db.object(`/${url}/${id}/`).update(object);
   }
 
 
 
+  postComentary(text: string, id: string) {
+    const commentar = [];
+    commentar.push(text);
+    this.updateUser('users', id, { comentary: commentar })
+  }
 
   // Get data from database - have 2 ways
 
@@ -88,12 +93,12 @@ export class Service {
 
 
 
-  
+
   // id: string = 'EbL6CXchcMZxTaBC0wLkzt5p58h1';
 
   // getUserData(id: string) {
   //   this.updateUser('users', id, {balance:1000})
-  
+
   // }
 
 

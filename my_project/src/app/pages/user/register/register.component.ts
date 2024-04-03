@@ -15,7 +15,7 @@ export class RegisterComponent {
   submitted = false;
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
@@ -66,19 +66,24 @@ export class RegisterComponent {
 
     if (this.form.invalid) {
       this.markFormGroupTouched(this.form);
-      console.log('form is invalid');
+      // console.log('form is invalid');
       return;
     }
 
     const emailValue = this.form.get('email')?.value;
     const passwordValue = this.form.get('password')?.value;
+    const rePasswordValue = this.form.get('rePassword')?.value;
     const firstname = this.form.get('firstname')?.value;
     const lastname = this.form.get('lastname')?.value;
     const gender = this.form.get('gender')?.value;
 
+    if(passwordValue !== rePasswordValue || gender === 'gender'){
+      return;
+    }
+
     // // console.log('register');
     // console.log(emailValue, passwordValue);
-    this.auth.register(emailValue, passwordValue, firstname, lastname, gender)
+    this.auth.register(emailValue, passwordValue, firstname, lastname, gender);
   }
 
   // mark all fields as touched
