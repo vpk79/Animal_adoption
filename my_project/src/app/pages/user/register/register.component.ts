@@ -20,7 +20,7 @@ export class RegisterComponent {
     private http: HttpClient,
     private router: Router,
     public service: Service
-  ) { 
+  ) {
     this.form.valueChanges.subscribe(() => {
       if (this.submitted) {
         this.submitted = false;
@@ -44,7 +44,7 @@ export class RegisterComponent {
       rePassword: ['', [Validators.required]]
     });
 
-    
+
   }
 
   nameValidator(control: FormControl): { [key: string]: any } | null {
@@ -75,12 +75,13 @@ export class RegisterComponent {
     const firstname = this.form.get('firstname')?.value;
     const lastname = this.form.get('lastname')?.value;
     const gender = this.form.get('gender')?.value;
-   
-    // console.log('register');
-    console.log(emailValue, passwordValue);
+
+    // // console.log('register');
+    // console.log(emailValue, passwordValue);
     this.auth.register(emailValue, passwordValue, firstname, lastname, gender)
   }
 
+  // mark all fields as touched
 
   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
@@ -92,8 +93,8 @@ export class RegisterComponent {
     });
   }
 
- 
-  
+
+  // email validator
 
   emailValidator(control: FormControl): { [key: string]: any } | null {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

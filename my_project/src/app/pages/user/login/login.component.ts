@@ -55,7 +55,10 @@ export class LoginComponent implements OnInit {
 
           this.service.isLoggedIn = true;
           console.log('Login successful');
-          this.service.toggleLoginForm();
+          setTimeout(() => {
+            this.service.toggleLoginForm();
+          }, 1500);
+          
 
         } else {
           console.error('Login error:', result.status);

@@ -4,17 +4,30 @@
         <h2>Pets Available for Adoption</h2>
     </div>
 
-
+    <div *ngIf="toggleLikeError" class="likes-alert">
+        <p><i class="fa-solid fa-triangle-exclamation"></i> You must be logged in to likes animals!</p>
+        <p><span><a (click)="service.toggleLoginForm()">Sign In</a></span> or <span><a
+                    (click)="service.toggleRegisterForm()">Sign Up</a></span></p>
+    </div>
     <div id="myCarousel2" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="4000">
         <div class="carousel-inner">
-            <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index" [class.active]="i === 0">
+            <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index"
+                [class.active]="i === 0">
                 <div class="cards-wrapper">
-                    <div class="card" *ngFor="let animalCard of animalsArray" (click)="getAnimalData(animalCard.Name, animalCard.Type)">
+                    <div class="card" *ngFor="let animalCard of animalsArray"
+                        (click)="getAnimalData(animalCard.Name, animalCard.Type)">
                         <div class="image-wrapper">
-                            <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'" alt="...">
-                            <div class="like-btn-wrappper">
+                            <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
+                                alt="...">
+                            <div *ngIf="service.isLoggedIn" class="like-btn-wrappper">
                                 <a class="like-btn" (click)="toggleLike($event, animalCard)">
-                                    <i [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                                    <i
+                                        [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                            </div>
+                            <div *ngIf="!service.isLoggedIn" class="like-btn-wrappper">
+                                <a class="like-btn" (click)="showAlert()">
+                                    <i
+                                        [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
                             </div>
                         </div>
                         <div class="card-body">

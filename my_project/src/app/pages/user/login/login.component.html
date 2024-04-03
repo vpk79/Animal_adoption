@@ -28,7 +28,8 @@
                     *Password is required!
                 </div>
             </div>
-                <label class="loginErr" *ngIf="submitted && loginError" for="" >Wrong password or user name!</label>
+                <label class="loginErr" *ngIf="submitted && loginError" for=""><i class="fa-solid fa-triangle-exclamation"></i> Wrong password or user name!</label>
+                <label class="loginErr" *ngIf="submitted && !loginError" for=""><i class="fa-solid fa-circle-check"></i> Login Successful! Welcome, back!</label>
             <input type="submit" value="Login" id="login"> 
         </form>
         <!-- <button type="button" class="btn btn-secondary" (click)="this.service.toggleLoginForm()" data-bs-dismiss="modal">Close</button> -->

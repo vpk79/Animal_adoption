@@ -92,8 +92,8 @@ export class AuthService {
 
         this.service.updateUser('/users/', this.newUser.ID, this.newUser);
 
-        console.log('User ID:', user.uid);
-        console.log('Email:', user.email);
+        // console.log('User ID:', user.uid);
+        // console.log('Email:', user.email);
        
 
         // user.getIdToken().then(token => {
@@ -108,8 +108,19 @@ export class AuthService {
       alert('Registration Successful');
       this.router.navigate(['/home']);
     }).catch(err => {
+      
       alert(err.message);
-      this.router.navigate(['/home']);
+      
+      if(err.message.includes('already in use')){
+        console.log(true);
+        
+      } else {
+        console.log(false);
+        
+      }
+      console.log('message', err.message);
+      
+      // this.router.navigate(['/home']);
     });
   }
 
@@ -131,7 +142,7 @@ export class AuthService {
       try {
         await user.delete();
         console.log('User account deleted successfully.');
-        // Изтрийте други асоциирани данни или извършете други действия след успешно изтриване на акаунта
+
       } catch (error) {
         console.error('Error deleting user account:', error);
       }
@@ -139,10 +150,5 @@ export class AuthService {
       console.error('No user currently signed in.');
     }
   }
-
-
-
-
-
 }
 

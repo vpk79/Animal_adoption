@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AvailablePetsComponent implements OnInit, AfterViewInit {
 
-  constructor(private service: Service, private cdr: ChangeDetectorRef) { }
+  constructor(public service: Service, private cdr: ChangeDetectorRef) { }
 
   animalsData: Animals[] = [];
   animalsDataArray: any[][] = [];
@@ -18,6 +18,15 @@ export class AvailablePetsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
+  }
+
+  toggleLikeError = false;
+
+  showAlert() {
+    this.toggleLikeError = true;
+    setTimeout(() => {
+      this.toggleLikeError = false;
+    }, 6000);
   }
 
   ngOnInit(): void {
