@@ -2,7 +2,7 @@ import { UserProfil } from './../../types/users';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, Subscription, finalize, map } from 'rxjs';
+import { Observable, Subscription, filter, finalize, map } from 'rxjs';
 
 
 
@@ -46,12 +46,55 @@ export class Service {
   }
 
 
+  // post commentary in database
 
   postComentary(text: string, id: string) {
-    const commentar = [];
-    commentar.push(text);
-    this.updateUser('users', id, { comentary: commentar })
+    const ID: string = this.generateUUID();
+    let newComment: {} = {};
+    const usersDb = this.getItemsAsArray('/users/').subscribe({
+      next: (data: any) => {
+        // console.log(data);
+        const user = data.filter((x: any) => x.ID === id);
+        // console.log(user);
+        if(!user[0].comentary){
+          user[0].comentary = [];
+        }
+        newComment = {ID, text};
+        user[0].comentary.push(newComment);
+        // console.log(user[0].comentary);
+        this.updateUser('/users/', id, user[0]);
+        usersDb.unsubscribe();
+      }
+    });
   }
+
+
+  // deletе commentary in database
+
+  deleteComentary(text: string, userId: string, postId: string) {
+   
+    const usersDb = this.getItemsAsArray('/users/').subscribe({
+      next: (data: any) => {
+        // console.log(data);
+        const user = data.filter((x: any) => x.ID === userId);
+        // console.log(user);
+        if (!user[0].comentary) {
+          return;
+        }
+        const coms = user[0].comentary;
+        const filteredComs = coms.filter((x:any) => x.ID !== postId);
+        // console.log(coms);
+        // console.log(filteredComs);
+        
+        // user[0].comentary.push(newComment);
+        // // console.log(user[0].comentary);
+        // this.updateUser('/users/', id, user[0]);
+        // usersDb.unsubscribe();
+      }
+    });
+  }
+
+
 
   // Get data from database - have 2 ways
 
@@ -168,5 +211,14 @@ export class Service {
 
   isLoggedIn: boolean = false;
 
+
+  // id generator
+
+  generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 
 }
