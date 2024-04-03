@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
         this.service.isLoggedIn = true;
       }
       
-      console.log(userInfo.logged);
-      console.log(this.service.isLoggedIn);
+      // console.log(userInfo.logged);
+      // console.log(this.service.isLoggedIn);
     }
   }
 

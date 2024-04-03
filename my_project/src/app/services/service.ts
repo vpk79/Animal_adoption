@@ -35,9 +35,15 @@ export class Service {
 
 
 
+// update user info
 
-
-
+  updateUser(url: string, id:string, object: any) {
+    // const updateObject: any = {};
+    // updateObject[property] = value;
+    console.log(url, id, object);
+    
+    this.db.object(`/${url}/${id}/`).update(object);
+  }
 
 
 
@@ -82,23 +88,13 @@ export class Service {
 
 
 
-  userDataSubscription: Subscription | undefined;
-  id: string = 'JANUEzfn8agRbZ9JciBWXGpsMk22';
+  
+  // id: string = 'EbL6CXchcMZxTaBC0wLkzt5p58h1';
 
-  getUserData(id: string) {
-    this.getItemsAsArray('/users/').subscribe({
-      next: (data) => {
-        data.forEach((x: any) => {
-          if (x.ID == id) {
-            console.log(x);
-          }
-        })
-      },
-      error: (error) => {
-        // Обработка на грешката
-      }
-    });
-  }
+  // getUserData(id: string) {
+  //   this.updateUser('users', id, {balance:1000})
+  
+  // }
 
 
 

@@ -90,7 +90,7 @@ export class AuthService {
         this.newUser.adopted_animals = [];
 
 
-        this.service.addItem('/users/', this.newUser);
+        this.service.updateUser('/users/', this.newUser.ID, this.newUser);
 
         console.log('User ID:', user.uid);
         console.log('Email:', user.email);
