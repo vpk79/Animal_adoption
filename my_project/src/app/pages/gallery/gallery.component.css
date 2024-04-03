@@ -16,6 +16,34 @@ header .header-container {
 
 } */
 
+.likes-alert {
+    display: flex;
+    height: 30px;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    gap: 20px;
+    margin-bottom: 30px;
+
+}
+
+.likes-alert p:first-child {
+    background-color: coral;
+    padding-bottom: 0;
+    padding: 10px 20px;
+}
+
+.likes-alert p:last-child {
+    padding-bottom: 0;
+}
+
+.likes-alert p:last-child span {
+    padding: 10px 20px;
+    color: white;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(86, 17, 120, 1) 35%, rgba(0, 212, 255, 1) 100%);
+}
 
 
 .gallery-bgnd {

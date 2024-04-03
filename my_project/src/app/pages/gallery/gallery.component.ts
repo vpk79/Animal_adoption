@@ -26,11 +26,20 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder) { }
 
+  toggleLikeError = false;
+
   form: FormGroup = new FormGroup({});
 
   ngAfterViewInit() {
 
     // ...
+  }
+
+  showAlert() {
+    this.toggleLikeError = true;
+    setTimeout(() => {
+      this.toggleLikeError = false;
+    }, 6000);
   }
 
   ngOnInit(): void {
@@ -75,33 +84,33 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     let animalAgeValue = this.form.get('animalAge')?.value;
 
     if (animalGenderValue != '') {
-      
+
 
       this.service.getAnimalsDataByKeyAndValue('Sex', animalGenderValue, this.choosedAnimal).subscribe({
         next: (data: any) => {
-         this.searchData = data;
+          this.searchData = data;
           console.log(this.searchData);
 
-         if (animalSizeValue !='') {
-           if (animalSizeValue == 'Small') { animalSizeValue = 'SMALL' }
-           if (animalSizeValue == 'Medium') { animalSizeValue = 'MED' }
-           if (animalSizeValue == 'Large') { animalSizeValue = 'LARGE' } 
-          this.searchData = this.searchData.filter(x => x.Size == animalSizeValue);
-           console.log(this.searchData);
-         }
+          if (animalSizeValue != '') {
+            if (animalSizeValue == 'Small') { animalSizeValue = 'SMALL' }
+            if (animalSizeValue == 'Medium') { animalSizeValue = 'MED' }
+            if (animalSizeValue == 'Large') { animalSizeValue = 'LARGE' }
+            this.searchData = this.searchData.filter(x => x.Size == animalSizeValue);
+            console.log(this.searchData);
+          }
 
           if (animalAgeValue != '') {
             if (animalAgeValue == '1 year') { animalAgeValue = '1year' }
             if (animalAgeValue == '2 years') { animalAgeValue = '2year' }
             if (animalAgeValue == '3 years') { animalAgeValue = '3year' }
-            if (animalAgeValue == '4 years') { animalAgeValue = '4year' } 
+            if (animalAgeValue == '4 years') { animalAgeValue = '4year' }
             this.searchData = this.searchData.filter(x => x.Age == animalAgeValue);
             console.log(this.searchData);
           }
 
           this.animalsData = this.searchData;
           // console.log(this.animalsData);
-         
+
         },
         error: (error) => {
           console.error(error);
@@ -109,9 +118,9 @@ export class GalleryComponent implements OnInit, AfterViewInit {
       });
 
     } else if (animalSizeValue != '') {
-      if (animalSizeValue == 'Small') { animalSizeValue = 'SMALL' } 
-      if (animalSizeValue == 'Medium') { animalSizeValue = 'MED' } 
-      if (animalSizeValue == 'Large') { animalSizeValue = 'LARGE' } 
+      if (animalSizeValue == 'Small') { animalSizeValue = 'SMALL' }
+      if (animalSizeValue == 'Medium') { animalSizeValue = 'MED' }
+      if (animalSizeValue == 'Large') { animalSizeValue = 'LARGE' }
 
       this.service.getAnimalsDataByKeyAndValue('Size', animalSizeValue, this.choosedAnimal).subscribe({
         next: (data: any) => {
@@ -135,10 +144,10 @@ export class GalleryComponent implements OnInit, AfterViewInit {
       });
 
     } else if (animalAgeValue != '') {
-      if (animalAgeValue == '1 year') { animalAgeValue = '1year' } 
-      if (animalAgeValue == '2 years') { animalAgeValue = '2year' } 
-      if (animalAgeValue == '3 years') { animalAgeValue = '3year' } 
-      if (animalAgeValue == '4 years') { animalAgeValue = '4year' } 
+      if (animalAgeValue == '1 year') { animalAgeValue = '1year' }
+      if (animalAgeValue == '2 years') { animalAgeValue = '2year' }
+      if (animalAgeValue == '3 years') { animalAgeValue = '3year' }
+      if (animalAgeValue == '4 years') { animalAgeValue = '4year' }
       this.service.getAnimalsDataByKeyAndValue('Age', animalAgeValue, this.choosedAnimal).subscribe({
         next: (data: any) => {
           this.searchData = data;
@@ -150,7 +159,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
       });
 
     } else {
-      
+
       this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
         next: (data: any) => {
           this.animalsData = data;

@@ -53,18 +53,21 @@
         </form>
     </div>
 
-
+    <div *ngIf="toggleLikeError" class="likes-alert">
+        <p><i class="fa-solid fa-triangle-exclamation"></i> You must be logged in to likes animals!</p><p><span><a (click)="service.toggleLoginForm()">Sign In</a></span> or  <span><a (click)="service.toggleRegisterForm()">Sign Up</a></span></p>
+    </div>
     <div class="gallery-cards">
         <div class="gallery-cards-wrapper">
-
-
             <div *ngFor="let animal of animalsData" class="card" (click)="getAnimalData(animal.Name)">
                 <div class="image-wrapper">
                     <img src="../../../assets/{{choosedAnimal}}/{{animal.Name}}.jpeg" alt="...">
-                    <div class="like-btn-wrappper" (click)="updateLikes($event, animal.Name, animal.Liked)">
+                    <div *ngIf="service.isLoggedIn" class="like-btn-wrappper" (click)="updateLikes($event, animal.Name, animal.Liked)" data-bs-toggle="tooltip" title="Add to Favorities">
                         <a class="like-btn">
-                            <i
-                                [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
+                            <i [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
+                    </div>
+                    <div *ngIf="!service.isLoggedIn" class="like-btn-wrappper" (click)="showAlert()" data-bs-toggle="tooltip" title="Add to Favorities">
+                        <a class="like-btn">
+                            <i [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -83,6 +86,11 @@
                 <h2><i class="fa-regular fa-face-frown"></i> Sorry, no-available animals by these criteria!</h2>
             </div>
         </div>
+    </div>
+    <div *ngIf="toggleLikeError" class="likes-alert">
+        <p><i class="fa-solid fa-triangle-exclamation"></i> You must be logged in to likes animals!</p>
+        <p><span><a (click)="service.toggleLoginForm()">Sign In</a></span> or <span><a
+                    (click)="service.toggleRegisterForm()">Sign Up</a></span></p>
     </div>
 </section>
 
