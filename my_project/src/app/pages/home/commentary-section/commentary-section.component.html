@@ -252,7 +252,26 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div class="rate-us-btn">
-        <a href=""><span class="btn-stars">***</span> Rate Us <span class="btn-stars">***</span></a>
+    <div *ngIf="isRateToggled"  class="commntary-form" >
+        <div class="commentary-section">
+            <div class="commentary-form-wrapper">
+                <form>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <div class="form-btns">
+                        <button class="close">Close</button>
+                        <button class="post">Post Comment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+    
+    <div class="rate-us-btn">
+        <a (click)="toggleRate()"><span class="btn-stars">***</span> Rate Us <span class="btn-stars">***</span></a>
+    </div>
+
+
+    
+       
+    
 </section>

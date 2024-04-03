@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './commentary-section.component.css'
 })
 export class CommentarySectionComponent {
+   isRateToggled: boolean = false;
+
+    toggleRate(){
+     this.isRateToggled = !this.isRateToggled;
+    }
 
 }

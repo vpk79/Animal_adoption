@@ -21,6 +21,7 @@ import { Service } from '../../services/service';
 
 
 
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -34,7 +35,8 @@ import { Service } from '../../services/service';
     DonationSectionComponent,
     OverFooterLineComponent,
     FooterComponent,
-    HeaderCarouselComponent
+    HeaderCarouselComponent,
+   
   ],
   imports: [
     CommonModule, RouterModule, UserModule
