@@ -48,13 +48,13 @@ export class Service {
 
   // post commentary in database
 
-  postComentary(text: string, id: string) {
+  postComentary(text: string, userId: string) {
     const ID: string = this.generateUUID();
     let newComment: {} = {};
     const usersDb = this.getItemsAsArray('/users/').subscribe({
       next: (data: any) => {
         // console.log(data);
-        const user = data.filter((x: any) => x.ID === id);
+        const user = data.filter((x: any) => x.ID === userId);
         // console.log(user);
         if(!user[0].comentary){
           user[0].comentary = [];
@@ -62,7 +62,7 @@ export class Service {
         newComment = {ID, text};
         user[0].comentary.push(newComment);
         // console.log(user[0].comentary);
-        this.updateUser('/users/', id, user[0]);
+        this.updateUser('/users/', userId, user[0]);
         usersDb.unsubscribe();
       }
     });
@@ -71,7 +71,7 @@ export class Service {
 
   // deletе commentary in database
 
-  deleteComentary(text: string, userId: string, postId: string) {
+  deleteComentary(userId: string, postId: string) {
    
     const usersDb = this.getItemsAsArray('/users/').subscribe({
       next: (data: any) => {
@@ -83,13 +83,11 @@ export class Service {
         }
         const coms = user[0].comentary;
         const filteredComs = coms.filter((x:any) => x.ID !== postId);
-        // console.log(coms);
         // console.log(filteredComs);
         
-        // user[0].comentary.push(newComment);
-        // // console.log(user[0].comentary);
-        // this.updateUser('/users/', id, user[0]);
-        // usersDb.unsubscribe();
+        user[0].comentary = filteredComs;
+        this.updateUser('/users/', userId, user[0]);
+        usersDb.unsubscribe();
       }
     });
   }
