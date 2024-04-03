@@ -16,6 +16,7 @@ import { HeaderCarouselComponent } from './header-carousel/header-carousel.compo
 import { UserModule } from '../user/user.module';
 import { LoginComponent } from '../user/login/login.component';
 import { Service } from '../../services/service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -39,7 +40,7 @@ import { Service } from '../../services/service';
    
   ],
   imports: [
-    CommonModule, RouterModule, UserModule
+    CommonModule, RouterModule, UserModule, ReactiveFormsModule
   ],
   exports: [HomeComponent,
      HeaderComponent,
