@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { LocalStorageService } from './../../services/local-storage.service';
 import { ImageValidateService } from './../../services/image-validate.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,7 @@ export class UserProfilComponent implements OnInit {
   isVisible: boolean = false;
   toggleImgErr: boolean = false;
   userID: string = ''
-  imageUrl: string = ''
+  imageUrl: any;
 
   ngOnInit(): void {
 
@@ -23,8 +24,19 @@ export class UserProfilComponent implements OnInit {
       const userInfo = this.localStorage.getItem('userInfo');
       this.userID = userInfo.userID;
 
-    this.imageUrl = this.service.getUserProperty('users', this.userID, 'profile_img')!;
-      // console.log(this.userID);
+      this.service.getUserProperty('users', this.userID, 'profile_img').subscribe({
+        next: (data) => {
+          console.log(data); // Тук получавате данните от базата данни
+          // return data;
+           this.imageUrl = data;
+        },
+        error: (error) => {
+          console.error('Error fetching user property:', error);
+        }
+      });
+
+      // console.log(this.imageUrl);
+      
     }
   }
 
@@ -51,6 +63,7 @@ export class UserProfilComponent implements OnInit {
             this.service.uploadFile(event, 'userProfileImg/' + this.userID, +'/' + 'profile_pic').subscribe(
               downloadURL => {
                 this.imageUrl = downloadURL; // Присвояване на URL адреса на каченото изображение
+                this.service.updateUserProperty('users', this.userID, 'profile_img', downloadURL);
               },
               error => {
                 this.toggleImgErr = true;

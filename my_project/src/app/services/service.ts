@@ -46,20 +46,14 @@ export class Service {
   }
 
 
-  getUserProperty(url: string, userID: string, property: string) {
-    const img = this.db.object(`/${url}/${userID}/${property}`).valueChanges().subscribe({
-      next: (data: any) => {
-        img.unsubscribe;
-         return data;
-      }
-    });
-
-
-    // return this.db.object(`/${url}/${userID}/${property}`).valueChanges();
+  getUserProperty(url: string, userID: string, property: string): Observable<any> {
+    return this.db.object(`/${url}/${userID}/${property}`).valueChanges();
   }
 
 
-
+  updateUserProperty(url: string, userID: string, property: string, newValue: string) {
+    this.db.object(`/${url}/${userID}/`).update({ [property]: newValue });
+  }
 
 
 
