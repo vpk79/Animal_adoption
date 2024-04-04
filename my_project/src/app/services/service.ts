@@ -73,35 +73,44 @@ export class Service {
   postSiteComentary(text: string, userID: string, rating: number) {
     const postID: string = this.generateUUID();
     let newComment: {} = {};
-    if (this.checkUserComment(userID) == true) {
-      console.log('already commented');
-      setTimeout(() => {
-        this.isSiteCommented = false;
-      }, 3000);
-      return;
-    } else {
-      newComment = { postID, text, rating };
-      this.updateDatabaseAsObject('siteComments', userID, newComment);
-      console.log('comment posted');
-    }
 
-
-    
-  }
-
-  checkUserComment(userID: string) {
-    const check = this.getItemsAsObject('/siteComments/' + userID).subscribe({
-      next: (data: any) => {
-        if (data !== null) {
-          this.isSiteCommented = true;
-        } else {
+    const check = this.checkUserComment(userID).subscribe(isCommented => {
+      if (isCommented) {
+        setTimeout(() => {
+          console.log('already commented');
           this.isSiteCommented = false;
-        }
+        }, 3000);
+        return;
+      } else {
+        newComment = { postID, userID, text, rating };
+        this.updateDatabaseAsObject('siteComments', userID, newComment);
+        console.log('comment posted');
       }
-    });
-    check.unsubscribe;
-    return this.isSiteCommented;
+    })
   }
+
+  // check if user already commented - 1 comment per user allowed
+
+  checkUserComment(userID: string): Observable<boolean> {
+    return this.getItemsAsObject('/siteComments/' + userID).pipe(
+      map((data: any) => {
+        const isCommented = data !== null;
+        // console.log(isCommented);
+        return isCommented;
+      })
+    );
+  }
+
+  // return all site comments as array
+  
+  getAllComments(): Observable<[]> {
+    return this.getItemsAsArray('/siteComments/').pipe(
+      map((data: any) => {
+        return data;
+      })
+    )
+  }
+
 
   // delete Site commentary in database
 

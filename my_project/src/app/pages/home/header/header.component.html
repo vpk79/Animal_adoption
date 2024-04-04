@@ -8,7 +8,7 @@
 
     <nav class="nav">
         <ul>
-            <li><a routerLink="/home">HOME</a></li>
+            <li (click)="ngOnInit()"><a routerLink="/home">HOME</a></li>
             <li (click)="service.toggleWelcomeMsg()"><a>WELCOME</a></li>
             <li (click)="service.updateUserProperty('users','7wxb84M9vrRNXpzY8VrMCS9AjNY2', 'profile_img', 'llllll')"><a>ABOUT</a></li>
             <li><a href="#">DOGS</a></li>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../../services/service';
 import { LocalStorageService } from '../../../services/local-storage.service';
@@ -8,21 +9,25 @@ import { LocalStorageService } from '../../../services/local-storage.service';
   templateUrl: './commentary-section.component.html',
   styleUrl: './commentary-section.component.css'
 })
-export class CommentarySectionComponent implements OnInit{
-   isRateToggled: boolean = false;
-   submitted: boolean = false;
-   userID: string = '';
+export class CommentarySectionComponent implements OnInit {
+  isRateToggled: boolean = false;
+  submitted: boolean = false;
+  userID: string = '';
+  userComments = [];
 
-    constructor(private fb: FormBuilder, public service: Service, private localStorage: LocalStorageService){}
+  constructor(private fb: FormBuilder, public service: Service, private localStorage: LocalStorageService) { }
 
   form: FormGroup = this.fb.group({});
 
   ngOnInit(): void {
+
     this.form = this.fb.nonNullable.group({
       commentary: ['', [Validators.required, Validators.minLength(10)]],
-      stars :[''],
-     
+      stars: [''],
+
     });
+
+    this.getSiteComments();
 
     if (this.service.isLoggedIn == true) {
       const userInfo = this.localStorage.getItem('userInfo');
@@ -30,7 +35,18 @@ export class CommentarySectionComponent implements OnInit{
     }
   }
 
-  onSubmit(): void{
+  getSiteComments() {
+    this.service.getAllComments().subscribe(data => {
+      this.userComments = data;
+      console.log(this.userComments);
+      
+    });
+  }
+
+
+
+
+  onSubmit(): void {
 
     this.submitted = true;
 
@@ -39,28 +55,31 @@ export class CommentarySectionComponent implements OnInit{
     }
     const comment = this.form.get('commentary')?.value;
     this.service.postSiteComentary(comment, this.userID, 5);
-   
-    console.log(comment);
-    // const star1 = this.form.get('stars')?.value;
-    
-    
-    // this.service.postSiteComentary('alabala', '0iHgyBkTv8gyWo646HWaBwB9nfk2', 5)
-    // this.service.postSiteComentary('alabala', '7wxb84M9vrRNXpzY8VrMCS9AjNY2', 5)
-    // this.service.postSiteComentary('alabala', 'EbL6CXchcMZxTaBC0wLkzt5p58h1', 5)
 
-    // this.service.deleteSiteComments('7wxb84M9vrRNXpzY8VrMCS9AjNY2')
     setTimeout(() => {
       this.isRateToggled = !this.isRateToggled;
       this.form.reset();
     }, 2000);
-    
+
   }
-    toggleRate(){
-      if (!this.service.checkUserComment(this.userID)){
-         this.isRateToggled = !this.isRateToggled;
-         this.form.reset();
+  toggleRate() {
+    this.isRateToggled = !this.isRateToggled;
+    this.form.reset();
+  }
+
+  checkIsUserCommented() {
+    this.ngOnInit();
+    this.service.checkUserComment(this.userID).subscribe(isCommented => {
+      if (!isCommented) {
+        this.toggleRate();
+        // console.log('user may comment');
+      } else {
+        // console.log('user cannot comment');
       }
-      // this.service.postSiteComentary('lalalal', this.userID, 5)
-      // console.log(this.service.isSiteCommented);
-    }
+      // console.log(this.userID);
+
+    })
+  }
+
+
 }

@@ -60,7 +60,7 @@ export class UserProfilComponent implements OnInit {
       this.imageValidateService.validateImage(file, maxSizeInBytes, maxWidth, maxHeight)
         .then(isValid => {
           if (isValid) {
-            this.service.uploadFile(event, 'userProfileImg/' + this.userID, +'/' + 'profile_pic').subscribe(
+            this.service.uploadFile(event, 'userProfileImg/' + this.userID, '/profile_pic').subscribe(
               downloadURL => {
                 this.imageUrl = downloadURL; // Присвояване на URL адреса на каченото изображение
                 this.service.updateUserProperty('users', this.userID, 'profile_img', downloadURL);
