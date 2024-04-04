@@ -31,7 +31,7 @@ export class AuthService {
     'comentary': [],
     'liked_animals': [],
     'adopted_animals': [],
-    'profile_img': ''
+    'profile_img': 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fuser_profile?alt=media&token=be227233-2374-4bcc-ad6f-1bdc02f405ec'
   };
 
   // Login function
@@ -92,7 +92,7 @@ export class AuthService {
         this.newUser.adopted_animals = [];
 
 
-        this.service.updateUser('/users/', this.newUser.ID, this.newUser);
+        this.service.updateDatabaseAsObject('users', this.newUser.ID, this.newUser);
 
         // console.log('User ID:', user.uid);
         // console.log('Email:', user.email);

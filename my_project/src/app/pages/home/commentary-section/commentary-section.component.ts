@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Service } from '../../../services/service';
 
 @Component({
   selector: 'app-commentary-section',
@@ -10,7 +11,7 @@ export class CommentarySectionComponent implements OnInit{
    isRateToggled: boolean = false;
    submitted: boolean = false;
 
-    constructor(private fb: FormBuilder){}
+    constructor(private fb: FormBuilder, public service: Service){}
 
   form: FormGroup = this.fb.group({});
 
@@ -26,24 +27,26 @@ export class CommentarySectionComponent implements OnInit{
 
     this.submitted = true
 
-    if (!this.form) {
-      return;
-    }
+    // if (!this.form) {
+    //   return;
+    // }
 
-    const comment = this.form.get('commentary')?.value;
-    console.log(comment);
+    // const comment = this.form.get('commentary')?.value;
+    // console.log(comment);
     
    
-    const star1 = this.form.get('stars')?.value;
-    console.log(star1);
+    // const star1 = this.form.get('stars')?.value;
+    // console.log(star1);
     
-    
+    this.service.postSiteComentary('alabala', '0iHgyBkTv8gyWo646HWaBwB9nfk2', 5)
+    this.service.postSiteComentary('alabala', '7wxb84M9vrRNXpzY8VrMCS9AjNY2', 5)
+    this.service.postSiteComentary('alabala', 'EbL6CXchcMZxTaBC0wLkzt5p58h1', 5)
 
- 
+    // this.service.deleteSiteComments('7wxb84M9vrRNXpzY8VrMCS9AjNY2')
 
   }
 
-
+  
 
 
 

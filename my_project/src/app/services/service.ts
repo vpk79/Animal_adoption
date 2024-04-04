@@ -9,8 +9,11 @@ import { Observable, Subscription, filter, finalize, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class Service {
   // private dbPath = "/newItem";
+  isSiteCommented = false;
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
@@ -37,7 +40,7 @@ export class Service {
 
   // update user info
 
-  updateUser(url: string, id: string, object: any) {
+  updateDatabaseAsObject(url: string, id: string, object: any) {
     // const updateObject: any = {};
     // updateObject[property] = value;
     // console.log(url, id, object);
@@ -45,52 +48,104 @@ export class Service {
     this.db.object(`/${url}/${id}/`).update(object);
   }
 
+// post Site commentary in database
 
-  // post commentary in database
-
-  postComentary(text: string, userId: string) {
-    const ID: string = this.generateUUID();
+  postSiteComentary(text: string, userID: string, rating: number) {
+    const postID: string = this.generateUUID();
     let newComment: {} = {};
-    const usersDb = this.getItemsAsArray('/users/').subscribe({
+    const usersDb = this.getItemsAsObject('/siteComments/' + userID).subscribe({
       next: (data: any) => {
-        // console.log(data);
-        const user = data.filter((x: any) => x.ID === userId);
-        // console.log(user);
-        if(!user[0].comentary){
-          user[0].comentary = [];
-        }
-        newComment = {ID, text};
-        user[0].comentary.push(newComment);
-        // console.log(user[0].comentary);
-        this.updateUser('/users/', userId, user[0]);
-        usersDb.unsubscribe();
-      }
-    });
-  }
-
-
-  // deletе commentary in database
-
-  deleteComentary(userId: string, postId: string) {
-   
-    const usersDb = this.getItemsAsArray('/users/').subscribe({
-      next: (data: any) => {
-        // console.log(data);
-        const user = data.filter((x: any) => x.ID === userId);
-        // console.log(user);
-        if (!user[0].comentary) {
+        if(data !== null){
+          this.isSiteCommented = true;
+          setTimeout(() => {
+              this.isSiteCommented = false;
+          }, 3000);
+          console.log('already commented');
           return;
+        } else {
+          newComment = { postID, text, rating };
+          this.updateDatabaseAsObject('siteComments', userID, newComment);
         }
-        const coms = user[0].comentary;
-        const filteredComs = coms.filter((x:any) => x.ID !== postId);
-        // console.log(filteredComs);
-        
-        user[0].comentary = filteredComs;
-        this.updateUser('/users/', userId, user[0]);
+        console.log(data);
         usersDb.unsubscribe();
       }
     });
   }
+
+  deleteSiteComments(userID: string): void {
+    const ref = this.db.database.ref('/siteComments/' + userID);
+    // Проверяваме дали записът съществува преди да го изтрием
+    ref.once('value')
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          // Записът съществува, изтриваме го
+          ref.remove()
+            .then(() => {
+              console.log("Записът е успешно изтрит.");
+            })
+            .catch((error) => {
+              console.error("Грешка при изтриване на записа:", error);
+            });
+        } else {
+          console.log("Записът не съществува.");
+        }
+      })
+      .catch((error) => {
+        console.error("Грешка при проверката на записа:", error);
+      });
+  }
+
+
+
+
+
+
+
+  // post commentary in user database
+
+  // postComentary(text: string, userId: string) {
+  //   const ID: string = this.generateUUID();
+  //   let newComment: {} = {};
+  //   const usersDb = this.getItemsAsArray('/users/').subscribe({
+  //     next: (data: any) => {
+  //       // console.log(data);
+  //       const user = data.filter((x: any) => x.ID === userId);
+  //       // console.log(user);
+  //       if(!user[0].comentary){
+  //         user[0].comentary = [];
+  //       }
+  //       newComment = {ID, text};
+  //       user[0].comentary.push(newComment);
+  //       // console.log(user[0].comentary);
+  //       this.updateUser('/users/', userId, user[0]);
+  //       usersDb.unsubscribe();
+  //     }
+  //   });
+  // }
+
+
+  // deletе commentary in user database
+
+  // deleteComentary(userId: string, postId: string) {
+
+  //   const usersDb = this.getItemsAsArray('/users/').subscribe({
+  //     next: (data: any) => {
+  //       // console.log(data);
+  //       const user = data.filter((x: any) => x.ID === userId);
+  //       // console.log(user);
+  //       if (!user[0].comentary) {
+  //         return;
+  //       }
+  //       const coms = user[0].comentary;
+  //       const filteredComs = coms.filter((x:any) => x.ID !== postId);
+  //       // console.log(filteredComs);
+
+  //       user[0].comentary = filteredComs;
+  //       this.updateUser('/users/', userId, user[0]);
+  //       usersDb.unsubscribe();
+  //     }
+  //   });
+  // }
 
 
 
@@ -213,10 +268,10 @@ export class Service {
   // id generator
 
   generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 
 }
