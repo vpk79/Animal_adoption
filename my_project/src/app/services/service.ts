@@ -73,24 +73,49 @@ export class Service {
   postSiteComentary(text: string, userID: string, rating: number) {
     const postID: string = this.generateUUID();
     let newComment: {} = {};
-    const usersDb = this.getItemsAsObject('/siteComments/' + userID).subscribe({
+    if (this.checkUserComment(userID) == true){
+      console.log('already commented');
+      setTimeout(() => {
+      }, 3000);
+      this.isSiteCommented = false;
+      return;
+    } else {
+      console.log('you may comment');
+    }
+
+
+    // const usersDb = this.getItemsAsObject('/siteComments/' + userID).subscribe({
+    //   next: (data: any) => {
+    //     if (data !== null) {
+    //       this.isSiteCommented = true;
+    //       setTimeout(() => {
+    //         this.isSiteCommented = false;
+    //       }, 3000);
+    //       console.log('already commented');
+    //       return;
+    //     } else {
+    //       newComment = { postID, text, rating };
+    //       this.updateDatabaseAsObject('siteComments', userID, newComment);
+    //     }
+    //     console.log(data);
+    //     usersDb.unsubscribe();
+    //   }
+    // });
+  }
+
+  checkUserComment(userID: string){
+    const check = this.getItemsAsObject('/siteComments/' + userID).subscribe({
       next: (data: any) => {
         if (data !== null) {
-          this.isSiteCommented = true;
-          setTimeout(() => {
-            this.isSiteCommented = false;
-          }, 3000);
-          console.log('already commented');
-          return;
+         this.isSiteCommented = true;
         } else {
-          newComment = { postID, text, rating };
-          this.updateDatabaseAsObject('siteComments', userID, newComment);
+          this.isSiteCommented = false;
         }
-        console.log(data);
-        usersDb.unsubscribe();
       }
-    });
-  }
+  });
+  check.unsubscribe;
+  return this.isSiteCommented;
+}
 
   // delete Site commentary in database
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../../services/service';
+import { LocalStorageService } from '../../../services/local-storage.service';
 
 @Component({
   selector: 'app-commentary-section',
@@ -10,8 +11,9 @@ import { Service } from '../../../services/service';
 export class CommentarySectionComponent implements OnInit{
    isRateToggled: boolean = false;
    submitted: boolean = false;
+   userID: string = '';
 
-    constructor(private fb: FormBuilder, public service: Service){}
+    constructor(private fb: FormBuilder, public service: Service, private localStorage: LocalStorageService){}
 
   form: FormGroup = this.fb.group({});
 
@@ -21,46 +23,49 @@ export class CommentarySectionComponent implements OnInit{
       stars :['', Validators.required],
      
     });
+
+    if (this.service.isLoggedIn == true) {
+      const userInfo = this.localStorage.getItem('userInfo');
+      this.userID = userInfo.userID;
+    }
   }
 
   onSubmit(): void{
 
-    this.submitted = true
+    this.submitted = true;
 
-    // if (!this.form) {
-    //   return;
-    // }
+    if (!this.form) {
+      return;
+    }
 
-    // const comment = this.form.get('commentary')?.value;
-    // console.log(comment);
+   
+
     
+
+    const comment = this.form.get('commentary')?.value;
+    console.log(comment);
+    // this.service.postSiteComentary(comment, this.userID, 5);
    
     // const star1 = this.form.get('stars')?.value;
     // console.log(star1);
     
-    this.service.postSiteComentary('alabala', '0iHgyBkTv8gyWo646HWaBwB9nfk2', 5)
-    this.service.postSiteComentary('alabala', '7wxb84M9vrRNXpzY8VrMCS9AjNY2', 5)
-    this.service.postSiteComentary('alabala', 'EbL6CXchcMZxTaBC0wLkzt5p58h1', 5)
+    // this.service.postSiteComentary('alabala', '0iHgyBkTv8gyWo646HWaBwB9nfk2', 5)
+    // this.service.postSiteComentary('alabala', '7wxb84M9vrRNXpzY8VrMCS9AjNY2', 5)
+    // this.service.postSiteComentary('alabala', 'EbL6CXchcMZxTaBC0wLkzt5p58h1', 5)
 
     // this.service.deleteSiteComments('7wxb84M9vrRNXpzY8VrMCS9AjNY2')
-
+    setTimeout(() => {
+      this.isRateToggled = !this.isRateToggled;
+      this.form.reset();
+    }, 2000);
+    
   }
-
-  
-
-
-
-
-
-
     toggleRate(){
-     this.isRateToggled = !this.isRateToggled;
-     this.form.reset();
+      if (!this.service.checkUserComment(this.userID)){
+         this.isRateToggled = !this.isRateToggled;
+         this.form.reset();
+      }
+      // this.service.postSiteComentary('lalalal', this.userID, 5)
+      // console.log(this.service.isSiteCommented);
     }
-
-
-    postComment(){
-      
-    }
-
 }

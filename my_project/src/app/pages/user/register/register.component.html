@@ -65,7 +65,7 @@
                         <select name="gender" id="gender" placeholder="gender" formControlName="gender">
                             <option value="gender" selected>Gender*</option>
                             <option value="male">Male</option>
-                            <option value="female">female</option>
+                            <option value="female">Female</option>
                         </select>
                         <div *ngIf="form.get('gender')?.value === 'gender' && form.get('gender')?.touched"
                             class="error-msg">
