@@ -73,49 +73,35 @@ export class Service {
   postSiteComentary(text: string, userID: string, rating: number) {
     const postID: string = this.generateUUID();
     let newComment: {} = {};
-    if (this.checkUserComment(userID) == true){
+    if (this.checkUserComment(userID) == true) {
       console.log('already commented');
       setTimeout(() => {
+        this.isSiteCommented = false;
       }, 3000);
-      this.isSiteCommented = false;
       return;
     } else {
-      console.log('you may comment');
+      newComment = { postID, text, rating };
+      this.updateDatabaseAsObject('siteComments', userID, newComment);
+      console.log('comment posted');
     }
 
 
-    // const usersDb = this.getItemsAsObject('/siteComments/' + userID).subscribe({
-    //   next: (data: any) => {
-    //     if (data !== null) {
-    //       this.isSiteCommented = true;
-    //       setTimeout(() => {
-    //         this.isSiteCommented = false;
-    //       }, 3000);
-    //       console.log('already commented');
-    //       return;
-    //     } else {
-    //       newComment = { postID, text, rating };
-    //       this.updateDatabaseAsObject('siteComments', userID, newComment);
-    //     }
-    //     console.log(data);
-    //     usersDb.unsubscribe();
-    //   }
-    // });
+    
   }
 
-  checkUserComment(userID: string){
+  checkUserComment(userID: string) {
     const check = this.getItemsAsObject('/siteComments/' + userID).subscribe({
       next: (data: any) => {
         if (data !== null) {
-         this.isSiteCommented = true;
+          this.isSiteCommented = true;
         } else {
           this.isSiteCommented = false;
         }
       }
-  });
-  check.unsubscribe;
-  return this.isSiteCommented;
-}
+    });
+    check.unsubscribe;
+    return this.isSiteCommented;
+  }
 
   // delete Site commentary in database
 

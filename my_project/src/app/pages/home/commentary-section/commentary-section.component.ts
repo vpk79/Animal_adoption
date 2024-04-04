@@ -20,7 +20,7 @@ export class CommentarySectionComponent implements OnInit{
   ngOnInit(): void {
     this.form = this.fb.nonNullable.group({
       commentary: ['', [Validators.required, Validators.minLength(10)]],
-      stars :['', Validators.required],
+      stars :[''],
      
     });
 
@@ -34,20 +34,15 @@ export class CommentarySectionComponent implements OnInit{
 
     this.submitted = true;
 
-    if (!this.form) {
+    if (!this.form || this.form.invalid) {
       return;
     }
-
-   
-
-    
-
     const comment = this.form.get('commentary')?.value;
-    console.log(comment);
-    // this.service.postSiteComentary(comment, this.userID, 5);
+    this.service.postSiteComentary(comment, this.userID, 5);
    
+    console.log(comment);
     // const star1 = this.form.get('stars')?.value;
-    // console.log(star1);
+    
     
     // this.service.postSiteComentary('alabala', '0iHgyBkTv8gyWo646HWaBwB9nfk2', 5)
     // this.service.postSiteComentary('alabala', '7wxb84M9vrRNXpzY8VrMCS9AjNY2', 5)
