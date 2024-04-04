@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const userInfo = this.localStorageService.getItem('userInfo');
-      if(userInfo == null) {
+      if(userInfo == null || userInfo.logged == false) {
         this.service.isLoggedIn = false;
       } else {
         this.service.isLoggedIn = true;

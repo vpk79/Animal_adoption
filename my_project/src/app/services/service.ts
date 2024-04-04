@@ -17,6 +17,15 @@ export class Service {
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
+  // Get data from database - have 2 ways
+
+  getItemsAsArray(url: string) {
+    return this.db.list(url).valueChanges();
+  }
+
+  getItemsAsObject(url: string) {
+    return this.db.object(url).valueChanges();
+  }
 
   // Add items in database
 
@@ -37,6 +46,23 @@ export class Service {
   }
 
 
+  getUserProperty(url: string, userID: string, property: string) {
+    const img = this.db.object(`/${url}/${userID}/${property}`).valueChanges().subscribe({
+      next: (data: any) => {
+        img.unsubscribe;
+         return data;
+      }
+    });
+
+
+    // return this.db.object(`/${url}/${userID}/${property}`).valueChanges();
+  }
+
+
+
+
+
+
 
   // update user info
 
@@ -48,17 +74,17 @@ export class Service {
     this.db.object(`/${url}/${id}/`).update(object);
   }
 
-// post Site commentary in database
+  // post Site commentary in database
 
   postSiteComentary(text: string, userID: string, rating: number) {
     const postID: string = this.generateUUID();
     let newComment: {} = {};
     const usersDb = this.getItemsAsObject('/siteComments/' + userID).subscribe({
       next: (data: any) => {
-        if(data !== null){
+        if (data !== null) {
           this.isSiteCommented = true;
           setTimeout(() => {
-              this.isSiteCommented = false;
+            this.isSiteCommented = false;
           }, 3000);
           console.log('already commented');
           return;
@@ -71,6 +97,8 @@ export class Service {
       }
     });
   }
+
+  // delete Site commentary in database
 
   deleteSiteComments(userID: string): void {
     const ref = this.db.database.ref('/siteComments/' + userID);
@@ -149,15 +177,6 @@ export class Service {
 
 
 
-  // Get data from database - have 2 ways
-
-  getItemsAsArray(url: string) {
-    return this.db.list(url).valueChanges();
-  }
-
-  getItemsAsObject(url: string) {
-    return this.db.object(url).valueChanges();
-  }
 
 
   // Upload user photo in data server

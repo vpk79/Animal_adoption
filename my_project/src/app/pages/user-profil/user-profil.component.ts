@@ -1,5 +1,6 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { ImageValidateService } from './../../services/image-validate.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Service } from '../../services/service';
 
 @Component({
@@ -9,14 +10,27 @@ import { Service } from '../../services/service';
 })
 
 
-export class UserProfilComponent {
-  toggle: boolean = true; 
-  isVisible = false;
-  toggleImgErr = false;
+export class UserProfilComponent implements OnInit {
+  toggle: boolean = true;
+  isVisible: boolean = false;
+  toggleImgErr: boolean = false;
+  userID: string = ''
+  imageUrl: string = ''
 
-  imageUrl: string = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fprofile_pic?alt=media&token=1cc19d05-685a-4d03-9d9e-5aa6f2aa22d6';
+  ngOnInit(): void {
 
-  constructor(public service: Service, public imageValidateService: ImageValidateService){}
+    if (this.service.isLoggedIn == true) {
+      const userInfo = this.localStorage.getItem('userInfo');
+      this.userID = userInfo.userID;
+
+    this.imageUrl = this.service.getUserProperty('users', this.userID, 'profile_img')!;
+      // console.log(this.userID);
+    }
+  }
+
+  // imageUrl: string = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fprofile_pic?alt=media&token=1cc19d05-685a-4d03-9d9e-5aa6f2aa22d6';
+
+  constructor(public service: Service, public imageValidateService: ImageValidateService, private localStorage: LocalStorageService) { }
 
   uploadFile(event: any) {
     const file = event.target.files[0];
@@ -29,12 +43,12 @@ export class UserProfilComponent {
       // Не е избран файл за качване
       return;
     }
-    if (file && allowedTypes.includes(file.type)){
+    if (file && allowedTypes.includes(file.type)) {
 
       this.imageValidateService.validateImage(file, maxSizeInBytes, maxWidth, maxHeight)
         .then(isValid => {
           if (isValid) {
-            this.service.uploadFile(event, 'profile/', 'profile_pic').subscribe(
+            this.service.uploadFile(event, 'userProfileImg/' + this.userID, +'/' + 'profile_pic').subscribe(
               downloadURL => {
                 this.imageUrl = downloadURL; // Присвояване на URL адреса на каченото изображение
               },
@@ -71,14 +85,14 @@ export class UserProfilComponent {
       // Файлът не е снимка или е в непозволен формат
       console.error('Invalid file format. Please select an image file.');
     }
-    
+
   }
 
 
   // toggle save button
   isDisabled(): boolean {
     this.isVisible = true;
-    return this.toggle = false; 
+    return this.toggle = false;
   }
-  
+
 }

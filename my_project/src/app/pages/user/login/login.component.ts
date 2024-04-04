@@ -79,6 +79,9 @@ export class LoginComponent implements OnInit {
       });
   }
 
+
+  // mark all fields as touched
+
   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
@@ -88,8 +91,6 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
- 
  
 }
 
