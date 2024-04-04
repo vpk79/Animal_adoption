@@ -12,11 +12,14 @@
         <div class="user-profile-container">
             <div class="user-picture-wrapper">
                 <div class="user-picture-holder">
-                    <img [src]="imageUrl" alt="">
+                    <img [src]="imageUrl" alt="userProfileImg">
                 </div>
                 <div class="user-image-upload">
                     <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
-                    <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg">
+                    <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg"  accept="image/*">
+                </div>
+                <div class="img-error-msg" *ngIf="toggleImgErr">
+                    <p><i class="fa-solid fa-triangle-exclamation"></i> Only images allowed - max-size 320 x 320!</p>
                 </div>
             </div>
             <div class="user-details">

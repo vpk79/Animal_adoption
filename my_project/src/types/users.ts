@@ -12,5 +12,6 @@ export interface UserProfil {
     donation: number | null,
     comentary: [] | null, 
     liked_animals: string[] | null, 
-    adopted_animals: string[] | null
+    adopted_animals: string[] | null,
+    profile_img: string | null
 }

@@ -30,7 +30,8 @@ export class AuthService {
     'donation': null,
     'comentary': [],
     'liked_animals': [],
-    'adopted_animals': []
+    'adopted_animals': [],
+    'profile_img': ''
   };
 
   // Login function

@@ -37,7 +37,7 @@ export class CommentarySectionComponent implements OnInit{
     const star1 = this.form.get('stars')?.value;
     console.log(star1);
     
-    // Повторете този процес за всички радио бутони
+    
 
  
 
