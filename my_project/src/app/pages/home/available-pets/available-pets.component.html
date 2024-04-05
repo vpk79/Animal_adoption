@@ -9,7 +9,7 @@
         <p><span><a (click)="service.toggleLoginForm()">Sign In</a></span> or <span><a
                     (click)="service.toggleRegisterForm()">Sign Up</a></span></p>
     </div>
-    <div id="myCarousel2" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="4000">
+    <div id="myCarousel2" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
             <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index"
                 [class.active]="i === 0">
@@ -206,11 +206,11 @@
                 </div>
             </div> -->
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel2" data-bs-slide="prev">
+        <button class="carousel-control-prev"  type="button" data-bs-target="#myCarousel2" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel2" data-bs-slide="next">
+        <button class="carousel-control-next" #btnNext3 type="button" data-bs-target="#myCarousel2" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>

@@ -46,6 +46,8 @@ export class Service {
   }
 
 
+  // get User property from database
+
   getUserProperty(url: string, userID: string, property: string): Observable<any> {
     return this.db.object(`/${url}/${userID}/${property}`).valueChanges();
   }
@@ -67,6 +69,16 @@ export class Service {
 
     this.db.object(`/${url}/${id}/`).update(object);
   }
+
+// get one User by his userID
+  getOneUserAsObject(userID: string): Observable<[]> {
+    return this.getItemsAsObject('/users/' + userID).pipe(
+      map((data: any) => {
+        return data;
+      })
+    )
+  }
+
 
   // post Site commentary in database
 
@@ -215,25 +227,6 @@ export class Service {
   }
 
 
-
-
-  // getUserDataByID(id: string): any {
-  //   this.getItemsAsArray('/users/')
-
-
-
-
-  // id: string = 'EbL6CXchcMZxTaBC0wLkzt5p58h1';
-
-  // getUserData(id: string) {
-  //   this.updateUser('users', id, {balance:1000})
-
-  // }
-
-
-
-
-
   getAnimalsDataByStatus(status: string): Observable<any[]> {
     return this.getItemsAsArray('/animals/').pipe(
       map((data: any[]) => {
@@ -267,7 +260,7 @@ export class Service {
   }
 
 
-  // Toggle Login and Registre forms
+  // Toggle Login and Register forms
 
   isLoginFormVisible: boolean = false;
 

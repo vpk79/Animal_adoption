@@ -105,3 +105,8 @@
     border-bottom: purple 10px solid;
 
 }
+
+.carousel-control-prev,
+.carousel-control-next {
+    opacity: 0;
+}

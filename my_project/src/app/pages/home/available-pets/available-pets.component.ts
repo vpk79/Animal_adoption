@@ -1,5 +1,5 @@
 import { Service } from './../../../services/service';
-import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Animals } from '../../../../types/animals';
 import { Observable } from 'rxjs';
 
@@ -8,17 +8,13 @@ import { Observable } from 'rxjs';
   templateUrl: './available-pets.component.html',
   styleUrl: './available-pets.component.css'
 })
-export class AvailablePetsComponent implements OnInit, AfterViewInit {
+export class AvailablePetsComponent implements OnInit{
 
-  constructor(public service: Service, private cdr: ChangeDetectorRef) { }
-
+  constructor(public service: Service, private cdr: ChangeDetectorRef, private renderer: Renderer2) { }
+  @ViewChild('btnNext3') btnNext3!: ElementRef;
   animalsData: Animals[] = [];
   animalsDataArray: any[][] = [];
   animalData: Animals[] = [];
-
-  ngAfterViewInit() {
-
-  }
 
   toggleLikeError = false;
 
@@ -30,6 +26,13 @@ export class AvailablePetsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    setTimeout(() => {
+      if (this.btnNext3) {
+        this.renderer.selectRootElement(this.btnNext3.nativeElement).click();
+      }
+    }, 2500);
+
 
     this.service.getAnimalsDataByStatus('Available').subscribe({   // Could be 'Reserved' or 'Available'
       next: (data: any) => {
