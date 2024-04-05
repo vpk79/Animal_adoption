@@ -16,11 +16,14 @@ export class CommentarySectionComponent implements OnInit {
   userComments: { userID: string, profile_img: string, firstName: string }[] = [];
   finalUserCommentsArray: any[] = [];
   isConfirmToggled: boolean = false;
+  postForDeleteID: string ='';
+  isCommentFormToggled: boolean = false;
 
 
   constructor(private fb: FormBuilder, public service: Service, private localStorage: LocalStorageService, private renderer: Renderer2) { }
   @ViewChild('btnNext2') btnNext2!: ElementRef;
   form: FormGroup = this.fb.group({});
+
 
   ngOnInit(): void {
 
@@ -65,6 +68,8 @@ export class CommentarySectionComponent implements OnInit {
       });
 
     });
+
+    this.checkIsUserCommented();
   }
 
 
@@ -89,24 +94,25 @@ export class CommentarySectionComponent implements OnInit {
     this.service.postSiteComentary(comment, this.userID, 5);
 
     setTimeout(() => {
-      this.isRateToggled = !this.isRateToggled;
+      this.toggleCommentForm();
       this.form.reset();
-    }, 2000);
+    }, 1200);
 
   }
 
-  toggleRate() {
+  toggleRateBtn() {
     this.isRateToggled = !this.isRateToggled;
     this.form.reset();
   }
 
   checkIsUserCommented() {
-    this.ngOnInit();
+    // this.ngOnInit();
     this.service.checkUserComment(this.userID).subscribe(isCommented => {
       if (!isCommented) {
-        this.toggleRate();
+        this.isRateToggled = true;
         // console.log('user may comment');
       } else {
+        this.isRateToggled = false;
         // console.log('user cannot comment');
       }
       // console.log(this.userID);
@@ -117,7 +123,12 @@ export class CommentarySectionComponent implements OnInit {
 
   deleteComment(event: Event){
     event.preventDefault();
-    this.toggleConfirm();
+
+    this.service.deleteSiteComments(this.postForDeleteID);
+    setTimeout(() => {
+      this.toggleConfirm(event);
+    }, 1500);
+    // console.log(event.target);
   }
 
   editComment(event: Event){
@@ -125,9 +136,16 @@ export class CommentarySectionComponent implements OnInit {
   }
 
 
-  toggleConfirm(){
+  toggleConfirm(event: Event){
+    console.log((event.target as HTMLButtonElement).id);
+    this.postForDeleteID = ((event.target as HTMLButtonElement).id);
     this.isConfirmToggled = !this.isConfirmToggled;
+    console.log(this.isConfirmToggled);
+    
   }
 
+  toggleCommentForm(){
+    this.isCommentFormToggled = !this.isCommentFormToggled;
+  }
 
 }

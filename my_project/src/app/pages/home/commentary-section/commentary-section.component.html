@@ -6,7 +6,7 @@
     </div>
 
 
-    <div id="myCarousel3" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3000">
+    <div id="myCarousel3" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3500">
         <div class="carousel-inner">
             <div class="carousel-item" *ngFor="let commentares of finalUserCommentsArray; let i = index"
                 [class.active]="i === 0">
@@ -22,31 +22,13 @@
                             <h5 class="card-title">{{comment.firstName}}</h5>
                             <p class="card-text">{{comment.text}}</p>
                             <div *ngIf="comment.userID == userID" class="btn-wrapper">
-                                <a [id]="comment.postID" (click)="editComment($event)"
+                                <a [id]="comment.userID" (click)="editComment($event)"
                                     class="btn btn-primary btn-edit">Edit</a>
-                                <a [id]="comment.postID" click="toggleConfirm()"
+                                <a [id]="comment.userID" (click)="toggleConfirm($event)"
                                     class="btn btn-primary btn-delete">Delete</a>
                             </div>
                         </div>
-                        <div *ngIf="isConfirmToggled" class="modal confirmBtn"  tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Modal body text goes here.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!-- <div class="card">
                         <div class="image-wrapper">
                             <img src="../../../../assets/smilled-man.png" alt="...">
@@ -254,6 +236,19 @@
             </div>
         </div>
     </div>
+    <div *ngIf="isConfirmToggled" class="confirmBtn" tabindex="-1">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <p>Delete this comment?</p>
+                </div>
+                <div class="confirmBtn-footer">
+                    <button type="button" (click)="deleteComment($event)"  class="btn btn-primary">Yes</button>
+                    <button type="button" (click)="toggleConfirm($event)" class="btn btn-secondary">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- <button class="carousel-control-prev"  type="button" data-bs-target="#myCarousel3"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -264,7 +259,7 @@
             <span class="visually-hidden">Next</span> -->
     </button>
 
-    <div *ngIf="isRateToggled" class="commntary-form">
+    <div *ngIf="isCommentFormToggled" class="commntary-form">
         <div class="commentary-section">
             <div class="commentary-form-wrapper">
                 <form class="commentary-form" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -304,15 +299,15 @@
                     </div>
                     <div class="form-btns">
                         <button class="post" type="submit">Comment</button>
-                        <button class="close" (click)="toggleRate()">Close</button>
+                        <button class="close" (click)="toggleCommentForm()">Close</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="rate-us-btn">
-        <a (click)="checkIsUserCommented()"><span class="btn-stars">***</span> Rate Us <span
+    <div  *ngIf="isRateToggled" class="rate-us-btn">
+        <a (click)="toggleCommentForm()"><span class="btn-stars">***</span> Rate Us <span
                 class="btn-stars">***</span></a>
     </div>
 

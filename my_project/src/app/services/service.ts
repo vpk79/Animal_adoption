@@ -127,15 +127,20 @@ export class Service {
   // delete Site commentary in database
 
   deleteSiteComments(userID: string): void {
+    console.log(userID);
     const ref = this.db.database.ref('/siteComments/' + userID);
+    console.log('reference', ref);
+    
     // Проверяваме дали записът съществува преди да го изтрием
     ref.once('value')
       .then((snapshot) => {
+        console.log('snapshot',snapshot);
+        
         if (snapshot.exists()) {
           // Записът съществува, изтриваме го
           ref.remove()
             .then(() => {
-              console.log("Записът е успешно изтрит.");
+              console.log("Записът e успешно изтрит.");
             })
             .catch((error) => {
               console.error("Грешка при изтриване на записа:", error);
