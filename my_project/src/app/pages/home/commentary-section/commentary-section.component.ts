@@ -9,11 +9,11 @@ import { LocalStorageService } from '../../../services/local-storage.service';
   templateUrl: './commentary-section.component.html',
   styleUrl: './commentary-section.component.css'
 })
-export class CommentarySectionComponent implements OnInit {
+export class CommentarySectionComponent implements OnInit, AfterViewInit {
   isRateToggled: boolean = false;
   submitted: boolean = false;
   userID: string = '';
-  userComments: { userID: string, profile_img: string, firstName: string }[] = [];
+  userComments: { userID: string, profile_img: string, firstName: string, text: string }[] = [];
   finalUserCommentsArray: any[] = [];
   isConfirmToggled: boolean = false;
   postForDeleteID: string ='';
@@ -22,6 +22,8 @@ export class CommentarySectionComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public service: Service, private localStorage: LocalStorageService, private renderer: Renderer2) { }
   @ViewChild('btnNext2') btnNext2!: ElementRef;
+  @ViewChild('commentArea') commentArea!: ElementRef;
+
   form: FormGroup = this.fb.group({});
 
 
@@ -72,6 +74,10 @@ export class CommentarySectionComponent implements OnInit {
     this.checkIsUserCommented();
   }
 
+  ngAfterViewInit(): void {
+    
+  }
+
 
   // printall() {
   //   // console.log(this.userComments);
@@ -83,10 +89,8 @@ export class CommentarySectionComponent implements OnInit {
 
 
 
-  onSubmit(): void {
-
+  onSubmit(event: Event): void {
     this.submitted = true;
-
     if (!this.form || this.form.invalid) {
       return;
     }
@@ -94,17 +98,21 @@ export class CommentarySectionComponent implements OnInit {
     this.service.postSiteComentary(comment, this.userID, 5);
 
     setTimeout(() => {
-      this.toggleCommentForm();
+      this.toggleCommentForm(event);
       this.form.reset();
     }, 1200);
 
   }
 
+
+// Toggle button Rate Us
   toggleRateBtn() {
     this.isRateToggled = !this.isRateToggled;
     this.form.reset();
   }
 
+
+// Check if user is already commented - 1 comment per user is allowed!
   checkIsUserCommented() {
     // this.ngOnInit();
     this.service.checkUserComment(this.userID).subscribe(isCommented => {
@@ -133,19 +141,32 @@ export class CommentarySectionComponent implements OnInit {
 
   editComment(event: Event){
     event.preventDefault()
+    const userIDEdit = ((event.target as HTMLButtonElement).id);
+    const index = this.userComments.findIndex((x:any) => x.userID == userIDEdit);
+    const oldTxt = this.userComments[index].text;
+    this.toggleCommentForm(event);
+    setTimeout(() => {
+      this.commentArea.nativeElement.value = oldTxt;
+    }, 100);
+  
+    
+    
   }
 
 
   toggleConfirm(event: Event){
-    console.log((event.target as HTMLButtonElement).id);
+    // console.log((event.target as HTMLButtonElement).id);
     this.postForDeleteID = ((event.target as HTMLButtonElement).id);
     this.isConfirmToggled = !this.isConfirmToggled;
-    console.log(this.isConfirmToggled);
+    // console.log(this.isConfirmToggled);
     
   }
 
-  toggleCommentForm(){
+  toggleCommentForm(event: Event){
+    event.preventDefault();
     this.isCommentFormToggled = !this.isCommentFormToggled;
+    this.form.reset();
+    this.submitted = false;
   }
 
 }

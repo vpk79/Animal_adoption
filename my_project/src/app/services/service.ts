@@ -86,20 +86,25 @@ export class Service {
     const postID: string = this.generateUUID();
     let newComment: {} = {};
 
-    const check = this.checkUserComment(userID).subscribe(isCommented => {
-      if (isCommented) {
-        setTimeout(() => {
-          console.log('already commented');
-          this.isSiteCommented = false;
-        }, 3000);
-        return;
-      } else {
-        newComment = { postID, userID, text, rating };
+    newComment = { postID, userID, text, rating };
         this.updateDatabaseAsObject('siteComments', userID, newComment);
-        check.unsubscribe();
+        // check.unsubscribe();
         console.log('comment posted');
-      }
-    })
+
+    // const check = this.checkUserComment(userID).subscribe(isCommented => {
+    //   if (isCommented) {
+    //     setTimeout(() => {
+    //       console.log('already commented');
+    //       this.isSiteCommented = false;
+    //     }, 3000);
+    //     return;
+    //   } else {
+    //     newComment = { postID, userID, text, rating };
+    //     this.updateDatabaseAsObject('siteComments', userID, newComment);
+    //     check.unsubscribe();
+    //     console.log('comment posted');
+    //   }
+    // })
   }
 
   // check if user already commented - 1 comment per user allowed

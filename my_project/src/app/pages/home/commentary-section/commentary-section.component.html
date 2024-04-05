@@ -262,7 +262,7 @@
     <div *ngIf="isCommentFormToggled" class="commntary-form">
         <div class="commentary-section">
             <div class="commentary-form-wrapper">
-                <form class="commentary-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form class="commentary-form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
                     <div class="commentary-title">
                         <h2>LEAVE A COMMENT</h2>
                     </div>
@@ -287,7 +287,7 @@
                             formControlName="stars" />
                         <label class="radio-label" for="star1" title="1 star">1 star</label>
                     </div>
-                    <textarea name="commentary" id="commentary" cols="30" rows="10"
+                    <textarea name="commentary" id="commentary" #commentArea cols="30" rows="10"
                         formControlName="commentary"></textarea>
                     <div class="error-msg"
                         *ngIf="form.get('commentary')?.invalid && (form.get('commentary')?.dirty || form.get('commentary')?.touched)">
@@ -299,7 +299,7 @@
                     </div>
                     <div class="form-btns">
                         <button class="post" type="submit">Comment</button>
-                        <button class="close" (click)="toggleCommentForm()">Close</button>
+                        <button class="close" (click)="toggleCommentForm($event)">Close</button>
                     </div>
                 </form>
             </div>
@@ -307,7 +307,7 @@
     </div>
 
     <div  *ngIf="isRateToggled" class="rate-us-btn">
-        <a (click)="toggleCommentForm()"><span class="btn-stars">***</span> Rate Us <span
+        <a (click)="toggleCommentForm($event)"><span class="btn-stars">***</span> Rate Us <span
                 class="btn-stars">***</span></a>
     </div>
 
