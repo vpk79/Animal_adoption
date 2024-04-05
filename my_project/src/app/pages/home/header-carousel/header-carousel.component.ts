@@ -6,8 +6,7 @@ import { AfterViewInit, Component, ElementRef,  OnInit,  ViewChild } from '@angu
   styleUrl: './header-carousel.component.css'
 })
 export class HeaderCarouselComponent implements  OnInit, AfterViewInit{
-  @ViewChild('myCarousel') carousel!: ElementRef<HTMLDivElement>;
-  
+  @ViewChild('myCarousel') carousel!: any
 
   ngOnInit(): void {
     // this.reloadCarousel();
@@ -16,7 +15,7 @@ export class HeaderCarouselComponent implements  OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-   
+    // this.reloadCarousel();
     // this.reloadCarousel();
     // console.log(this.carousel);
   }
@@ -25,13 +24,7 @@ export class HeaderCarouselComponent implements  OnInit, AfterViewInit{
 
   // reloadCarousel(): void {
   //   if (this.carousel) {
-  //     this.carousel.nativeElement.dataset['bsRide'] = 'false';
-  //     this.carousel.nativeElement.dataset['bsRide'] = 'carousel';
-      
-     
-  //     console.log('Carousel reloaded.');
-  //   } else {
-  //     console.error('Carousel element not found.');
-  //   }
+  //     this.carousel.next(2);
   // }
+// }
 }
