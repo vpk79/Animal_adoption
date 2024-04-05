@@ -96,6 +96,7 @@ export class Service {
       } else {
         newComment = { postID, userID, text, rating };
         this.updateDatabaseAsObject('siteComments', userID, newComment);
+        check.unsubscribe();
         console.log('comment posted');
       }
     })
