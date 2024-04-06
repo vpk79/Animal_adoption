@@ -11,10 +11,10 @@
     <div class="user-profile-section-wrapper">
         <div class="user-profile-container">
             <div class="user-picture-wrapper">
-                <div class="user-picture-holder">
-                    <img [src]="imageUrl" alt="userProfileImg">
+                <div class="user-picture-holder" *ngIf="userData$ | async as userData">
+                    <img [src]="userData.profile_img" alt="userProfileImg">
                 </div>
-                <div class="user-image-upload">
+                <div class="user-image-upload" >
                     <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
                     <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg" accept="image/*">
                 </div>
@@ -27,26 +27,26 @@
                     <h2>Edit your profile <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span>
                     </h2>
                 </div>
-                <form class="user-form">
+                <form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div *ngIf="isVisible">
-                        <div class="form-fields">
+                        <div class="form-fields" *ngIf="userData$ | async as userData">
                             <div>
-                                <input type="text" #firstname name="firstname" id="firstname" placeholder="Firstname"
-                                    [disabled]="toggle">
-                                <input type="text" #lastname name="lastname" id="lastname" placeholder="Lastname"
-                                    [disabled]="toggle">
+                                <input type="text" #firstname name="firstname" id="firstname" [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname"
+                                    >
+                                <input type="text" #lastname name="lastname" id="lastname" [placeholder]="userData.lastName || 'Lastname'"  formControlName="lastname"
+                                    >
                             </div>
                             <div>
-                                <input type="text" #country name="country" id="country" placeholder="Country"
-                                    [disabled]="toggle">
-                                <input type="text" #city name="city" id="username" placeholder="City"
-                                    [disabled]="toggle">
+                                <input type="text" #country name="country" id="country" [placeholder]="userData.country || 'Country'" formControlName="country"
+                                    >
+                                <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'" formControlName="city"
+                                    >
                             </div>
                             <div>
-                                <input type="email" #email name="email" id="email" placeholder="Email"
-                                    [disabled]="toggle">
-                                <input type="number" #phone name="phone" id="phone" placeholder="Phone"
-                                    [disabled]="toggle">
+                                <input type="email" #email name="email" id="email" [placeholder]="userData.email || 'Email'" formControlName="email"
+                                   >
+                                <input type="number" #phone name="phone" id="phone" [placeholder]="userData.phone || 'Phone'" formControlName="phone"
+                                    >
                             </div>
                         </div>
                         <div class="save-btn">
@@ -55,18 +55,18 @@
                     </div>
 
                     <div *ngIf="!isVisible" class="userInfo">
-                        <div class="form-fields info-fields">
+                        <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
                             <div>
-                                <input type="text" #firstname name="firstname" id="firstname" [disabled]>
-                                <input type="text" #lastname name="lastname" id="lastname" [disabled]>
+                                <input type="text" #firstname name="firstname" [placeholder]="userData.firstName || 'Firstname'"  id="firstname" [disabled]>
+                                <input type="text" #lastname name="lastname" [placeholder]="userData.lastName || 'Lastname'" id="lastname" [disabled]>
                             </div>
                             <div>
-                                <input type="text" #country name="country" id="country"  [disabled]>
-                                <input type="text" #city name="city" id="username" [disabled]>
+                                <input type="text" #country name="country" [placeholder]="userData.country || 'Country'" id="country"  [disabled]>
+                                <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'" [disabled]>
                             </div>
                             <div>
-                                <input type="email" #email name="email" id="email" [disabled]>
-                                <input type="text" #phone name="phone" id="phone"  [disabled]>
+                                <input type="email" #email name="email" [placeholder]="userData.email || 'Email'" id="email" [disabled]>
+                                <input type="text" #phone name="phone" [placeholder]="userData.phone || 'Phone'" id="phone"  [disabled]>
                             </div>
                         </div>
                         

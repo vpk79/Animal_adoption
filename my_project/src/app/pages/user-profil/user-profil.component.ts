@@ -1,10 +1,10 @@
-import { Subscription } from 'rxjs';
-import { LocalStorageService } from './../../services/local-storage.service';
 import { ImageValidateService } from './../../services/image-validate.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
 import { UserDataService } from '../../services/user-data.service';
 import { UserProfil } from '../../../types/users';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-user-profil',
@@ -13,13 +13,13 @@ import { UserProfil } from '../../../types/users';
 })
 
 
-export class UserProfilComponent implements OnInit {
-  @ViewChild('firstname')firstName!: ElementRef;
-  @ViewChild('lastname') lastName!: ElementRef;
-  @ViewChild('country') country!: ElementRef;
-  @ViewChild('city') city!: ElementRef;
-  @ViewChild('email') email!: ElementRef;
-  @ViewChild('phone') phone!: ElementRef;
+export class UserProfilComponent implements OnInit, AfterViewInit {
+  // @ViewChild('firstname')firstName!: ElementRef;
+  // @ViewChild('lastname') lastName!: ElementRef;
+  // @ViewChild('country') country!: ElementRef;
+  // @ViewChild('city') city!: ElementRef;
+  // @ViewChild('email') email!: ElementRef;
+  // @ViewChild('phone') phone!: ElementRef;
 
   toggle: boolean = true;
   isVisible: boolean = false;
@@ -27,40 +27,108 @@ export class UserProfilComponent implements OnInit {
   userID: string = '';
   imageUrl: string = '';
   userName: string = '';
-  
+  userData: UserProfil[] = [];
+  firstName: string = '';
+  lastName: string | null = '';
+  email: string = '';
+  city: string | null = 'City';
+  country: string | null = 'Country';
+  phone: number | '' = 0;
 
-  constructor(public service: Service, public imageValidateService: ImageValidateService, 
-    private userDataService: UserDataService) { }
+  constructor(public service: Service, public imageValidateService: ImageValidateService, private userDataService: UserDataService,
+     private fb: FormBuilder
+    ) { }
+  userData$!: Observable<UserProfil | undefined>;
 
+  form: FormGroup = this.fb.group({});
 
   ngOnInit(): void {
-
-    this.service.isLoggedIn$.subscribe(isLoggedIn => {
-      if (isLoggedIn == true) {
-        setTimeout(() => {
-          this.userID = this.userDataService.getUserID()!;
-          this.userDataService.userData$.subscribe((userData: UserProfil) => {
-            this.imageUrl = userData.profile_img!;
-            this.userName = userData.firstName;
-
-            this.firstName.nativeElement.placeholder = userData.firstName;
-            this.lastName.nativeElement.placeholder = userData.lastName;
-            this.country.nativeElement.placeholder = userData.country || 'Country:';
-            this.city.nativeElement.placeholder = userData.city || 'City:';
-            this.email.nativeElement.placeholder = userData.email;
-            this.phone.nativeElement.placeholder = userData.phone || 'Phone:';
-
-          });
-
-        }, 1200);
-
-      }
+    this.form = this.fb.nonNullable.group({
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      country: ['',],
+      city: ['',],
+      phone: ['',]
     });
+
+
+    this.userData$ = this.service.isLoggedIn$.pipe(
+      filter(isLoggedIn => isLoggedIn),
+      switchMap(() => this.userDataService.userData$)
+    );
     
+
+
+    // this.service.isLoggedIn$.pipe(
+    //   filter(isLoggedIn => isLoggedIn), // филтрираме само когато потребителят е влязъл
+    //   switchMap(() => this.userDataService.userData$) // превключваме към потока с данни за потребителя
+    // ).subscribe((userData: UserProfil) => {
+    //   // console.log(userData);
+
+    //   this.userData = [userData];
+    //   console.log(this.userData);
+
+    //   this.email = userData.email;
+    //   this.imageUrl = this.userData[0].profile_img!;
+    //   this.firstName = this.userData[0].firstName;
+    //   this.lastName = this.userData[0].lastName;
+    //   this.city = this.userData[0].city;
+    //   this.country = this.userData[0].country;
+      
+    //   this.phone = this.userData[0]?.phone || '';
+
+    //   console.log(this.phone);
+    //   console.log(this.email);
+    // });
+
+    // this.service.isLoggedIn$.subscribe(isLoggedIn => {
+    //  if(isLoggedIn){
+    //   setTimeout(() => {
+    //     this.userID = this.userDataService.getUserID()!;
+    //     this.userDataService.userData$.subscribe((userData: UserProfil) => {
+    //       console.log(userData);
+          
+    //       this.userData = [userData];
+    //       this.imageUrl = this.userData[0].profile_img!;
+    //       this.firstName = this.userData[0].firstName;
+    //       this.lastName = this.userData[0].lastName!;
+    //       this.city = this.userData[0].city!;
+    //       this.country = this.userData[0].country!;
+    //       this.email = this.userData[0].email;
+    //       this.phone = this.userData[0].phone!;
+
+    //       console.log(this.phone);
+    //       console.log(this.email);
+          
+          
+    //     });
+    //   }, 2200);
+    //  }
+    // })
+    
+    // this.firstName.nativeElement.placeholder = userData.firstName;
+    // this.lastName.nativeElement.placeholder = userData.lastName;
+    // this.country.nativeElement.placeholder = userData.country || 'Country:';
+    // this.city.nativeElement.placeholder = userData.city || 'City:';
+    // this.email.nativeElement.placeholder = userData.email;
+    // this.phone.nativeElement.placeholder = userData.phone || 'Phone:';
+
+
+
+
+
+
+
   }
 
-  // imageUrl: string = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fprofile_pic?alt=media&token=1cc19d05-685a-4d03-9d9e-5aa6f2aa22d6';
+  ngAfterViewInit(): void {
 
+  }
+
+  onSubmit() {
+
+  }
 
   uploadFile(event: any) {
     const file = event.target.files[0];

@@ -44,8 +44,10 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
 
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn == true) {
-        const userInfo = this.localStorage.getItem('userInfo');
-        this.userID = userInfo.userID;
+        setTimeout(() => {
+          const userInfo = this.localStorage.getItem('userInfo');
+          this.userID = userInfo.userID;
+        }, 1000);
       }
     });
 

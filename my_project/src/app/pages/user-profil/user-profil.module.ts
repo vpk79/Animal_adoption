@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfilComponent } from './user-profil.component';
 import { HomeModule } from '../home/home.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserDataService } from '../../services/user-data.service';
 
 
 
@@ -10,7 +12,7 @@ import { HomeModule } from '../home/home.module';
     UserProfilComponent
   ],
   imports: [
-    CommonModule, HomeModule
+    CommonModule, HomeModule, ReactiveFormsModule
   ],
   exports: [UserProfilComponent]
 })

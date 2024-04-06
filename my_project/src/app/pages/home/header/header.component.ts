@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
 
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      console.log(isLoggedIn);
+      // console.log(isLoggedIn);
       
       if (this.isLoggedIn == true) {
         setTimeout(() => {
