@@ -14,8 +14,7 @@
             <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index"
                 [class.active]="i === 0">
                 <div class="cards-wrapper">
-                    <div class="card" *ngFor="let animalCard of animalsArray"
-                        (click)="getAnimalData(animalCard.Name, animalCard.Type)">
+                    <div class="card" *ngFor="let animalCard of animalsArray" [id]="animalCard.ID" (click)="getAnimalData(animalCard.Name, animalCard.Type)">
                         <div class="image-wrapper">
                             <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
                                 alt="...">

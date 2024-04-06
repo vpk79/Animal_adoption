@@ -87,5 +87,11 @@ export class AvailablePetsComponent implements OnInit{
   toggleLike(event: MouseEvent, animalCard: any): void {
     this.updateLikes(event, animalCard.ID, animalCard.Liked, animalCard.Type)
     animalCard.Liked = (animalCard.Liked === '1') ? '0' : '1';
+
+    if(animalCard.Liked === 1) {
+      const userID = localStorage.getItem('userInfo');
+      this.service.updateUserLikedAnimals(userID!, animalCard.ID, animalCard.Name)
+    }
   }
+
 }

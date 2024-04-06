@@ -15,24 +15,27 @@ export class Service {
   // private dbPath = "/newItem";
   isSiteCommented = false;
 
+
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
+
   private isLoggedInSubject = new BehaviorSubject<any>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
  
-  loggedIn(){
-    this.isLoggedInSubject.next(true);
-  }
 
-  loggedOut(){
-    this.isLoggedInSubject.next(false);
-  }
+ 
+updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
+  const likedAnimal = {[animalID]: animalName}
+
+  console.log(likedAnimal);
+  
+  // this.updateUserProperty('users', userID, 'animalLikes', likedAnimal);
+}
+  
+  
 
 
-  // Logged In check
-
-  // isLoggedIn: boolean = false;
-
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
+ 
 
   // Get data from database - by 2 ways
 
@@ -70,7 +73,7 @@ export class Service {
   }
 
 
-  updateUserProperty(url: string, userID: string, property: string, newValue: string) {
+  updateUserProperty(url: string, userID: string, property: string, newValue: any) {
     this.db.object(`/${url}/${userID}/`).update({ [property]: newValue });
   }
 
@@ -178,7 +181,14 @@ export class Service {
   }
 
 
+  // Login and Logout switch
+  loggedIn() {
+    this.isLoggedInSubject.next(true);
+  }
 
+  loggedOut() {
+    this.isLoggedInSubject.next(false);
+  }
 
 
 
