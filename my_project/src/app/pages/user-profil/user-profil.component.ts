@@ -15,8 +15,8 @@ export class UserProfilComponent implements OnInit {
   toggle: boolean = true;
   isVisible: boolean = false;
   toggleImgErr: boolean = false;
-  userID: string = ''
-  imageUrl: any;
+  userID: string = '';
+  imageUrl: string = '';
 
   ngOnInit(): void {
 

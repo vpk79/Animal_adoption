@@ -17,7 +17,7 @@ export class Service {
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
-  // Get data from database - have 2 ways
+  // Get data from database - by 2 ways
 
   getItemsAsArray(url: string) {
     return this.db.list(url).valueChanges();

@@ -10,13 +10,14 @@
         <ul>
             <li><a routerLink="/home">HOME</a></li>
             <li (click)="service.toggleWelcomeMsg()"><a>WELCOME</a></li>
-            <li (click)="service.deleteSiteComments('cgYIluPvjocDh0vTx0SJ2qjSY7m1')"><a>ABOUT</a></li>
+            <li ><a>ABOUT</a></li>
             <li><a href="#">DOGS</a></li>
             <li><a href="#">CATS</a></li>
             <li><a href="#">CONTACT</a></li>
             <li *ngIf="!this.service.isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
             <li *ngIf="!this.service.isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
-            <li *ngIf="this.service.isLoggedIn"><a routerLink="/profile">User Profile</a></li>
+            <li><a class="imgProfileHolder"><img [src]="imageUrl" alt=""></a></li>
+            <li *ngIf="this.service.isLoggedIn"><a routerLink="/profile">Hello, {{userName}}</a></li>
             <li *ngIf="this.service.isLoggedIn"><a (click)="authService.logout()">LOGOUT</a></li>
         </ul>
     </nav>
