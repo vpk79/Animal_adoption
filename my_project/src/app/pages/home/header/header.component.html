@@ -9,16 +9,19 @@
     <nav class="nav">
         <ul>
             <li><a routerLink="/home">HOME</a></li>
-            <li (click)="service.toggleWelcomeMsg()"><a>WELCOME</a></li>
+            <li (click)="service.printID()"><a>WELCOME</a></li>
             <li ><a>ABOUT</a></li>
             <li><a href="#">DOGS</a></li>
             <li><a href="#">CATS</a></li>
             <li><a href="#">CONTACT</a></li>
-            <li *ngIf="!this.service.isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
-            <li *ngIf="!this.service.isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
-            <li><a class="imgProfileHolder"><img [src]="imageUrl" alt=""></a></li>
-            <li *ngIf="this.service.isLoggedIn"><a routerLink="/profile">Hello, {{userName}}</a></li>
-            <li *ngIf="this.service.isLoggedIn"><a (click)="authService.logout()">LOGOUT</a></li>
+            <li *ngIf="!isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
+            <li *ngIf="!isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
+            <li *ngIf="!isLoggedIn"><a class="imgProfileHolder"><img [src]="defaultProfileImg" alt=""></a></li>
+            <li *ngIf="!isLoggedIn"><a class="greetings">Hello, Guest!</a></li>
+            <li *ngIf="isLoggedIn"><a a routerLink="/profile" class="imgProfileHolder"><img [src]="imageUrl" alt=""></a><span class="myAcc">My Account</span></li>
+            <li *ngIf="isLoggedIn"><a routerLink="/profile" class="greetings">Hello, {{userName}}</a></li>
+            <li *ngIf="isLoggedIn"><a class="balance">Balance: ${{userBalance}}</a></li>
+            <li *ngIf="isLoggedIn"><a (click)="authService.logout()">LOGOUT</a></li>
         </ul>
     </nav>
 </header>

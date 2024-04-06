@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './gallery.component.css'
 })
 
-export class GalleryComponent implements OnInit, AfterViewInit {
+export class GalleryComponent implements OnInit {
 
   choosedAnimal: string = '';
   animalsData: Animals[] = [];
@@ -22,6 +22,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
   likes: string = '';
   oldValue: number = 1;
   searchData: Animals[] = [];
+  isLoggedIn = false;
 
 
   constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder) { }
@@ -30,10 +31,7 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   form: FormGroup = new FormGroup({});
 
-  ngAfterViewInit() {
-
-    // ...
-  }
+ 
 
   showAlert() {
     this.toggleLikeError = true;
@@ -44,18 +42,17 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
+    this.service.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+
     this.form = this.fb.nonNullable.group({
       animalGender: ['', Validators.required],
       animalSize: ['', Validators.required],
       animalAge: ['', Validators.required]
     });
 
-    // if (this.oldValue == 1) {
-    //   this.oldValue = 0
-    // } else {
-    //   this.oldValue = 1;
-    // }
-
+  
     //  Taking user animal choice from previous page
     this.route.queryParams.subscribe(params => {
       this.choosedAnimal = params['animalChoice'];
@@ -66,7 +63,11 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
     this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
       next: (data: any) => {
+        // console.log(data);
+        
         this.animalsData = data;
+        console.log(this.animalsData);
+        
       },
       error: (error) => {
         console.error(error);
@@ -195,13 +196,13 @@ export class GalleryComponent implements OnInit, AfterViewInit {
 
   // Gallery likes functions
 
-  updateLikes(event: Event, name: string, liked: string): void {
+  updateLikes(event: Event, ID: string, liked: string): void {
     event.stopImmediatePropagation();
 
     if (liked == "0") {
-      this.service.updateItemLikes('animals', this.choosedAnimal, name, "1");
+      this.service.updateItemLikes('animals', this.choosedAnimal, ID, "1");
     } else {
-      this.service.updateItemLikes('animals', this.choosedAnimal, name, "0");
+      this.service.updateItemLikes('animals', this.choosedAnimal, ID, "0");
     }
   }
 

@@ -11,31 +11,26 @@ import { Service } from './services/service';
 })
 export class AppComponent implements OnInit {
   title = 'my_project';
+
   constructor(public localStorageService: LocalStorageService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    public service: Service, public userData: UserDataService) { }
+    public service: Service, public userDataService: UserDataService) { }
 
   ngOnInit(): void {
 
     if (isPlatformBrowser(this.platformId)) {
       const userInfo = this.localStorageService.getItem('userInfo');
-      if(userInfo == null || userInfo.logged == false) {
-        this.service.isLoggedIn = false;
-      } else {
-        this.service.isLoggedIn = true;
-        const userID = userInfo.userID;
-      //  const data = this.userData.saveUserData(userID);
-      //  console.log(data);
-        this.userData.saveUserData(userID).subscribe((userData: any) => {
-          this.userData.userDataObject = userData;
-          console.log(this.userData.userDataObject); // Тук може да направите каквото искате с получените данни
-        });
-       
+      if (userInfo == null || userInfo.logged == false) {
+        this.service.loggedOut()
       }
-      
-      // console.log(userInfo.logged);
-      // console.log(this.service.isLoggedIn);
+      else {
+        this.service.loggedIn;
+        const userID = userInfo.userID;
+        this.userDataService.getOneUserAsObject(userID).subscribe((userData: any) => {
+          // console.log(userData);
+          this.userDataService.setUserData(userData);
+        });
+      }
     }
   }
-
 }

@@ -1,8 +1,10 @@
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from './../../services/local-storage.service';
 import { ImageValidateService } from './../../services/image-validate.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
+import { UserDataService } from '../../services/user-data.service';
+import { UserProfil } from '../../../types/users';
 
 @Component({
   selector: 'app-user-profil',
@@ -12,37 +14,53 @@ import { Service } from '../../services/service';
 
 
 export class UserProfilComponent implements OnInit {
+  @ViewChild('firstname')firstName!: ElementRef;
+  @ViewChild('lastname') lastName!: ElementRef;
+  @ViewChild('country') country!: ElementRef;
+  @ViewChild('city') city!: ElementRef;
+  @ViewChild('email') email!: ElementRef;
+  @ViewChild('phone') phone!: ElementRef;
+
   toggle: boolean = true;
   isVisible: boolean = false;
   toggleImgErr: boolean = false;
   userID: string = '';
   imageUrl: string = '';
+  userName: string = '';
+  
+
+  constructor(public service: Service, public imageValidateService: ImageValidateService, 
+    private userDataService: UserDataService) { }
+
 
   ngOnInit(): void {
 
-    if (this.service.isLoggedIn == true) {
-      const userInfo = this.localStorage.getItem('userInfo');
-      this.userID = userInfo.userID;
+    this.service.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn == true) {
+        setTimeout(() => {
+          this.userID = this.userDataService.getUserID()!;
+          this.userDataService.userData$.subscribe((userData: UserProfil) => {
+            this.imageUrl = userData.profile_img!;
+            this.userName = userData.firstName;
 
-      this.service.getUserProperty('users', this.userID, 'profile_img').subscribe({
-        next: (data) => {
-          console.log(data); // Тук получавате данните от базата данни
-          // return data;
-           this.imageUrl = data;
-        },
-        error: (error) => {
-          console.error('Error fetching user property:', error);
-        }
-      });
+            this.firstName.nativeElement.placeholder = userData.firstName;
+            this.lastName.nativeElement.placeholder = userData.lastName;
+            this.country.nativeElement.placeholder = userData.country || 'Country:';
+            this.city.nativeElement.placeholder = userData.city || 'City:';
+            this.email.nativeElement.placeholder = userData.email;
+            this.phone.nativeElement.placeholder = userData.phone || 'Phone:';
 
-      // console.log(this.imageUrl);
-      
-    }
+          });
+
+        }, 1200);
+
+      }
+    });
+    
   }
 
   // imageUrl: string = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fprofile_pic?alt=media&token=1cc19d05-685a-4d03-9d9e-5aa6f2aa22d6';
 
-  constructor(public service: Service, public imageValidateService: ImageValidateService, private localStorage: LocalStorageService) { }
 
   uploadFile(event: any) {
     const file = event.target.files[0];

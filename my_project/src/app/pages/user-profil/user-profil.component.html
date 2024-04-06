@@ -3,7 +3,7 @@
 </div>
 
 <div class="user-welcome">
-    <h2>Hi, user</h2>
+    <h2>Hi, {{userName}}</h2>
     <h2>Welcome, to your profil page</h2>
 </div>
 
@@ -16,7 +16,7 @@
                 </div>
                 <div class="user-image-upload">
                     <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
-                    <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg"  accept="image/*">
+                    <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg" accept="image/*">
                 </div>
                 <div class="img-error-msg" *ngIf="toggleImgErr">
                     <p><i class="fa-solid fa-triangle-exclamation"></i> Only images allowed - max-size 320 x 320!</p>
@@ -24,31 +24,54 @@
             </div>
             <div class="user-details">
                 <div class="edit-profil">
-                    <h2>Edit your profile  <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span></h2>
+                    <h2>Edit your profile <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span>
+                    </h2>
                 </div>
                 <form class="user-form">
-                    <!-- <div class="form-labels">
-                        <label for="username">Name:</label>
-                        <label for="email">Email:</label>
-                        <label for="number">Phone:</label>
-                    </div> -->
-                    <div class="form-fields">
-                        <div>
-                            <input type="text" name="firstname" id="firstname" placeholder="Firstname" [disabled]="toggle">
-                            <input type="text" name="lastname" id="lastname" placeholder="Lastname" [disabled]="toggle">
+                    <div *ngIf="isVisible">
+                        <div class="form-fields">
+                            <div>
+                                <input type="text" #firstname name="firstname" id="firstname" placeholder="Firstname"
+                                    [disabled]="toggle">
+                                <input type="text" #lastname name="lastname" id="lastname" placeholder="Lastname"
+                                    [disabled]="toggle">
+                            </div>
+                            <div>
+                                <input type="text" #country name="country" id="country" placeholder="Country"
+                                    [disabled]="toggle">
+                                <input type="text" #city name="city" id="username" placeholder="City"
+                                    [disabled]="toggle">
+                            </div>
+                            <div>
+                                <input type="email" #email name="email" id="email" placeholder="Email"
+                                    [disabled]="toggle">
+                                <input type="number" #phone name="phone" id="phone" placeholder="Phone"
+                                    [disabled]="toggle">
+                            </div>
                         </div>
-                        <div>
-                            <input type="text" name="country" id="country" placeholder="Country" [disabled]="toggle">
-                            <input type="text" name="city" id="username" placeholder="City" [disabled]="toggle">
+                        <div class="save-btn">
+                            <button  type="submit" [disabled]="toggle">Save</button>
                         </div>
-                        <div>
-                            <input type="email" name="email" id="email" placeholder="Email" [disabled]="toggle">
-                            <input type="number" name="phone" id="phone" placeholder="Phone" [disabled]="toggle">
-                        </div>  
                     </div>
-                    <div class="save-btn">
-                        <button *ngIf="isVisible" type="submit" [disabled]="toggle" >Save</button>
+
+                    <div *ngIf="!isVisible" class="userInfo">
+                        <div class="form-fields info-fields">
+                            <div>
+                                <input type="text" #firstname name="firstname" id="firstname" [disabled]>
+                                <input type="text" #lastname name="lastname" id="lastname" [disabled]>
+                            </div>
+                            <div>
+                                <input type="text" #country name="country" id="country"  [disabled]>
+                                <input type="text" #city name="city" id="username" [disabled]>
+                            </div>
+                            <div>
+                                <input type="email" #email name="email" id="email" [disabled]>
+                                <input type="text" #phone name="phone" id="phone"  [disabled]>
+                            </div>
+                        </div>
+                        
                     </div>
+
                 </form>
             </div>
         </div>

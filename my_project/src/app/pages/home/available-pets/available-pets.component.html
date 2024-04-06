@@ -19,12 +19,12 @@
                         <div class="image-wrapper">
                             <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
                                 alt="...">
-                            <div *ngIf="service.isLoggedIn" class="like-btn-wrappper">
+                            <div *ngIf="isLoggedIn" class="like-btn-wrappper">
                                 <a class="like-btn" (click)="toggleLike($event, animalCard)">
                                     <i
                                         [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
                             </div>
-                            <div *ngIf="!service.isLoggedIn" class="like-btn-wrappper">
+                            <div *ngIf="!isLoggedIn" class="like-btn-wrappper">
                                 <a class="like-btn" (click)="showAlert()">
                                     <i
                                         [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>

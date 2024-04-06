@@ -17,6 +17,7 @@ import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common
 import { UserProfilModule } from './pages/user-profil/user-profil.module';
 import { Service } from './services/service';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
+import { UserDataService } from './services/user-data.service';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -48,7 +49,7 @@ const firebaseConfig = {
   exports: [],
   providers: [
     { provide: HttpClient, useClass: HttpClient, useValue: { withCredentials: true } },
-    Service
+    Service, UserDataService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Service } from './service';
-import { Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { UserProfil } from '../../types/users';
 import { LocalStorageService } from './local-storage.service';
 
@@ -9,18 +9,24 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class UserDataService {
-  userDataObject: UserProfil[] = [];
+  // userDataObject: UserProfil[] = [];
+
+  private userDataSubject = new BehaviorSubject<any>(null);
+  userData$ = this.userDataSubject.asObservable();
 
 
   constructor(private service: Service, private localStorage: LocalStorageService) { }
 
-  getUserID() {
-    if (this.service.isLoggedIn == true) {
-      const userInfo = this.localStorage.getItem('userInfo');
-      return userInfo.userID;
-    }
-  }
 
+  // get userID from localStorage  
+  getUserID() {
+    this.service.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn == true) {
+        const userInfo = this.localStorage.getItem('userInfo');
+        return userInfo.userID;
+      }
+    });
+  }
 
 
   // get one User by his userID
@@ -32,13 +38,14 @@ export class UserDataService {
     )
   }
 
-  saveUserData(userID: string): Observable<any> {
-    return this.getOneUserAsObject(userID).pipe(
-      map((data: any) => {
-        // console.log(data); // Тук може да направите каквото искате с получените данни
-        return data; // Връщаме данните за ползване във външния код
-      })
-    );
+  setUserData(userData: UserProfil) {
+    this.userDataSubject.next(userData);
+  }
+
+  changeUserDataProperty(property: any, value: any) {
+    const currentUserData = this.userDataSubject.getValue();
+    currentUserData[property] = value;
+    this.setUserData(currentUserData);
   }
 }
 

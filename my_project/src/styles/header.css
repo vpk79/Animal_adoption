@@ -68,12 +68,18 @@
     justify-content: space-evenly;
     align-items: center;
     padding-top: 20px;
-    gap: 20px;
+    /* gap: 20px; */
     z-index: 1;
 }
 
 .nav ul li {
     /* border: 1px solid black; */
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     color: white;
     font-weight: 600;
     list-style: none;

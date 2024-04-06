@@ -1,4 +1,3 @@
-import { Subscription, catchError, forkJoin, of, tap } from 'rxjs';
 import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../../services/service';
@@ -16,7 +15,7 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
   userComments: { userID: string, profile_img: string, firstName: string, text: string }[] = [];
   finalUserCommentsArray: any[] = [];
   isConfirmToggled: boolean = false;
-  postForDeleteID: string ='';
+  postForDeleteID: string = '';
   isCommentFormToggled: boolean = false;
 
 
@@ -43,10 +42,13 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
 
     // get userID if is logged
 
-    if (this.service.isLoggedIn == true) {
-      const userInfo = this.localStorage.getItem('userInfo');
-      this.userID = userInfo.userID;
-    }
+    this.service.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn == true) {
+        const userInfo = this.localStorage.getItem('userInfo');
+        this.userID = userInfo.userID;
+      }
+    });
+
 
     // loading user comments
 
@@ -60,7 +62,7 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
           const index = this.userComments.findIndex(comment => comment.userID === x.userID);
           this.userComments[index] = x;
           // console.log(this.userComments);
-          
+
           for (let i = 0; i < this.userComments.length; i += 3) {
             this.finalUserCommentsArray.push(this.userComments.slice(i, i + 3));
           }
@@ -75,14 +77,14 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
+
   }
 
 
   // printall() {
   //   // console.log(this.userComments);
   //   console.log(this.finalUserCommentsArray);
-    
+
   // }
 
 
@@ -105,14 +107,14 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
   }
 
 
-// Toggle button Rate Us
+  // Toggle button Rate Us
   toggleRateBtn() {
     this.isRateToggled = !this.isRateToggled;
     this.form.reset();
   }
 
 
-// Check if user is already commented - 1 comment per user is allowed!
+  // Check if user is already commented - 1 comment per user is allowed!
   checkIsUserCommented() {
     // this.ngOnInit();
     this.service.checkUserComment(this.userID).subscribe(isCommented => {
@@ -129,7 +131,7 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
   }
 
 
-  deleteComment(event: Event){
+  deleteComment(event: Event) {
     event.preventDefault();
 
     this.service.deleteSiteComments(this.postForDeleteID);
@@ -139,30 +141,30 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit {
     // console.log(event.target);
   }
 
-  editComment(event: Event){
+  editComment(event: Event) {
     event.preventDefault()
     const userIDEdit = ((event.target as HTMLButtonElement).id);
-    const index = this.userComments.findIndex((x:any) => x.userID == userIDEdit);
+    const index = this.userComments.findIndex((x: any) => x.userID == userIDEdit);
     const oldTxt = this.userComments[index].text;
     this.toggleCommentForm(event);
     setTimeout(() => {
       this.commentArea.nativeElement.value = oldTxt;
     }, 100);
-  
-    
-    
+
+
+
   }
 
 
-  toggleConfirm(event: Event){
+  toggleConfirm(event: Event) {
     // console.log((event.target as HTMLButtonElement).id);
     this.postForDeleteID = ((event.target as HTMLButtonElement).id);
     this.isConfirmToggled = !this.isConfirmToggled;
     // console.log(this.isConfirmToggled);
-    
+
   }
 
-  toggleCommentForm(event: Event){
+  toggleCommentForm(event: Event) {
     event.preventDefault();
     this.isCommentFormToggled = !this.isCommentFormToggled;
     this.form.reset();

@@ -62,8 +62,15 @@
     /* width: 45%; */
     height: 300px;
 
+
+
 }
 
+.userInfo input {
+    background: none;
+    color: black;
+    font-weight: 600;
+}
 
 .user-profile-container {
 
@@ -180,6 +187,14 @@
 
 }
 
+.form-fields.info-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    /* gap: 25px; */
+}
+
 .form-fields div {
     display: flex;
     gap: 30px;
@@ -214,6 +229,7 @@
 .save-btn {
     align-self: flex-end;
     text-align: center;
+    margin-top: 20px;
     width: 100%;
 
 }

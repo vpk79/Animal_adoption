@@ -2,7 +2,7 @@ import { UserProfil } from './../../types/users';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, Subscription, filter, finalize, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, filter, finalize, map } from 'rxjs';
 
 
 
@@ -14,6 +14,23 @@ import { Observable, Subscription, filter, finalize, map } from 'rxjs';
 export class Service {
   // private dbPath = "/newItem";
   isSiteCommented = false;
+
+  private isLoggedInSubject = new BehaviorSubject<any>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
+ 
+  loggedIn(){
+    this.isLoggedInSubject.next(true);
+  }
+
+  loggedOut(){
+    this.isLoggedInSubject.next(false);
+  }
+
+
+  // Logged In check
+
+  // isLoggedIn: boolean = false;
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
@@ -36,12 +53,12 @@ export class Service {
 
   // Check likes in animal database
 
-  getItemLikes(url: string, item: string, itemName: string) {
-    return this.db.object(`/${url}/${item}/${itemName}/Liked`).valueChanges();
+  getItemLikes(url: string, item: string, itemID: string) {
+    return this.db.object(`/${url}/${item}/${itemID}/Liked`).valueChanges();
   }
 
-  updateItemLikes(url: string, item: string, itemName: string, likes: string) {
-    this.db.object(`/${url}/${item}/${itemName}`).update({ Liked: likes });
+  updateItemLikes(url: string, item: string, itemID: string, likes: string) {
+    this.db.object(`/${url}/${item}/${itemID}`).update({ Liked: likes });
 
   }
 
@@ -295,11 +312,12 @@ export class Service {
     this.isWelcomeMsg = !this.isWelcomeMsg;
   }
 
+  printID(){
+    const id = this.generateUUID();
+    console.log(id);
+  }
 
-
-  // Logged In check
-
-  isLoggedIn: boolean = false;
+  
 
 
   // id generator
@@ -310,5 +328,4 @@ export class Service {
       return v.toString(16);
     });
   }
-
 }

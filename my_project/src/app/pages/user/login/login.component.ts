@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       .then((result: any) => {
         if (result.success) {
 
-          this.service.isLoggedIn = true;
+          this.service.loggedIn;
           console.log('Login successful');
           setTimeout(() => {
             this.service.toggleLoginForm();

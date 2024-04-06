@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrl: './available-pets.component.css'
 })
 export class AvailablePetsComponent implements OnInit{
-
+  isLoggedIn = false;
   constructor(public service: Service, private cdr: ChangeDetectorRef, private renderer: Renderer2) { }
   @ViewChild('btnNext3') btnNext3!: ElementRef;
   animalsData: Animals[] = [];
@@ -26,6 +26,9 @@ export class AvailablePetsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.service.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
 
     setTimeout(() => {
       if (this.btnNext3) {
@@ -45,7 +48,7 @@ export class AvailablePetsComponent implements OnInit{
     });
   }
 
-  updateLikes(event: Event, name: string, liked: string, type: string): void {
+  updateLikes(event: Event, ID: string, liked: string, type: string): void {
     // event.stopImmediatePropagation();
     if (type == "Dog") {
       type = 'dogs'
@@ -54,9 +57,9 @@ export class AvailablePetsComponent implements OnInit{
     }
 
     if (liked == "0") {
-      this.service.updateItemLikes('animals', type, name, "1");
+      this.service.updateItemLikes('animals', type, ID, "1");
     } else {
-      this.service.updateItemLikes('animals', type, name, "0");
+      this.service.updateItemLikes('animals', type, ID, "0");
     }
   }
 
@@ -82,7 +85,7 @@ export class AvailablePetsComponent implements OnInit{
   }
 
   toggleLike(event: MouseEvent, animalCard: any): void {
-    this.updateLikes(event, animalCard.Name, animalCard.Liked, animalCard.Type)
+    this.updateLikes(event, animalCard.ID, animalCard.Liked, animalCard.Type)
     animalCard.Liked = (animalCard.Liked === '1') ? '0' : '1';
   }
 }

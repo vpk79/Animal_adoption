@@ -1,4 +1,5 @@
 export interface Animals {
+    ID: string,
     Type: string,
     Name: string,
     Sex: string,

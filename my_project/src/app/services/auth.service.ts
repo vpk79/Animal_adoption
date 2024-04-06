@@ -1,8 +1,10 @@
+import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { Router } from '@angular/router';
 import { UserProfil } from '../../types/users';
 import { Service } from './service';
+import { UserDataService } from './user-data.service';
 
 
 
@@ -10,29 +12,13 @@ import { Service } from './service';
   providedIn: 'root'
 })
 export class AuthService {
-
+  defaultProfileImg = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fuser_profile?alt=media&token=be227233-2374-4bcc-ad6f-1bdc02f405ec';
   errorMessage: string = ' Please, fill all required fields!';
   errorStatus: boolean = false;
 
-  constructor(private fireauth: AngularFireAuth, private router: Router, public service: Service) { }
+  constructor(private fireauth: AngularFireAuth, private router: Router, public service: Service, public userDataService: UserDataService, public localStorageService: LocalStorageService) { }
 
-  newUser: UserProfil = {
-    'ID': '',
-    'firstName': '',
-    'lastName': '',
-    'email': '',
-    'phone': null,
-    'age': null,
-    'country': null,
-    'city': null,
-    'gender': '',
-    'balance': null,
-    'donation': null,
-    'comentary': [],
-    'liked_animals': [],
-    'adopted_animals': [],
-    'profile_img': 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fuser_profile?alt=media&token=be227233-2374-4bcc-ad6f-1bdc02f405ec'
-  };
+  newUser: UserProfil[] = [];
 
   // Login function
 
@@ -48,9 +34,15 @@ export class AuthService {
             user.getIdToken().then(token => {
               const userToken = token;
               const logged = true;
+              const userObject = { userID, userEmail, userToken, logged }
 
-              localStorage.setItem('userInfo', JSON.stringify({userID, userEmail, userToken, logged }));
-            
+              this.localStorageService.setItem('userInfo', userObject );
+
+              this.userDataService.getOneUserAsObject(userID).subscribe((userData: any) => {
+                // console.log(userData);
+                this.userDataService.setUserData(userData);
+              });
+
             }).catch(err => {
               console.error('Error getting user token:', err);
             });
@@ -75,24 +67,24 @@ export class AuthService {
 
       
       if (user) {
-        this.newUser.ID = user.uid;
-        this.newUser.firstName = firstname;
-        this.newUser.email = user.email!;
-        this.newUser.balance = 5000;
-        this.newUser.lastName = lastname;
-        this.newUser.gender = gender;
+        this.newUser[0].ID = user.uid;
+        this.newUser[0].firstName = firstname;
+        this.newUser[0].email = user.email!;
+        this.newUser[0].balance = 5000;
+        this.newUser[0].lastName = lastname;
+        this.newUser[0].gender = gender;
 
-        this.newUser.phone = null;
-        this.newUser.age = null;
-        this.newUser.country = null;
-        this.newUser.city = null;
-        this.newUser.donation = 0;
-        this.newUser.comentary = [];
-        this.newUser.liked_animals = [];
-        this.newUser.adopted_animals = [];
+        this.newUser[0].phone = null;
+        this.newUser[0].age = null;
+        this.newUser[0].country = null;
+        this.newUser[0].city = null;
+        this.newUser[0].donation = 0;
+        this.newUser[0].comentary = [];
+        this.newUser[0].liked_animals = [];
+        this.newUser[0].adopted_animals = [];
 
 
-        this.service.updateDatabaseAsObject('users', this.newUser.ID, this.newUser);
+        this.service.updateDatabaseAsObject('users', this.newUser[0].ID, this.newUser[0]);
 
         // console.log('User ID:', user.uid);
         // console.log('Email:', user.email);
@@ -109,7 +101,7 @@ export class AuthService {
       this.errorMessage = ' Registration Successful! Welcome to us!';
       this.login(email, password).then((result: any) => {
         if (result.success) {
-          this.service.isLoggedIn = true;
+          this.service.loggedIn();
           console.log('Login successful');
           setTimeout(() => {
           }, 1500);
@@ -142,7 +134,9 @@ export class AuthService {
   logout() {
     this.fireauth.signOut().then(() => {
       localStorage.removeItem('userInfo');
-      this.service.isLoggedIn = false;
+      localStorage.clear();
+      this.service.loggedOut();
+      this.userDataService.changeUserDataProperty('profile_img', this.defaultProfileImg)
       this.router.navigate(['/home']);
     }, err => {
       alert(err.message);
