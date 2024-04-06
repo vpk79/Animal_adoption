@@ -26,10 +26,11 @@ export class Service {
  
 updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   const likedAnimal = {[animalID]: animalName}
+console.log(userID);
 
   console.log(likedAnimal);
   
-  // this.updateUserProperty('users', userID, 'animalLikes', likedAnimal);
+  this.updateUserPropertyByValue('users', userID, 'animalLikes', likedAnimal);
 }
   
   
@@ -61,7 +62,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
   updateItemLikes(url: string, item: string, itemID: string, likes: string) {
-    this.db.object(`/${url}/${item}/${itemID}`).update({ Liked: likes });
+    this.db.object(`/${url}/${item}/${itemID}/`).update({ Liked: likes });
 
   }
 
@@ -74,10 +75,12 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
 
 
   updateUserProperty(url: string, userID: string, property: string, newValue: any) {
-    this.db.object(`/${url}/${userID}/`).update({ [property]: newValue });
+    this.db.object(`/${url}/${userID}`).update({ [property]: newValue });
   }
 
-
+  updateUserPropertyByValue(url: string, userID: string, property: string, newValue: any) {
+    this.db.object(`/${url}/${userID}/${property}`).update( newValue );
+  }
 
 
   // update user info
@@ -191,7 +194,33 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
 
+  deleteUserProperty(url: string, userID: string, property: string, key:string): void {
+    console.log(userID);
+    const ref = this.db.database.ref(`/${url}/${userID}/${property}/${key}`);
+    console.log('reference', ref);
 
+    // Проверяваме дали записът съществува преди да го изтрием
+    ref.once('value')
+      .then((snapshot) => {
+        console.log('snapshot', snapshot);
+
+        if (snapshot.exists()) {
+          // Записът съществува, изтриваме го
+          ref.remove()
+            .then(() => {
+              console.log("Записът e успешно изтрит.");
+            })
+            .catch((error) => {
+              console.error("Грешка при изтриване на записа:", error);
+            });
+        } else {
+          console.log("Записът не съществува.");
+        }
+      })
+      .catch((error) => {
+        console.error("Грешка при проверката на записа:", error);
+      });
+  }
 
   // post commentary in user database
 

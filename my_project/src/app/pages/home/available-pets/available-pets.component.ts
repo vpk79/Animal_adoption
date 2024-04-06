@@ -2,6 +2,7 @@ import { Service } from './../../../services/service';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Animals } from '../../../../types/animals';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from '../../../services/local-storage.service';
 
 @Component({
   selector: 'app-available-pets',
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class AvailablePetsComponent implements OnInit{
   isLoggedIn = false;
-  constructor(public service: Service, private cdr: ChangeDetectorRef, private renderer: Renderer2) { }
+  constructor(public service: Service, private cdr: ChangeDetectorRef, private renderer: Renderer2, private localStorageService: LocalStorageService) { }
   @ViewChild('btnNext3') btnNext3!: ElementRef;
   animalsData: Animals[] = [];
   animalsDataArray: any[][] = [];
@@ -87,10 +88,13 @@ export class AvailablePetsComponent implements OnInit{
   toggleLike(event: MouseEvent, animalCard: any): void {
     this.updateLikes(event, animalCard.ID, animalCard.Liked, animalCard.Type)
     animalCard.Liked = (animalCard.Liked === '1') ? '0' : '1';
-
-    if(animalCard.Liked === 1) {
-      const userID = localStorage.getItem('userInfo');
-      this.service.updateUserLikedAnimals(userID!, animalCard.ID, animalCard.Name)
+    // console.log('liked');
+    const userInfo = this.localStorageService.getItem('userInfo');
+    if(animalCard.Liked == 1) {
+      
+      this.service.updateUserLikedAnimals(userInfo.userID, animalCard.ID, animalCard.Name)
+    } else {
+      this.service.deleteUserProperty('users', userInfo.userID, 'animalLikes', animalCard.ID);
     }
   }
 
