@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   defaultProfileImg = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fuser_profile?alt=media&token=be227233-2374-4bcc-ad6f-1bdc02f405ec';
   @ViewChild('loginform') loginForm!: ElementRef;
   dogs: string = "dogs";
@@ -24,12 +24,10 @@ export class HeaderComponent implements OnInit{
   userDataObject: UserProfil[] = [];
   userBalance: number = 0;
   userDataSubscription!: Subscription;
-  isLoggedIn = false; 
+  isLoggedIn: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, public service: Service,
     public authService: AuthService, public localStorage: LocalStorageService, public userData: UserDataService) { }
-
-
 
   ngOnInit(): void {
     // check if site is scrolled - about header fade
@@ -40,15 +38,11 @@ export class HeaderComponent implements OnInit{
       });
     }
 
-
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-    });
-
-
-    
-    this.service.isLoggedIn$.subscribe(isLoggedIn => {
-      if (isLoggedIn == true) {
+      console.log(isLoggedIn);
+      
+      if (this.isLoggedIn == true) {
         setTimeout(() => {
           this.userDataSubscription = this.userData.userData$.subscribe((userData: UserProfil) => {
             this.userDataObject = [userData];

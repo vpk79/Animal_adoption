@@ -33,9 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-
-    this.submitted = true
-
     if (!this.form) {
       return;
     }
@@ -45,6 +42,8 @@ export class LoginComponent implements OnInit {
       console.log('form is invalid');
       return;
     }
+
+    this.submitted = true
    
     const emailValue = this.form.get('email')?.value;
     const passwordValue = this.form.get('password')?.value;
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
       .then((result: any) => {
         if (result.success) {
 
-          this.service.loggedIn;
+          this.service.loggedIn();
           console.log('Login successful');
           setTimeout(() => {
             this.service.toggleLoginForm();

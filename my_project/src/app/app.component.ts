@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
         this.service.loggedOut()
       }
       else {
-        this.service.loggedIn;
+        this.service.loggedIn();
         const userID = userInfo.userID;
         this.userDataService.getOneUserAsObject(userID).subscribe((userData: any) => {
           // console.log(userData);
