@@ -7,6 +7,7 @@
     align-items: center;
     z-index: 1000;
     margin-bottom: 200px;
+    margin-top: -200px;
 }
 
 .liked-animals .liked-title h4{
@@ -53,8 +54,16 @@
 
     #myCarousel5 .cards-wrapper {
         display: flex;
+    
     }
 }
+
+/* .cards-second-wrapper {
+    display: flex;
+    width: 100%;
+    height: auto;
+    
+} */
 
 #myCarousel5 {
     width: 1200px;

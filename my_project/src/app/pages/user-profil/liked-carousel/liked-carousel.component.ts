@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild, Renderer2, SimpleChanges } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { Observable, delay, filter, switchMap } from 'rxjs';
 import { UserProfil } from '../../../../types/users';
@@ -11,11 +11,14 @@ import { Animals } from '../../../../types/animals';
   templateUrl: './liked-carousel.component.html',
   styleUrl: './liked-carousel.component.css'
 })
-export class LikedCarouselComponent implements OnInit {
+export class LikedCarouselComponent implements OnInit{
+  
+  showSection = false;
   isLoggedIn = false;
   userData: any = [];
   likedAnimalsArray: [] = [];
   likedAnimals: any = [];
+  arrayOfSortedAnimals: any[]=[];
   userData$!: Observable<UserProfil | undefined>;
   
   @ViewChild('btnNext3') btnNext3!: ElementRef;
@@ -52,9 +55,18 @@ export class LikedCarouselComponent implements OnInit {
         this.userData = data;
         this.likedAnimalsArray = Object.values(this.userData.animalLikes!) as []
         
+        console.log(this.likedAnimalsArray);
+        
         for (let i = 0; i < this.likedAnimalsArray.length; i += 4) {
-          this.likedAnimals.push(this.likedAnimalsArray.slice(i, i + 4));
+          this.likedAnimals = [...this.likedAnimals,this.likedAnimalsArray.slice(i, i + 4)];
         }
+        this.arrayOfSortedAnimals = [...this.likedAnimals];
+        if(this.arrayOfSortedAnimals.length > 0) {
+          this.showSection = true;
+        }
+        console.log(this.arrayOfSortedAnimals);
+        this.likedAnimals = [];
+        
         // console.log(data);
         // console.log(this.likedAnimals);
       }
@@ -81,7 +93,10 @@ export class LikedCarouselComponent implements OnInit {
     //   }
     // }, 2500);
 
+
   }
+
+  
 
 
 
@@ -132,6 +147,9 @@ export class LikedCarouselComponent implements OnInit {
       this.service.updateUserPropertyByValue('users', userInfo.userID, `animalLikes/${animalCard.ID}`, animalCard);
     } else {
       this.service.deleteUserProperty('users', userInfo.userID, 'animalLikes', animalCard.ID);
+      if(this.animalsDataArray.length == 0) {
+        this.showSection = false;
+      }
     }
   }
 

@@ -9,10 +9,33 @@
     z-index: 1;
 }
 
+.profileBgnd {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+
+
+.profileBgnd img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    opacity: 0.6;
+}
+
+
 .user-profile-section-wrapper {
     position: relative;
     width: 100%;
-    height: 100px;
+    min-height: 300px;
     display: flex;
     justify-content: center;
     /* background-color: aqua; */
@@ -40,7 +63,7 @@
     width: 100%;
     height: 500px;
     display: flex;
-    background-color: lightskyblue;
+    /* background-color: lightskyblue; */
     color: purple;
     font-size: 42px;
     /* border-top: 80px black solid; */
@@ -49,7 +72,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    background-image: url('../../../assets/users/user-profil-bgnd.jpg');
+    /* background-image: url('../../../assets/users/user-profil-bgnd.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
 

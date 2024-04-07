@@ -1,37 +1,40 @@
-<section  class="liked-animals">
+<section *ngIf="showSection" class="liked-animals">
 
     <div class="liked-title">
         <h4>Here are all animals liked by you!</h4>
     </div>
-        
-    <div *ngIf="likedAnimals" class="carousel-wrapper">
+    
+
+    <div class="carousel-wrapper">
         <div id="myCarousel5" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner">
-                <div class="carousel-item" *ngFor="let animalsArray of likedAnimals; let i = index"
+                <div class="carousel-item" *ngFor="let animalsArray of arrayOfSortedAnimals; let i = index"
                     [class.active]="i === 0">
                     <div class="cards-wrapper">
-                        <div class="card" *ngFor="let animalCard of animalsArray" [id]="animalCard.ID"
+                        <div class="card" *ngFor="let animalCard of animalsArray"
                             (click)="getAnimalData(animalCard.Name, animalCard.Type)">
-                            <div class="image-wrapper">
-                                <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
-                                    alt="...">
-                                <div *ngIf="isLoggedIn" class="like-btn-wrappper">
-                                    <a class="like-btn" (click)="toggleLike($event, animalCard)">
-                                        <i
-                                            [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                            <div  [id]="animalCard.ID">
+                                <div class="image-wrapper">
+                                    <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
+                                        alt="...">
+                                    <div *ngIf="isLoggedIn" class="like-btn-wrappper">
+                                        <a class="like-btn" (click)="toggleLike($event, animalCard)">
+                                            <i
+                                                [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                                    </div>
+                                    <div *ngIf="!isLoggedIn" class="like-btn-wrappper">
+                                        <a class="like-btn" (click)="showAlert()">
+                                            <i
+                                                [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                                    </div>
                                 </div>
-                                <div *ngIf="!isLoggedIn" class="like-btn-wrappper">
-                                    <a class="like-btn" (click)="showAlert()">
-                                        <i
-                                            [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ animalCard.Name }}</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's
+                                        content.</p>
+                                    <a href="#" class="btn btn-primary">Details</a>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ animalCard.Name }}</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Details</a>
                             </div>
 
                         </div>

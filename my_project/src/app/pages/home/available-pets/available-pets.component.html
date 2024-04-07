@@ -21,7 +21,7 @@
                             <div *ngIf="isLoggedIn" class="like-btn-wrappper">
                                 <a class="like-btn" (click)="toggleLike($event, animalCard)">
                                     <i
-                                        [ngClass]="{'fa-regular':  likedAnimalsArray.includes(animalCard.ID), 'fa-solid': likedAnimalsArray.includes(animalCard.ID), 'fa-heart': true}"></i></a>
+                                        [ngClass]="{'fa-regular':  !likedAnimalsArray.includes(animalCard.ID), 'fa-solid': likedAnimalsArray.includes(animalCard.ID), 'fa-heart': true}"></i></a>
                             </div>
                             <div *ngIf="!isLoggedIn" class="like-btn-wrappper">
                                 <a class="like-btn" (click)="showAlert()">
