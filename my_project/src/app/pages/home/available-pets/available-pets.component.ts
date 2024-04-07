@@ -1,8 +1,10 @@
 import { Service } from './../../../services/service';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Animals } from '../../../../types/animals';
-import { Observable } from 'rxjs';
+import { Observable, filter, switchMap } from 'rxjs';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { UserProfil } from '../../../../types/users';
+import { UserDataService } from '../../../services/user-data.service';
 
 @Component({
   selector: 'app-available-pets',
@@ -11,13 +13,20 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 })
 export class AvailablePetsComponent implements OnInit{
   isLoggedIn = false;
-  constructor(public service: Service, private cdr: ChangeDetectorRef, private renderer: Renderer2, private localStorageService: LocalStorageService) { }
+  constructor(public service: Service,
+     private cdr: ChangeDetectorRef,
+      private renderer: Renderer2, 
+      private localStorageService: LocalStorageService,
+      private userDataService: UserDataService) { }
+  userData$!: Observable<UserProfil | undefined>;
   @ViewChild('btnNext3') btnNext3!: ElementRef;
   animalsData: Animals[] = [];
   animalsDataArray: any[][] = [];
   animalData: Animals[] = [];
-
+  likedAnimalsArray: any[] = [];
+  likedAnimals: any = [];
   toggleLikeError = false;
+  userData: Partial<UserProfil> = {};
 
   showAlert() {
     this.toggleLikeError = true;
@@ -36,6 +45,21 @@ export class AvailablePetsComponent implements OnInit{
         this.renderer.selectRootElement(this.btnNext3.nativeElement).click();
       }
     }, 2500);
+
+
+    this.userData$ = this.service.isLoggedIn$.pipe(
+      filter(isLoggedIn => isLoggedIn),
+      switchMap(() => this.userDataService.userData$)
+    );
+
+    this.userData$.subscribe(data => {
+      if (data) {
+        this.userData = data;
+        this.likedAnimalsArray = Object.keys(data.animalLikes!) as []
+        console.log(data);
+        console.log(this.likedAnimalsArray);
+      }
+    });
 
 
     this.service.getAnimalsDataByStatus('Available').subscribe({   // Could be 'Reserved' or 'Available'
