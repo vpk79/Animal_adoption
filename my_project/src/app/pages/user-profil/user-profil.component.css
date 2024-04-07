@@ -15,7 +15,7 @@
     height: 100px;
     display: flex;
     justify-content: center;
-    background-color: aqua;
+    /* background-color: aqua; */
     /* align-items: center; */
     /* flex-wrap: wrap; */
 }
@@ -26,7 +26,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
 }
 
 .user-profil-bgnd img {
@@ -369,60 +369,60 @@
     gap: 0;
 
     animation: fadeIn 3s;
-        -webkit-animation: fadeIn 3s;
-        -moz-animation: fadeIn 3s;
-        -o-animation: fadeIn 3s;
-        -ms-animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
-    
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-    
-        100% {
-            opacity: 1;
-        }
+
+    100% {
+        opacity: 1;
     }
-    
-    @-webkit-keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-    
-        100% {
-            opacity: 1;
-        }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
-    
-    @-moz-keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-    
-        100% {
-            opacity: 1;
-        }
+
+    100% {
+        opacity: 1;
     }
-    
-    
-    @-o-keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-    
-        100% {
-            opacity: 1;
-        }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
-    
-    
-    @-ms-keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-    
-        100% {
-            opacity: 1;
-        }
+
+    100% {
+        opacity: 1;
     }
+}
+
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

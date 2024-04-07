@@ -80,7 +80,7 @@ export class AuthService {
         this.newUser[0].city = null;
         this.newUser[0].donation = 0;
         this.newUser[0].comentary = [];
-        this.newUser[0].liked_animals = [];
+        this.newUser[0].animalLikes = [];
         this.newUser[0].adopted_animals = [];
 
 

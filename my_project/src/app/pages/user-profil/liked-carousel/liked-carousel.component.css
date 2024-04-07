@@ -1,72 +1,34 @@
-/* .section-two-wrapper {
-    min-height: 1020px;
+.liked-animals{
+    width: 100%;
+    height: 600px;
     display: flex;
-    position: relative;
+    justify-content: center;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-top: -70px;
-    z-index: 1;
-
-}
-
-.section-two-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2100px;
-    background-image: url(../../../../assets/paws.jpg);
-    background-size: contain;
-    /* background-position: center; */
-
-    /* opacity: 0.1;
-    z-index: -100; */
-
-/* } */
-
-/* .pets-available {
-    text-align: center;
-    margin-top: -120px;
-    margin-bottom: 60px;
-
-}
-
-.pets-available h2 {
-    font-size: 36px;
-    color: rgb(192, 3, 192);
-    letter-spacing: 1px;
-    font-weight: 800;
-}
-
-
-.recently-viewed {
-    text-align: center;
-    font-size: 18px;
-    color: rgb(192, 3, 192);
-    letter-spacing: 1px;
-    font-weight: 800;
-} */
-
-.liked-animals {
-    width: 100%;
-    height: 400px;
-    display: flex;
-    justify-content: center;
     z-index: 1000;
+    margin-bottom: 200px;
 }
 
-#myCarousel2 {
-    z-index: 1000;
+.liked-animals .liked-title h4{
+    color: rgb(165, 1, 165);
+    font-size: 24px;
+    margin-bottom: 30px;
 }
 
-#myCarousel2 .carousel-inner {
+#myCarousel5 .carousel-inner {
     padding: 1em;
 
 }
 
-#myCarousel2 .carousel-control-prev,
-#myCarousel2 .carousel-control-next {
+#myCarousel5 {
+    width: 1200px;
+    height: 200px;
+    display: block;
+    margin-top: -20px;
+}
+
+#myCarousel5 .carousel-control-prev,
+#myCarousel5 .carousel-control-next {
     background-color: #000000;
     width: 6vh;
     height: 6vh;
@@ -76,42 +38,40 @@
     opacity: 0.2;
 }
 
-#myCarousel2 .carousel-control-prev span,
-#myCarousel2 .carousel-control-next span {
+#myCarousel5 .carousel-control-prev span,
+#myCarousel5 .carousel-control-next span {
     width: 1.5rem;
     height: 1.5rem;
 }
 
-#myCarousel2 .carousel-control-prev:hover,
-#myCarousel2 .carousel-control-next:hover {
+#myCarousel5 .carousel-control-prev:hover,
+#myCarousel5 .carousel-control-next:hover {
     opacity: 0.7;
 }
 
 @media screen and (min-width: 578px) {
 
-    #myCarousel2 .cards-wrapper {
+    #myCarousel5 .cards-wrapper {
         display: flex;
     }
 }
 
-#myCarousel2 {
+#myCarousel5 {
     width: 1200px;
     height: 200px;
     display: block;
     margin-top: -20px;
-    z-index: 1000;
 }
 
-#myCarousel2 .card {
+#myCarousel5 .card {
     margin: 0 .5em;
     width: calc(100%/4);
     border: none;
     border-radius: 0;
     box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-    z-index: 1000;
 }
 
-#myCarousel2 .card:hover {
+#myCarousel5 .card:hover {
     /* outline: 3px purple solid;
     border-radius: 15px; */
     background-color: rgb(237, 233, 247);
@@ -122,20 +82,20 @@
 
 }
 
-#myCarousel2 .card-body {
+#myCarousel5 .card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#myCarousel2 .card-body a {
+#myCarousel5 .card-body a {
     font-size: 20px;
     background-color: rgb(163, 2, 163);
     padding-left: 20px;
     padding-right: 20px;
 }
 
-#myCarousel2 .image-wrapper {
+#myCarousel5 .image-wrapper {
     /* height: 22vw; */
     display: flex;
     position: relative;
@@ -145,7 +105,7 @@
     margin: 0 auto;
 }
 
-#myCarousel2 .image-wrapper .like-btn {
+#myCarousel5 .image-wrapper .like-btn {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -161,17 +121,17 @@
     opacity: 0.7;
 }
 
-#myCarousel2 .image-wrapper .like-btn:hover {
+#myCarousel5 .image-wrapper .like-btn:hover {
     background-color: rgb(162, 163, 163);
 }
 
 @media screen and (max-width: 576px) {
-    #myCarousel2 .card:not(:first-child) {
+    #myCarousel5 .card:not(:first-child) {
         display: none;
     }
 }
 
-#myCarousel2 .image-wrapper img {
+#myCarousel5 .image-wrapper img {
     width: 100%;
     max-height: 100%;
     border: 1px solid rgb(209, 201, 201);
@@ -179,7 +139,7 @@
     object-fit: cover;
 }
 
-#myCarousel2 .card-body .btn:hover {
+#myCarousel5 .card-body .btn:hover {
     background-color: aqua;
     color: purple;
 }
