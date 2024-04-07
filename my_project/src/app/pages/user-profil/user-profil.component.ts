@@ -1,10 +1,12 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { ImageValidateService } from './../../services/image-validate.service';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, isDevMode } from '@angular/core';
 import { Service } from '../../services/service';
 import { UserDataService } from '../../services/user-data.service';
 import { UserProfil } from '../../../types/users';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, filter, switchMap } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-profil',
@@ -13,13 +15,7 @@ import { Observable, filter, switchMap } from 'rxjs';
 })
 
 
-export class UserProfilComponent implements OnInit, AfterViewInit {
-  // @ViewChild('firstname')firstName!: ElementRef;
-  // @ViewChild('lastname') lastName!: ElementRef;
-  // @ViewChild('country') country!: ElementRef;
-  // @ViewChild('city') city!: ElementRef;
-  // @ViewChild('email') email!: ElementRef;
-  // @ViewChild('phone') phone!: ElementRef;
+export class UserProfilComponent implements OnInit {
 
   toggle: boolean = true;
   isVisible: boolean = false;
@@ -27,29 +23,30 @@ export class UserProfilComponent implements OnInit, AfterViewInit {
   userID: string = '';
   imageUrl: string = '';
   userName: string = '';
-  userData: UserProfil[] = [];
+  userData: Partial<UserProfil> = {};
   firstName: string = '';
   lastName: string | null = '';
   email: string = '';
   city: string | null = 'City';
   country: string | null = 'Country';
   phone: number | '' = 0;
+  submitted: boolean = false;
 
   constructor(public service: Service, public imageValidateService: ImageValidateService, private userDataService: UserDataService,
-     private fb: FormBuilder
-    ) { }
+    private fb: FormBuilder, private authService: AuthService, private localStorageService: LocalStorageService
+  ) { }
   userData$!: Observable<UserProfil | undefined>;
 
   form: FormGroup = this.fb.group({});
 
   ngOnInit(): void {
-    this.form = this.fb.nonNullable.group({
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      country: ['',],
-      city: ['',],
-      phone: ['',]
+    this.form = this.fb.group({
+      email: { value: '', disabled: true },
+      firstname: ['', Validators.nullValidator],
+      lastname: ['', Validators.nullValidator],
+      country: ['', Validators.nullValidator],
+      city: ['', Validators.nullValidator],
+      phone: ['', Validators.nullValidator]
     });
 
 
@@ -57,78 +54,91 @@ export class UserProfilComponent implements OnInit, AfterViewInit {
       filter(isLoggedIn => isLoggedIn),
       switchMap(() => this.userDataService.userData$)
     );
-    
+
+    this.userDataService.userData$.subscribe(data => {
+      this.userData = data;
+    })
 
 
-    // this.service.isLoggedIn$.pipe(
-    //   filter(isLoggedIn => isLoggedIn), // филтрираме само когато потребителят е влязъл
-    //   switchMap(() => this.userDataService.userData$) // превключваме към потока с данни за потребителя
-    // ).subscribe((userData: UserProfil) => {
-    //   // console.log(userData);
-
-    //   this.userData = [userData];
-    //   console.log(this.userData);
-
-    //   this.email = userData.email;
-    //   this.imageUrl = this.userData[0].profile_img!;
-    //   this.firstName = this.userData[0].firstName;
-    //   this.lastName = this.userData[0].lastName;
-    //   this.city = this.userData[0].city;
-    //   this.country = this.userData[0].country;
-      
-    //   this.phone = this.userData[0]?.phone || '';
-
-    //   console.log(this.phone);
-    //   console.log(this.email);
-    // });
-
-    // this.service.isLoggedIn$.subscribe(isLoggedIn => {
-    //  if(isLoggedIn){
-    //   setTimeout(() => {
-    //     this.userID = this.userDataService.getUserID()!;
-    //     this.userDataService.userData$.subscribe((userData: UserProfil) => {
-    //       console.log(userData);
-          
-    //       this.userData = [userData];
-    //       this.imageUrl = this.userData[0].profile_img!;
-    //       this.firstName = this.userData[0].firstName;
-    //       this.lastName = this.userData[0].lastName!;
-    //       this.city = this.userData[0].city!;
-    //       this.country = this.userData[0].country!;
-    //       this.email = this.userData[0].email;
-    //       this.phone = this.userData[0].phone!;
-
-    //       console.log(this.phone);
-    //       console.log(this.email);
-          
-          
-    //     });
-    //   }, 2200);
-    //  }
-    // })
-    
-    // this.firstName.nativeElement.placeholder = userData.firstName;
-    // this.lastName.nativeElement.placeholder = userData.lastName;
-    // this.country.nativeElement.placeholder = userData.country || 'Country:';
-    // this.city.nativeElement.placeholder = userData.city || 'City:';
-    // this.email.nativeElement.placeholder = userData.email;
-    // this.phone.nativeElement.placeholder = userData.phone || 'Phone:';
-
-
-
-
-
-
+    this.userDataService.userData$.subscribe(userData => {
+      if (userData) {
+        // Задаване на стойности на input полетата
+        this.form.patchValue({
+          firstname: userData.firstName || '',
+          lastname: userData.lastName || '',
+          country: userData.country || '',
+          city: userData.city || '',
+          email: userData.email || '',
+          phone: userData.phone || ''
+        });
+      }
+    });
 
   }
 
-  ngAfterViewInit(): void {
-
+  onInput(event: Event) {
+    event.preventDefault();
   }
+
 
   onSubmit() {
+    this.submitted = true
 
+    if (!this.form) {
+      return;
+    }
+
+    if (this.form.invalid) {
+      // this.markFormGroupTouched(this.form);
+      // console.log('form is invalid');
+      return;
+    }
+
+    // const emailValue = this.form.get('email')?.value;
+
+    console.log('started');
+
+    const firstnameValue = this.form.get('firstname')?.value;
+    const lastnameValue = this.form.get('lastname')?.value;
+    const countryValue = this.form.get('country')?.value;
+    const cityValue = this.form.get('city')?.value;
+    const phoneValue = this.form.get('phone')?.value;
+
+
+    const updateUser: Partial<UserProfil> = {};
+    updateUser.firstName = firstnameValue || this.userData.firstName;
+    updateUser.lastName = lastnameValue || this.userData.lastName;
+    countryValue ? updateUser.country = countryValue : this.userData.country;
+    cityValue ? updateUser.city = cityValue : this.userData.city;
+    phoneValue ? updateUser.phone = phoneValue : this.userData.phone;
+
+    const userInfo = this.localStorageService.getItem('userInfo');
+
+    // console.log(this.userData);
+
+
+    console.log(updateUser);
+
+    try {
+      this.service.updateDatabaseAsObject('users', userInfo.userID, updateUser)
+        .then(() => {
+          console.log('Update successful');
+        })
+        .catch(error => {
+          console.error('Error updating database:', error);
+          // Обработка на грешката тук
+        });
+    } catch (error) {
+      console.error('Error updating database:', error);
+      // Обработка на грешката тук
+    }
+
+    this.isDisabled();
   }
+
+
+
+
 
   uploadFile(event: any) {
     const file = event.target.files[0];
@@ -189,9 +199,9 @@ export class UserProfilComponent implements OnInit, AfterViewInit {
 
 
   // toggle save button
-  isDisabled(): boolean {
-    this.isVisible = true;
-    return this.toggle = false;
+  isDisabled(): void {
+    this.isVisible = !this.isVisible;
+    // return this.toggle = false;
   }
 
 }

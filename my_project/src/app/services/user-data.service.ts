@@ -24,6 +24,8 @@ export class UserDataService {
       if (isLoggedIn == true) {
         const userInfo = this.localStorage.getItem('userInfo');
         return userInfo.userID;
+      } else {
+        return false;
       }
     });
   }
@@ -38,10 +40,13 @@ export class UserDataService {
     )
   }
 
+
+  // sets User data in local global object
   setUserData(userData: UserProfil) {
     this.userDataSubject.next(userData);
   }
 
+  // change property in user data local global object
   changeUserDataProperty(property: any, value: any) {
     const currentUserData = this.userDataSubject.getValue();
     currentUserData[property] = value;

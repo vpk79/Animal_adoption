@@ -83,14 +83,17 @@ console.log(userID);
   }
 
 
-  // update user info
+  // update user properties in database
 
-  updateDatabaseAsObject(url: string, id: string, object: any) {
-    // const updateObject: any = {};
-    // updateObject[property] = value;
-    // console.log(url, id, object);
-
-    this.db.object(`/${url}/${id}/`).update(object);
+  updateDatabaseAsObject(url: string, id: string, object: any): Promise<void> {
+    return this.db.object(`/${url}/${id}/`).update(object)
+      .then(() => {
+        console.log('Update successful');
+      })
+      .catch(error => {
+        console.error('Error updating database:', error);
+        throw error; // Разхвърляне на грешката за обработка от по-горните слоеве на приложението
+      });
   }
 
 // get one User by his userID
@@ -327,6 +330,8 @@ console.log(userID);
   }
 
 
+ 
+
   // Toggle Login and Register forms
 
   isLoginFormVisible: boolean = false;
@@ -343,21 +348,11 @@ console.log(userID);
     this.isLoginFormVisible = false;
   }
 
-
-
   isWelcomeMsg: boolean = false;
 
   toggleWelcomeMsg() {
     this.isWelcomeMsg = !this.isWelcomeMsg;
   }
-
-  printID(){
-    const id = this.generateUUID();
-    console.log(id);
-  }
-
-  
-
 
   // id generator
 

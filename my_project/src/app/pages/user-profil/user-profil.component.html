@@ -2,8 +2,8 @@
     <app-header></app-header>
 </div>
 
-<div class="user-welcome">
-    <h2>Hi, {{userName}}</h2>
+<div *ngIf="userData$ | async as userData" class="user-welcome">
+    <h2>Hi, {{userData.firstName}}</h2>
     <h2>Welcome, to your profil page</h2>
 </div>
 
@@ -27,11 +27,11 @@
                     <h2>Edit your profile <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span>
                     </h2>
                 </div>
-                <form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div *ngIf="isVisible">
+                <form  *ngIf="isVisible" class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div >
                         <div class="form-fields" *ngIf="userData$ | async as userData">
                             <div>
-                                <input type="text" #firstname name="firstname" id="firstname" [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname"
+                                <input type="text" #firstname name="firstname" id="firstname"  [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname"
                                     >
                                 <input type="text" #lastname name="lastname" id="lastname" [placeholder]="userData.lastName || 'Lastname'"  formControlName="lastname"
                                     >
@@ -43,36 +43,36 @@
                                     >
                             </div>
                             <div>
-                                <input type="email" #email name="email" id="email" [placeholder]="userData.email || 'Email'" formControlName="email"
-                                   >
+                                <input type="email" #email name="email" id="email" [placeholder]="userData.email || 'Email'" [disabled]="true">
                                 <input type="number" #phone name="phone" id="phone" [placeholder]="userData.phone || 'Phone'" formControlName="phone"
                                     >
                             </div>
                         </div>
                         <div class="save-btn">
-                            <button  type="submit" [disabled]="toggle">Save</button>
+                            <button  type="submit">Save</button>
                         </div>
                     </div>
-
-                    <div *ngIf="!isVisible" class="userInfo">
-                        <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
-                            <div>
-                                <input type="text" #firstname name="firstname" [placeholder]="userData.firstName || 'Firstname'"  id="firstname" [disabled]>
-                                <input type="text" #lastname name="lastname" [placeholder]="userData.lastName || 'Lastname'" id="lastname" [disabled]>
-                            </div>
-                            <div>
-                                <input type="text" #country name="country" [placeholder]="userData.country || 'Country'" id="country"  [disabled]>
-                                <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'" [disabled]>
-                            </div>
-                            <div>
-                                <input type="email" #email name="email" [placeholder]="userData.email || 'Email'" id="email" [disabled]>
-                                <input type="text" #phone name="phone" [placeholder]="userData.phone || 'Phone'" id="phone"  [disabled]>
-                            </div>
-                        </div>
-                        
-                    </div>
-
                 </form>
+                <div *ngIf="!isVisible" class="userInfo">
+                    <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
+                        <div>
+                            <input (input)="onInput($event)" type="text" #firstname name="firstname"
+                                [placeholder]="userData.firstName || 'Firstname'" id="firstname" [readonly]="true">
+                            <input type="text" #lastname name="lastname" [placeholder]="userData.lastName || 'Lastname'" id="lastname"
+                                [readonly]="true">
+                        </div>
+                        <div>
+                            <input type="text" #country name="country" [placeholder]="userData.country || 'Country'" id="country"
+                                [readonly]="true">
+                            <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'" [readonly]="true">
+                        </div>
+                        <div>
+                            <input type="email" #email name="email" [placeholder]="userData.email || 'Email'" id="email" [readonly]="true">
+                            <input type="text" #phone name="phone" [placeholder]="userData.phone || 'Phone'" id="phone" [readonly]="true">
+                        </div>
+                    </div>
+                
+                </div>
             </div>
         </div>
 
