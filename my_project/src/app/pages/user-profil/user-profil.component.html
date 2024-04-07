@@ -56,7 +56,7 @@
                 <div *ngIf="!isVisible" class="userInfo">
                     <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
                         <div>
-                            <input (input)="onInput($event)" type="text" #firstname name="firstname"
+                            <input type="text" #firstname name="firstname"
                                 [placeholder]="userData.firstName || 'Firstname'" id="firstname" [readonly]="true">
                             <input type="text" #lastname name="lastname" [placeholder]="userData.lastName || 'Lastname'" id="lastname"
                                 [readonly]="true">
@@ -75,6 +75,10 @@
                 </div>
             </div>
         </div>
+            <div *ngIf="isEditErrorVisible" class="profile-error-msg">
+                <p *ngIf="isSuccess">Your profile was edited Successfull!</p>
+                <p *ngIf="!isSuccess">Something went wrong! Please check all fields!
+            </div>
 
     </div>
 </section>

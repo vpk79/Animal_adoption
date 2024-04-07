@@ -12,7 +12,7 @@
 .user-profile-section-wrapper {
     position: relative;
     width: 100%;
-    height: 1200px;
+    height: 600px;
     display: flex;
     justify-content: center;
     background-color: aqua;
@@ -344,3 +344,85 @@
     margin-right: 5px;
 
 }
+
+.profile-error-msg {
+    display: flex;
+    position: fixed;
+    width: auto;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 15px;
+    z-index: 30000;
+    bottom: 8%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-content: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding-top: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 0;
+
+    animation: fadeIn 3s;
+        -webkit-animation: fadeIn 3s;
+        -moz-animation: fadeIn 3s;
+        -o-animation: fadeIn 3s;
+        -ms-animation: fadeIn 3s;
+    }
+    
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+    
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    @-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+    
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    @-moz-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+    
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    
+    @-o-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+    
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    
+    @-ms-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+    
+        100% {
+            opacity: 1;
+        }
+    }

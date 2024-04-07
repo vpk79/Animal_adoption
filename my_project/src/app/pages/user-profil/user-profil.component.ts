@@ -31,6 +31,8 @@ export class UserProfilComponent implements OnInit {
   country: string | null = 'Country';
   phone: number | '' = 0;
   submitted: boolean = false;
+  isEditErrorVisible = false;
+  isSuccess = false;
 
   constructor(public service: Service, public imageValidateService: ImageValidateService, private userDataService: UserDataService,
     private fb: FormBuilder, private authService: AuthService, private localStorageService: LocalStorageService
@@ -76,9 +78,7 @@ export class UserProfilComponent implements OnInit {
 
   }
 
-  onInput(event: Event) {
-    event.preventDefault();
-  }
+ 
 
 
   onSubmit() {
@@ -117,19 +117,26 @@ export class UserProfilComponent implements OnInit {
     // console.log(this.userData);
 
 
-    console.log(updateUser);
+    // console.log(updateUser);
 
     try {
       this.service.updateDatabaseAsObject('users', userInfo.userID, updateUser)
         .then(() => {
-          console.log('Update successful');
+          this.isSuccess = true;
+          this.toggleEditError();
+          // console.log('Update successful');
         })
         .catch(error => {
-          console.error('Error updating database:', error);
+          // console.error('Error updating database:', error);
           // Обработка на грешката тук
+          this.isSuccess = false;
+          this.toggleEditError();
         });
     } catch (error) {
-      console.error('Error updating database:', error);
+      this.isSuccess = false;
+      this.toggleEditError();
+
+      // console.error('Error updating database:', error);
       // Обработка на грешката тук
     }
 
@@ -195,6 +202,13 @@ export class UserProfilComponent implements OnInit {
       console.error('Invalid file format. Please select an image file.');
     }
 
+  }
+
+  toggleEditError() {
+    this.isEditErrorVisible = !this.isEditErrorVisible;
+    setTimeout(() => {
+      this.isEditErrorVisible = !this.isEditErrorVisible;
+    }, 3000);
   }
 
 
