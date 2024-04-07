@@ -33,6 +33,7 @@ export class UserProfilComponent implements OnInit {
   submitted: boolean = false;
   isEditErrorVisible = false;
   isSuccess = false;
+ 
 
   constructor(public service: Service, public imageValidateService: ImageValidateService, private userDataService: UserDataService,
     private fb: FormBuilder, private authService: AuthService, private localStorageService: LocalStorageService
@@ -75,6 +76,8 @@ export class UserProfilComponent implements OnInit {
         });
       }
     });
+
+    
 
   }
 

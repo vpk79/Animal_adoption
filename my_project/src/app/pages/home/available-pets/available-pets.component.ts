@@ -92,7 +92,8 @@ export class AvailablePetsComponent implements OnInit{
     const userInfo = this.localStorageService.getItem('userInfo');
     if(animalCard.Liked == 1) {
       
-      this.service.updateUserLikedAnimals(userInfo.userID, animalCard.ID, animalCard.Name)
+      // this.service.updateUserLikedAnimals(userInfo.userID, animalCard.ID, animalCard.Name);
+      this.service.updateUserPropertyByValue('users', userInfo.userID, `animalLikes/${animalCard.ID}`, animalCard);
     } else {
       this.service.deleteUserProperty('users', userInfo.userID, 'animalLikes', animalCard.ID);
     }

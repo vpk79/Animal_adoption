@@ -3,18 +3,20 @@
         <div class="carousel-inner">
             <div class="carousel-item">
                 <div class="cards-wrapper">
-                    <div class="card">
-                        <!-- <div class="image-wrapper">
-                            <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
+                    <div  *ngFor="let animal of this.likedAnimals" class="card">
+                        <div class="image-wrapper">
+                            <img [src]="'../../../../assets/' + (animal.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animal.Name + '.jpeg'"
                                 alt="...">
                             <div class="like-btn-wrappper">
-                                <a class="like-btn" (click)="toggleLike($event, animalCard)">
-                                    <i
-                                        [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
+                                <!-- <a class="like-btn" (click)="toggleLike($event, animalCard)"> -->
+                                    <i 
+                                        [ngClass]="{'fa-regular':  animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}">
+                                    </i>
+                                <!-- </a> -->
                             </div>
-                        </div> -->
+                        </div>
                         <div class="card-body">
-                            <!-- <h5 class="card-title">{{ animalCard.Name }}</h5> -->
+                            <h5 class="card-title">{{ animal.Name }}</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up
                                 the bulk of the card's
                                 content.</p>
