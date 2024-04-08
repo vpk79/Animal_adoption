@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/user/login/login.component';
 import { RegisterComponent } from './pages/user/register/register.component';
 import { UserProfilModule } from './pages/user-profil/user-profil.module';
 import { UserProfilComponent } from './pages/user-profil/user-profil.component';
+import { DetailsComponent } from './pages/details/details.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: UserProfilComponent },
+  { path: 'details', component: DetailsComponent },
   // { path: 'dasboard', component: DashboardComponent },
   
 ];

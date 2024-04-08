@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { UserModule } from './user/user.module';
+import { DetailsModule } from './details/details.module';
 
 
 
@@ -14,7 +15,7 @@ import { UserModule } from './user/user.module';
     PagesComponent
   ],
   imports: [
-    CommonModule, HomeModule, GalleryModule, UserModule
+    CommonModule, HomeModule, GalleryModule, UserModule, DetailsModule
   ],
   exports: [
     PagesComponent
