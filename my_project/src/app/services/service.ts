@@ -26,9 +26,9 @@ export class Service {
  
 updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   const likedAnimal = {[animalID]: animalName}
-console.log(userID);
+// console.log(userID);
 
-  console.log(likedAnimal);
+//   console.log(likedAnimal);
   
   this.updateUserPropertyByValue('users', userID, 'animalLikes', likedAnimal);
 }

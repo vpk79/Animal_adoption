@@ -20,6 +20,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
+    
     //  Taking user animal choice from previous page
     this.animalChoice = this.route.queryParams.subscribe(params => {
       this.animalType = (params['animalType']);
@@ -37,7 +39,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   }
 
-
+  adopt(){
+    if (this.service.isLoggedIn$){
+      console.log('adopted');
+    } else {
+      console.log('not adopted');
+      
+    }
+  }
 
 
 ngOnDestroy(): void {

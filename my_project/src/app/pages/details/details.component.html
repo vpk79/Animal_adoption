@@ -28,11 +28,11 @@
                             <p>Gender: <span>{{animalData.Sex}}</span></p>
                             <p>Age: <span>{{animalData.Age}}</span></p>
                             <p>Primary Color: <span>{{animalData.Primary_Color}}</span></p>
-                            <p>Secondary Color: <span>{{animalData.Secondary_Color}}</span></p>
+                            <p>Secondary Color: <span>{{!animalData.Secondary_Color ? animalData.Secondary_Color : 'none'}}</span></p>
                             <p>Size: <span>{{animalData.Size}}</span></p>
                             <p>Weight: <span>{{animalData.Weight}}</span></p>
                         </div>
-                        <p class="adopt-link"><a>Adopt</a></p>
+                        <p class="adopt-link"><a (click)="adopt()">Adopt</a></p>
                     </div>
                 </div>
                 <div class="animal-description">
