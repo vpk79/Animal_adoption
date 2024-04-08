@@ -23,9 +23,9 @@
                             <p class="card-text">{{comment.text}}</p>
                             <div *ngIf="comment.userID == userID" class="btn-wrapper">
                                 <a [id]="comment.userID" (click)="editComment($event)"
-                                    class="btn btn-primary btn-edit">Edit</a>
+                                    class="btn btn-primary btn-edit" data-bs-toggle="tooltip" title="Edit Commentary">Edit</a>
                                 <a [id]="comment.userID" (click)="toggleConfirm($event)"
-                                    class="btn btn-primary btn-delete">Delete</a>
+                                    class="btn btn-primary btn-delete" data-bs-toggle="tooltip" title="Delete Commentary">Delete</a>
                             </div>
                         </div>
                         

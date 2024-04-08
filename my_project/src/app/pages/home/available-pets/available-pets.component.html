@@ -19,12 +19,12 @@
                             <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
                                 alt="...">
                             <div *ngIf="isLoggedIn" class="like-btn-wrappper">
-                                <a class="like-btn" (click)="toggleLike($event, animalCard)">
+                                <a class="like-btn" (click)="toggleLike($event, animalCard)" data-bs-toggle="tooltip" title="Add/Remove to favorites">
                                     <i
                                         [ngClass]="{'fa-regular':  !likedAnimalsArray.includes(animalCard.ID), 'fa-solid': likedAnimalsArray.includes(animalCard.ID), 'fa-heart': true}"></i></a>
                             </div>
                             <div *ngIf="!isLoggedIn" class="like-btn-wrappper">
-                                <a class="like-btn" (click)="showAlert()">
+                                <a class="like-btn" (click)="showAlert()" data-bs-toggle="tooltip" title="Add/Remove to favorites">
                                     <i
                                         [ngClass]="{'fa-regular':  animalCard.Liked == '0' , 'fa-solid': animalCard.Liked == '1', 'fa-heart': true}"></i></a>
                             </div>
@@ -34,7 +34,7 @@
                             <p class="card-text">Some quick example text to build on the card title and make up
                                 the bulk of the card's
                                 content.</p>
-                            <a routerLink="/details" [queryParams]="{animalType: animalCard.Type, animalID: animalCard.ID}" class="btn btn-primary">Details</a>
+                            <a routerLink="/details" [queryParams]="{animalType: animalCard.Type, animalID: animalCard.ID}" class="btn btn-primary"  data-bs-toggle="tooltip" title="See details">Details</a>
                         </div>
 
                     </div>

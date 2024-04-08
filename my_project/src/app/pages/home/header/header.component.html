@@ -8,18 +8,18 @@
 
     <nav class="nav">
         <ul>
-            <li><a routerLink="/home">HOME</a></li>
-            <li ><a>WELCOME</a></li>
+            <!-- <li><a routerLink="/home">HOME</a></li> -->
+            <!-- <li ><a>WELCOME</a></li>
             <li ><a>ABOUT</a></li>
             <li><a href="#">DOGS</a></li>
             <li><a href="#">CATS</a></li>
-            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">CONTACT</a></li> -->
             <li *ngIf="!isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
             <li *ngIf="!isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
-            <li *ngIf="!isLoggedIn"><a class="imgProfileHolder"><img [src]="defaultProfileImg" alt=""></a></li>
             <li *ngIf="!isLoggedIn"><a class="greetings">Hello, Guest!</a></li>
+            <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Visit your profil"><a routerLink="/profile" class="greetings">Hello, {{userName}}!</a></li>
+            <li *ngIf="!isLoggedIn"><a class="imgProfileHolder"><img [src]="defaultProfileImg" alt=""></a></li>
             <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Visit your profil"><a a routerLink="/profile" class="imgProfileHolder"><img [src]="imageUrl" alt=""></a><span class="myAcc">My Account</span></li>
-            <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Visit your profil"><a routerLink="/profile" class="greetings">Hello, {{userName}}</a></li>
             <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Your funds"><a class="balance">Balance: ${{userBalance}}</a></li>
             <li *ngIf="isLoggedIn"><a (click)="authService.logout()">LOGOUT</a></li>
         </ul>

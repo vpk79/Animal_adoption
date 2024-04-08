@@ -5,8 +5,11 @@
 
     <h1>HappyTails</h1>
     <p>"Your best friend, awaiting for you!"</p>
-    <a (click)="service.toggleLoginForm()" class="sign-in">Sign In</a>
-    <a (click)="service.toggleRegisterForm()" class="sign-up">Sign Up</a>
+    <div *ngIf="!this.service.isLoggedIn$">
+        <a (click)="service.toggleLoginForm()" class="sign-in">Sign In</a>
+        <a (click)="service.toggleRegisterForm()" class="sign-up">Sign Up</a>
+    </div>
+    
 
 </div>
 
