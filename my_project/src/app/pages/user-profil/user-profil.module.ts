@@ -5,6 +5,7 @@ import { HomeModule } from '../home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserDataService } from '../../services/user-data.service';
 import { LikedCarouselComponent } from './liked-carousel/liked-carousel.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ import { LikedCarouselComponent } from './liked-carousel/liked-carousel.componen
     LikedCarouselComponent
   ],
   imports: [
-    CommonModule, HomeModule, ReactiveFormsModule
+    CommonModule, HomeModule, ReactiveFormsModule, RouterModule
   ],
   exports: [UserProfilComponent, LikedCarouselComponent]
 })

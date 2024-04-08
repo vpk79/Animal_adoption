@@ -45,7 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [HomeComponent,
      HeaderComponent,
      FooterComponent,
-      DonationSectionComponent, AvailablePetsComponent, HeaderCardsComponent, HeaderCarouselComponent]
+      DonationSectionComponent, AvailablePetsComponent, HeaderCardsComponent, HeaderCarouselComponent, OverFooterLineComponent]
 
 })
 export class HomeModule { }

@@ -8,88 +8,109 @@
     <div class="section-bgnd">
         <img src="../../../assets/paws.jpg" alt="">
     </div>
-    <h2 class="animal-name">Here are the details about dog Stryker!</h2>
-    <div class="details-content">
-        <div class="details-wrapper">
-            <div class="animal-details">
-                <div class="animal-img-wrapper">
-                    <div class="animal-img">
-                        <img class="animal-pic" src="../../../assets/dogs/Stryker.jpeg" alt="">
+    <div *ngIf="animalData !==null">
+        <h2 class="animal-name">Here are the details about our precious {{animalData.Type == 'Cat' ? 'cat':'dog'}} {{animalData.Name}}!
+        </h2>
+        <div class="details-content" >
+            <div class="details-wrapper">
+                <div class="animal-details">
+                    <div class="animal-img-wrapper">
+                        <div class="animal-img">
+                            <img class="animal-pic" [src]="animalType == 'Dog' ? '../../../assets/dogs/' + animalData.Name + '.jpeg':
+                        '../../../assets/cats/' + animalData.Name + '.jpeg' " alt="">
+                        </div>
+                        <p>{{animalData.Name}}</p>
+                        <p>Price: {{animalData.Price}}</p>
                     </div>
-                    <p>Animal Name</p>
+                    <div class="animal-data">
+                        <h3>Details:</h3>
+                        <div class="data-container">
+                            <p>Gender: <span>{{animalData.Sex}}</span></p>
+                            <p>Age: <span>{{animalData.Age}}</span></p>
+                            <p>Primary Color: <span>{{animalData.Primary_Color}}</span></p>
+                            <p>Secondary Color: <span>{{animalData.Secondary_Color}}</span></p>
+                            <p>Size: <span>{{animalData.Size}}</span></p>
+                            <p>Weight: <span>{{animalData.Weight}}</span></p>
+                        </div>
+                        <p class="adopt-link"><a>Adopt</a></p>
+                    </div>
                 </div>
-                <div class="animal-data">
-                    <h3>Details:</h3>
-                    <div class="data-container">
-                        <p>Gender: </p>
-                        <p>Age: </p>
-                        <p>Primary Color: </p>
-                        <p>Secondary Color: </p>
-                        <p>Size: </p>
-                        <p>Weight: </p>
+                <div class="animal-description">
+                    <div class="description">
+                        <h3>Description:</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum magni suscipit vitae eaque
+                            quam
+                            eveniet doloribus itaque reiciendis repudiandae consectetur! Laborum possimus, expedita ea
+                            vero
+                            tempore repellat magnam optio? Corporis odio repellendus iure. Nulla quisquam sunt possimus
+                            numquam
+                            velit fugiat.
+                        </p>
+                    </div>
+
+                    <div class="usefull-links">
+                        <h3>Usefull Links:</h3>
+                        <ul>
+                            <li><a href="https://www.purina.com/"><img src="../../../assets/logo/purina_logo.jpg"
+                                        alt=""></a></li>
+                            <li><a
+                                    href="https://veterinarymedicalcenterwoodlandhills.com/?gad_source=1&gclid=Cj0KCQjwq86wBhDiARIsAJhuphn93W8JQL9Foyk3SkTtx5nts6C71epsazKl6uRhK7-k6cV8JUQzCscaAtt-EALw_wcB"><img
+                                        src="../../../assets/logo/vet-med-center-new-logo.png" alt=""></a></li>
+                            <li><a href="https://www.petshop.co.uk/"><img
+                                        src="../../../assets/logo/petshop-2019-logo.png" alt=""></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="animal-description">
-                <div class="description">
-                    <h3>Description:</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum magni suscipit vitae eaque quam
-                        eveniet doloribus itaque reiciendis repudiandae consectetur! Laborum possimus, expedita ea vero
-                        tempore repellat magnam optio? Corporis odio repellendus iure. Nulla quisquam sunt possimus
-                        numquam
-                        velit fugiat.
-                    </p>
-                </div>
 
-                <div class="usefull-links">
-                    <h3>Usefull Links:</h3>
-                    <ul>
-                        <li><a href="https://www.purina.com/"><img src="../../../assets/logo/purina_logo.jpg"
-                                    alt=""></a></li>
-                        <li><a
-                                href="https://veterinarymedicalcenterwoodlandhills.com/?gad_source=1&gclid=Cj0KCQjwq86wBhDiARIsAJhuphn93W8JQL9Foyk3SkTtx5nts6C71epsazKl6uRhK7-k6cV8JUQzCscaAtt-EALw_wcB"><img
-                                    src="../../../assets/logo/vet-med-center-new-logo.png" alt=""></a></li>
-                        <li><a href="https://www.petshop.co.uk/"><img src="../../../assets/logo/petshop-2019-logo.png"
-                                    alt=""></a></li>
-                    </ul>
+
+            <div class="contact-wrapper">
+                <div class="logo-img"><img src="../../../assets/logo.png" alt=""></div>
+                <div class="site-title">
+                    <h2>HappyTails</h2>
                 </div>
+                <div class="item-list">
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i><span>Location Address</span><br><span
+                                class="location">Somewhere In The World</span></li>
+                        <li><i class="fas fa-envelope"></i><a
+                                href="mailto:happytails@gmail.com"></a><span>happytails&#64;gmail.com</span></li>
+                        <li><i class="fas fa-phone-alt"></i><span>(020)355-555-555</span></li>
+                        <li><i class="fas fa-clock"></i><span>Weekly hours 08:00-20:00</span></li>
+                    </ul>
+                    <div class="day-hours">
+                        <ul>
+                            <li>Monday</li>
+                            <li>Tuesday</li>
+                            <li>Wednesday</li>
+                            <li>Thursday</li>
+                            <li>Friday</li>
+                            <li>Saturday</li>
+                            <li>Sunday</li>
+                        </ul>
+                        <ul>
+                            <li>08:00-20:00</li>
+                            <li>08:00-20:00</li>
+                            <li>08:00-20:00</li>
+                            <li>08:00-20:00</li>
+                            <li>08:00-20:00</li>
+                            <li>08:00-20:00</li>
+                            <li>08:00-20:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="more-about"><a>MORE ABOUT US</a></div>
             </div>
-        </div>
-
-
-        <div class="contact-wrapper">
-            <div class="logo-img"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="site-title"><h2>HappyTails</h2></div>
-            <div class="item-list">
-               <ul>
-                <li><i class="fas fa-map-marker-alt"></i>Location Address<br><span>Somewehere In The World</span></li>
-                <li><i class="fas fa-envelope"></i><a href="mailto:happytails@gmail.com"></a></li>
-                <li><i class="fas fa-phone-alt"></i>(020)355-555-555</li>
-                <li><i class="fas fa-clock"></i>Weekly hours 08:00-20:00</li>
-               </ul>
-                <div class="day-hours">
-                    <ul>
-                        <li>Monday</li>
-                        <li>Tuesday</li>
-                        <li>Wednesday</li>
-                        <li>Thursday</li>
-                        <li>Friday</li>
-                        <li>Saturday</li>
-                        <li>Sunday</li>
-                    </ul>
-                    <ul>
-                        <li>08:00-20:00</li>
-                        <li>08:00-20:00</li>
-                        <li>08:00-20:00</li>
-                        <li>08:00-20:00</li>
-                        <li>08:00-20:00</li>
-                        <li>08:00-20:00</li>
-                        <li>08:00-20:00</li>
-                    </ul>
-                </div>
-            </div>
-            <div><a>MORE ABOUT US</a></div>
         </div>
     </div>
+    
 
 </section>
+
+
+    <!-- <app-available-pets></app-available-pets> -->
+    
+    <app-donation-section></app-donation-section>
+    <app-over-footer-line></app-over-footer-line>
+    <app-footer></app-footer>
+

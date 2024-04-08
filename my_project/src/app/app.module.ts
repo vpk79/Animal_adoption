@@ -18,6 +18,7 @@ import { UserProfilModule } from './pages/user-profil/user-profil.module';
 import { Service } from './services/service';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { UserDataService } from './services/user-data.service';
+import { RouterModule } from '@angular/router';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -42,7 +43,8 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
-    UserProfilModule
+    UserProfilModule,
+    RouterModule
 
 
   ],

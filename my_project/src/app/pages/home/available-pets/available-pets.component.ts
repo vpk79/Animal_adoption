@@ -1,10 +1,11 @@
 import { Service } from './../../../services/service';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef,  OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Animals } from '../../../../types/animals';
 import { Observable, filter, switchMap } from 'rxjs';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { UserProfil } from '../../../../types/users';
 import { UserDataService } from '../../../services/user-data.service';
+
 
 @Component({
   selector: 'app-available-pets',
@@ -14,7 +15,6 @@ import { UserDataService } from '../../../services/user-data.service';
 export class AvailablePetsComponent implements OnInit{
   isLoggedIn = false;
   constructor(public service: Service,
-     private cdr: ChangeDetectorRef,
       private renderer: Renderer2, 
       private localStorageService: LocalStorageService,
       private userDataService: UserDataService) { }
