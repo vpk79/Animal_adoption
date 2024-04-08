@@ -58,7 +58,7 @@
     </div>
     <div class="gallery-cards">
         <div class="gallery-cards-wrapper">
-            <div *ngFor="let animal of animalsData" class="card" (click)="getAnimalData(animal.Name)">
+            <div *ngFor="let animal of animalsData" class="card"  [queryParams]="{animalType: animal.Type, animalID: animal.ID}" [routerLink]="['/details']">
                 <div class="image-wrapper">
                     <img src="../../../assets/{{choosedAnimal}}/{{animal.Name}}.jpeg" alt="...">
                     <div *ngIf="isLoggedIn" class="like-btn-wrappper" (click)="updateLikes($event, animal.ID, animal.Liked)" data-bs-toggle="tooltip" title="Add to Favorities">

@@ -1,1 +1,59 @@
-<p>details works!</p>
+<app-header></app-header>
+
+<section classs="details-section">
+    <div class="header-bgnd">
+        <img [src]="animalType =='Dog' ?  '../../../assets/gallery-dogs-bgnd.jpg' : '../../../assets/gallery-cats-bgnd.jpg'"
+            alt="">
+    </div>
+    <div class="section-bgnd">
+        <img src="../../../assets/paws.jpg" alt="">
+    </div>
+    <div class="details-content">
+        <div class="details-wrapper">
+            <div class="animal-details">
+                <div class="animal-img-wrapper">
+                    <div class="animal-img">
+                        <img class="animal-pic" src="../../../assets/dogs/Stryker.jpeg" alt="">
+                    </div>
+                    <p>Animal Name</p>
+                </div>
+                <div class="animal-data">
+                    <h3>Details:</h3>
+                    <div class="data-container">
+                        <p>Gender: </p>
+                        <p>Age: </p>
+                        <p>Primary Color: </p>
+                        <p>Secondary Color: </p>
+                        <p>Size: </p>
+                        <p>Weight: </p>
+                    </div>
+                </div>
+            </div>
+            <div class="animal-description">
+                <div class="description">
+                    <h3>Description:</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum magni suscipit vitae eaque quam
+                        eveniet doloribus itaque reiciendis repudiandae consectetur! Laborum possimus, expedita ea vero
+                        tempore repellat magnam optio? Corporis odio repellendus iure. Nulla quisquam sunt possimus numquam
+                        velit fugiat.
+                    </p>
+                </div>
+                
+                <div class="userfull-links">
+                    <h3>Usefull Links:</h3>
+                    <ul>
+                        <li><a href="https://www.purina.com/"></a></li>
+                        <li><a href="https://veterinarymedicalcenterwoodlandhills.com/?gad_source=1&gclid=Cj0KCQjwq86wBhDiARIsAJhuphn93W8JQL9Foyk3SkTtx5nts6C71epsazKl6uRhK7-k6cV8JUQzCscaAtt-EALw_wcB"></a></li>
+                        <li><a href="https://www.petshop.co.uk/"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="contact-wrapper">
+
+        </div>
+    </div>
+
+</section>
