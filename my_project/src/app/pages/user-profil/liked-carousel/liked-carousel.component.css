@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     z-index: 1000;
-    margin-bottom: 200px;
+    /* margin-bottom: 200px; */
     margin-top: -200px;
 }
 
@@ -26,6 +26,9 @@
     height: 200px;
     display: block;
     margin-top: -20px;
+    z-index: 10;
+   
+
 }
 
 #myCarousel5 .carousel-control-prev,

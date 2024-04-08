@@ -1,91 +1,101 @@
-<div class="user-profil-header">
-    <app-header></app-header>
-</div>
+<section class="profile-section">
 
-<div *ngIf="userData$ | async as userData" class="user-welcome">
-    <h2>Hi, {{userData.firstName}}</h2>
-    <h2>Welcome, to your profil page</h2>
-</div>
-<div class="profileBgnd">
-    <img src="../../../../assets/profilBgnd.jpg" alt="">
-</div>
 
-<section class="user-profile-section">
-    <div class="user-profile-section-wrapper">
-        <div class="user-profile-container">
-            <div class="user-picture-wrapper">
-                <div class="user-picture-holder" *ngIf="userData$ | async as userData">
-                    <img [src]="userData.profile_img" alt="userProfileImg">
+    <div class="user-profil-header">
+        <app-header></app-header>
+    </div>
+
+    <div *ngIf="userData$ | async as userData" class="user-welcome">
+        <h2>Hi, {{userData.firstName}}</h2>
+        <h2>Welcome, to your profil page!</h2>
+    </div>
+    <div class="profileBgnd">
+        <img src="../../../../assets/profilBgnd.jpg" alt="">
+    </div>
+
+    <section class="user-profile-section">
+        <div class="user-profile-section-wrapper">
+            <div class="user-profile-container">
+                <div class="user-picture-wrapper">
+                    <div class="user-picture-holder" *ngIf="userData$ | async as userData">
+                        <img [src]="userData.profile_img" alt="userProfileImg">
+                    </div>
+                    <div class="user-image-upload">
+                        <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
+                        <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg"
+                            accept="image/*">
+                    </div>
+                    <div class="img-error-msg" *ngIf="toggleImgErr">
+                        <p><i class="fa-solid fa-triangle-exclamation"></i> Only images allowed - max-size 320 x 320!
+                        </p>
+                    </div>
                 </div>
-                <div class="user-image-upload" >
-                    <label for="uploadImg" data-bs-toggle="tooltip" title="Max size 320*320">+</label>
-                    <input type="file" (change)="uploadFile($event)" name="uploadImg" id="uploadImg" accept="image/*">
-                </div>
-                <div class="img-error-msg" *ngIf="toggleImgErr">
-                    <p><i class="fa-solid fa-triangle-exclamation"></i> Only images allowed - max-size 320 x 320!</p>
+                <div class="user-details">
+                    <div class="edit-profil">
+                        <h2>Edit your profile <span (click)="isDisabled()"><i
+                                    class="fa-solid fa-pen-to-square"></i></span>
+                        </h2>
+                    </div>
+                    <form *ngIf="isVisible" class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div>
+                            <div class="form-fields" *ngIf="userData$ | async as userData">
+                                <div>
+                                    <input type="text" #firstname name="firstname" id="firstname"
+                                        [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname">
+                                    <input type="text" #lastname name="lastname" id="lastname"
+                                        [placeholder]="userData.lastName || 'Lastname'" formControlName="lastname">
+                                </div>
+                                <div>
+                                    <input type="text" #country name="country" id="country"
+                                        [placeholder]="userData.country || 'Country'" formControlName="country">
+                                    <input type="text" #city name="city" id="city"
+                                        [placeholder]="userData.city || 'City'" formControlName="city">
+                                </div>
+                                <div>
+                                    <input type="email" #email name="email" id="email"
+                                        [placeholder]="userData.email || 'Email'" [disabled]="true">
+                                    <input type="number" #phone name="phone" id="phone"
+                                        [placeholder]="userData.phone || 'Phone'" formControlName="phone">
+                                </div>
+                            </div>
+                            <div class="save-btn">
+                                <button type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div *ngIf="!isVisible" class="userInfo">
+                        <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
+                            <div>
+                                <input type="text" #firstname name="firstname"
+                                    [placeholder]="userData.firstName || 'Firstname'" id="firstname" [readonly]="true">
+                                <input type="text" #lastname name="lastname"
+                                    [placeholder]="userData.lastName || 'Lastname'" id="lastname" [readonly]="true">
+                            </div>
+                            <div>
+                                <input type="text" #country name="country" [placeholder]="userData.country || 'Country'"
+                                    id="country" [readonly]="true">
+                                <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'"
+                                    [readonly]="true">
+                            </div>
+                            <div>
+                                <input type="email" #email name="email" [placeholder]="userData.email || 'Email'"
+                                    id="email" [readonly]="true">
+                                <input type="text" #phone name="phone" [placeholder]="userData.phone || 'Phone'"
+                                    id="phone" [readonly]="true">
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="user-details">
-                <div class="edit-profil">
-                    <h2>Edit your profile <span (click)="isDisabled()"><i class="fa-solid fa-pen-to-square"></i></span>
-                    </h2>
-                </div>
-                <form  *ngIf="isVisible" class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div >
-                        <div class="form-fields" *ngIf="userData$ | async as userData">
-                            <div>
-                                <input type="text" #firstname name="firstname" id="firstname"  [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname"
-                                    >
-                                <input type="text" #lastname name="lastname" id="lastname" [placeholder]="userData.lastName || 'Lastname'"  formControlName="lastname"
-                                    >
-                            </div>
-                            <div>
-                                <input type="text" #country name="country" id="country" [placeholder]="userData.country || 'Country'" formControlName="country"
-                                    >
-                                <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'" formControlName="city"
-                                    >
-                            </div>
-                            <div>
-                                <input type="email" #email name="email" id="email" [placeholder]="userData.email || 'Email'" [disabled]="true">
-                                <input type="number" #phone name="phone" id="phone" [placeholder]="userData.phone || 'Phone'" formControlName="phone"
-                                    >
-                            </div>
-                        </div>
-                        <div class="save-btn">
-                            <button  type="submit">Save</button>
-                        </div>
-                    </div>
-                </form>
-                <div *ngIf="!isVisible" class="userInfo">
-                    <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
-                        <div>
-                            <input type="text" #firstname name="firstname"
-                                [placeholder]="userData.firstName || 'Firstname'" id="firstname" [readonly]="true">
-                            <input type="text" #lastname name="lastname" [placeholder]="userData.lastName || 'Lastname'" id="lastname"
-                                [readonly]="true">
-                        </div>
-                        <div>
-                            <input type="text" #country name="country" [placeholder]="userData.country || 'Country'" id="country"
-                                [readonly]="true">
-                            <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'" [readonly]="true">
-                        </div>
-                        <div>
-                            <input type="email" #email name="email" [placeholder]="userData.email || 'Email'" id="email" [readonly]="true">
-                            <input type="text" #phone name="phone" [placeholder]="userData.phone || 'Phone'" id="phone" [readonly]="true">
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
-        </div>
             <div *ngIf="isEditErrorVisible" class="profile-error-msg">
                 <p *ngIf="isSuccess">Your profile was edited Successfull!</p>
                 <p *ngIf="!isSuccess">Something went wrong! Please check all fields!
             </div>
 
-    </div>
+        </div>
+    </section>
 </section>
-
 <app-liked-carousel></app-liked-carousel>
 <app-donation-section></app-donation-section>
 <app-footer></app-footer>
