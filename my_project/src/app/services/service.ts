@@ -2,7 +2,7 @@ import { UserProfil } from './../../types/users';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { BehaviorSubject, Observable, Subscription, filter, finalize, map } from 'rxjs';
+import { BehaviorSubject, Observable,  map } from 'rxjs';
 
 
 
@@ -45,6 +45,8 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
   getItemsAsObject(url: string) {
+    console.log(url);
+    
     return this.db.object(url).valueChanges();
   }
 
@@ -138,8 +140,10 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   checkUserComment(userID: string): Observable<boolean> {
     return this.getItemsAsObject('/siteComments/' + userID).pipe(
       map((data: any) => {
-        const isCommented = data !== null;
-        // console.log(isCommented);
+        const isCommented = data.userID === userID;
+        // console.log(data);
+        
+        console.log(isCommented);
         return isCommented;
       })
     );

@@ -101,11 +101,11 @@ export class UserProfilComponent implements OnInit {
 
     console.log('started');
 
-    const firstnameValue = this.form.get('firstname')?.value;
-    const lastnameValue = this.form.get('lastname')?.value;
-    const countryValue = this.form.get('country')?.value;
-    const cityValue = this.form.get('city')?.value;
-    const phoneValue = this.form.get('phone')?.value;
+    const firstnameValue = this.form.get('firstname')?.value.trim();
+    const lastnameValue = this.form.get('lastname')?.value.trim();
+    const countryValue = this.form.get('country')?.value.trim();
+    const cityValue = this.form.get('city')?.value.trim();
+    const phoneValue = this.form.get('phone')?.value.trim();
 
 
     const updateUser: Partial<UserProfil> = {};
