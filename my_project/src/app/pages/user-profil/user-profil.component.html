@@ -32,40 +32,135 @@
                 </div>
                 <div class="user-details">
                     <div class="edit-profil">
-                        <h2>Edit your profile <span (click)="isDisabled()" data-bs-toggle="tooltip"
+                        <h2>Edit your profile <span (click)="enableForm()" data-bs-toggle="tooltip"
                                 title="Edit profile"><i class="fa-solid fa-pen-to-square"></i></span>
                         </h2>
                     </div>
-                    <form  class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div>
                             <div class="form-fields" *ngIf="userData$ | async as userData">
                                 <div>
                                     <label>Firstname:</label>
-                                    <input type="text" #firstname name="firstname" id="firstname"  [class]="!isVisible ? 'disabled' : 'normal'"
-                                        [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname"  [readonly]="!isVisible">
+                                    <div class="input-wrapper">
+                                        <input type="text" #firstname name="firstname" id="firstname"
+                                            [class]="!isVisible ? 'disabled' : 'normal'"
+                                            [placeholder]="userData.firstName || 'Firstname'"
+                                            formControlName="firstname" [readonly]="!isVisible">
+
+                                        <div class="fname-error-msg" *ngIf="form.get('firstname')?.touched">
+                                            <div *ngIf="form.get('firstname')?.errors?.['minlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <div *ngIf="form.get('firstname')?.errors?.['maxlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <div *ngIf="form.get('firstname')?.errors?.['required']">
+                                                *First name is required!
+                                            </div>
+                                            <div *ngIf="form.get('firstname')?.errors?.['pattern']">
+                                                *Letters only!
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <label>Lastname:</label>
-                                    <input type="text" #lastname name="lastname" id="lastname" [class]="!isVisible ? 'disabled' : 'normal'"
-                                        [placeholder]="userData.lastName || 'Lastname'" formControlName="lastname"  [readonly]="!isVisible">
+                                    <div class="input-wrapper">
+                                        <input type="text" #lastname name="lastname" id="lastname"
+                                            [class]="!isVisible ? 'disabled' : 'normal'"
+                                            [placeholder]="userData.lastName || 'Lastname'" formControlName="lastname"
+                                            [readonly]="!isVisible">
+                                        <div class="fname-error-msg" *ngIf="form.get('lastname')?.touched">
+                                            <div *ngIf="form.get('lastname')?.errors?.['minlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <div *ngIf="form.get('lastname')?.errors?.['maxlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <div *ngIf="form.get('lastname')?.errors?.['required']">
+                                                *Last name is required!
+                                            </div>
+                                            <div *ngIf="form.get('lastname')?.errors?.['pattern']">
+                                                *Letters only!
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div>
+
                                     <label>Country:</label>
-                                    <input type="text" #country name="country" id="country" [class]="!isVisible ? 'disabled' : 'normal'"
-                                        [placeholder]="userData.country || 'Country'" formControlName="country" [readonly]="!isVisible">
+                                    <div class="input-wrapper">
+                                        <input type="text" #country name="country" id="country"
+                                            [class]="!isVisible ? 'disabled' : 'normal'"
+                                            [placeholder]="userData.country || 'Country'" formControlName="country"
+                                            [readonly]="!isVisible">
+
+                                        <div class="fname-error-msg" *ngIf="form.get('country')?.touched">
+                                            <div *ngIf="form.get('country')?.errors?.['minlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <div *ngIf="form.get('country')?.errors?.['maxlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <!-- <div *ngIf="form.get('country')?.errors?.['required']">
+                                                *Country is required!
+                                            </div> -->
+                                            <div *ngIf="form.get('country')?.errors?.['pattern']">
+                                                *Letters only!
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <label>City:</label>
-                                    <input type="text" #city name="city" id="city" [class]="!isVisible ? 'disabled' : 'normal'"
-                                        [placeholder]="userData.city || 'City'" formControlName="city" [readonly]="!isVisible">
+                                    <div class="input-wrapper">
+                                        <input type="text" #city name="city" id="city"
+                                            [class]="!isVisible ? 'disabled' : 'normal'"
+                                            [placeholder]="userData.city || 'City'" formControlName="city"
+                                            [readonly]="!isVisible">
+
+                                        <div class="fname-error-msg" *ngIf="form.get('city')?.touched">
+                                            <div *ngIf="form.get('city')?.errors?.['minlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <div *ngIf="form.get('city')?.errors?.['maxlength']">
+                                                *3-20 letters!
+                                            </div>
+                                            <!-- <div *ngIf="form.get('city')?.errors?.['required']">
+                                                *City is required!
+                                            </div> -->
+                                            <div *ngIf="form.get('city')?.errors?.['pattern']">
+                                                *Letters only!
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div>
                                     <label>Email:</label>
                                     <input type="email" #email name="email" id="email" class="disabled"
-                                        [placeholder]="userData.email || 'Email'" [readonly]="true" >
+                                        [placeholder]="userData.email || 'Email'" [readonly]="true">
                                     <label>Phone:</label>
-                                    <input type="number" #phone name="phone" id="phone" [class]="!isVisible ? 'disabled' : 'normal'"
-                                        [placeholder]="userData.phone || 'Phone'" formControlName="phone" [readonly]="!isVisible">
+
+                                    <div class="input-wrapper">
+                                        <input type="number" #phone name="phone" id="phone"
+                                            [class]="!isVisible ? 'disabled' : 'normal'"
+                                            [placeholder]="userData.phone || 'Phone'" formControlName="phone"
+                                            [readonly]="!isVisible">
+
+                                        <div class="fname-error-msg" *ngIf="form.get('phone')?.touched">
+                                            <div *ngIf="form.get('phone')?.errors?.['pattern']">
+                                                *8-20 numbers!
+                                            </div>
+                                          
+                                          
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="save-btn" >
-                                <button [class]="isVisible ? 'active' : 'inactive'" type="submit" [disabled]="!isVisible">Save</button>
+                            <div class="save-btn">
+                                <button [class]="isVisible ? 'active' : 'inactive'" type="submit"
+                                    [disabled]="!isVisible">Save</button>
                             </div>
                         </div>
                     </form>
@@ -100,14 +195,13 @@
                     </div> -->
                 </div>
             </div>
-            <div *ngIf="isEditErrorVisible" class="profile-error-msg">
-                <p *ngIf="isSuccess">Your profile was edited Successfull!</p>
-                <p *ngIf="!isSuccess">Something went wrong! Please check all fields!
-            </div>
-
         </div>
     </section>
 </section>
+<div *ngIf="isEditErrorVisible" class="profile-error-msg">
+    <p *ngIf="isSuccess">Your profile was updated Successfully!</p>
+    <p *ngIf="!isSuccess">Something went wrong! Please check all fields!
+</div>
 
 <app-liked-carousel></app-liked-carousel>
 <!-- <app-available-pets></app-available-pets> -->

@@ -343,6 +343,19 @@
 
 }
 
+.fname-error-msg {
+    font-size: 14px;
+    font-weight: 600;
+    font-style: italic;
+    color: blue;
+    margin-top: 3px;
+
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
 
 
 .save-btn button:hover {
@@ -371,11 +384,11 @@
     bottom: 5%;
     left: 50%;
     transform: translate(-50%, 0);
-    animation: fadeIn 4s;
-    -webkit-animation: fadeIn 4s;
-    -moz-animation: fadeIn 4s;
-    -o-animation: fadeIn 4s;
-    -ms-animation: fadeIn 4s;
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
 }
 
 @keyframes fadeIn {
@@ -455,7 +468,7 @@
     font-size: 18px;
     font-weight: 600;
     border-radius: 15px;
-    z-index: 30000;
+    z-index: 30000000;
     bottom: 8%;
     left: 50%;
     transform: translate(-50%, -50%);

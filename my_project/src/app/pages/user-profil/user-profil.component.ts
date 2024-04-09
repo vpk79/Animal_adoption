@@ -47,11 +47,11 @@ export class UserProfilComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       email: { value: '', disabled: true },
-      firstname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]+$')]],
-      lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]+$')]],
+      firstname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z]+$')]],
+      lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z]+$')]],
       country: ['', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]+$')]],
       city: ['', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z\s]+$')]],
-      phone: ['', Validators.nullValidator]
+      phone: ['', [Validators.pattern(/^\d{8,18}$/)]]
     });
 
 
@@ -212,7 +212,6 @@ export class UserProfilComponent implements OnInit {
       setTimeout(() => {
         this.toggleImgErr = false;
       }, 5000);
-      // Файлът не е снимка или е в непозволен формат
       console.error('Invalid file format. Please select an image file.');
     }
 
@@ -222,7 +221,7 @@ export class UserProfilComponent implements OnInit {
     this.isEditErrorVisible = !this.isEditErrorVisible;
     setTimeout(() => {
       this.isEditErrorVisible = !this.isEditErrorVisible;
-    }, 3000);
+    }, 4000);
   }
 
 
@@ -230,7 +229,10 @@ export class UserProfilComponent implements OnInit {
   isDisabled(): void {
     
     this.isVisible = !this.isVisible;
-    // return this.toggle = false;
+  }
+  // form fields
+  enableForm() {
+  this.isVisible = true;
   }
 
 }
