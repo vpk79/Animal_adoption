@@ -45,7 +45,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
   getItemsAsObject(url: string) {
-    console.log(url);
+    // console.log(url);
     
     return this.db.object(url).valueChanges();
   }

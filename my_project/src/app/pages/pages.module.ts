@@ -5,6 +5,8 @@ import { HomeModule } from './home/home.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { UserModule } from './user/user.module';
 import { DetailsModule } from './details/details.module';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -12,13 +14,14 @@ import { DetailsModule } from './details/details.module';
 
 @NgModule({
   declarations: [
-    PagesComponent
+    PagesComponent,
+    ErrorPageComponent
   ],
   imports: [
-    CommonModule, HomeModule, GalleryModule, UserModule, DetailsModule
+    CommonModule, HomeModule, GalleryModule, UserModule, DetailsModule, RouterModule
   ],
   exports: [
-    PagesComponent
+    PagesComponent, ErrorPageComponent
   ]
 })
 export class PagesModule { }

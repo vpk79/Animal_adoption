@@ -2,4 +2,4 @@
 
 !!! THE PROJECT IS UNDER CONSTRUCITON !!!
 
-SoftUni Angular final exam project - NOT READY YET :(
+SoftUni Angular final exam project - unfinished...
