@@ -4,7 +4,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, isDevMode } fr
 import { Service } from '../../services/service';
 import { UserDataService } from '../../services/user-data.service';
 import { UserProfil } from '../../../types/users';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, filter, switchMap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
@@ -42,13 +42,15 @@ export class UserProfilComponent implements OnInit {
 
   form: FormGroup = this.fb.group({});
 
+
+
   ngOnInit(): void {
     this.form = this.fb.group({
       email: { value: '', disabled: true },
-      firstname: ['', Validators.nullValidator],
-      lastname: ['', Validators.nullValidator],
-      country: ['', Validators.nullValidator],
-      city: ['', Validators.nullValidator],
+      firstname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]+$')]],
+      lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]+$')]],
+      country: ['', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]+$')]],
+      city: ['', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z\s]+$')]],
       phone: ['', Validators.nullValidator]
     });
 
@@ -81,6 +83,15 @@ export class UserProfilComponent implements OnInit {
 
   }
 
+  // nameValidator(control: FormControl): { [key: string]: any } | null {
+  //   const namePattern = /^[a-zA-Z]+$/;
+
+  //   if (control.value && !namePattern.test(control.value)) {
+  //     return { 'invalidName': true };
+  //   }
+  //   return null;
+  // }
+
  
 
 
@@ -99,20 +110,20 @@ export class UserProfilComponent implements OnInit {
 
     // const emailValue = this.form.get('email')?.value;
 
-    console.log('started');
+    
 
-    const firstnameValue = this.form.get('firstname')?.value.trim();
-    const lastnameValue = this.form.get('lastname')?.value.trim();
-    const countryValue = this.form.get('country')?.value.trim();
-    const cityValue = this.form.get('city')?.value.trim();
-    const phoneValue = this.form.get('phone')?.value.trim();
+    const firstnameValue = this.form.get('firstname')?.value;
+    const lastnameValue = this.form.get('lastname')?.value;
+    const countryValue = this.form.get('country')?.value;
+    const cityValue = this.form.get('city')?.value;
+    const phoneValue = this.form.get('phone')?.value;
 
 
     const updateUser: Partial<UserProfil> = {};
-    updateUser.firstName = firstnameValue || this.userData.firstName;
-    updateUser.lastName = lastnameValue || this.userData.lastName;
-    countryValue ? updateUser.country = countryValue : this.userData.country;
-    cityValue ? updateUser.city = cityValue : this.userData.city;
+    updateUser.firstName = firstnameValue.trim() || this.userData.firstName;
+    updateUser.lastName = lastnameValue.trim() || this.userData.lastName;
+    countryValue.trim() ? updateUser.country = countryValue.trim() : this.userData.country;
+    cityValue.trim() ? updateUser.city = cityValue.trim() : this.userData.city;
     phoneValue ? updateUser.phone = phoneValue : this.userData.phone;
 
     const userInfo = this.localStorageService.getItem('userInfo');
@@ -217,6 +228,7 @@ export class UserProfilComponent implements OnInit {
 
   // toggle save button
   isDisabled(): void {
+    
     this.isVisible = !this.isVisible;
     // return this.toggle = false;
   }

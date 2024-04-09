@@ -32,60 +32,72 @@
                 </div>
                 <div class="user-details">
                     <div class="edit-profil">
-                        <h2>Edit your profile <span (click)="isDisabled()" data-bs-toggle="tooltip" title="Edit profile"><i
-                                    class="fa-solid fa-pen-to-square"></i></span>
+                        <h2>Edit your profile <span (click)="isDisabled()" data-bs-toggle="tooltip"
+                                title="Edit profile"><i class="fa-solid fa-pen-to-square"></i></span>
                         </h2>
                     </div>
-                    <form *ngIf="isVisible" class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <form  class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div>
                             <div class="form-fields" *ngIf="userData$ | async as userData">
                                 <div>
-                                    <input type="text" #firstname name="firstname" id="firstname"
-                                        [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname">
-                                    <input type="text" #lastname name="lastname" id="lastname"
-                                        [placeholder]="userData.lastName || 'Lastname'" formControlName="lastname">
+                                    <label>Firstname:</label>
+                                    <input type="text" #firstname name="firstname" id="firstname"  [class]="!isVisible ? 'disabled' : 'normal'"
+                                        [placeholder]="userData.firstName || 'Firstname'" formControlName="firstname"  [readonly]="!isVisible">
+                                    <label>Lastname:</label>
+                                    <input type="text" #lastname name="lastname" id="lastname" [class]="!isVisible ? 'disabled' : 'normal'"
+                                        [placeholder]="userData.lastName || 'Lastname'" formControlName="lastname"  [readonly]="!isVisible">
                                 </div>
                                 <div>
-                                    <input type="text" #country name="country" id="country"
-                                        [placeholder]="userData.country || 'Country'" formControlName="country">
-                                    <input type="text" #city name="city" id="city"
-                                        [placeholder]="userData.city || 'City'" formControlName="city">
+                                    <label>Country:</label>
+                                    <input type="text" #country name="country" id="country" [class]="!isVisible ? 'disabled' : 'normal'"
+                                        [placeholder]="userData.country || 'Country'" formControlName="country" [readonly]="!isVisible">
+                                    <label>City:</label>
+                                    <input type="text" #city name="city" id="city" [class]="!isVisible ? 'disabled' : 'normal'"
+                                        [placeholder]="userData.city || 'City'" formControlName="city" [readonly]="!isVisible">
                                 </div>
                                 <div>
-                                    <input type="email" #email name="email" id="email"
-                                        [placeholder]="userData.email || 'Email'" [disabled]="true">
-                                    <input type="number" #phone name="phone" id="phone"
-                                        [placeholder]="userData.phone || 'Phone'" formControlName="phone">
+                                    <label>Email:</label>
+                                    <input type="email" #email name="email" id="email" class="disabled"
+                                        [placeholder]="userData.email || 'Email'" [readonly]="true" >
+                                    <label>Phone:</label>
+                                    <input type="number" #phone name="phone" id="phone" [class]="!isVisible ? 'disabled' : 'normal'"
+                                        [placeholder]="userData.phone || 'Phone'" formControlName="phone" [readonly]="!isVisible">
                                 </div>
                             </div>
-                            <div class="save-btn">
-                                <button type="submit">Save</button>
+                            <div class="save-btn" >
+                                <button [class]="isVisible ? 'active' : 'inactive'" type="submit" [disabled]="!isVisible">Save</button>
                             </div>
                         </div>
                     </form>
-                    <div *ngIf="!isVisible" class="userInfo">
+                    <!-- <div *ngIf="!isVisible" class="userInfo">
                         <div class="form-fields info-fields" *ngIf="userData$ | async as userData">
                             <div>
+                                <label>Firstname:</label>
                                 <input type="text" #firstname name="firstname"
                                     [placeholder]="userData.firstName || 'Firstname'" id="firstname" [readonly]="true">
+                                <label>Lastname:</label>
                                 <input type="text" #lastname name="lastname"
                                     [placeholder]="userData.lastName || 'Lastname'" id="lastname" [readonly]="true">
                             </div>
                             <div>
+                                <label>Country:</label>
                                 <input type="text" #country name="country" [placeholder]="userData.country || 'Country'"
                                     id="country" [readonly]="true">
+                                <label>City:</label>
                                 <input type="text" #city name="city" id="city" [placeholder]="userData.city || 'City'"
                                     [readonly]="true">
                             </div>
                             <div>
+                                <label>Email:</label>
                                 <input type="email" #email name="email" [placeholder]="userData.email || 'Email'"
                                     id="email" [readonly]="true">
+                                <label>Phone:</label>
                                 <input type="text" #phone name="phone" [placeholder]="userData.phone || 'Phone'"
                                     id="phone" [readonly]="true">
                             </div>
                         </div>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div *ngIf="isEditErrorVisible" class="profile-error-msg">
@@ -96,6 +108,8 @@
         </div>
     </section>
 </section>
+
 <app-liked-carousel></app-liked-carousel>
+<!-- <app-available-pets></app-available-pets> -->
 <app-donation-section></app-donation-section>
 <app-footer></app-footer>

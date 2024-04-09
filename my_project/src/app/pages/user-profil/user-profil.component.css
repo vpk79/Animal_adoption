@@ -7,7 +7,7 @@
     z-index: 10;
     justify-content: center;
     /* align-items: center; */
-    /* gap: 50px; */
+/* gap: 50px; */
 /* } */
 
 .user-profil-header {
@@ -43,11 +43,13 @@
     z-index: -100;
     opacity: 0.6;
 }
-.user-profile-section{
+
+.user-profile-section {
     width: 100%;
     height: 300px;
     z-index: 10;
 }
+
 .user-profile-section-wrapper {
     position: relative;
     width: 100%;
@@ -86,7 +88,7 @@
     margin-top: 70px;
     /* background-color: lightskyblue; */
     color: purple;
-  
+
     /* border-top: 80px black solid; */
     /* margin-top: 80px; */
     text-align: center;
@@ -110,7 +112,7 @@
     -webkit-text-stroke: 3px purple;
     border: 1px solid groove;
     /* padding: 10px 30px; */
-    
+
 }
 
 .user-picture-wrapper {
@@ -211,24 +213,25 @@
     display: flex;
     justify-content: center;
     /* flex-direction: column; */
-    gap: 30px;
+    /* gap: 30px; */
     flex-wrap: wrap;
 }
 
 .user-form label {
+    width: 12ch;
     margin-right: 10px;
     font-size: 18px;
     font-weight: 600;
-    border: 1px black solid;
+    /* border: 1px black solid; */
     padding: 5px 20px;
-    background-color: rgba(204, 202, 202, 1.0);
+    /* background-color: rgba(204, 202, 202, 1.0); */
 
 }
 
 .form-labels {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; */
     /* justify-content: center; */
     /* align-items: center; */
 }
@@ -238,7 +241,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 35px;
+
+}
+
+.form-fields .normal {
+    background-color: white;
+    color: black;
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+.form-fields .disabled {
+    background-color: unset;
+    color: black;
+    font-size: 22px;
+    font-weight: 600;
 
 }
 
@@ -247,16 +266,18 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    /* gap: 25px; */
+    gap: 25px;
 }
 
 .form-fields div {
     display: flex;
-    gap: 30px;
+    /* gap: 30px; */
+
 }
 
 .form-fields input {
     font-size: 22px;
+    width: 15ch;
     outline: none;
     border: none;
     padding: 1px;
@@ -290,9 +311,10 @@
     margin-top: 20px;
     width: 100%;
 
+
 }
 
-.save-btn button {
+.save-btn button.inactive {
     padding: 5px 25px;
     margin-top: 10px;
     font-size: 18px;
@@ -301,7 +323,27 @@
     color: white;
     background: rgb(2, 0, 36);
     background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgb(96, 47, 121) 35%, rgba(0, 212, 255, 1) 100%);
+    box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: 3s;
 }
+
+.save-btn button.active {
+    padding: 5px 25px;
+    margin-top: 10px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: 1px solid silver;
+    color: white;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgb(96, 47, 121) 35%, rgba(0, 212, 255, 1) 100%);
+    box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.3);
+    transition: 3s;
+    opacity: 1;
+
+}
+
+
 
 .save-btn button:hover {
     background: rgb(2, 0, 36);

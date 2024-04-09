@@ -8,12 +8,12 @@
 
     <nav class="nav">
         <ul>
-            <!-- <li><a routerLink="/home">HOME</a></li> -->
+            <li><a routerLink="/home">HOME</a></li>
             <!-- <li ><a>WELCOME</a></li>
-            <li ><a>ABOUT</a></li>
-            <li><a href="#">DOGS</a></li>
-            <li><a href="#">CATS</a></li>
-            <li><a href="#">CONTACT</a></li> -->
+            <li ><a>ABOUT</a></li> -->
+            <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">DOGS <span class="span-gallery">GALLERY</span></a></li>
+            <li><a routerLink="/gallery" [queryParams]="{animalChoice: cats}">CATS <span class="span-gallery">GALLERY</span></a></li>
+            <!-- <li><a href="#">CONTACT</a></li> -->
             <li *ngIf="!isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
             <li *ngIf="!isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
             <li *ngIf="!isLoggedIn"><a class="greetings">Hello, Guest!</a></li>

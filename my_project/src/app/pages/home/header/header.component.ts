@@ -17,14 +17,15 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
   defaultProfileImg = 'https://firebasestorage.googleapis.com/v0/b/animaladoption-95397.appspot.com/o/main%2Fprofile%2Fuser_profile?alt=media&token=be227233-2374-4bcc-ad6f-1bdc02f405ec';
   @ViewChild('loginform') loginForm!: ElementRef;
-  dogs: string = "dogs";
   imageUrl: string = '';
   userID: string = '';
   userName: string = '';
   userDataObject: UserProfil[] = [];
   userBalance: number = 0;
   userDataSubscription!: Subscription;
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false; 
+  dogs: string = "dogs";
+  cats: string = "cats";
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, public service: Service,
     public authService: AuthService, public localStorage: LocalStorageService, public userData: UserDataService) { }
