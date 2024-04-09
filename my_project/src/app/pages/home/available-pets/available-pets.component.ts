@@ -27,6 +27,7 @@ export class AvailablePetsComponent implements OnInit{
   likedAnimals: any = [];
   toggleLikeError = false;
   userData: Partial<UserProfil> = {};
+  loading: boolean = true;
 
   showAlert() {
     this.toggleLikeError = true;
@@ -38,6 +39,10 @@ export class AvailablePetsComponent implements OnInit{
   ngOnInit(): void {
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
+      
+      
+     
+      
     });
 
     setTimeout(() => {
@@ -56,8 +61,9 @@ export class AvailablePetsComponent implements OnInit{
       if (data) {
         this.userData = data;
         this.likedAnimalsArray = Object.keys(data.animalLikes!) as []
-        console.log(data);
-        console.log(this.likedAnimalsArray);
+        // console.log(data);
+        // console.log(this.likedAnimalsArray);
+        this.loading = false;
       }
     });
 

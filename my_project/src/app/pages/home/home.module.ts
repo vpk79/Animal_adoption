@@ -17,6 +17,8 @@ import { UserModule } from '../user/user.module';
 import { LoginComponent } from '../user/login/login.component';
 import { Service } from '../../services/service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from '../../shared/loader/loader.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -37,10 +39,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     OverFooterLineComponent,
     FooterComponent,
     HeaderCarouselComponent,
+    
    
   ],
   imports: [
-    CommonModule, RouterModule, UserModule, ReactiveFormsModule
+    CommonModule, RouterModule, UserModule, ReactiveFormsModule, SharedModule
   ],
   exports: [HomeComponent,
      HeaderComponent,

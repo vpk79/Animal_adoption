@@ -19,6 +19,8 @@ import { Service } from './services/service';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { UserDataService } from './services/user-data.service';
 import { RouterModule } from '@angular/router';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { SharedModule } from './shared/shared.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -34,6 +36,7 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     
+    
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ const firebaseConfig = {
     AngularFireDatabaseModule,
     HttpClientModule,
     UserProfilModule,
-    RouterModule
+    RouterModule,
+    SharedModule
 
 
   ],

@@ -1,12 +1,11 @@
 import { Service } from './../../../services/service';
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject,  OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { UserDataService } from '../../../services/user-data.service';
 import { UserProfil } from '../../../../types/users';
-import { unsubscribe } from 'diagnostics_channel';
 import { Subscription } from 'rxjs';
 
 @Component({

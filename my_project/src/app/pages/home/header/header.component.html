@@ -11,8 +11,8 @@
             <li><a routerLink="/home">HOME</a></li>
             <!-- <li ><a>WELCOME</a></li>
             <li ><a>ABOUT</a></li> -->
-            <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">DOGS <span class="span-gallery">GALLERY</span></a></li>
-            <li><a routerLink="/gallery" [queryParams]="{animalChoice: cats}">CATS <span class="span-gallery">GALLERY</span></a></li>
+            <li><a routerLink="/gallery" [queryParams]="{animalChoice: dogs}">DOG'<span class="small-symbol">S<br></span><span class="span-gallery">GALLERY</span></a></li>
+            <li><a routerLink="/gallery" [queryParams]="{animalChoice: cats}">CAT'<span class="small-symbol">S<br></span><span class="span-gallery">GALLERY</span></a></li>
             <!-- <li><a href="#">CONTACT</a></li> -->
             <li *ngIf="!isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
             <li *ngIf="!isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>

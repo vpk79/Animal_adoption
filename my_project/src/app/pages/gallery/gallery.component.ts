@@ -23,7 +23,7 @@ export class GalleryComponent implements OnInit {
   oldValue: number = 1;
   searchData: Animals[] = [];
   isLoggedIn = false;
-
+  
 
   constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder) { }
 
