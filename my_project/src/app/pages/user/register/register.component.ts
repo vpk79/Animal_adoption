@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -77,7 +77,7 @@ export class RegisterComponent {
     const lastname = this.form.get('lastname')?.value;
     const gender = this.form.get('gender')?.value;
 
-    if(passwordValue !== rePasswordValue || gender === 'gender'){
+    if (passwordValue !== rePasswordValue || gender === 'gender') {
       return;
     }
 

@@ -29,12 +29,13 @@ export class GalleryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.ngOnInit();
     });
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.getAnimalsData(this.getAnimalChoice());
+    });
    }
-
-
-
-
-
 
   toggleLikeError = false;
 
@@ -52,14 +53,6 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
 
     
-  
-
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.getAnimalsData(this.getAnimalChoice());
-    });
-
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
@@ -90,10 +83,10 @@ export class GalleryComponent implements OnInit {
     
     this.service.getItemsAsArray('/animals/' + choice).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
 
-        this.animalsData = data;
-        console.log(this.animalsData);
+        this.animalsData = [...data];
+        // console.log(this.animalsData);
 
       },
       error: (error) => {
