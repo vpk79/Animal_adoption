@@ -69,7 +69,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.toggleConfirm();
 
       if (this.animalData.Status === 'Adopted') {
-        this.toggleError('This sugar is already adopted')
+        this.toggleError('This sugar is already adopted!')
         console.log(`This ${this.animalData.Type} is already Adopted!`);
         return;
       }
@@ -91,16 +91,36 @@ export class DetailsComponent implements OnInit, OnDestroy {
       }
 
       // update animal status
-      this.service.updateUserProperty(url, animalID, property, newValue);
+      if(url && animalID && property && newValue){
+        this.service.updateUserProperty(url, animalID, property, newValue);
+      } else {
+        this.toggleError('Error! Something goes wrong!');
+        return;
+      }
+      
 
       // add buyed animal in user database
 
       this.animalData.Status = 'Adopted';
-      this.service.updateUserProperty('users', `${userID}/animalsOwned`, animalID, this.animalData);
+      if(userID && animalID && this.animalData){
+        this.service.updateUserProperty('users', `${userID}/animalsOwned`, animalID, this.animalData);
+      } else {
+        this.toggleError('Error! Something goes wrong!');
+        return;
+      }
+      
 
       // update user balance 
       const newUserBalance = userBalance - animalPrice;
-      this.service.updateUserProperty('users', userID, 'balance', newUserBalance);
+      if(userID && newUserBalance){
+        this.service.updateUserProperty('users', userID, 'balance', newUserBalance);
+      } else {
+        this.toggleError('Error! Something goes wrong!');
+        return;
+      }
+      
+
+      this.toggleError('Congratulations! This sugar is now yours!');
 
       console.log('adopted');
     } else {
@@ -115,16 +135,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.errorMsg = msg;
     setTimeout(() => {
       this.isErrorToggled = !this.isErrorToggled;
-    }, 3000);
-
-
-
-
+    }, 4500);
   }
 
   toggleConfirm() {
     this.isConfirmToggled = !this.isConfirmToggled
-
   }
 
 

@@ -13,6 +13,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 
 const routes: Routes = [
+  
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: PagesComponent },
   { path: 'gallery', component: GalleryComponent },
@@ -22,6 +23,9 @@ const routes: Routes = [
   { path: 'details', component: DetailsComponent },
   { path: 'error', component: ErrorPageComponent },
   { path: '**', redirectTo: '/error' },
+ 
+  
+  
   // { path: 'dasboard', component: DashboardComponent },
   
 ];

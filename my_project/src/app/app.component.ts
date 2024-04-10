@@ -3,6 +3,7 @@ import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID } from '@angular/
 import { LocalStorageService } from './services/local-storage.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Service } from './services/service';
+import { UserAuthProfil, UserProfil } from '../types/users';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +20,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     if (isPlatformBrowser(this.platformId)) {
-      const userInfo = this.localStorageService.getItem('userInfo');
+      const userInfo:UserAuthProfil = this.localStorageService.getItem('userInfo');
       if (userInfo == null || userInfo.logged == false) {
         this.service.loggedOut()
       }
       else {
         this.service.loggedIn();
-        const userID = userInfo.userID;
+        const userID:string = userInfo.userID;
         this.userDataService.getOneUserAsObject(userID).subscribe((userData: any) => {
           // console.log(userData);
-          this.userDataService.setUserData(userData);
+          if(userData){
+            this.userDataService.setUserData(userData);
+          }
         });
       }
     }

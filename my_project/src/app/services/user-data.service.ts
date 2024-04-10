@@ -46,14 +46,14 @@ export class UserDataService {
 
 
   // set new data with user credentials
-  setUserAuthData(userData: UserAuthProfil){
+  setUserAuthData(userData: UserAuthProfil) {
     this.userAuthDataSubject.next(userData);
   }
 
   // change user auth property
-  changePropertyInUserAuthData(property: string, value: string){
+  changePropertyInUserAuthData(property: string, value: string) {
     const currentData = this.userAuthDataSubject.getValue();
-    currentData[property]= value;
+    currentData[property] = value;
     this.setUserAuthData(currentData);
   }
 
@@ -61,7 +61,12 @@ export class UserDataService {
 
   // sets User data in local global object
   setUserData(userData: UserProfil) {
-    this.userDataSubject.next(userData);
+    if (userData) {
+      console.log(userData);
+      
+      this.userDataSubject.next(userData);
+    }
+
   }
 
   // change property in user data local global object

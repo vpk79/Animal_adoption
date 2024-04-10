@@ -83,10 +83,10 @@ export class GalleryComponent implements OnInit {
     
     this.service.getItemsAsArray('/animals/' + choice).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
 
         this.animalsData = data.filter((x:any) => x.Status === 'Available');
-        console.log(this.animalsData);
+        // console.log(this.animalsData);
 
       },
       error: (error) => {
@@ -183,6 +183,8 @@ export class GalleryComponent implements OnInit {
       this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
         next: (data: any) => {
           this.animalsData = data;
+          console.log(this.animalsData);
+          
         },
         error: (error) => {
           console.error(error);

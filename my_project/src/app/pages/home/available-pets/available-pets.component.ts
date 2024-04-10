@@ -59,9 +59,9 @@ export class AvailablePetsComponent implements OnInit{
     );
 
     this.userData$.subscribe(data => {
-      if (data) {
+      if (data !== undefined) {
         this.userData = data;
-        this.likedAnimalsArray = Object.keys(data.animalLikes!) as []
+        this.likedAnimalsArray = Object.keys(data.animalLikes!);
         // console.log(data);
         // console.log(this.likedAnimalsArray);
        
