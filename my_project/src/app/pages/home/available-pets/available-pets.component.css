@@ -203,3 +203,22 @@
     background: rgb(2, 0, 36);
     background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(86, 17, 120, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
+
+.not-found-animals {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.not-found-animals h2 {
+    font-size: 42px;
+    color: purple;
+    text-align: center;
+    margin-left: 60px;
+}
+
+.not-found-animals .sad-face {
+    font-size: 42px;
+}

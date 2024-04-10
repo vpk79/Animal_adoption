@@ -28,6 +28,7 @@ export class AvailablePetsComponent implements OnInit{
   toggleLikeError = false;
   userData: Partial<UserProfil> = {};
   loading: boolean = true;
+  timedOut: boolean = false;
 
   showAlert() {
     this.toggleLikeError = true;
@@ -63,7 +64,7 @@ export class AvailablePetsComponent implements OnInit{
         this.likedAnimalsArray = Object.keys(data.animalLikes!) as []
         // console.log(data);
         // console.log(this.likedAnimalsArray);
-        this.loading = false;
+       
       }
     });
 
@@ -73,6 +74,10 @@ export class AvailablePetsComponent implements OnInit{
         //  this.animalsData = data;
         for (let i = 0; i < data.length; i += 4) {
           this.animalsDataArray.push(data.slice(i, i + 4));
+
+          setTimeout(() => {
+            this.timedOut= true;
+          }, 3000);
         }
         //  console.log(this.animalsDataArray);
       }

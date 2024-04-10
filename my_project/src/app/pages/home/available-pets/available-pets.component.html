@@ -13,7 +13,7 @@
                     (click)="service.toggleRegisterForm()">Sign Up</a></span></p>
     </div>
     <div id="myCarousel2" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-inner">
+        <div class="carousel-inner" *ngIf="animalsDataArray.length > 0">
             <div class="carousel-item" *ngFor="let animalsArray of animalsDataArray; let i = index"
                 [class.active]="i === 0">
                 <div class="cards-wrapper">
@@ -217,4 +217,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+            <div class="not-found-animals" *ngIf="animalsDataArray.length === 0 && timedOut">
+            <h2><i class="fa-regular fa-face-frown"></i> Sorry, no-available animals by these criteria!</h2>
+            </div>
 </section>
