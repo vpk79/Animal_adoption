@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Animals } from '../../../types/animals';
@@ -24,7 +24,7 @@ export class GalleryComponent implements OnInit {
   searchData: Animals[] = [];
   isLoggedIn = false;
 
-
+ 
   constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
     this.route.params.subscribe(params => {
       this.ngOnInit();

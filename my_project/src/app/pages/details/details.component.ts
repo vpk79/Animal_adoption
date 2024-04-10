@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Service } from '../../services/service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { UserDataService } from '../../services/user-data.service';
-import { Subscription } from 'rxjs';
+import { Subscription, timeout } from 'rxjs';
 import { Animals } from '../../../types/animals';
+import { time } from 'console';
 
 
 @Component({
@@ -23,10 +24,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   animalType: string = '';
   animalID: string = '';
   animalChoice!: Subscription;
-  animalData! : any;
+  animalData!: any;
   animalDataSubs!: Subscription
   isConfirmToggled: boolean = false;
-
+  isErrorToggled: boolean = false;
+  errorMsg: string = '';
 
   ngOnInit(): void {
 
@@ -67,7 +69,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.toggleConfirm();
 
       if (this.animalData.Status === 'Adopted') {
-        console.log(`This ${this.animalData.Type} is already Adopted`);
+        this.toggleError('This sugar is already adopted')
+        console.log(`This ${this.animalData.Type} is already Adopted!`);
         return;
       }
 
@@ -80,12 +83,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
         userBalance = data.balance;
         // console.log(userBalance);
       });
-      
-      if(userBalance < animalPrice){
+
+      if (userBalance < animalPrice) {
+        this.toggleError('You don`t have enough money!')
         console.log('Sorry, you have not enough money in your account balance!');
         return;
       }
-      
+
       // update animal status
       this.service.updateUserProperty(url, animalID, property, newValue);
 
@@ -105,8 +109,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleConfirm(){
+
+  toggleError(msg: string) {
+    this.isErrorToggled = !this.isErrorToggled;
+    this.errorMsg = msg;
+    setTimeout(() => {
+      this.isErrorToggled = !this.isErrorToggled;
+    }, 3000);
+
+
+
+
+  }
+
+  toggleConfirm() {
     this.isConfirmToggled = !this.isConfirmToggled
+
   }
 
 

@@ -522,10 +522,82 @@
     box-shadow: 5px 10px 8px 0 rgba(22, 22, 26, 0.18);
 }
 
-.confirmBtn.error{
-height: 40px;
+.confirmBtn.error {
+    display: flex;
+    height: 40px;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 3px groovy black;
+    box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.7);
+
 }
 
-.confirmBtn.error p{
-    
+.confirmBtn.error p {
+    font-size: 16px;
+    /* padding-bottom: 10px; */
+    padding-top: 13px;
+    color: white;
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
+
+}
+
+
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

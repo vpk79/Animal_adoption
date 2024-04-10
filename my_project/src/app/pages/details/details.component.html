@@ -34,7 +34,7 @@
                             <p>Size: <span>{{animalData.Size}}</span></p>
                             <p>Weight: <span>{{animalData.Weight}}</span></p>
                         </div>
-                        <p class="adopt-link"><a (click)="toggleConfirm()">Adopt</a></p>
+                        <p class="adopt-link"><a (click)="toggleConfirm()" >Adopt</a></p>
                     </div>
                 </div>
                 <div class="animal-description">
@@ -116,9 +116,9 @@
 
     </div>
 
-    <div class="confirmBtn error" tabindex="-1">
+    <div *ngIf="isErrorToggled"  class="confirmBtn error" tabindex="-1">
         <div class="error-msg">
-            <p>You have not enough money!</p>
+            <p>{{errorMsg}}</p>
         </div>
     </div>
 
