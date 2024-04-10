@@ -79,14 +79,14 @@ export class GalleryComponent implements OnInit {
   // Loading gallery data from database by url + user choice
 
   getAnimalsData(choice: string) {
-    console.log(choice);
+    // console.log(choice);
     
     this.service.getItemsAsArray('/animals/' + choice).subscribe({
       next: (data: any) => {
-        // console.log(data);
+        console.log(data);
 
-        this.animalsData = [...data];
-        // console.log(this.animalsData);
+        this.animalsData = data.filter((x:any) => x.Status === 'Available');
+        console.log(this.animalsData);
 
       },
       error: (error) => {

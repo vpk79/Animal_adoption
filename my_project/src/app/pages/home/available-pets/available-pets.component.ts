@@ -68,7 +68,7 @@ export class AvailablePetsComponent implements OnInit{
     });
 
 
-    this.service.getAnimalsDataByStatus('Available').subscribe({   // Could be 'Reserved' or 'Available'
+    this.service.getAnimalsDataByStatus('Available').subscribe({   // Could be 'Adopted' or 'Available'
       next: (data: any) => {
         //  this.animalsData = data;
         for (let i = 0; i < data.length; i += 4) {

@@ -50,7 +50,7 @@ export class Service {
     return this.db.object(url).valueChanges();
   }
 
-  // Add items in database
+  // Add new items in database
 
   addItem(url: string, item: string | UserProfil) {
     this.db.list(url).push(item);
@@ -77,6 +77,8 @@ export class Service {
 
 
   updateUserProperty(url: string, userID: string, property: string, newValue: any) {
+    console.log(url, userID, property, newValue);
+    
     this.db.object(`/${url}/${userID}`).update({ [property]: newValue });
     console.log('updated');
     

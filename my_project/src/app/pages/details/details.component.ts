@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Service } from '../../services/service';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { UserDataService } from '../../services/user-data.service';
 
 
 @Component({
@@ -10,7 +12,12 @@ import { Service } from '../../services/service';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private service: Service, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+    private service: Service,
+    private router: Router,
+    private localStorageService: LocalStorageService,
+    private userDataService: UserDataService) { }
+
   animalType: string = '';
   animalID: string = '';
   animalChoice: any;
@@ -48,9 +55,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   adopt() {
     if (this.service.isLoggedIn$) {
-      const type = this.animalData.type == 'Cat' ? 'cats' : 'dogs';
+      const type = this.animalData.Type == 'Cat' ? 'cats' : 'dogs';
       const url: string = `animals/${type}`;
-      const ID: string = this.animalData.ID;
+      const animalID: string = this.animalData.ID;
       const property: string = 'Status';
       const newValue: string = 'Adopted';
 
@@ -58,21 +65,33 @@ export class DetailsComponent implements OnInit, OnDestroy {
         console.log(`This ${this.animalData.Type} is already Adopted`);
         return;
       }
-      this.service.updateUserProperty(url, ID, property, newValue);
 
+      // check if user have enough money in his balance
+      let userID!: string;
+      let userBalance!: number;
+      const animalPrice = Number(this.animalData.Price);
+      this.userDataService.userData$.subscribe(data => {
+        userID = data.ID;
+        userBalance = data.balance;
+        // console.log(userBalance);
+      });
+      
+      if(userBalance < animalPrice){
+        console.log('Sorry, you have not enough money in your account balance!');
+        return;
+      }
 
-      console.log(this.animalData);
-      console.log(this.animalData.Status);
+      // update animal status
+      this.service.updateUserProperty(url, animalID, property, newValue);
 
+      // add buyed animal in user database
 
-      // updateUserProperty(url: string, userID: string, property: string, newValue: any) {
-      //   this.db.object(`/${url}/${userID}`).update({ [property]: newValue });
-      // }
+      this.animalData.Status = 'Adopted';
+      this.service.updateUserProperty('users', `${userID}/animalsOwned`, animalID, this.animalData);
 
-
-
-
-
+      // update user balance 
+      const newUserBalance = userBalance - animalPrice;
+      this.service.updateUserProperty('users', userID, 'balance', newUserBalance);
 
       console.log('adopted');
     } else {
