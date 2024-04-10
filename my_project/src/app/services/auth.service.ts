@@ -2,7 +2,7 @@ import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { Router } from '@angular/router';
-import { UserProfil } from '../../types/users';
+import { UserAuthProfil, UserProfil } from '../../types/users';
 import { Service } from './service';
 import { UserDataService } from './user-data.service';
 
@@ -28,14 +28,15 @@ export class AuthService {
         .then((userCredential) => {
           const user = userCredential.user;
           if (user) {
-            const userID = user.uid;
-            const userEmail = user.email;
+            const userID: string = user.uid;
+            const userEmail: string = user.email as string;
           
             user.getIdToken().then(token => {
-              const userToken = token;
-              const logged = true;
-              const userObject = { userID, userEmail, userToken, logged }
+              const userToken: string = token;
+              const logged: boolean = true;
+              const userObject: UserAuthProfil = { userID, userEmail, userToken, logged };
 
+              this.userDataService.setUserAuthData(userObject);
               this.localStorageService.setItem('userInfo', userObject );
 
               this.userDataService.getOneUserAsObject(userID).subscribe((userData: any) => {
@@ -98,15 +99,15 @@ export class AuthService {
         //   console.error('Error getting user token:', err);
         // });
       }
-      this.errorMessage = ' Registration Successful! Welcome to us!';
+      this.errorMessage = ' Registration Successful! Welcome to our site!';
       this.login(email, password).then((result: any) => {
         if (result.success) {
           this.service.loggedIn();
-          console.log('Login successful');
+          // console.log('Login successful');
           setTimeout(() => {
           }, 1500);
         } else {
-          console.error('Login error:', result.status);
+          // console.error('Login error:', result.status);
         }
       })
       setTimeout(() => {

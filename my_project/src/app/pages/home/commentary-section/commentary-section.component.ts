@@ -1,4 +1,3 @@
-import { unsubscribe } from 'diagnostics_channel';
 import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, PLATFORM_ID, Renderer2, SimpleChanges, ViewChild, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../../services/service';
@@ -29,23 +28,14 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
 
 
   constructor(private fb: FormBuilder, public service: Service,
-     private localStorage: LocalStorageService, 
-     private renderer: Renderer2) {  
-    if (isPlatformBrowser(PLATFORM_ID)){
-      this.localStorageSubscription = fromEvent<StorageEvent>(window, 'storage').subscribe((event: StorageEvent) => {
-        console.log(event.key);
-        
-        if (event.key == 'userInfo') {
-          this.ngOnInit();
-          console.log('Променено в localStorage:', event.newValue);
-        }
-      });
-    }
-    // this.checkUserState = this.service.isLoggedIn$.subscribe(isLogged => {
-    //   if (isLogged || !isLogged)  { 
-    //     this.ngOnInit();
-    //   }})
-     }
+    private localStorage: LocalStorageService,
+    private renderer: Renderer2) {
+
+    this.checkUserState = this.service.isLoggedIn$.subscribe(isLogged => {
+      // console.log('noted');
+      this.ngOnInit();
+    })
+  }
   @ViewChild('btnNext2') btnNext2!: ElementRef;
   @ViewChild('commentArea') commentArea!: ElementRef;
 
@@ -62,8 +52,8 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
       }
     }, 3500);
 
-    console.log(this.isRateToggled);
-    
+    // console.log(this.isRateToggled);
+
 
     // comentary validators
     this.form = this.fb.group({
@@ -76,13 +66,14 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
 
     this.loginCheck = this.service.isLoggedIn$.subscribe(isLoggedIn => {
       // console.log('trigerred');
-      
+
       if (isLoggedIn == true) {
         this.isUserLoggedIn = true;
-        setTimeout(() => {
-          const userInfo = this.localStorage.getItem('userInfo');
-          this.userID = userInfo ? userInfo.userID : null;
-        }, 2000);
+
+        const userInfo = this.localStorage.getItem('userInfo');
+        this.userID = userInfo ? userInfo.userID : null;
+        // console.log(this.userID, 'logincheck');
+
       } else {
         this.isUserLoggedIn = false;
         this.isRateToggled = false;
@@ -98,7 +89,7 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
     this.checkIsUserCommented();
   }
 
-  
+
 
   // add new comment
 
@@ -114,7 +105,7 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
       this.isRateToggled = false;
       this.toggleCommentForm(event);
       this.form.reset();
-    }, 300);
+    }, 200);
 
   }
 
@@ -138,7 +129,7 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
           for (let i = 0; i < this.userComments.length; i += 3) {
             this.finalUserCommentsArray = [...this.finalUserCommentsArray, this.userComments.slice(i, i + 3)];
           }
-          // this.printall()
+
 
         })
       });
@@ -156,34 +147,34 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
 
   // Check if user is already commented - 1 comment per user is allowed!
   checkIsUserCommented() {
-    console.log('triggered');
-    
+    // console.log('triggered2');
+
     if (this.service.isLoggedIn$.subscribe(isLogged => {
       if (isLogged == true) {
         const userInfo = this.localStorage.getItem('userInfo');
-        console.log(isLogged);
-        
+        // console.log(isLogged);
+
         this.userID = userInfo ? userInfo.userID : null;
-        console.log(this.userID);
-        
-        if(this.userID !== null){
+        // console.log(this.userID);
+
+        if (this.userID !== null) {
           this.service.checkUserComment(this.userID).subscribe(isCommented => {
             console.log(this.userID);
             // console.log(isCommented);
 
             if (!isCommented) {
               this.isRateToggled = true;
-              console.log('user may comment');
+              // console.log('user may comment');
             } else {
               this.isRateToggled = false;
-              console.log('user cannot comment');
+              // console.log('user cannot comment');
             }
             // console.log(this.userID);
 
           })
 
         }
-        
+
       }
     })) {
 
@@ -193,14 +184,15 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
 
   deleteComment(event: Event) {
     event.preventDefault();
-
-    this.service.deleteSiteComments(this.postForDeleteID);
-    setTimeout(() => {
-      this.loadComments();
-      this.toggleConfirm(event);
-    }, 500);
-    this.isRateToggled = true;
+    if(this.postForDeleteID){
+      this.service.deleteSiteComments(this.postForDeleteID);
+    } else {
+      // console.log('delete failed, noID');
+    }
+    this.loadComments();
+    this.toggleConfirm(event);
     // console.log(event.target);
+    this.isRateToggled = true;
   }
 
   editComment(event: Event) {
@@ -225,9 +217,11 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
   toggleConfirm(event: Event) {
     // console.log((event.target as HTMLButtonElement).id);
     this.postForDeleteID = ((event.target as HTMLButtonElement).id);
+    // console.log(this.postForDeleteID);
+    
     this.isConfirmToggled = !this.isConfirmToggled;
-    
-    
+
+    // return this.postForDeleteID;
     // console.log(this.isConfirmToggled);
 
   }

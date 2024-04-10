@@ -170,8 +170,10 @@ export class Service {
   // delete Site commentary in database
 
   deleteSiteComments(userID: string): void {
-    console.log(userID);
+    // console.log(userID);
     const ref = this.db.database.ref('/siteComments/' + userID);
+    console.log(userID,'forDelete');
+    
     // console.log('reference', ref);
 
     // Проверяваме дали записът съществува преди да го изтрием
@@ -202,7 +204,7 @@ export class Service {
   loggedIn() {
     this.isLoggedInSubject.next(true);
   }
-
+  
   loggedOut() {
     this.isLoggedInSubject.next(false);
   }

@@ -15,3 +15,11 @@ export interface UserProfil {
     adopted_animals: string[] | null,
     profile_img: string | null
 }
+
+
+export interface UserAuthProfil {
+    userID: string,
+    userEmail: string,
+    userToken: string,
+    logged: boolean
+}

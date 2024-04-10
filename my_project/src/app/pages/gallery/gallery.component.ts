@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Animals } from '../../../types/animals';
-import { Observable, tap } from 'rxjs';
+import { Observable, filter, tap } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -16,22 +16,31 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class GalleryComponent implements OnInit {
 
-  choosedAnimal: string = '';
+  choosedAnimal!: any;
   animalsData: Animals[] = [];
   animalData = {};
   likes: string = '';
   oldValue: number = 1;
   searchData: Animals[] = [];
   isLoggedIn = false;
-  
 
-  constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder) { }
+
+  constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
+    this.route.params.subscribe(params => {
+      this.ngOnInit();
+    });
+   }
+
+
+
+
+
 
   toggleLikeError = false;
 
   form: FormGroup = new FormGroup({});
 
- 
+
 
   showAlert() {
     this.toggleLikeError = true;
@@ -41,6 +50,15 @@ export class GalleryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+  
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.getAnimalsData(this.getAnimalChoice());
+    });
 
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
@@ -52,29 +70,37 @@ export class GalleryComponent implements OnInit {
       animalAge: ['', Validators.required]
     });
 
-  
-    //  Taking user animal choice from previous page
+  }
+
+
+  //  Taking user animal choice from previous page
+  getAnimalChoice() {
     this.route.queryParams.subscribe(params => {
       this.choosedAnimal = params['animalChoice'];
       // console.log(this.choosedAnimal); 
     });
+    return this.choosedAnimal;
+  }
 
-    // Loading gallery data from database by url + user choice
 
-    this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
+  // Loading gallery data from database by url + user choice
+
+  getAnimalsData(choice: string) {
+    console.log(choice);
+    
+    this.service.getItemsAsArray('/animals/' + choice).subscribe({
       next: (data: any) => {
-        // console.log(data);
-        
+        console.log(data);
+
         this.animalsData = data;
-        // console.log(this.animalsData);
-        
+        console.log(this.animalsData);
+
       },
       error: (error) => {
         console.error(error);
       }
     });
   }
-
 
   // Search animals in database
 
@@ -192,6 +218,7 @@ export class GalleryComponent implements OnInit {
       }
     });
   }
+
 
 
   // Gallery likes functions
