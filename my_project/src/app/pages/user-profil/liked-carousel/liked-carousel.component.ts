@@ -55,7 +55,7 @@ export class LikedCarouselComponent implements OnInit{
         this.userData = data;
         this.likedAnimalsArray = Object.values(this.userData.animalLikes!) as []
         
-        console.log(this.likedAnimalsArray);
+        // console.log(this.likedAnimalsArray);
         
         for (let i = 0; i < this.likedAnimalsArray.length; i += 4) {
           this.likedAnimals = [...this.likedAnimals,this.likedAnimalsArray.slice(i, i + 4)];
@@ -64,7 +64,7 @@ export class LikedCarouselComponent implements OnInit{
         if(this.arrayOfSortedAnimals.length > 0) {
           this.showSection = true;
         }
-        console.log(this.arrayOfSortedAnimals);
+        // console.log(this.arrayOfSortedAnimals);
         this.likedAnimals = [];
         
         // console.log(data);

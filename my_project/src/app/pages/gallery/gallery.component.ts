@@ -66,7 +66,7 @@ export class GalleryComponent implements OnInit {
         // console.log(data);
         
         this.animalsData = data;
-        console.log(this.animalsData);
+        // console.log(this.animalsData);
         
       },
       error: (error) => {

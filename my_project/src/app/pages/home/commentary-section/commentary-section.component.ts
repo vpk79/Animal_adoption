@@ -1,16 +1,17 @@
 import { unsubscribe } from 'diagnostics_channel';
-import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewChild, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, PLATFORM_ID, Renderer2, SimpleChanges, ViewChild, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../../services/service';
 import { LocalStorageService } from '../../../services/local-storage.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-commentary-section',
   templateUrl: './commentary-section.component.html',
   styleUrl: './commentary-section.component.css'
 })
-export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CommentarySectionComponent implements OnInit, OnDestroy {
   isRateToggled: boolean = false;
   submitted: boolean = false;
   userID: string = '';
@@ -23,9 +24,28 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
   isUserLoggedIn: boolean = false;
   loginCheck!: Subscription;
   isReadyToShowButton: boolean = false;
+  checkUserState!: Subscription;
+  localStorageSubscription!: Subscription;
 
 
-  constructor(private fb: FormBuilder, public service: Service, private localStorage: LocalStorageService, private renderer: Renderer2) { }
+  constructor(private fb: FormBuilder, public service: Service,
+     private localStorage: LocalStorageService, 
+     private renderer: Renderer2) {  
+    if (isPlatformBrowser(PLATFORM_ID)){
+      this.localStorageSubscription = fromEvent<StorageEvent>(window, 'storage').subscribe((event: StorageEvent) => {
+        console.log(event.key);
+        
+        if (event.key == 'userInfo') {
+          this.ngOnInit();
+          console.log('Променено в localStorage:', event.newValue);
+        }
+      });
+    }
+    // this.checkUserState = this.service.isLoggedIn$.subscribe(isLogged => {
+    //   if (isLogged || !isLogged)  { 
+    //     this.ngOnInit();
+    //   }})
+     }
   @ViewChild('btnNext2') btnNext2!: ElementRef;
   @ViewChild('commentArea') commentArea!: ElementRef;
 
@@ -42,9 +62,11 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
       }
     }, 3500);
 
+    console.log(this.isRateToggled);
+    
 
     // comentary validators
-    this.form = this.fb.nonNullable.group({
+    this.form = this.fb.group({
       commentary: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(400)]],
       stars: [''],
 
@@ -53,13 +75,14 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
     // get userID if is logged
 
     this.loginCheck = this.service.isLoggedIn$.subscribe(isLoggedIn => {
-
+      // console.log('trigerred');
+      
       if (isLoggedIn == true) {
         this.isUserLoggedIn = true;
         setTimeout(() => {
           const userInfo = this.localStorage.getItem('userInfo');
-          this.userID = userInfo.userID;
-        }, 1000);
+          this.userID = userInfo ? userInfo.userID : null;
+        }, 2000);
       } else {
         this.isUserLoggedIn = false;
         this.isRateToggled = false;
@@ -75,20 +98,7 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
     this.checkIsUserCommented();
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
-
-  // printall() {
-  //   // console.log(this.userComments);
-  //   console.log(this.finalUserCommentsArray);
-
-  // }
-
-
-
-
+  
 
   // add new comment
 
@@ -146,24 +156,34 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
 
   // Check if user is already commented - 1 comment per user is allowed!
   checkIsUserCommented() {
+    console.log('triggered');
+    
     if (this.service.isLoggedIn$.subscribe(isLogged => {
-      if (isLogged) {
+      if (isLogged == true) {
         const userInfo = this.localStorage.getItem('userInfo');
-        this.userID = userInfo.userID;
-        this.service.checkUserComment(this.userID).subscribe(isCommented => {
-          // console.log(this.userID);
-          // console.log(isCommented);
-          
-          if (!isCommented) {
-            this.isRateToggled = true;
-            // console.log('user may comment');
-          } else {
-            this.isRateToggled = false;
-            // console.log('user cannot comment');
-          }
-          // console.log(this.userID);
+        console.log(isLogged);
+        
+        this.userID = userInfo ? userInfo.userID : null;
+        console.log(this.userID);
+        
+        if(this.userID !== null){
+          this.service.checkUserComment(this.userID).subscribe(isCommented => {
+            console.log(this.userID);
+            // console.log(isCommented);
 
-        })
+            if (!isCommented) {
+              this.isRateToggled = true;
+              console.log('user may comment');
+            } else {
+              this.isRateToggled = false;
+              console.log('user cannot comment');
+            }
+            // console.log(this.userID);
+
+          })
+
+        }
+        
       }
     })) {
 
@@ -179,6 +199,7 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
       this.loadComments();
       this.toggleConfirm(event);
     }, 500);
+    this.isRateToggled = true;
     // console.log(event.target);
   }
 
@@ -205,6 +226,8 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
     // console.log((event.target as HTMLButtonElement).id);
     this.postForDeleteID = ((event.target as HTMLButtonElement).id);
     this.isConfirmToggled = !this.isConfirmToggled;
+    
+    
     // console.log(this.isConfirmToggled);
 
   }
@@ -218,7 +241,8 @@ export class CommentarySectionComponent implements OnInit, AfterViewInit, OnDest
 
   ngOnDestroy(): void {
     this.loginCheck.unsubscribe;
-
+    // this.checkUserState.unsubscribe;
+    // this.localStorageSubscription.unsubscribe; 
   }
 
 }

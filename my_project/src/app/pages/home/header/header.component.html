@@ -16,8 +16,8 @@
             <!-- <li><a href="#">CONTACT</a></li> -->
             <li *ngIf="!isLoggedIn" (click)="service.toggleLoginForm()"><a>LOGIN</a></li>
             <li *ngIf="!isLoggedIn" (click)="service.toggleRegisterForm()"><a>REGISTER</a></li>
-            <li *ngIf="!isLoggedIn"><a class="greetings">Hello, Guest!</a></li>
-            <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Visit your profil"><a routerLink="/profile" class="greetings">Hello, {{userName}}!</a></li>
+            <li *ngIf="!isLoggedIn"><a class="greetings">Hello,<br>Guest!</a></li>
+            <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Visit your profil"><a routerLink="/profile" class="greetings">Hello,<br> {{userName}}!</a></li>
             <li *ngIf="!isLoggedIn"><a class="imgProfileHolder"><img [src]="defaultProfileImg" alt=""></a></li>
             <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Visit your profil"><a a routerLink="/profile" class="imgProfileHolder"><img [src]="imageUrl" alt=""></a><span class="myAcc">My Account</span></li>
             <li *ngIf="isLoggedIn" data-bs-toggle="tooltip" title="Your funds"><a class="balance">Balance: ${{userBalance}}</a></li>

@@ -23,6 +23,7 @@
     text-align: center;
     /* padding: 30px; */
     z-index: 20;
+    box-shadow: 3px 5px 12px 2px rgba(2, 0, 36, 1);
 }
 
 .selection-cards li {

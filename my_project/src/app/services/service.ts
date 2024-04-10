@@ -2,7 +2,7 @@ import { UserProfil } from './../../types/users';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { BehaviorSubject, Observable,  map } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 
 
 
@@ -21,22 +21,22 @@ export class Service {
   private isLoggedInSubject = new BehaviorSubject<any>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
- 
-
- 
-updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
-  const likedAnimal = {[animalID]: animalName}
-// console.log(userID);
-
-//   console.log(likedAnimal);
-  
-  this.updateUserPropertyByValue('users', userID, 'animalLikes', likedAnimal);
-}
-  
-  
 
 
- 
+
+  updateUserLikedAnimals(userID: string, animalID: string, animalName: string) {
+    const likedAnimal = { [animalID]: animalName }
+    // console.log(userID);
+
+    //   console.log(likedAnimal);
+
+    this.updateUserPropertyByValue('users', userID, 'animalLikes', likedAnimal);
+  }
+
+
+
+
+
 
   // Get data from database - by 2 ways
 
@@ -46,7 +46,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
 
   getItemsAsObject(url: string) {
     // console.log(url);
-    
+
     return this.db.object(url).valueChanges();
   }
 
@@ -81,7 +81,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
   updateUserPropertyByValue(url: string, userID: string, property: string, newValue: any) {
-    this.db.object(`/${url}/${userID}/${property}`).update( newValue );
+    this.db.object(`/${url}/${userID}/${property}`).update(newValue);
   }
 
 
@@ -98,7 +98,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
       });
   }
 
-// get one User by his userID
+  // get one User by his userID
   getOneUserAsObject(userID: string): Observable<[]> {
     return this.getItemsAsObject('/users/' + userID).pipe(
       map((data: any) => {
@@ -115,9 +115,9 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
     let newComment: {} = {};
 
     newComment = { postID, userID, text, rating };
-        this.updateDatabaseAsObject('siteComments', userID, newComment);
-        // check.unsubscribe();
-        console.log('comment posted');
+    this.updateDatabaseAsObject('siteComments', userID, newComment);
+    // check.unsubscribe();
+    console.log('comment posted');
 
     // const check = this.checkUserComment(userID).subscribe(isCommented => {
     //   if (isCommented) {
@@ -138,19 +138,26 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   // check if user already commented - 1 comment per user allowed
 
   checkUserComment(userID: string): Observable<boolean> {
-    return this.getItemsAsObject('/siteComments/' + userID).pipe(
-      map((data: any) => {
-        const isCommented = data.userID === userID;
-        // console.log(data);
-        
-        console.log(isCommented);
-        return isCommented;
-      })
-    );
+    if (userID !== null) {
+      return this.getItemsAsObject('/siteComments/' + userID).pipe(
+        map((data: any) => {
+          const isCommented = data;
+          // console.log(data);
+
+          // console.log(isCommented);
+          return isCommented;
+        })
+      );
+
+    } else {
+      return of(false);
+    }
   }
 
+
+
   // return all site comments as array
-  
+
   getAllComments(): Observable<[]> {
     return this.getItemsAsArray('/siteComments/').pipe(
       map((data: any) => {
@@ -165,13 +172,13 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   deleteSiteComments(userID: string): void {
     console.log(userID);
     const ref = this.db.database.ref('/siteComments/' + userID);
-    console.log('reference', ref);
-    
+    // console.log('reference', ref);
+
     // Проверяваме дали записът съществува преди да го изтрием
     ref.once('value')
       .then((snapshot) => {
-        console.log('snapshot',snapshot);
-        
+        console.log('snapshot', snapshot);
+
         if (snapshot.exists()) {
           // Записът съществува, изтриваме го
           ref.remove()
@@ -201,7 +208,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
 
-  deleteUserProperty(url: string, userID: string, property: string, key:string): void {
+  deleteUserProperty(url: string, userID: string, property: string, key: string): void {
     console.log(userID);
     const ref = this.db.database.ref(`/${url}/${userID}/${property}/${key}`);
     console.log('reference', ref);
@@ -334,7 +341,7 @@ updateUserLikedAnimals(userID:string, animalID:string, animalName:string){
   }
 
 
- 
+
 
   // Toggle Login and Register forms
 

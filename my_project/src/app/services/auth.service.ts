@@ -133,10 +133,10 @@ export class AuthService {
 
   logout() {
     this.fireauth.signOut().then(() => {
-      localStorage.removeItem('userInfo');
+      // localStorage.removeItem('userInfo');
       localStorage.clear();
       this.service.loggedOut();
-      this.userDataService.changeUserDataProperty('profile_img', this.defaultProfileImg)
+      this.userDataService.changeUserDataProperty('profile_img', this.defaultProfileImg);
       this.router.navigate(['/home']);
     }, err => {
       alert(err.message);
