@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Service } from '../../services/service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { UserDataService } from '../../services/user-data.service';
+import { Subscription } from 'rxjs';
+import { Animals } from '../../../types/animals';
 
 
 @Component({
@@ -20,8 +22,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   animalType: string = '';
   animalID: string = '';
-  animalChoice: any;
-  animalData: any;
+  animalChoice!: Subscription;
+  animalData! : any;
+  animalDataSubs!: Subscription
+  isConfirmToggled: boolean = false;
 
 
   ngOnInit(): void {
@@ -42,10 +46,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   getAnimalData(animalID: string, animalType: string) {
-    console.log(animalID, animalType);
+    // console.log(animalID, animalType);
 
     let animalPath: string = animalType == 'Cat' ? 'cats' : 'dogs';
-    this.animalData = this.service.getItemsAsObject(`/animals/${animalPath}/${animalID}`).subscribe(data => {
+    this.animalDataSubs = this.service.getItemsAsObject(`/animals/${animalPath}/${animalID}`).subscribe(data => {
       this.animalData = data;
       console.log(this.animalData);
 
@@ -60,6 +64,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       const animalID: string = this.animalData.ID;
       const property: string = 'Status';
       const newValue: string = 'Adopted';
+      this.toggleConfirm();
 
       if (this.animalData.Status === 'Adopted') {
         console.log(`This ${this.animalData.Type} is already Adopted`);
@@ -80,7 +85,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         console.log('Sorry, you have not enough money in your account balance!');
         return;
       }
-
+      
       // update animal status
       this.service.updateUserProperty(url, animalID, property, newValue);
 
@@ -98,6 +103,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       console.log('not adopted');
 
     }
+  }
+
+  toggleConfirm(){
+    this.isConfirmToggled = !this.isConfirmToggled
   }
 
 

@@ -8,10 +8,11 @@
     <div class="section-bgnd">
         <img src="../../../assets/paws.jpg" alt="">
     </div>
-    <div *ngIf="animalData !==null">
-        <h2 class="animal-name">Here are the details about our precious {{animalData.Type == 'Cat' ? 'cat':'dog'}} {{animalData.Name}}!
+    <div *ngIf="animalData">
+        <h2 class="animal-name">Here are the details about our precious {{animalData.Type == 'Cat' ? 'cat':'dog'}}
+            {{animalData.Name}}!
         </h2>
-        <div class="details-content" >
+        <div class="details-content">
             <div class="details-wrapper">
                 <div class="animal-details">
                     <div class="animal-img-wrapper">
@@ -28,11 +29,12 @@
                             <p>Gender: <span>{{animalData.Sex}}</span></p>
                             <p>Age: <span>{{animalData.Age}}</span></p>
                             <p>Primary Color: <span>{{animalData.Primary_Color}}</span></p>
-                            <p>Secondary Color: <span>{{!animalData.Secondary_Color ? animalData.Secondary_Color : 'none'}}</span></p>
+                            <p>Secondary Color: <span>{{!animalData.Secondary_Color ? animalData.Secondary_Color :
+                                    'none'}}</span></p>
                             <p>Size: <span>{{animalData.Size}}</span></p>
                             <p>Weight: <span>{{animalData.Weight}}</span></p>
                         </div>
-                        <p class="adopt-link"><a (click)="adopt()">Adopt</a></p>
+                        <p class="adopt-link"><a (click)="toggleConfirm()">Adopt</a></p>
                     </div>
                 </div>
                 <div class="animal-description">
@@ -103,14 +105,29 @@
             </div>
         </div>
     </div>
-    
+    <div *ngIf="isConfirmToggled" class="confirmBtn" tabindex="-1">
+
+        <p>Adopt this little cutie?</p>
+
+        <div class="confirmBtn-footer">
+            <button type="button" (click)="adopt()" class="btn btn-primary">Yes</button>
+            <button type="button" (click)="toggleConfirm()" class="btn btn-secondary">No</button>
+        </div>
+
+    </div>
+
+    <div class="confirmBtn error" tabindex="-1">
+        <div class="error-msg">
+            <p>You have not enough money!</p>
+        </div>
+    </div>
+
 
 </section>
 
 
-    <!-- <app-available-pets></app-available-pets> -->
-    
-    <app-donation-section></app-donation-section>
-    <app-over-footer-line></app-over-footer-line>
-    <app-footer></app-footer>
+<!-- <app-available-pets></app-available-pets> -->
 
+<app-donation-section></app-donation-section>
+<app-over-footer-line></app-over-footer-line>
+<app-footer></app-footer>
