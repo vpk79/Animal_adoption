@@ -77,7 +77,7 @@ export class Service {
 
 
   updateUserProperty(url: string, userID: string, property: string, newValue: any) {
-    console.log(url, userID, property, newValue);
+    // console.log(url, userID, property, newValue);
     
     this.db.object(`/${url}/${userID}`).update({ [property]: newValue });
     // console.log('updated');
@@ -94,10 +94,10 @@ export class Service {
   updateDatabaseAsObject(url: string, id: string, object: any): Promise<void> {
     return this.db.object(`/${url}/${id}/`).update(object)
       .then(() => {
-        console.log('Update successful');
+        // console.log('Update successful');
       })
       .catch(error => {
-        console.error('Error updating database:', error);
+        // console.error('Error updating database:', error);
         throw error; // Разхвърляне на грешката за обработка от по-горните слоеве на приложението
       });
   }
@@ -121,7 +121,7 @@ export class Service {
     newComment = { postID, userID, text, rating };
     this.updateDatabaseAsObject('siteComments', userID, newComment);
     // check.unsubscribe();
-    console.log('comment posted');
+    // console.log('comment posted');
    
   }
 
@@ -162,14 +162,14 @@ export class Service {
   deleteSiteComments(userID: string): void {
     // console.log(userID);
     const ref = this.db.database.ref('/siteComments/' + userID);
-    console.log(userID,'forDelete');
+    // console.log(userID,'forDelete');
     
     // console.log('reference', ref);
 
     // Проверяваме дали записът съществува преди да го изтрием
     ref.once('value')
       .then((snapshot) => {
-        console.log('snapshot', snapshot);
+        // console.log('snapshot', snapshot);
 
         if (snapshot.exists()) {
           // Записът съществува, изтриваме го
@@ -214,17 +214,17 @@ export class Service {
           // Записът съществува, изтриваме го
           ref.remove()
             .then(() => {
-              console.log("Записът e успешно изтрит.");
+              // console.log("Записът e успешно изтрит.");
             })
             .catch((error) => {
-              console.error("Грешка при изтриване на записа:", error);
+              // console.error("Грешка при изтриване на записа:", error);
             });
         } else {
-          console.log("Записът не съществува.");
+          // console.log("Записът не съществува.");
         }
       })
       .catch((error) => {
-        console.error("Грешка при проверката на записа:", error);
+        // console.error("Грешка при проверката на записа:", error);
       });
   }
 

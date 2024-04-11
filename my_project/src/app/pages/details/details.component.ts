@@ -53,7 +53,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     let animalPath: string = animalType == 'Cat' ? 'cats' : 'dogs';
     this.animalDataSubs = this.service.getItemsAsObject(`/animals/${animalPath}/${animalID}`).subscribe(data => {
       this.animalData = data;
-      console.log(this.animalData);
+      // console.log(this.animalData);
 
     })
 
@@ -122,9 +122,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
       this.toggleError('Congratulations! This sugar is now yours!');
 
-      console.log('adopted');
+      // console.log('adopted');
     } else {
-      console.log('not adopted');
+      // console.log('not adopted');
 
     }
   }

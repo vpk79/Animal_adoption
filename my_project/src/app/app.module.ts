@@ -13,7 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { HomeModule } from './pages/home/home.module';
 import { GalleryModule } from './pages/gallery/gallery.module';
 import { UserModule } from './pages/user/user.module';
-import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { UserProfilModule } from './pages/user-profil/user-profil.module';
 import { Service } from './services/service';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
@@ -21,6 +21,7 @@ import { UserDataService } from './services/user-data.service';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { SharedModule } from './shared/shared.module';
+import { TokenInterceptor } from './services/tokenInterceptor';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8SgSbLZRZLDGJGXsQoCj6t0Z-yq4YgbM",
@@ -55,7 +56,12 @@ const firebaseConfig = {
   exports: [],
   providers: [
     { provide: HttpClient, useClass: HttpClient, useValue: { withCredentials: true } },
-    Service, UserDataService
+    Service, UserDataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
