@@ -63,7 +63,7 @@
                     <img src="../../../assets/{{ choosedAnimal }}/{{ animal.Name }}.jpeg" alt="...">
                     <div *ngIf="isLoggedIn" class="like-btn-wrappper" (click)="updateLikes($event, animal)" data-bs-toggle="tooltip" title="Add to Favorities">
                         <a class="like-btn">
-                            <i [ngClass]="{'fa-regular': animal.Liked == '0' , 'fa-solid': animal.Liked == '1', 'fa-heart': true}"></i></a>
+                            <i [ngClass]="{'fa-regular':  !likedAnimalsArray.includes(animal.ID), 'fa-solid': likedAnimalsArray.includes(animal.ID), 'fa-heart': true}"></i></a>
                     </div>
                     <div *ngIf="!isLoggedIn" class="like-btn-wrappper" (click)="showAlert()" data-bs-toggle="tooltip" title="Add to Favorities">
                         <a class="like-btn">

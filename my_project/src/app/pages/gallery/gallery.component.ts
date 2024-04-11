@@ -2,9 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Animals } from '../../../types/animals';
-import { Observable, filter, tap } from 'rxjs';
+import { Observable, filter, switchMap, tap } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { UserProfil } from '../../../types/users';
+import { UserDataService } from '../../services/user-data.service';
 
 
 
@@ -17,6 +19,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 
 export class GalleryComponent implements OnInit {
 
+  userData$!: Observable<UserProfil | undefined>;
   choosedAnimal!: any;
   animalsData: Animals[] = [];
   animalData = {};
@@ -24,13 +27,16 @@ export class GalleryComponent implements OnInit {
   oldValue: number = 1;
   searchData: Animals[] = [];
   isLoggedIn = false;
+  userData: Partial<UserProfil> = {};
+  likedAnimalsArray: any[] = [];
 
 
   constructor(public service: Service,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private localStorageService: LocalStorageService) {
+    private localStorageService: LocalStorageService,
+    private userDataService: UserDataService) {
     this.route.params.subscribe(params => {
       this.ngOnInit();
     });
@@ -66,6 +72,24 @@ export class GalleryComponent implements OnInit {
       animalGender: ['', Validators.required],
       animalSize: ['', Validators.required],
       animalAge: ['', Validators.required]
+    });
+
+    
+
+    this.userData$ = this.service.isLoggedIn$.pipe(
+      filter(isLoggedIn => isLoggedIn),
+      switchMap(() => this.userDataService.userData$)
+    );
+
+    // get animals liked by this user
+    this.userData$.subscribe(data => {
+      if (data !== undefined) {
+        this.userData = data;
+        this.likedAnimalsArray = Object.keys(data.animalLikes!);
+        // console.log(data);
+        // console.log(this.likedAnimalsArray);
+
+      }
     });
 
   }

@@ -6,7 +6,7 @@
     </div>
 
 
-    <div id="myCarousel3" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3500">
+    <div id="myCarousel3" class="carousel slide d-none d-sm-block" data-bs-ride="true" data-bs-interval="3500">
         <div class="carousel-inner" *ngIf="isCommentSectionVisible">
             <div class="carousel-item" *ngFor="let commentares of finalUserCommentsArray; let i = index"
                 [class.active]="i === 0">
@@ -234,8 +234,19 @@
                 <!-- </div>
             </div> -->
             </div>
+             
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel3" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" #btnNext2 type="button" data-bs-target="#myCarousel3" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    
     </div>
+    
     <div *ngIf="isConfirmToggled" class="confirmBtn" tabindex="-1">
         <div class="">
             <div class="">
@@ -249,15 +260,7 @@
             </div>
         </div>
     </div>
-    <!-- <button class="carousel-control-prev"  type="button" data-bs-target="#myCarousel3"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button> -->
-    <button class="carousel-control-next" #btnNext2 type="button" data-bs-target="#myCarousel3" data-bs-slide="next">
-        <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span> -->
-    </button>
+   
 
     <div *ngIf="isCommentFormToggled" class="commntary-form">
         <div class="commentary-section">

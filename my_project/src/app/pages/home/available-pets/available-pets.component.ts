@@ -18,6 +18,7 @@ export class AvailablePetsComponent implements OnInit{
       private renderer: Renderer2, 
       private localStorageService: LocalStorageService,
       private userDataService: UserDataService) { }
+
   userData$!: Observable<UserProfil | undefined>;
   @ViewChild('btnNext3') btnNext3!: ElementRef;
   animalsData: Animals[] = [];
@@ -41,23 +42,22 @@ export class AvailablePetsComponent implements OnInit{
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       
-      
-     
-      
     });
 
+    // auto run carousels
     setTimeout(() => {
       if (this.btnNext3) {
         this.renderer.selectRootElement(this.btnNext3.nativeElement).click();
       }
     }, 2500);
 
-
+    
     this.userData$ = this.service.isLoggedIn$.pipe(
       filter(isLoggedIn => isLoggedIn),
       switchMap(() => this.userDataService.userData$)
     );
 
+    // get animals liked by this user
     this.userData$.subscribe(data => {
       if (data !== undefined) {
         this.userData = data;
@@ -68,7 +68,7 @@ export class AvailablePetsComponent implements OnInit{
       }
     });
 
-
+    // filter all adopted animals
     this.service.getAnimalsDataByStatus('Available').subscribe({   // Could be 'Adopted' or 'Available'
       next: (data: any) => {
         //  this.animalsData = data;
