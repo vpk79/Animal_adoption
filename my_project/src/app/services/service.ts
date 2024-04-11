@@ -80,7 +80,7 @@ export class Service {
     console.log(url, userID, property, newValue);
     
     this.db.object(`/${url}/${userID}`).update({ [property]: newValue });
-    console.log('updated');
+    // console.log('updated');
     
   }
 
@@ -201,14 +201,14 @@ export class Service {
 
 
   deleteUserProperty(url: string, userID: string, property: string, key: string): void {
-    console.log(userID);
+    // console.log(userID);
     const ref = this.db.database.ref(`/${url}/${userID}/${property}/${key}`);
-    console.log('reference', ref);
+    // console.log('reference', ref);
 
     // Проверяваме дали записът съществува преди да го изтрием
     ref.once('value')
       .then((snapshot) => {
-        console.log('snapshot', snapshot);
+        // console.log('snapshot', snapshot);
 
         if (snapshot.exists()) {
           // Записът съществува, изтриваме го

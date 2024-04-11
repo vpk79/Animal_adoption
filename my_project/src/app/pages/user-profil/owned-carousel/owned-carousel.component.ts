@@ -48,7 +48,7 @@ export class OwnedCarouselComponent implements OnInit{
         this.userData = data;
         this.ownedAnimalsArray = Object.values(this.userData.animalsOwned!) as []
 
-        console.log(this.ownedAnimalsArray);
+        // console.log(this.ownedAnimalsArray);
 
         for (let i = 0; i < this.ownedAnimalsArray.length; i += 4) {
           this.ownedAnimals = [...this.ownedAnimals, this.ownedAnimalsArray.slice(i, i + 4)];
@@ -62,7 +62,7 @@ export class OwnedCarouselComponent implements OnInit{
         // console.log(this.arrayOfSortedAnimals);
         this.ownedAnimals = [];
 
-        console.log(data);
+        // console.log(data);
         // console.log(this.ownedAnimals);
       }
     });

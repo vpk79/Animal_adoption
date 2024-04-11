@@ -159,7 +159,7 @@ export class CommentarySectionComponent implements OnInit, OnDestroy {
 
         if (this.userID !== null) {
           this.service.checkUserComment(this.userID).subscribe(isCommented => {
-            console.log(this.userID);
+            // console.log(this.userID);
             // console.log(isCommented);
 
             if (!isCommented) {

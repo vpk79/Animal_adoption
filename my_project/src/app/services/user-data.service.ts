@@ -62,7 +62,7 @@ export class UserDataService {
   // sets User data in local global object
   setUserData(userData: UserProfil) {
     if (userData) {
-      console.log(userData);
+      // console.log(userData);
       
       this.userDataSubject.next(userData);
     }
