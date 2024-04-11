@@ -70,7 +70,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
       if (this.animalData.Status === 'Adopted') {
         this.toggleError('This sugar is already adopted!')
-        console.log(`This ${this.animalData.Type} is already Adopted!`);
+        // console.log(`This ${this.animalData.Type} is already Adopted!`);
         return;
       }
 
@@ -86,7 +86,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
       if (userBalance < animalPrice) {
         this.toggleError('You don`t have enough money!')
-        console.log('Sorry, you have not enough money in your account balance!');
+        // console.log('Sorry, you have not enough money in your account balance!');
         return;
       }
 

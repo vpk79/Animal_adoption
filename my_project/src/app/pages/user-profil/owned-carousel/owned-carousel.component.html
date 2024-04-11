@@ -1,0 +1,223 @@
+<section *ngIf="showSection" class="owned-animals">
+
+    <div class="owned-title">
+        <h4>Here are the animals you own!</h4>
+    </div>
+
+
+    <div class="carousel-wrapper">
+        <div id="myCarousel6" class="carousel slide d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let animalsArray of arrayOfSortedAnimals; let i = index"
+                    [class.active]="i === 0">
+                    <div class="cards-wrapper">
+                        <div class="card" *ngFor="let animalCard of animalsArray"
+                            (click)="getAnimalData(animalCard.Name, animalCard.Type)">
+                            <div [id]="animalCard.ID">
+                                <div class="image-wrapper">
+                                    <img [src]="'../../../../assets/' + (animalCard.Type == 'Dog' ? 'dogs' : 'cats') + '/' + animalCard.Name + '.jpeg'"
+                                        alt="...">
+                                    <!-- <div *ngIf="isLoggedIn" class="like-btn-wrappper">
+                                        <a class="like-btn" (click)="toggleLike($event, animalCard)"
+                                            data-bs-toggle="tooltip" title="Add/Remove to favorites">
+                                            <i
+                                                [ngClass]="{'fa-regular':  animalCard.owned == '0' , 'fa-solid': animalCard.owned == '1', 'fa-heart': true}"></i></a>
+                                    </div> -->
+                                    <!-- <div *ngIf="!isLoggedIn" class="like-btn-wrappper">
+                                        <a class="like-btn" (click)="showAlert()" data-bs-toggle="tooltip"
+                                            title="Add/Remove to favorites">
+                                            <i
+                                                [ngClass]="{'fa-regular':  animalCard.owned == '0' , 'fa-solid': animalCard.owned == '1', 'fa-heart': true}"></i></a>
+                                    </div> -->
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ animalCard.Name }}</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's
+                                        content.</p>
+                                    <a routerLink="/details"
+                                        [queryParams]="{animalType: animalCard.Type, animalID: animalCard.ID}"
+                                        class="btn btn-primary" data-bs-toggle="tooltip" title="See details">Details</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- <div class="card">
+                                <div class="image-wrapper">
+                                    <img src="../../../../assets/cat1.png" alt="...">
+                                    <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make
+                                        up
+                                        the bulk of the card's
+                                        content.</p>
+                                    <a href="#" class="btn btn-primary">Details</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image-wrapper">
+                                    <img src="../../../../assets/dog1.png" alt="...">
+                                    <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make
+                                        up
+                                        the bulk of the card's
+                                        content.</p>
+                                    <a href="#" class="btn btn-primary">Details</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image-wrapper">
+                                    <img src="../../../../assets/cat1.png" alt="...">
+    
+                                    <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make
+                                        up
+                                        the bulk of the card's
+                                        content.</p>
+                                    <a href="#" class="btn btn-primary">Details</a>
+                                </div>
+                            </div> -->
+                    </div>
+                </div>
+
+
+                <!-- <div class="carousel-item">
+                    <div class="cards-wrapper">
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/dog1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/cat1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/dog1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/cat1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="cards-wrapper">
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/dog1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/cat1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+    
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/dog1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper">
+                                <img src="../../../../assets/cat1.png" alt="...">
+                                <a href="#" class="like-btn"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make
+                                    up
+                                    the bulk of the card's
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel6" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" #btnNext3 type="button" data-bs-target="#myCarousel6"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>

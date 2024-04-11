@@ -6,17 +6,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserDataService } from '../../services/user-data.service';
 import { LikedCarouselComponent } from './liked-carousel/liked-carousel.component';
 import { RouterModule } from '@angular/router';
+import { OwnedCarouselComponent } from './owned-carousel/owned-carousel.component';
 
 
 
 @NgModule({
   declarations: [
     UserProfilComponent,
-    LikedCarouselComponent
+    LikedCarouselComponent,
+    OwnedCarouselComponent
   ],
   imports: [
     CommonModule, HomeModule, ReactiveFormsModule, RouterModule
   ],
-  exports: [UserProfilComponent, LikedCarouselComponent]
+  exports: [UserProfilComponent, LikedCarouselComponent, OwnedCarouselComponent]
 })
 export class UserProfilModule { }

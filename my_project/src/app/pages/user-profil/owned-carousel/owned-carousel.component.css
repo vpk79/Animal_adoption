@@ -1,4 +1,4 @@
-.liked-animals{
+.owned-animals {
     width: 100%;
     height: 600px;
     display: flex;
@@ -7,33 +7,33 @@
     align-items: center;
     z-index: 1000;
     margin-bottom: 50px;
-    margin-top: -100px;
+    margin-top: -200px;
 }
 
-.liked-animals .liked-title h4{
+.owned-animals .owned-title h4 {
     color: rgb(165, 1, 165);
     font-size: 24px;
     margin-bottom: 30px;
 }
 
-#myCarousel5 .carousel-inner {
+#myCarousel6 .carousel-inner {
     padding: 1em;
 
 }
 
-#myCarousel5 {
+#myCarousel6 {
     width: 1200px;
     height: 200px;
     display: block;
     margin-top: -20px;
     z-index: 10;
-    margin-bottom: 100px;
-   
+    margin-bottom: 50px;
+
 
 }
 
-#myCarousel5 .carousel-control-prev,
-#myCarousel5 .carousel-control-next {
+#myCarousel6 .carousel-control-prev,
+#myCarousel6 .carousel-control-next {
     background-color: #000000;
     width: 6vh;
     height: 6vh;
@@ -43,22 +43,22 @@
     opacity: 0.2;
 }
 
-#myCarousel5 .carousel-control-prev span,
-#myCarousel5 .carousel-control-next span {
+#myCarousel6 .carousel-control-prev span,
+#myCarousel6 .carousel-control-next span {
     width: 1.5rem;
     height: 1.5rem;
 }
 
-#myCarousel5 .carousel-control-prev:hover,
-#myCarousel5 .carousel-control-next:hover {
+#myCarousel6 .carousel-control-prev:hover,
+#myCarousel6 .carousel-control-next:hover {
     opacity: 0.7;
 }
 
 @media screen and (min-width: 578px) {
 
-    #myCarousel5 .cards-wrapper {
+    #myCarousel6 .cards-wrapper {
         display: flex;
-    
+
     }
 }
 
@@ -69,14 +69,14 @@
     
 } */
 
-#myCarousel5 {
+#myCarousel6 {
     width: 1200px;
     height: 200px;
     display: block;
     margin-top: -20px;
 }
 
-#myCarousel5 .card {
+#myCarousel6 .card {
     margin: 0 .5em;
     width: calc(100%/4);
     border: none;
@@ -84,7 +84,7 @@
     box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
 }
 
-#myCarousel5 .card:hover {
+#myCarousel6 .card:hover {
     /* outline: 3px purple solid;
     border-radius: 15px; */
     background-color: rgb(237, 233, 247);
@@ -95,20 +95,20 @@
 
 }
 
-#myCarousel5 .card-body {
+#myCarousel6 .card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#myCarousel5 .card-body a {
+#myCarousel6 .card-body a {
     font-size: 20px;
     background-color: rgb(163, 2, 163);
     padding-left: 20px;
     padding-right: 20px;
 }
 
-#myCarousel5 .image-wrapper {
+#myCarousel6 .image-wrapper {
     /* height: 22vw; */
     display: flex;
     position: relative;
@@ -118,7 +118,7 @@
     margin: 0 auto;
 }
 
-#myCarousel5 .image-wrapper .like-btn {
+#myCarousel6 .image-wrapper .like-btn {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -134,17 +134,17 @@
     opacity: 0.7;
 }
 
-#myCarousel5 .image-wrapper .like-btn:hover {
+#myCarousel6 .image-wrapper .like-btn:hover {
     background-color: rgb(162, 163, 163);
 }
 
 @media screen and (max-width: 576px) {
-    #myCarousel5 .card:not(:first-child) {
+    #myCarousel6 .card:not(:first-child) {
         display: none;
     }
 }
 
-#myCarousel5 .image-wrapper img {
+#myCarousel6 .image-wrapper img {
     width: 100%;
     max-height: 100%;
     border: 1px solid rgb(209, 201, 201);
@@ -152,7 +152,7 @@
     object-fit: cover;
 }
 
-#myCarousel5 .card-body .btn:hover {
+#myCarousel6 .card-body .btn:hover {
     background-color: aqua;
     color: purple;
 }

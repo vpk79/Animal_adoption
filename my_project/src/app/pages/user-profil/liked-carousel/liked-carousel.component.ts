@@ -50,12 +50,11 @@ export class LikedCarouselComponent implements OnInit{
       switchMap(() => this.userDataService.userData$)
     );
 
+    // load data with liked animals
     this.userData$.subscribe(data => {
       if (data) {
         this.userData = data;
         this.likedAnimalsArray = Object.values(this.userData.animalLikes!) as []
-        
-        // console.log(this.likedAnimalsArray);
         
         for (let i = 0; i < this.likedAnimalsArray.length; i += 4) {
           this.likedAnimals = [...this.likedAnimals,this.likedAnimalsArray.slice(i, i + 4)];
@@ -64,40 +63,11 @@ export class LikedCarouselComponent implements OnInit{
         if(this.arrayOfSortedAnimals.length > 0) {
           this.showSection = true;
         }
-        // console.log(this.arrayOfSortedAnimals);
         this.likedAnimals = [];
-        
-        // console.log(data);
-        // console.log(this.likedAnimals);
       }
     });
 
-    // this.userDataService.userData$.subscribe(data => {
-    //   if (data) { // Проверяваме дали има данни и дали има поне един елемент в масива
-
-
-    //     if(data){
-    //       this.userData = data;
-    //       this.likedAnimals = Object.values(data.animalLikes)
-    //     }
-
-    //     // console.log(this.userData);
-    //     // console.log(this.likedAnimals);
-
-    //   }
-    //   // console.log(this.userData);
-    // });
-    // setTimeout(() => {
-    //   if (this.btnNext3) {
-    //     this.renderer.selectRootElement(this.btnNext3.nativeElement).click();
-    //   }
-    // }, 2500);
-
-
   }
-
-  
-
 
 
   updateLikes(event: Event, ID: string, liked: string, type: string): void {
@@ -152,6 +122,4 @@ export class LikedCarouselComponent implements OnInit{
       }
     }
   }
-
-
 }
