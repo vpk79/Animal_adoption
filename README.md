@@ -1,35 +1,36 @@
 # Animal_adoption
 - Unfinished yet
 
-Description
+## Description
 ============
 It is about fostering and adopting animals.
 
-Server
+## Server
 ========
 Firebase real time-data
 
-How to start
+## How to start
 ============
 cd my_project
+npm install
 ng serve
 
 
-Features
+## Features
 =========
 
-[x] Users can see all available animals on main page in carousel
-[x] Users can visit the gallery with amimals by their choice
-[x] Users can sort the animals in galerry page
-[x] Users can see animals details in details page
-[x] Logged in users can like animals
-[x] Logged in users can post site comments (1 comment per user allowed)
-[x] Logged in users can adopt animals and pay for them
-[x] Logged in users can visit the profile page and change their profile data and picture
-[x] Logged in users can see animals they liked and they owned in the profile page
+- [x] Users can see all available animals on main page in carousel
+- [x] Users can visit the gallery with amimals by their choice
+- [x] Users can sort the animals in galerry page
+- [x] Users can see animals details in details page
+- [x] Logged in users can like animals
+- [x] Logged in users can post site comments (1 comment per user allowed)
+- [x] Logged in users can adopt animals and pay for them
+- [x] Logged in users can visit the profile page and change their profile data and picture
+- [x] Logged in users can see animals they liked and they owned in the profile page
 
 
-Restrictions
+## Restrictions
 ============
 [x] Not logged users cannot like animals
 [x] Not looged users cannot adopt animals
@@ -41,11 +42,11 @@ Restrictions
 [x] Logged in users cannot visit register page
 
 
-More features to be implemented in the future
+## More features to be implemented in the future
 ===============================================
-[-] Lost and found page
-[-] Fostering animals
-[-] Users to see last viewed animals
-[-] Blogs
-[-] More animations
+- [-] Lost and found page
+- [-] Fostering animals
+- [-] Users to see last viewed animals
+- [-] Blogs
+- [-] More animations
 
