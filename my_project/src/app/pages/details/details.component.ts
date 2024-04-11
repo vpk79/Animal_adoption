@@ -69,7 +69,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.toggleConfirm();
 
       if (this.animalData.Status === 'Adopted') {
-        this.toggleError('This sugar is already adopted!')
+        this.toggleError(`This ${this.animalData.Type} is already Adopted!`)
         // console.log(`This ${this.animalData.Type} is already Adopted!`);
         return;
       }
@@ -120,7 +120,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       }
       
 
-      this.toggleError('Congratulations! This sugar is now yours!');
+      this.toggleError(`Congratulations! This ${this.animalType} is now yours!`);
 
       // console.log('adopted');
     } else {
