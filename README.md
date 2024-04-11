@@ -3,17 +3,17 @@
 
 ## Description
 ============
-It is about fostering and adopting animals.
+- It is about fostering and adopting animals.
 
 ## Server
 ========
-Firebase real time-data
+- Firebase real time-data
 
 ## How to start
 ============
-cd my_project
-npm install
-ng serve
+- cd my_project
+- npm install
+- ng serve
 
 
 ## Features
@@ -32,14 +32,14 @@ ng serve
 
 ## Restrictions
 ============
-[x] Not logged users cannot like animals
-[x] Not looged users cannot adopt animals
-[x] Not logged users cannot post comments
-[x] Not logged users cannot visi profile page
-[x] Not logged users have access to register and login pages
+- [x] Not logged users cannot like animals
+- [x] Not looged users cannot adopt animals
+- [x] Not logged users cannot post comments
+- [x] Not logged users cannot visi profile page
+- [x] Not logged users have access to register and login pages
 
-[x] Logged in users cannot visit login page
-[x] Logged in users cannot visit register page
+- [x] Logged in users cannot visit login page
+- [x] Logged in users cannot visit register page
 
 
 ## More features to be implemented in the future
