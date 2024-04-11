@@ -1,9 +1,10 @@
-import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '../../services/service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Animals } from '../../../types/animals';
 import { Observable, filter, tap } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 
 
@@ -24,8 +25,12 @@ export class GalleryComponent implements OnInit {
   searchData: Animals[] = [];
   isLoggedIn = false;
 
- 
-  constructor(public service: Service, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
+
+  constructor(public service: Service,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
+    private localStorageService: LocalStorageService) {
     this.route.params.subscribe(params => {
       this.ngOnInit();
     });
@@ -35,7 +40,7 @@ export class GalleryComponent implements OnInit {
     ).subscribe(() => {
       this.getAnimalsData(this.getAnimalChoice());
     });
-   }
+  }
 
   toggleLikeError = false;
 
@@ -52,7 +57,7 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+
     this.service.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
@@ -80,12 +85,12 @@ export class GalleryComponent implements OnInit {
 
   getAnimalsData(choice: string) {
     // console.log(choice);
-    
+
     this.service.getItemsAsArray('/animals/' + choice).subscribe({
       next: (data: any) => {
         // console.log(data);
 
-        this.animalsData = data.filter((x:any) => x.Status === 'Available');
+        this.animalsData = data.filter((x: any) => x.Status === 'Available');
         // console.log(this.animalsData);
 
       },
@@ -109,14 +114,14 @@ export class GalleryComponent implements OnInit {
       this.service.getAnimalsDataByKeyAndValue('Sex', animalGenderValue, this.choosedAnimal).subscribe({
         next: (data: any) => {
           this.searchData = data;
-          console.log(this.searchData);
+          // console.log(this.searchData);
 
           if (animalSizeValue != '') {
             if (animalSizeValue == 'Small') { animalSizeValue = 'SMALL' }
             if (animalSizeValue == 'Medium') { animalSizeValue = 'MED' }
             if (animalSizeValue == 'Large') { animalSizeValue = 'LARGE' }
             this.searchData = this.searchData.filter(x => x.Size == animalSizeValue);
-            console.log(this.searchData);
+            // console.log(this.searchData);
           }
 
           if (animalAgeValue != '') {
@@ -125,10 +130,10 @@ export class GalleryComponent implements OnInit {
             if (animalAgeValue == '3 years') { animalAgeValue = '3year' }
             if (animalAgeValue == '4 years') { animalAgeValue = '4year' }
             this.searchData = this.searchData.filter(x => x.Age == animalAgeValue);
-            console.log(this.searchData);
+            // console.log(this.searchData);
           }
 
-          this.animalsData = this.searchData;
+          this.animalsData = this.searchData.filter(x => x.Status == 'Available');
           // console.log(this.animalsData);
 
         },
@@ -155,7 +160,7 @@ export class GalleryComponent implements OnInit {
             console.log(this.searchData);
           }
 
-          this.animalsData = this.searchData;
+          this.animalsData = this.searchData.filter(x => x.Status == 'Available');
 
         },
         error: (error) => {
@@ -171,7 +176,7 @@ export class GalleryComponent implements OnInit {
       this.service.getAnimalsDataByKeyAndValue('Age', animalAgeValue, this.choosedAnimal).subscribe({
         next: (data: any) => {
           this.searchData = data;
-          this.animalsData = this.searchData;
+          this.animalsData = this.searchData.filter(x => x.Status == 'Available');
         },
         error: (error) => {
           console.error(error);
@@ -182,14 +187,16 @@ export class GalleryComponent implements OnInit {
 
       this.service.getItemsAsArray('/animals/' + this.choosedAnimal).subscribe({
         next: (data: any) => {
-          this.animalsData = data;
-          console.log(this.animalsData);
-          
+          this.animalsData = data.filter((x: any) => x.Status == 'Available');
+          // console.log(this.animalsData);
+
         },
         error: (error) => {
           console.error(error);
         }
       });
+
+
     }
 
     // if (this.searchData.length > 0) {
@@ -206,7 +213,7 @@ export class GalleryComponent implements OnInit {
     this.service.getItemsAsObject('/animals/' + this.choosedAnimal + "/" + name).subscribe({
       next: (data: any) => {
         this.animalData = data;
-        console.log(this.animalData);
+        // console.log(this.animalData);
       },
       error: (error) => {
         console.error(error);
@@ -218,13 +225,16 @@ export class GalleryComponent implements OnInit {
 
   // Gallery likes functions
 
-  updateLikes(event: Event, ID: string, liked: string): void {
+  updateLikes(event: Event, animal:Animals): void {
     event.stopImmediatePropagation();
-
-    if (liked == "0") {
-      this.service.updateItemLikes('animals', this.choosedAnimal, ID, "1");
+    const userInfo = this.localStorageService.getItem('userInfo');
+    if (animal.Liked == "0") {
+      this.service.updateItemLikes('animals', this.choosedAnimal, animal.ID, "1");
+      animal.Liked = '1';
+      this.service.updateUserPropertyByValue('users', userInfo.userID, `animalLikes/${animal.ID}`, animal);
     } else {
-      this.service.updateItemLikes('animals', this.choosedAnimal, ID, "0");
+      this.service.updateItemLikes('animals', this.choosedAnimal, animal.ID, "0");
+      this.service.deleteUserProperty('users', userInfo.userID, 'animalLikes', animal.ID);
     }
   }
 
