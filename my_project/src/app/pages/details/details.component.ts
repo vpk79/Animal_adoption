@@ -94,7 +94,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       if(url && animalID && property && newValue){
         this.service.updateUserProperty(url, animalID, property, newValue);
       } else {
-        this.toggleError('Error! Something goes wrong!');
+        this.toggleError('Error! Something went wrong!');
         return;
       }
       
@@ -105,7 +105,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       if(userID && animalID && this.animalData){
         this.service.updateUserProperty('users', `${userID}/animalsOwned`, animalID, this.animalData);
       } else {
-        this.toggleError('Error! Something goes wrong!');
+        this.toggleError('Error! Something went wrong!');
         return;
       }
       
@@ -115,7 +115,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       if(userID && newUserBalance){
         this.service.updateUserProperty('users', userID, 'balance', newUserBalance);
       } else {
-        this.toggleError('Error! Something goes wrong!');
+        this.toggleError('Error! Something went wrong!');
         return;
       }
       
